@@ -1,0 +1,583 @@
+Creating shared client manager with 3 clients, 50 connections each for 1 runners
+Creating 3 optimized HTTP clients with 50 connections each
+File descriptor limits: soft=1024, hard=524288
+Low file descriptor limit (1024). Consider increasing with 'ulimit -n 65536'
+Generating 10 prompts with length 20000 and seed 1
+Num of prompts: 10
+Num of tasks: 5
+Num of runners: 1
+Max tokens: 300
+Tables created successfully.
+Experiment created: 
+Experiment(
+    experiment_id=7,
+    experiment_name=kimi_b200_small,
+    experiment_date=2026-04-08 18:03:39.878555,
+    description=
+)
+
+Running experiments:   0%|          | 0/5 [00:00<?, ?it/s]Running experiments:  20%|██        | 1/5 [00:10<00:40, 10.18s/it]Running experiments:  40%|████      | 2/5 [00:19<00:29,  9.80s/it]Running experiments:  60%|██████    | 3/5 [00:29<00:19,  9.68s/it]Running experiments:  80%|████████  | 4/5 [00:38<00:09,  9.63s/it]Running experiments: 100%|██████████| 5/5 [00:47<00:00,  9.37s/it]Running experiments: 100%|██████████| 5/5 [00:47<00:00,  9.54s/it]
+Number of failed measurements: 0
+Creating shared client manager with 3 clients, 50 connections each for 30 runners
+Creating 3 optimized HTTP clients with 50 connections each
+Generating 100 prompts with length 2000 and seed 1
+Num of prompts: 100
+Num of tasks: 200
+Num of runners: 30
+Max tokens: 300
+
+Experiment Details:
+ID: 7
+Name: kimi_b200_small
+Date: 2026-04-09 01:03:39
+Description: 
+
+Experiment Parameters:
+╒═════════════════════╤═══════════════════════╕
+│           Parameter │                 Value │
+╞═════════════════════╪═══════════════════════╡
+│         num_workers │                     1 │
+├─────────────────────┼───────────────────────┤
+│           num_tasks │                     5 │
+├─────────────────────┼───────────────────────┤
+│            node_url │ http://127.0.0.1:8080 │
+├─────────────────────┼───────────────────────┤
+│          max_tokens │                   300 │
+├─────────────────────┼───────────────────────┤
+│          model_name │  moonshotai/Kimi-K2.5 │
+├─────────────────────┼───────────────────────┤
+│             no_sign │                  True │
+├─────────────────────┼───────────────────────┤
+│            old_sign │                 False │
+├─────────────────────┼───────────────────────┤
+│ client_architecture │           shared_pool │
+├─────────────────────┼───────────────────────┤
+│   requester_address │                 gonka │
+├─────────────────────┼───────────────────────┤
+│         avg_n_input │             9951.6000 │
+├─────────────────────┼───────────────────────┤
+│         std_n_input │               28.2631 │
+├─────────────────────┼───────────────────────┤
+│        avg_n_output │                   300 │
+├─────────────────────┼───────────────────────┤
+│        std_n_output │                     0 │
+╘═════════════════════╧═══════════════════════╛
+
+Experiment Metrics:
+╒══════════════════════════╤═══════════╕
+│ Metric                   │     Value │
+╞══════════════════════════╪═══════════╡
+│ TTFT                     │    0.5858 │
+├──────────────────────────┼───────────┤
+│ TTFT_95                  │    0.8617 │
+├──────────────────────────┼───────────┤
+│ TOP_5_TTFT               │    0.9132 │
+├──────────────────────────┼───────────┤
+│ LATENCY                  │    9.5451 │
+├──────────────────────────┼───────────┤
+│ LATENCY_95               │   10.0586 │
+├──────────────────────────┼───────────┤
+│ TOP_5_LATENCY            │   10.1822 │
+├──────────────────────────┼───────────┤
+│ TPOT                     │    0.0318 │
+├──────────────────────────┼───────────┤
+│ THROUGHPUT               │ 1074.01   │
+├──────────────────────────┼───────────┤
+│ THROUGHPUT_INPUT_TOKENS  │ 1042.58   │
+├──────────────────────────┼───────────┤
+│ THROUGHPUT_OUTPUT_TOKENS │   31.4296 │
+├──────────────────────────┼───────────┤
+│ RPS                      │    0.1048 │
+├──────────────────────────┼───────────┤
+│ LONGER_THAN_60_LATENCY   │    0      │
+├──────────────────────────┼───────────┤
+│ LONGER_THAN_120_LATENCY  │    0      │
+├──────────────────────────┼───────────┤
+│ LONGER_THAN_180_LATENCY  │    0      │
+├──────────────────────────┼───────────┤
+│ FAILED_REQUESTS          │    0      │
+├──────────────────────────┼───────────┤
+│ FAILED_REQUESTS_PER_HOUR │    0      │
+╘══════════════════════════╧═══════════╛
+Tables created successfully.
+Experiment created: 
+Experiment(
+    experiment_id=8,
+    experiment_name=kimi_b200_concurrent,
+    experiment_date=2026-04-08 18:04:37.648974,
+    description=
+)
+
+Running experiments:   0%|          | 0/200 [00:00<?, ?it/s]Running experiments:   0%|          | 1/200 [00:10<35:41, 10.76s/it]Running experiments:   4%|▍         | 9/200 [00:10<02:47,  1.14it/s]Running experiments:  16%|█▌        | 31/200 [00:21<01:33,  1.81it/s]Running experiments:  20%|█▉        | 39/200 [00:21<01:03,  2.52it/s]Running experiments:  30%|███       | 61/200 [00:31<01:00,  2.29it/s]Running experiments:  34%|███▍      | 69/200 [00:31<00:45,  2.88it/s]Running experiments:  46%|████▌     | 91/200 [00:42<00:44,  2.46it/s]Running experiments:  50%|████▉     | 99/200 [00:42<00:33,  3.03it/s]Running experiments:  60%|██████    | 121/200 [00:52<00:30,  2.63it/s]Running experiments:  64%|██████▍   | 129/200 [00:52<00:22,  3.17it/s]Running experiments:  76%|███████▌  | 151/200 [01:02<00:18,  2.69it/s]Running experiments:  80%|███████▉  | 159/200 [01:02<00:12,  3.25it/s]Running experiments:  90%|█████████ | 181/200 [01:12<00:06,  2.74it/s]Running experiments:  98%|█████████▊| 195/200 [01:12<00:01,  3.73it/s]Running experiments: 100%|██████████| 200/200 [01:12<00:00,  2.77it/s]
+Number of failed measurements: 0
+Creating shared client manager with 3 clients, 50 connections each for 1 runners
+Creating 3 optimized HTTP clients with 50 connections each
+Generating 10 prompts with length 45000 and seed 1
+Num of prompts: 10
+Num of tasks: 5
+Num of runners: 1
+Max tokens: 1000
+
+Experiment Details:
+ID: 8
+Name: kimi_b200_concurrent
+Date: 2026-04-09 01:04:37
+Description: 
+
+Experiment Parameters:
+╒═════════════════════╤═══════════════════════╕
+│           Parameter │                 Value │
+╞═════════════════════╪═══════════════════════╡
+│         num_workers │                    30 │
+├─────────────────────┼───────────────────────┤
+│           num_tasks │                   200 │
+├─────────────────────┼───────────────────────┤
+│            node_url │ http://127.0.0.1:8080 │
+├─────────────────────┼───────────────────────┤
+│          max_tokens │                   300 │
+├─────────────────────┼───────────────────────┤
+│          model_name │  moonshotai/Kimi-K2.5 │
+├─────────────────────┼───────────────────────┤
+│             no_sign │                  True │
+├─────────────────────┼───────────────────────┤
+│            old_sign │                 False │
+├─────────────────────┼───────────────────────┤
+│ client_architecture │           shared_pool │
+├─────────────────────┼───────────────────────┤
+│   requester_address │                 gonka │
+├─────────────────────┼───────────────────────┤
+│         avg_n_input │             1006.8500 │
+├─────────────────────┼───────────────────────┤
+│         std_n_input │                8.8407 │
+├─────────────────────┼───────────────────────┤
+│        avg_n_output │                   300 │
+├─────────────────────┼───────────────────────┤
+│        std_n_output │                     0 │
+╘═════════════════════╧═══════════════════════╛
+
+Experiment Metrics:
+╒══════════════════════════╤═══════════╕
+│ Metric                   │     Value │
+╞══════════════════════════╪═══════════╡
+│ TTFT                     │    0.7633 │
+├──────────────────────────┼───────────┤
+│ TTFT_95                  │    1.4888 │
+├──────────────────────────┼───────────┤
+│ TOP_5_TTFT               │    1.7651 │
+├──────────────────────────┼───────────┤
+│ LATENCY                  │   10.3448 │
+├──────────────────────────┼───────────┤
+│ LATENCY_95               │   10.8924 │
+├──────────────────────────┼───────────┤
+│ TOP_5_LATENCY            │   10.9149 │
+├──────────────────────────┼───────────┤
+│ TPOT                     │    0.0345 │
+├──────────────────────────┼───────────┤
+│ THROUGHPUT               │ 3614.12   │
+├──────────────────────────┼───────────┤
+│ THROUGHPUT_INPUT_TOKENS  │ 2784.46   │
+├──────────────────────────┼───────────┤
+│ THROUGHPUT_OUTPUT_TOKENS │  829.656  │
+├──────────────────────────┼───────────┤
+│ RPS                      │    2.7655 │
+├──────────────────────────┼───────────┤
+│ LONGER_THAN_60_LATENCY   │    0      │
+├──────────────────────────┼───────────┤
+│ LONGER_THAN_120_LATENCY  │    0      │
+├──────────────────────────┼───────────┤
+│ LONGER_THAN_180_LATENCY  │    0      │
+├──────────────────────────┼───────────┤
+│ FAILED_REQUESTS          │    0      │
+├──────────────────────────┼───────────┤
+│ FAILED_REQUESTS_PER_HOUR │    0      │
+╘══════════════════════════╧═══════════╛
+Tables created successfully.
+Experiment created: 
+Experiment(
+    experiment_id=9,
+    experiment_name=kimi_b200_longctx_single,
+    experiment_date=2026-04-08 18:06:00.154823,
+    description=
+)
+
+Running experiments:   0%|          | 0/5 [00:00<?, ?it/s]Running experiments:  20%|██        | 1/5 [00:32<02:08, 32.24s/it]Running experiments:  40%|████      | 2/5 [01:00<01:29, 29.74s/it]Running experiments:  60%|██████    | 3/5 [01:32<01:01, 30.90s/it]Running experiments:  80%|████████  | 4/5 [01:48<00:24, 24.87s/it]Running experiments: 100%|██████████| 5/5 [02:19<00:00, 27.05s/it]Running experiments: 100%|██████████| 5/5 [02:19<00:00, 27.81s/it]
+Number of failed measurements: 0
+Creating shared client manager with 3 clients, 50 connections each for 5 runners
+Creating 3 optimized HTTP clients with 50 connections each
+Generating 10 prompts with length 45000 and seed 2
+Num of prompts: 10
+Num of tasks: 10
+Num of runners: 5
+Max tokens: 1000
+
+Experiment Details:
+ID: 9
+Name: kimi_b200_longctx_single
+Date: 2026-04-09 01:06:00
+Description: 
+
+Experiment Parameters:
+╒═════════════════════╤═══════════════════════╕
+│           Parameter │                 Value │
+╞═════════════════════╪═══════════════════════╡
+│         num_workers │                     1 │
+├─────────────────────┼───────────────────────┤
+│           num_tasks │                     5 │
+├─────────────────────┼───────────────────────┤
+│            node_url │ http://127.0.0.1:8080 │
+├─────────────────────┼───────────────────────┤
+│          max_tokens │                  1000 │
+├─────────────────────┼───────────────────────┤
+│          model_name │  moonshotai/Kimi-K2.5 │
+├─────────────────────┼───────────────────────┤
+│             no_sign │                  True │
+├─────────────────────┼───────────────────────┤
+│            old_sign │                 False │
+├─────────────────────┼───────────────────────┤
+│ client_architecture │           shared_pool │
+├─────────────────────┼───────────────────────┤
+│   requester_address │                 gonka │
+├─────────────────────┼───────────────────────┤
+│         avg_n_input │            22427.4000 │
+├─────────────────────┼───────────────────────┤
+│         std_n_input │               18.5822 │
+├─────────────────────┼───────────────────────┤
+│        avg_n_output │              864.6000 │
+├─────────────────────┼───────────────────────┤
+│        std_n_output │              232.9695 │
+╘═════════════════════╧═══════════════════════╛
+
+Experiment Metrics:
+╒══════════════════════════╤══════════╕
+│ Metric                   │    Value │
+╞══════════════════════════╪══════════╡
+│ TTFT                     │   1.1554 │
+├──────────────────────────┼──────────┤
+│ TTFT_95                  │   1.4231 │
+├──────────────────────────┼──────────┤
+│ TOP_5_TTFT               │   1.4233 │
+├──────────────────────────┼──────────┤
+│ LATENCY                  │  27.813  │
+├──────────────────────────┼──────────┤
+│ LATENCY_95               │  32.2717 │
+├──────────────────────────┼──────────┤
+│ TOP_5_LATENCY            │  32.2782 │
+├──────────────────────────┼──────────┤
+│ TPOT                     │   0.0322 │
+├──────────────────────────┼──────────┤
+│ THROUGHPUT               │ 837.449  │
+├──────────────────────────┼──────────┤
+│ THROUGHPUT_INPUT_TOKENS  │ 806.363  │
+├──────────────────────────┼──────────┤
+│ THROUGHPUT_OUTPUT_TOKENS │  31.0862 │
+├──────────────────────────┼──────────┤
+│ RPS                      │   0.036  │
+├──────────────────────────┼──────────┤
+│ LONGER_THAN_60_LATENCY   │   0      │
+├──────────────────────────┼──────────┤
+│ LONGER_THAN_120_LATENCY  │   0      │
+├──────────────────────────┼──────────┤
+│ LONGER_THAN_180_LATENCY  │   0      │
+├──────────────────────────┼──────────┤
+│ FAILED_REQUESTS          │   0      │
+├──────────────────────────┼──────────┤
+│ FAILED_REQUESTS_PER_HOUR │   0      │
+╘══════════════════════════╧══════════╛
+Tables created successfully.
+Experiment created: 
+Experiment(
+    experiment_id=10,
+    experiment_name=kimi_b200_longctx_5run,
+    experiment_date=2026-04-08 18:08:29.301887,
+    description=
+)
+
+Running experiments:   0%|          | 0/10 [00:00<?, ?it/s]Running experiments:  10%|█         | 1/10 [00:28<04:12, 28.04s/it]Running experiments:  20%|██        | 2/10 [00:31<01:47, 13.50s/it]Running experiments:  30%|███       | 3/10 [00:38<01:12, 10.38s/it]Running experiments:  50%|█████     | 5/10 [00:39<00:24,  4.92s/it]Running experiments:  60%|██████    | 6/10 [01:03<00:41, 10.35s/it]Running experiments:  70%|███████   | 7/10 [01:05<00:23,  7.90s/it]Running experiments:  80%|████████  | 8/10 [01:09<00:13,  6.83s/it]Running experiments:  90%|█████████ | 9/10 [01:11<00:05,  5.52s/it]Running experiments: 100%|██████████| 10/10 [01:12<00:00,  3.91s/it]Running experiments: 100%|██████████| 10/10 [01:12<00:00,  7.20s/it]
+Number of failed measurements: 0
+Creating shared client manager with 3 clients, 50 connections each for 20 runners
+Creating 3 optimized HTTP clients with 50 connections each
+Generating 20 prompts with length 45000 and seed 3
+Num of prompts: 20
+Num of tasks: 40
+Num of runners: 20
+Max tokens: 1000
+
+Experiment Details:
+ID: 10
+Name: kimi_b200_longctx_5run
+Date: 2026-04-09 01:08:29
+Description: 
+
+Experiment Parameters:
+╒═════════════════════╤═══════════════════════╕
+│           Parameter │                 Value │
+╞═════════════════════╪═══════════════════════╡
+│         num_workers │                     5 │
+├─────────────────────┼───────────────────────┤
+│           num_tasks │                    10 │
+├─────────────────────┼───────────────────────┤
+│            node_url │ http://127.0.0.1:8080 │
+├─────────────────────┼───────────────────────┤
+│          max_tokens │                  1000 │
+├─────────────────────┼───────────────────────┤
+│          model_name │  moonshotai/Kimi-K2.5 │
+├─────────────────────┼───────────────────────┤
+│             no_sign │                  True │
+├─────────────────────┼───────────────────────┤
+│            old_sign │                 False │
+├─────────────────────┼───────────────────────┤
+│ client_architecture │           shared_pool │
+├─────────────────────┼───────────────────────┤
+│   requester_address │                 gonka │
+├─────────────────────┼───────────────────────┤
+│         avg_n_input │                 22443 │
+├─────────────────────┼───────────────────────┤
+│         std_n_input │               50.4205 │
+├─────────────────────┼───────────────────────┤
+│        avg_n_output │              942.5000 │
+├─────────────────────┼───────────────────────┤
+│        std_n_output │              104.4746 │
+╘═════════════════════╧═══════════════════════╛
+
+Experiment Metrics:
+╒══════════════════════════╤═══════════╕
+│ Metric                   │     Value │
+╞══════════════════════════╪═══════════╡
+│ TTFT                     │    2.692  │
+├──────────────────────────┼───────────┤
+│ TTFT_95                  │    5.618  │
+├──────────────────────────┼───────────┤
+│ TOP_5_TTFT               │    5.7108 │
+├──────────────────────────┼───────────┤
+│ LATENCY                  │   34.1902 │
+├──────────────────────────┼───────────┤
+│ LATENCY_95               │   38.8768 │
+├──────────────────────────┼───────────┤
+│ TOP_5_LATENCY            │   39.5133 │
+├──────────────────────────┼───────────┤
+│ TPOT                     │    0.0363 │
+├──────────────────────────┼───────────┤
+│ THROUGHPUT               │ 3247.8    │
+├──────────────────────────┼───────────┤
+│ THROUGHPUT_INPUT_TOKENS  │ 3116.9    │
+├──────────────────────────┼───────────┤
+│ THROUGHPUT_OUTPUT_TOKENS │  130.895  │
+├──────────────────────────┼───────────┤
+│ RPS                      │    0.1389 │
+├──────────────────────────┼───────────┤
+│ LONGER_THAN_60_LATENCY   │    0      │
+├──────────────────────────┼───────────┤
+│ LONGER_THAN_120_LATENCY  │    0      │
+├──────────────────────────┼───────────┤
+│ LONGER_THAN_180_LATENCY  │    0      │
+├──────────────────────────┼───────────┤
+│ FAILED_REQUESTS          │    0      │
+├──────────────────────────┼───────────┤
+│ FAILED_REQUESTS_PER_HOUR │    0      │
+╘══════════════════════════╧═══════════╛
+Tables created successfully.
+Experiment created: 
+Experiment(
+    experiment_id=11,
+    experiment_name=kimi_b200_longctx_20run,
+    experiment_date=2026-04-08 18:09:51.498329,
+    description=
+)
+
+Running experiments:   0%|          | 0/40 [00:00<?, ?it/s]Running experiments:   2%|▎         | 1/40 [00:32<20:59, 32.30s/it]Running experiments:   5%|▌         | 2/40 [00:37<10:29, 16.56s/it]Running experiments:   8%|▊         | 3/40 [00:41<06:30, 10.54s/it]Running experiments:  10%|█         | 4/40 [00:41<03:57,  6.60s/it]Running experiments:  12%|█▎        | 5/40 [00:43<02:52,  4.94s/it]Running experiments:  15%|█▌        | 6/40 [00:46<02:18,  4.09s/it]Running experiments:  18%|█▊        | 7/40 [00:49<02:01,  3.68s/it]Running experiments:  20%|██        | 8/40 [00:49<01:22,  2.57s/it]Running experiments:  22%|██▎       | 9/40 [00:49<01:00,  1.94s/it]Running experiments:  32%|███▎      | 13/40 [00:51<00:25,  1.07it/s]Running experiments:  42%|████▎     | 17/40 [00:53<00:16,  1.36it/s]Running experiments:  52%|█████▎    | 21/40 [01:09<00:40,  2.11s/it]Running experiments:  55%|█████▌    | 22/40 [01:11<00:37,  2.07s/it]Running experiments:  57%|█████▊    | 23/40 [01:13<00:35,  2.11s/it]Running experiments:  60%|██████    | 24/40 [01:20<00:46,  2.92s/it]Running experiments:  62%|██████▎   | 25/40 [01:21<00:36,  2.43s/it]Running experiments:  65%|██████▌   | 26/40 [01:24<00:35,  2.56s/it]Running experiments:  68%|██████▊   | 27/40 [01:25<00:29,  2.28s/it]Running experiments:  70%|███████   | 28/40 [01:26<00:24,  2.04s/it]Running experiments:  72%|███████▎  | 29/40 [01:27<00:16,  1.53s/it]Running experiments:  75%|███████▌  | 30/40 [01:27<00:12,  1.25s/it]Running experiments:  90%|█████████ | 36/40 [01:27<00:01,  2.59it/s]Running experiments:  90%|█████████ | 36/40 [01:38<00:01,  2.59it/s]Running experiments:  95%|█████████▌| 38/40 [01:42<00:04,  2.17s/it]Running experiments:  98%|█████████▊| 39/40 [01:46<00:02,  2.43s/it]Running experiments: 100%|██████████| 40/40 [01:46<00:00,  2.66s/it]
+Number of failed measurements: 0
+Creating shared client manager with 3 clients, 50 connections each for 10 runners
+Creating 3 optimized HTTP clients with 50 connections each
+Generating 40 prompts with length 45000 and seed 2
+Num of prompts: 40
+Num of tasks: 60
+Num of runners: 10
+Max tokens: 1000
+
+Experiment Details:
+ID: 11
+Name: kimi_b200_longctx_20run
+Date: 2026-04-09 01:09:51
+Description: 
+
+Experiment Parameters:
+╒═════════════════════╤═══════════════════════╕
+│           Parameter │                 Value │
+╞═════════════════════╪═══════════════════════╡
+│         num_workers │                    20 │
+├─────────────────────┼───────────────────────┤
+│           num_tasks │                    40 │
+├─────────────────────┼───────────────────────┤
+│            node_url │ http://127.0.0.1:8080 │
+├─────────────────────┼───────────────────────┤
+│          max_tokens │                  1000 │
+├─────────────────────┼───────────────────────┤
+│          model_name │  moonshotai/Kimi-K2.5 │
+├─────────────────────┼───────────────────────┤
+│             no_sign │                  True │
+├─────────────────────┼───────────────────────┤
+│            old_sign │                 False │
+├─────────────────────┼───────────────────────┤
+│ client_architecture │           shared_pool │
+├─────────────────────┼───────────────────────┤
+│   requester_address │                 gonka │
+├─────────────────────┼───────────────────────┤
+│         avg_n_input │            22425.2500 │
+├─────────────────────┼───────────────────────┤
+│         std_n_input │               51.4417 │
+├─────────────────────┼───────────────────────┤
+│        avg_n_output │              945.8750 │
+├─────────────────────┼───────────────────────┤
+│        std_n_output │              108.1882 │
+╘═════════════════════╧═══════════════════════╛
+
+Experiment Metrics:
+╒══════════════════════════╤═══════════╕
+│ Metric                   │     Value │
+╞══════════════════════════╪═══════════╡
+│ TTFT                     │    8.1776 │
+├──────────────────────────┼───────────┤
+│ TTFT_95                  │   22.1328 │
+├──────────────────────────┼───────────┤
+│ TOP_5_TTFT               │   22.133  │
+├──────────────────────────┼───────────┤
+│ LATENCY                  │   43.4566 │
+├──────────────────────────┼───────────┤
+│ LATENCY_95               │   53.3484 │
+├──────────────────────────┼───────────┤
+│ TOP_5_LATENCY            │   53.3494 │
+├──────────────────────────┼───────────┤
+│ TPOT                     │    0.0459 │
+├──────────────────────────┼───────────┤
+│ THROUGHPUT               │ 8768.85   │
+├──────────────────────────┼───────────┤
+│ THROUGHPUT_INPUT_TOKENS  │ 8413.96   │
+├──────────────────────────┼───────────┤
+│ THROUGHPUT_OUTPUT_TOKENS │  354.892  │
+├──────────────────────────┼───────────┤
+│ RPS                      │    0.3752 │
+├──────────────────────────┼───────────┤
+│ LONGER_THAN_60_LATENCY   │    0      │
+├──────────────────────────┼───────────┤
+│ LONGER_THAN_120_LATENCY  │    0      │
+├──────────────────────────┼───────────┤
+│ LONGER_THAN_180_LATENCY  │    0      │
+├──────────────────────────┼───────────┤
+│ FAILED_REQUESTS          │    0      │
+├──────────────────────────┼───────────┤
+│ FAILED_REQUESTS_PER_HOUR │    0      │
+╘══════════════════════════╧═══════════╛
+Tables created successfully.
+Experiment created: 
+Experiment(
+    experiment_id=12,
+    experiment_name=kimi_b200_longctx_10run,
+    experiment_date=2026-04-08 18:11:48.352945,
+    description=
+)
+
+Running experiments:   0%|          | 0/60 [00:00<?, ?it/s]Running experiments:   2%|▏         | 1/60 [00:34<34:11, 34.78s/it]Running experiments:   3%|▎         | 2/60 [00:38<16:05, 16.64s/it]Running experiments:   5%|▌         | 3/60 [00:44<10:58, 11.56s/it]Running experiments:   7%|▋         | 4/60 [00:45<06:53,  7.38s/it]Running experiments:   8%|▊         | 5/60 [00:46<04:48,  5.25s/it]Running experiments:  15%|█▌        | 9/60 [00:48<01:39,  1.96s/it]Running experiments:  18%|█▊        | 11/60 [01:01<02:48,  3.44s/it]Running experiments:  20%|██        | 12/60 [01:10<03:37,  4.54s/it]Running experiments:  22%|██▏       | 13/60 [01:11<02:54,  3.71s/it]Running experiments:  23%|██▎       | 14/60 [01:14<02:44,  3.58s/it]Running experiments:  25%|██▌       | 15/60 [01:14<02:03,  2.74s/it]Running experiments:  27%|██▋       | 16/60 [01:17<02:04,  2.83s/it]Running experiments:  28%|██▊       | 17/60 [01:29<03:43,  5.20s/it]Running experiments:  32%|███▏      | 19/60 [01:30<02:13,  3.25s/it]Running experiments:  35%|███▌      | 21/60 [01:40<02:33,  3.94s/it]Running experiments:  37%|███▋      | 22/60 [01:42<02:12,  3.49s/it]Running experiments:  38%|███▊      | 23/60 [01:47<02:22,  3.86s/it]Running experiments:  40%|████      | 24/60 [01:51<02:24,  4.00s/it]Running experiments:  42%|████▏     | 25/60 [01:53<02:01,  3.48s/it]Running experiments:  43%|████▎     | 26/60 [01:56<01:50,  3.24s/it]Running experiments:  45%|████▌     | 27/60 [01:59<01:42,  3.12s/it]Running experiments:  47%|████▋     | 28/60 [02:03<01:44,  3.28s/it]Running experiments:  48%|████▊     | 29/60 [02:07<01:55,  3.73s/it]Running experiments:  50%|█████     | 30/60 [02:09<01:37,  3.25s/it]Running experiments:  52%|█████▏    | 31/60 [02:11<01:18,  2.72s/it]Running experiments:  53%|█████▎    | 32/60 [02:20<02:05,  4.49s/it]Running experiments:  55%|█████▌    | 33/60 [02:25<02:09,  4.81s/it]Running experiments:  57%|█████▋    | 34/60 [02:28<01:51,  4.30s/it]Running experiments:  58%|█████▊    | 35/60 [02:29<01:20,  3.23s/it]Running experiments:  60%|██████    | 36/60 [02:32<01:12,  3.04s/it]Running experiments:  62%|██████▏   | 37/60 [02:35<01:12,  3.15s/it]Running experiments:  63%|██████▎   | 38/60 [02:37<01:02,  2.82s/it]Running experiments:  65%|██████▌   | 39/60 [02:40<00:59,  2.84s/it]Running experiments:  67%|██████▋   | 40/60 [02:42<00:49,  2.48s/it]Running experiments:  68%|██████▊   | 41/60 [02:48<01:12,  3.81s/it]Running experiments:  70%|███████   | 42/60 [02:55<01:24,  4.67s/it]Running experiments:  72%|███████▏  | 43/60 [02:59<01:13,  4.31s/it]Running experiments:  73%|███████▎  | 44/60 [03:06<01:23,  5.21s/it]Running experiments:  75%|███████▌  | 45/60 [03:07<01:01,  4.10s/it]Running experiments:  77%|███████▋  | 46/60 [03:09<00:48,  3.43s/it]Running experiments:  78%|███████▊  | 47/60 [03:12<00:40,  3.08s/it]Running experiments:  80%|████████  | 48/60 [03:15<00:39,  3.28s/it]Running experiments:  82%|████████▏ | 49/60 [03:19<00:38,  3.52s/it]Running experiments:  83%|████████▎ | 50/60 [03:22<00:33,  3.36s/it]Running experiments:  85%|████████▌ | 51/60 [03:29<00:39,  4.42s/it]Running experiments:  87%|████████▋ | 52/60 [03:33<00:33,  4.24s/it]Running experiments:  88%|████████▊ | 53/60 [03:38<00:31,  4.44s/it]Running experiments:  90%|█████████ | 54/60 [03:40<00:21,  3.56s/it]Running experiments:  92%|█████████▏| 55/60 [03:46<00:21,  4.29s/it]Running experiments:  93%|█████████▎| 56/60 [03:46<00:12,  3.17s/it]Running experiments:  95%|█████████▌| 57/60 [03:47<00:07,  2.49s/it]Running experiments:  97%|█████████▋| 58/60 [03:49<00:04,  2.34s/it]Running experiments:  98%|█████████▊| 59/60 [03:51<00:02,  2.16s/it]Running experiments: 100%|██████████| 60/60 [03:55<00:00,  2.80s/it]Running experiments: 100%|██████████| 60/60 [03:55<00:00,  3.93s/it]
+Number of failed measurements: 0
+
+Experiment Details:
+ID: 12
+Name: kimi_b200_longctx_10run
+Date: 2026-04-09 01:11:48
+Description: 
+
+Experiment Parameters:
+╒═════════════════════╤═══════════════════════╕
+│           Parameter │                 Value │
+╞═════════════════════╪═══════════════════════╡
+│         num_workers │                    10 │
+├─────────────────────┼───────────────────────┤
+│           num_tasks │                    60 │
+├─────────────────────┼───────────────────────┤
+│            node_url │ http://127.0.0.1:8080 │
+├─────────────────────┼───────────────────────┤
+│          max_tokens │                  1000 │
+├─────────────────────┼───────────────────────┤
+│          model_name │  moonshotai/Kimi-K2.5 │
+├─────────────────────┼───────────────────────┤
+│             no_sign │                  True │
+├─────────────────────┼───────────────────────┤
+│            old_sign │                 False │
+├─────────────────────┼───────────────────────┤
+│ client_architecture │           shared_pool │
+├─────────────────────┼───────────────────────┤
+│   requester_address │                 gonka │
+├─────────────────────┼───────────────────────┤
+│         avg_n_input │            22447.2667 │
+├─────────────────────┼───────────────────────┤
+│         std_n_input │               37.8180 │
+├─────────────────────┼───────────────────────┤
+│        avg_n_output │              907.9000 │
+├─────────────────────┼───────────────────────┤
+│        std_n_output │              146.2923 │
+╘═════════════════════╧═══════════════════════╛
+
+Experiment Metrics:
+╒══════════════════════════╤═══════════╕
+│ Metric                   │     Value │
+╞══════════════════════════╪═══════════╡
+│ TTFT                     │    2.3268 │
+├──────────────────────────┼───────────┤
+│ TTFT_95                  │    9.6343 │
+├──────────────────────────┼───────────┤
+│ TOP_5_TTFT               │   11.241  │
+├──────────────────────────┼───────────┤
+│ LATENCY                  │   37.3086 │
+├──────────────────────────┼───────────┤
+│ LATENCY_95               │   46.696  │
+├──────────────────────────┼───────────┤
+│ TOP_5_LATENCY            │   47.6506 │
+├──────────────────────────┼───────────┤
+│ TPOT                     │    0.0411 │
+├──────────────────────────┼───────────┤
+│ THROUGHPUT               │ 5949.53   │
+├──────────────────────────┼───────────┤
+│ THROUGHPUT_INPUT_TOKENS  │ 5718.25   │
+├──────────────────────────┼───────────┤
+│ THROUGHPUT_OUTPUT_TOKENS │  231.28   │
+├──────────────────────────┼───────────┤
+│ RPS                      │    0.2547 │
+├──────────────────────────┼───────────┤
+│ LONGER_THAN_60_LATENCY   │    0      │
+├──────────────────────────┼───────────┤
+│ LONGER_THAN_120_LATENCY  │    0      │
+├──────────────────────────┼───────────┤
+│ LONGER_THAN_180_LATENCY  │    0      │
+├──────────────────────────┼───────────┤
+│ FAILED_REQUESTS          │    0      │
+├──────────────────────────┼───────────┤
+│ FAILED_REQUESTS_PER_HOUR │    0      │
+╘══════════════════════════╧═══════════╛
+
+List of Experiments:
++------+--------------------------+---------------------+---------------+
+|   ID | Name                     | Date                | Description   |
++======+==========================+=====================+===============+
+|   12 | kimi_b200_longctx_10run  | 2026-04-09 01:11:48 |               |
++------+--------------------------+---------------------+---------------+
+|   11 | kimi_b200_longctx_20run  | 2026-04-09 01:09:51 |               |
++------+--------------------------+---------------------+---------------+
+|   10 | kimi_b200_longctx_5run   | 2026-04-09 01:08:29 |               |
++------+--------------------------+---------------------+---------------+
+|    9 | kimi_b200_longctx_single | 2026-04-09 01:06:00 |               |
++------+--------------------------+---------------------+---------------+
+|    8 | kimi_b200_concurrent     | 2026-04-09 01:04:37 |               |
++------+--------------------------+---------------------+---------------+
+|    7 | kimi_b200_small          | 2026-04-09 01:03:39 |               |
++------+--------------------------+---------------------+---------------+
+|    6 | kimi_b200_longctx_10run  | 2026-04-09 00:55:40 |               |
++------+--------------------------+---------------------+---------------+
+|    5 | kimi_b200_longctx_20run  | 2026-04-09 00:55:30 |               |
++------+--------------------------+---------------------+---------------+
+|    4 | kimi_b200_longctx_5run   | 2026-04-09 00:55:20 |               |
++------+--------------------------+---------------------+---------------+
+|    3 | kimi_b200_longctx_single | 2026-04-09 00:55:10 |               |
++------+--------------------------+---------------------+---------------+
+|    2 | kimi_b200_concurrent     | 2026-04-09 00:54:59 |               |
++------+--------------------------+---------------------+---------------+
+|    1 | kimi_b200_small          | 2026-04-09 00:49:49 |               |
++------+--------------------------+---------------------+---------------+

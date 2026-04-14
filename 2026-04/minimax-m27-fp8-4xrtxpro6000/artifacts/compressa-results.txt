@@ -1,0 +1,107 @@
+
+List of Experiments:
++----+------+---------------------+--------+------------------------------------+------------------------------------+
+|    | ID   | Name                | Date   | Description                        | Parameters                         |
++====+======+=====================+========+====================================+====================================+
+|  6 |      | 2026-04-14 20:39:57 |        | num_workers: 10                    | TTFT: 3.6388                       |
+|    |      |                     |        | num_tasks: 60                      | TTFT_95: 13.7175                   |
+|    |      |                     |        | node_url: http://127...            | TOP_5_TTFT: 14.0173                |
+|    |      |                     |        | max_tokens: 1000                   | LATENCY: 40.3254                   |
+|    |      |                     |        | model_name: MiniMaxAI/...          | LATENCY_95: 51.9070                |
+|    |      |                     |        | no_sign: True                      | TOP_5_LATENCY: 51.9291             |
+|    |      |                     |        | old_sign: False                    | TPOT: 0.0452                       |
+|    |      |                     |        | client_architecture: shared_poo... | THROUGHPUT: 5555.2732              |
+|    |      |                     |        | requester_address: gonka           | THROUGHPUT_INPUT_TOKENS: 5344.5989 |
+|    |      |                     |        | avg_n_input: 22629.15              | THROUGHPUT_OUTPUT_TOKENS: 210.6744 |
+|    |      |                     |        | std_n_input: 42.16                 | RPS: 0.2362                        |
+|    |      |                     |        | avg_n_output: 892                  | LONGER_THAN_60_LATENCY: 0          |
+|    |      |                     |        | std_n_output: 193.52               | LONGER_THAN_120_LATENCY: 0         |
+|    |      |                     |        |                                    | LONGER_THAN_180_LATENCY: 0         |
+|    |      |                     |        |                                    | FAILED_REQUESTS: 0                 |
+|    |      |                     |        |                                    | FAILED_REQUESTS_PER_HOUR: 0        |
++----+------+---------------------+--------+------------------------------------+------------------------------------+
+|  5 |      | 2026-04-14 20:37:57 |        | num_workers: 20                    | TTFT: 9.0715                       |
+|    |      |                     |        | num_tasks: 40                      | TTFT_95: 19.4239                   |
+|    |      |                     |        | node_url: http://127...            | TOP_5_TTFT: 19.4341                |
+|    |      |                     |        | max_tokens: 1000                   | LATENCY: 50.0830                   |
+|    |      |                     |        | model_name: MiniMaxAI/...          | LATENCY_95: 67.2765                |
+|    |      |                     |        | no_sign: True                      | TOP_5_LATENCY: 67.2823             |
+|    |      |                     |        | old_sign: False                    | TPOT: 0.0586                       |
+|    |      |                     |        | client_architecture: shared_poo... | THROUGHPUT: 8506.5431              |
+|    |      |                     |        | requester_address: gonka           | THROUGHPUT_INPUT_TOKENS: 8196.8630 |
+|    |      |                     |        | avg_n_input: 22605.03              | THROUGHPUT_OUTPUT_TOKENS: 309.6801 |
+|    |      |                     |        | std_n_input: 46.72                 | RPS: 0.3626                        |
+|    |      |                     |        | avg_n_output: 854.02               | LONGER_THAN_60_LATENCY: 12         |
+|    |      |                     |        | std_n_output: 228.12               | LONGER_THAN_120_LATENCY: 0         |
+|    |      |                     |        |                                    | LONGER_THAN_180_LATENCY: 0         |
+|    |      |                     |        |                                    | FAILED_REQUESTS: 0                 |
+|    |      |                     |        |                                    | FAILED_REQUESTS_PER_HOUR: 0        |
++----+------+---------------------+--------+------------------------------------+------------------------------------+
+|  4 |      | 2026-04-14 20:36:52 |        | num_workers: 5                     | TTFT: 4.2750                       |
+|    |      |                     |        | num_tasks: 10                      | TTFT_95: 7.0848                    |
+|    |      |                     |        | node_url: http://127...            | TOP_5_TTFT: 7.1858                 |
+|    |      |                     |        | max_tokens: 1000                   | LATENCY: 23.8235                   |
+|    |      |                     |        | model_name: MiniMaxAI/...          | LATENCY_95: 33.2920                |
+|    |      |                     |        | no_sign: True                      | TOP_5_LATENCY: 33.2979             |
+|    |      |                     |        | old_sign: False                    | TPOT: 0.0309                       |
+|    |      |                     |        | client_architecture: shared_poo... | THROUGHPUT: 4314.8665              |
+|    |      |                     |        | requester_address: gonka           | THROUGHPUT_INPUT_TOKENS: 4172.5334 |
+|    |      |                     |        | avg_n_input: 22622.60              | THROUGHPUT_OUTPUT_TOKENS: 142.3331 |
+|    |      |                     |        | std_n_input: 49.14                 | RPS: 0.1844                        |
+|    |      |                     |        | avg_n_output: 771.70               | LONGER_THAN_60_LATENCY: 0          |
+|    |      |                     |        | std_n_output: 311.14               | LONGER_THAN_120_LATENCY: 0         |
+|    |      |                     |        |                                    | LONGER_THAN_180_LATENCY: 0         |
+|    |      |                     |        |                                    | FAILED_REQUESTS: 0                 |
+|    |      |                     |        |                                    | FAILED_REQUESTS_PER_HOUR: 0        |
++----+------+---------------------+--------+------------------------------------+------------------------------------+
+|  3 |      | 2026-04-14 20:35:36 |        | num_workers: 1                     | TTFT: 1.4769                       |
+|    |      |                     |        | num_tasks: 5                       | TTFT_95: 1.8312                    |
+|    |      |                     |        | node_url: http://127...            | TOP_5_TTFT: 1.8335                 |
+|    |      |                     |        | max_tokens: 1000                   | LATENCY: 13.3170                   |
+|    |      |                     |        | model_name: MiniMaxAI/...          | LATENCY_95: 14.5059                |
+|    |      |                     |        | no_sign: True                      | TOP_5_LATENCY: 14.5076             |
+|    |      |                     |        | old_sign: False                    | TPOT: 0.0143                       |
+|    |      |                     |        | client_architecture: shared_poo... | THROUGHPUT: 1768.1155              |
+|    |      |                     |        | requester_address: gonka           | THROUGHPUT_INPUT_TOKENS: 1697.9952 |
+|    |      |                     |        | avg_n_input: 22612.40              | THROUGHPUT_OUTPUT_TOKENS: 70.1203  |
+|    |      |                     |        | std_n_input: 20.96                 | RPS: 0.0751                        |
+|    |      |                     |        | avg_n_output: 933.80               | LONGER_THAN_60_LATENCY: 0          |
+|    |      |                     |        | std_n_output: 148.03               | LONGER_THAN_120_LATENCY: 0         |
+|    |      |                     |        |                                    | LONGER_THAN_180_LATENCY: 0         |
+|    |      |                     |        |                                    | FAILED_REQUESTS: 0                 |
+|    |      |                     |        |                                    | FAILED_REQUESTS_PER_HOUR: 0        |
++----+------+---------------------+--------+------------------------------------+------------------------------------+
+|  2 |      | 2026-04-14 20:34:07 |        | num_workers: 30                    | TTFT: 1.4996                       |
+|    |      |                     |        | num_tasks: 200                     | TTFT_95: 6.7428                    |
+|    |      |                     |        | node_url: http://127...            | TOP_5_TTFT: 6.7570                 |
+|    |      |                     |        | max_tokens: 300                    | LATENCY: 11.3128                   |
+|    |      |                     |        | model_name: MiniMaxAI/...          | LATENCY_95: 16.5350                |
+|    |      |                     |        | no_sign: True                      | TOP_5_LATENCY: 16.5495             |
+|    |      |                     |        | old_sign: False                    | TPOT: 0.0377                       |
+|    |      |                     |        | client_architecture: shared_poo... | THROUGHPUT: 3416.2170              |
+|    |      |                     |        | requester_address: gonka           | THROUGHPUT_INPUT_TOKENS: 2653.2892 |
+|    |      |                     |        | avg_n_input: 1042.44               | THROUGHPUT_OUTPUT_TOKENS: 762.9277 |
+|    |      |                     |        | std_n_input: 10.13                 | RPS: 2.5453                        |
+|    |      |                     |        | avg_n_output: 299.75               | LONGER_THAN_60_LATENCY: 0          |
+|    |      |                     |        | std_n_output: 3.61                 | LONGER_THAN_120_LATENCY: 0         |
+|    |      |                     |        |                                    | LONGER_THAN_180_LATENCY: 0         |
+|    |      |                     |        |                                    | FAILED_REQUESTS: 0                 |
+|    |      |                     |        |                                    | FAILED_REQUESTS_PER_HOUR: 0        |
++----+------+---------------------+--------+------------------------------------+------------------------------------+
+|  1 |      | 2026-04-14 20:33:34 |        | num_workers: 1                     | TTFT: 0.8079                       |
+|    |      |                     |        | num_tasks: 5                       | TTFT_95: 1.3525                    |
+|    |      |                     |        | node_url: http://127...            | TOP_5_TTFT: 1.4612                 |
+|    |      |                     |        | max_tokens: 300                    | LATENCY: 4.4422                    |
+|    |      |                     |        | model_name: MiniMaxAI/...          | LATENCY_95: 4.9851                 |
+|    |      |                     |        | no_sign: True                      | TOP_5_LATENCY: 5.0905              |
+|    |      |                     |        | old_sign: False                    | TPOT: 0.0148                       |
+|    |      |                     |        | client_architecture: shared_poo... | THROUGHPUT: 2334.5040              |
+|    |      |                     |        | requester_address: gonka           | THROUGHPUT_INPUT_TOKENS: 2266.9716 |
+|    |      |                     |        | avg_n_input: 10070.60              | THROUGHPUT_OUTPUT_TOKENS: 67.5324  |
+|    |      |                     |        | std_n_input: 26.55                 | RPS: 0.2251                        |
+|    |      |                     |        | avg_n_output: 300                  | LONGER_THAN_60_LATENCY: 0          |
+|    |      |                     |        | std_n_output: 0                    | LONGER_THAN_120_LATENCY: 0         |
+|    |      |                     |        |                                    | LONGER_THAN_180_LATENCY: 0         |
+|    |      |                     |        |                                    | FAILED_REQUESTS: 0                 |
+|    |      |                     |        |                                    | FAILED_REQUESTS_PER_HOUR: 0        |
++----+------+---------------------+--------+------------------------------------+------------------------------------+

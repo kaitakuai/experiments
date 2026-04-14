@@ -1,0 +1,83 @@
+
+==================================================
+  PoC v2 Generation Test
+==================================================
+  Model:    moonshotai/Kimi-K2.5
+  API:      http://127.0.0.1:8080
+  Callback: http://127.0.0.1:9999
+  Warmup:   5s
+  Duration: 30s per test
+
+Starting batch receiver...
+Batch receiver ready.
+
+==================================================
+  PHASE 3: Batch Size Benchmark
+==================================================
+  Batch sizes: [8, 16, 32, 64, 128]
+  Duration: 35s each (5s warmup + 30s measurement)
+
+────────────────────────────────────────
+  Testing batch_size = 8
+────────────────────────────────────────
+    5s warmup done
+    [10s] 144 nonces
+    [20s] 304 nonces
+    [30s] 456 nonces
+  Result: 456 nonces, 912/min
+
+────────────────────────────────────────
+  Testing batch_size = 16
+────────────────────────────────────────
+    5s warmup done
+    [10s] 160 nonces
+    [20s] 320 nonces
+    [30s] 496 nonces
+  Result: 496 nonces, 992/min
+
+────────────────────────────────────────
+  Testing batch_size = 32
+────────────────────────────────────────
+    5s warmup done
+    [10s] 160 nonces
+    [20s] 320 nonces
+    [30s] 512 nonces
+  Result: 512 nonces, 1024/min
+
+────────────────────────────────────────
+  Testing batch_size = 64
+────────────────────────────────────────
+    5s warmup done
+    [10s] 0 nonces
+    [20s] 0 nonces
+    [30s] 0 nonces
+  Result: 0 nonces, 0/min
+
+────────────────────────────────────────
+  Testing batch_size = 128
+────────────────────────────────────────
+    5s warmup done
+    [10s] 0 nonces
+    [20s] 0 nonces
+    [30s] 0 nonces
+  Result: 0 nonces, 0/min
+
+==================================================
+  RESULTS
+==================================================
+     Batch │   Nonces │   Nonces/min
+  ─────────┼──────────┼─────────────
+         8 │      456 │          912  
+        16 │      496 │          992  
+        32 │      512 │         1024 ★
+        64 │        0 │            0  
+       128 │        0 │            0  
+==================================================
+  ★ Best batch size: 32 (1024 nonces/min)
+
+  NOTE: Best=32 differs from current default (8).
+        Update PHASE1_BATCH_SIZE and the pow_v2_routes.py patch in onstart.sh.
+
+✓ Test complete!
+
+Stopping batch receiver...
