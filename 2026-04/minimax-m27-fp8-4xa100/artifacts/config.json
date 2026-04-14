@@ -1,0 +1,12 @@
+{
+  "gpu": "A100-SXM4-80GB",
+  "vllm_version": "0.19.0",
+  "model": "MiniMaxAI/MiniMax-M2.7",
+  "url": "http://127.0.0.1:5001",
+  "batch_size": 16,
+  "seq_len": 1024,
+  "k_dim": 12,
+  "tensor_parallel_size": 4,
+  "quantization": "fp8",
+  "timestamp": "2026-04-14T22:59:00"
+}
