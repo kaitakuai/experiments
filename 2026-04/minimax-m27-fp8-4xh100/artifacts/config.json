@@ -1,0 +1,14 @@
+{
+  "gpu": "NVIDIA H100 80GB HBM3",
+  "vllm_version": "0.19.0",
+  "model": "MiniMaxAI/MiniMax-M2.7",
+  "url": "http://127.0.0.1:5001",
+  "batch_size": 16,
+  "seq_len": 1024,
+  "k_dim": 12,
+  "tensor_parallel_size": 4,
+  "quantization": "fp8",
+  "moe_backend": "FLASHINFER_CUTLASS",
+  "attention_backend": "FLASH_ATTN",
+  "timestamp": "2026-04-15T03:16:00"
+}
