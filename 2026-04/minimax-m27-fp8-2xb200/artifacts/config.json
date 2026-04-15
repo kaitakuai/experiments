@@ -1,0 +1,14 @@
+{
+  "gpu": "NVIDIA B200",
+  "vllm_version": "0.19.0",
+  "model": "MiniMaxAI/MiniMax-M2.7",
+  "url": "http://127.0.0.1:5001",
+  "batch_size": 16,
+  "seq_len": 1024,
+  "k_dim": 12,
+  "tensor_parallel_size": 2,
+  "quantization": "fp8",
+  "moe_backend": "FLASHINFER_TRTLLM (default)",
+  "attention_backend": "FLASHINFER (default)",
+  "timestamp": "2026-04-15T02:24:00"
+}
