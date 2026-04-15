@@ -234,32 +234,35 @@ Measured on the second hot-cache start (first cold start is dominated by FUSE/di
 
 ## Results
 
-Phase 3 batch-size sweep, 30 s measurement window per batch (5 s warmup discarded):
+Two parallelism configurations were measured against identical PoC v2 workloads on the same instance: **TP=4** (`--tensor-parallel-size 4 --pipeline-parallel-size 1`) and **PP=4** (`--tensor-parallel-size 1 --pipeline-parallel-size 4`).
 
-| Batch Size | Nonces (30 s) | Nonces/min | vs best |
-|-----------:|--------------:|-----------:|--------:|
-| 2 | 340 | 680 | 80 % |
-| **8 ★** | **424** | **848** | **100 %** |
-| 16 | 400 | 800 | 94 % |
-| 32 | 384 | 768 | 91 % |
-| 64 | 0 | 0 (failed) | — |
+### Phase 3 — batch-size sweep (30 s measurement window per batch, 5 s warmup discarded)
 
-**Best: batch=8 → 848 nonces/min**
+| Batch Size | TP=4 nonces/min | PP=4 nonces/min |
+|-----------:|----------------:|----------------:|
+| 2 | 680 | 516 |
+| 8 | **848 ★** | 768 |
+| 16 | 800 | 768 |
+| 32 | 768 | **768 ★** |
+| 64 | 0 (OOM) | 768 |
 
-Phase 1 (generation + self-validation):
+- **TP=4 best:** batch=8 → **848 nonces/min** (peak), but engine OOMs at batch=64.
+- **PP=4 best:** batch=32 (or any of 8/16/32/64) → **768 nonces/min** (flat plateau, no OOM through batch=64).
+- TP=4 is ~10 % faster at its peak; PP=4 is more robust under high concurrency and uses less GPU memory (~83 GiB vs ~91 GiB per GPU because PP avoids attention-weight duplication).
 
-| Check | Result |
-|---|---|
-| Async generation throughput (batch=8, 30 s) | 424 nonces / 848 nonces/min |
-| Sync→Sync determinism (20 nonces re-generated) | 20/20 match, **0 mismatches** |
-| Async→Sync replay (full 424 nonces) | 424/424 match, **0 mismatches**, p_value = 1.0 |
+### Phase 1 — generation + self-validation
 
-Phase 2 (fraud detection):
-
-| Test | Vectors | Expectation | Result |
+| Configuration | Async batch=8 throughput | Sync→Sync determinism | Async→Sync replay |
 |---|---|---|---|
-| Fresh honest (sync→sync) | 32 | validation passes | ✅ passed |
-| INT4-quantized fraud vectors | 32 | validation rejects | ✅ rejected |
+| **TP=4** | 424 nonces / 848/min | 20/20, **0 mismatches** | 424/424, **0 mismatches**, p_value = 1.0 |
+| **PP=4** | 384 nonces / 768/min | 20/20, **0 mismatches** | 384/384, **0 mismatches**, p_value = 1.0 |
+
+### Phase 2 — fraud detection (both configurations)
+
+| Test | Vectors | Expectation | TP=4 | PP=4 |
+|---|---|---|---|---|
+| Fresh honest (sync→sync) | 32 | validation passes | ✅ passed | ✅ passed |
+| INT4-quantized fraud vectors | 32 | validation rejects | ✅ rejected | ✅ rejected |
 
 ## Backend trace (from vLLM startup log)
 
@@ -277,19 +280,22 @@ PoC engine patch applied successfully to AsyncLLM (V1)
 
 ## Key observations
 
-- **TRITON is the only working FP8 MoE backend on SM120 with MiniMax's 128×128 block-wise layout in vLLM 0.19.0.** Both FlashInfer FP8 MoE paths reject the configuration (verified on FlashInfer 0.6.6 and 0.6.7.post3); DeepGEMM rejects the device entirely (no SM120 support yet, only SM90/SM100). This caps achievable throughput at ~30–50 % below what vendor-tuned kernels would deliver on the same silicon.
-- **batch=64 OOMs** (0 nonces produced for the entire 30 s window) despite `--max-num-seqs 128`. The KV-cache headroom of 29 GiB is enough for ~32 simultaneous PoC sequences but not 64; raising `--gpu-memory-utilization` past 0.92 risks the engine itself OOMing during graph capture.
-- **Throughput plateau** at batch=8 is consistent with the kimi-k25-int4-4×B200 baseline (sweet spot at 32–64 there because B200 has more KV headroom and faster INT4 kernels). For RTX PRO 6000 Blackwell + FP8, batch=8 is the practical maximum.
-- Comparison with kimi-k25-int4-4×B200 (1024 nonces/min): MiniMax-M2.7 / RTX PRO 6000 Blackwell achieves **~83 % of B200's PoC throughput** despite using a smaller workstation Blackwell — better than the raw FLOPs ratio would suggest, primarily because PoC v2 is bound by MoE expert dispatch latency, not raw matmul.
-- **PoC v2 self-validation passes byte-for-byte** (`p_value = 1.0`) — the TRITON FP8 MoE path is numerically deterministic across async and sync execution, which is the property PoC v2 actually requires. The TRITON throughput penalty does not affect correctness, only speed.
+- **TRITON is the only working FP8 MoE backend on SM120 with MiniMax's 128×128 block-wise layout in vLLM 0.19.0** (applies equally to TP and PP). Both FlashInfer FP8 MoE paths reject the configuration (verified on FlashInfer 0.6.6 and 0.6.7.post3); DeepGEMM rejects the device entirely (no SM120 support yet, only SM90/SM100). This caps achievable throughput at ~30–50 % below what vendor-tuned kernels would deliver on the same silicon.
+- **TP=4 vs PP=4 trade-off:**
+  - TP=4 wins peak throughput by ~10 % (848 vs 768 nonces/min) but **OOMs at batch=64** because TP duplicates attention buffers across all 4 GPUs (~91 GiB used per GPU, 5 GiB headroom).
+  - PP=4 is throughput-flat from batch=8 to batch=64 (768 nonces/min) and uses only ~83 GiB per GPU; **no OOM** at any tested batch. Better choice for sustained high-concurrency or anywhere the workload may spike past batch=32.
+  - Both configurations preserve PoC v2 determinism end-to-end (p_value = 1.0 on Async→Sync replay).
+- **Throughput plateau** at batch=8 (TP) or batch=8+ (PP) is consistent with the kimi-k25-int4-4×B200 baseline (sweet spot at 32–64 there because B200 has more KV headroom and faster INT4 kernels). For RTX PRO 6000 Blackwell + FP8, batch=8 is the practical maximum on TP, batch=32 on PP.
+- Comparison with kimi-k25-int4-4×B200 (1024 nonces/min): MiniMax-M2.7 / RTX PRO 6000 Blackwell achieves **~83 % of B200's PoC throughput** on TP=4 (~75 % on PP=4) despite using a smaller workstation Blackwell — better than the raw FLOPs ratio would suggest, primarily because PoC v2 is bound by MoE expert dispatch latency, not raw matmul.
+- **PoC v2 self-validation passes byte-for-byte** (`p_value = 1.0`) on both TP and PP — the TRITON FP8 MoE path is numerically deterministic across async and sync execution, which is the property PoC v2 actually requires. The TRITON throughput penalty does not affect correctness, only speed.
 
 ## Artifacts
 
-- [`artifacts/nonces_1000.json`](artifacts/nonces_1000.json) — 1 056 PoC nonce vectors (`seq_len=1024`, `k_dim=12`) collected via `collect_artifacts.py`. Sustained collection rate **823 nonces/min** (77 s for 1 056 nonces, batch_size=8) — close to the Phase-3 sweet spot of 848 nonces/min, the small delta is the cost of the per-batch HTTP callback to port 9998.
-- [`artifacts/config.json`](artifacts/config.json) — collection metadata (model, URL, batch size, timestamp) saved by `collect_artifacts.py`.
-- [`artifacts/compressa-perf.sqlite`](artifacts/compressa-perf.sqlite) and [`artifacts/compressa-results.txt`](artifacts/compressa-results.txt) — see [`compressa-perf.md`](compressa-perf.md) for the inference benchmark.
+- [`artifacts/nonces_1000.json`](artifacts/nonces_1000.json) + [`artifacts/config.json`](artifacts/config.json) — 1 056 PoC nonce vectors (`seq_len=1024`, `k_dim=12`) collected on **TP=4** with `batch_size=8`. Sustained rate **823 nonces/min** (77 s) — within 3 % of Phase-3 peak 848/min, delta is the per-batch HTTP callback overhead.
+- [`artifacts/nonces_1000_pp4.json`](artifacts/nonces_1000_pp4.json) + [`artifacts/config_pp4.json`](artifacts/config_pp4.json) — 1 056 PoC nonce vectors collected on **PP=4** with `batch_size=32`. Sustained rate **773 nonces/min** (82 s) — within 1 % of Phase-3 plateau 768/min.
+- [`artifacts/compressa-perf.sqlite`](artifacts/compressa-perf.sqlite) and [`artifacts/compressa-results.txt`](artifacts/compressa-results.txt) — see [`compressa-perf.md`](compressa-perf.md) for the inference benchmark (TP=4 only).
 
-Reproduction:
+Reproduction (TP=4):
 
 ```bash
 python3 -u collect_artifacts.py \
@@ -299,6 +305,18 @@ python3 -u collect_artifacts.py \
     --nonces 1000 --batch-size 8 --logprobs-count 0 \
     --gpu 'RTX PRO 6000 Blackwell' \
     --vllm-version '0.19.0+poc-overlay-f9477d1'
+```
+
+Reproduction (PP=4 — bring vLLM up via MLNode with `--tensor-parallel-size 1 --pipeline-parallel-size 4`, then):
+
+```bash
+python3 -u collect_artifacts.py \
+    --url http://127.0.0.1:8081 \
+    --model 'MiniMaxAI/MiniMax-M2.7' \
+    --output-dir /root/poc_artifacts_pp4 \
+    --nonces 1000 --batch-size 32 --logprobs-count 0 \
+    --gpu 'RTX PRO 6000 Blackwell' \
+    --vllm-version '0.19.0+poc-overlay-f9477d1 (PP=4 TP=1)'
 ```
 
 Note: `--url` points to **MLNode** on `:8081`, not vLLM's `:5001`. The script hits MLNode endpoints (`/api/v1/inference/pow/init/generate`, `/stop`); MLNode proxies to vLLM's PoC v2 routes (`/api/v1/pow/*`). It also opens a callback HTTPServer on port `9998` to receive the streamed nonce batches (different from the `9999` used by `run_pow_generation.py`, so the two can coexist).
