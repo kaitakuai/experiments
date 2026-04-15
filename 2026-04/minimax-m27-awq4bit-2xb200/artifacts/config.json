@@ -1,0 +1,14 @@
+{
+  "gpu": "NVIDIA B200",
+  "vllm_version": "0.19.0",
+  "model": "demon-zombie/MiniMax-M2.7-AWQ-4bit",
+  "url": "http://127.0.0.1:5001",
+  "batch_size": 16,
+  "seq_len": 1024,
+  "k_dim": 12,
+  "tensor_parallel_size": 2,
+  "quantization": "compressed-tensors (AWQ INT4)",
+  "moe_backend": "default (auto-selected)",
+  "attention_backend": "default (auto-selected)",
+  "timestamp": "2026-04-15T02:30:00"
+}

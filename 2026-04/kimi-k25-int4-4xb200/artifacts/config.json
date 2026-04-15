@@ -1,0 +1,12 @@
+{
+  "gpu": "NVIDIA B200",
+  "vllm_version": "0.19.0",
+  "model": "moonshotai/Kimi-K2.5",
+  "url": "http://127.0.0.1:5001",
+  "batch_size": 32,
+  "seq_len": 1024,
+  "k_dim": 12,
+  "tensor_parallel_size": 4,
+  "quantization": "compressed-tensors (INT4, MoE experts only)",
+  "timestamp": "2026-04-11T15:38:00"
+}

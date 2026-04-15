@@ -1,0 +1,12 @@
+{
+  "gpu": "A100-SXM4-80GB",
+  "vllm_version": "0.19.0",
+  "model": "demon-zombie/MiniMax-M2.7-AWQ-4bit",
+  "url": "http://127.0.0.1:5001",
+  "batch_size": 16,
+  "seq_len": 1024,
+  "k_dim": 12,
+  "tensor_parallel_size": 2,
+  "quantization": "compressed-tensors (AWQ INT4)",
+  "timestamp": "2026-04-14T23:25:00"
+}
