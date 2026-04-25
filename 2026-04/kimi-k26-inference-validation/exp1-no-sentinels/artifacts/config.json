@@ -1,0 +1,52 @@
+{
+  "experiment": "K2.6 INT4 honest cross-GPU inference validation — no sentinels",
+  "model": "moonshotai/Kimi-K2.6",
+  "quantization": "native INT4 W4A16 (QAT, compressed-tensors)",
+  "vllm_version": "0.19.0",
+  "inference_server": {
+    "gpu": "4x NVIDIA B200 183GB",
+    "tensor_parallel_size": 4
+  },
+  "validator_server": {
+    "gpu": "8x NVIDIA H200 143GB",
+    "tensor_parallel_size": 8
+  },
+  "vllm_args": {
+    "--logprobs-mode": "processed_logprobs",
+    "--max-model-len": 65536,
+    "--gpu-memory-utilization": 0.92,
+    "--max-num-seqs": 64,
+    "--trust-remote-code": true
+  },
+  "request_params": {
+    "temperature": 0.7,
+    "seed": 1,
+    "top_logprobs": 4,
+    "max_tokens": 1000,
+    "repetition_penalty": 1.2
+  },
+  "prompts": {
+    "datasets": ["tatsu-lab/alpaca", "iamshnoo/alpaca-cleaned-hindi", "bertin-project/alpaca-spanish", "gagan3012/alpaca-gpt4-arabic-updated", "silk-road/alpaca-data-gpt4-chinese"],
+    "languages": ["sp", "en", "ch", "ar", "hi"],
+    "per_language": 200,
+    "total": 1000
+  },
+  "results": {
+    "n_items": 1000,
+    "token_mismatches": 0,
+    "sentinel_positions_ratio": 0.0,
+    "distance2_mean": 0.1440,
+    "distance2_median": 0.1457,
+    "distance2_p05": 0.1246,
+    "distance2_p95": 0.1591,
+    "distance2_min": 0.0686,
+    "distance2_max": 0.1698,
+    "per_language_mean": {
+      "sp": 0.1474,
+      "en": 0.1477,
+      "ch": 0.1486,
+      "ar": 0.1410,
+      "hi": 0.1353
+    }
+  }
+}
