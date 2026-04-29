@@ -1,0 +1,128 @@
+=== waiting for vLLM ready (max 18 min) ===
+[010s] healthy=False poc=NO_BACKENDS
+[020s] healthy=False poc=NO_BACKENDS
+[030s] healthy=False poc=NO_BACKENDS
+[040s] healthy=False poc=NO_BACKENDS
+[050s] healthy=False poc=NO_BACKENDS
+[060s] healthy=False poc=NO_BACKENDS
+[070s] healthy=False poc=NO_BACKENDS
+[080s] healthy=False poc=NO_BACKENDS
+[090s] healthy=False poc=NO_BACKENDS
+[100s] healthy=False poc=NO_BACKENDS
+[110s] healthy=False poc=NO_BACKENDS
+[120s] healthy=False poc=NO_BACKENDS
+[130s] healthy=False poc=NO_BACKENDS
+[140s] healthy=False poc=NO_BACKENDS
+[150s] healthy=False poc=NO_BACKENDS
+[160s] healthy=False poc=NO_BACKENDS
+[170s] healthy=False poc=NO_BACKENDS
+[180s] healthy=False poc=NO_BACKENDS
+[190s] healthy=False poc=NO_BACKENDS
+[200s] healthy=False poc=NO_BACKENDS
+[210s] healthy=False poc=NO_BACKENDS
+[220s] healthy=False poc=NO_BACKENDS
+[230s] healthy=False poc=NO_BACKENDS
+[240s] healthy=False poc=NO_BACKENDS
+[250s] healthy=False poc=NO_BACKENDS
+[260s] healthy=False poc=NO_BACKENDS
+[270s] healthy=False poc=NO_BACKENDS
+[280s] healthy=False poc=NO_BACKENDS
+[290s] healthy=False poc=NO_BACKENDS
+[300s] healthy=False poc=NO_BACKENDS
+[310s] healthy=False poc=NO_BACKENDS
+[320s] healthy=False poc=NO_BACKENDS
+[330s] healthy=False poc=NO_BACKENDS
+[340s] healthy=False poc=NO_BACKENDS
+[350s] healthy=False poc=NO_BACKENDS
+[360s] healthy=False poc=NO_BACKENDS
+[370s] healthy=False poc=NO_BACKENDS
+[380s] healthy=False poc=NO_BACKENDS
+[390s] healthy=False poc=NO_BACKENDS
+[400s] healthy=False poc=NO_BACKENDS
+[410s] healthy=False poc=NO_BACKENDS
+[420s] healthy=False poc=NO_BACKENDS
+[430s] healthy=False poc=NO_BACKENDS
+[440s] healthy=False poc=NO_BACKENDS
+[450s] healthy=False poc=NO_BACKENDS
+[460s] healthy=False poc=NO_BACKENDS
+[470s] healthy=False poc=NO_BACKENDS
+[480s] healthy=False poc=NO_BACKENDS
+[490s] healthy=False poc=NO_BACKENDS
+[500s] healthy=False poc=NO_BACKENDS
+[510s] healthy=False poc=NO_BACKENDS
+[520s] healthy=False poc=NO_BACKENDS
+[530s] healthy=False poc=NO_BACKENDS
+[540s] healthy=False poc=NO_BACKENDS
+[550s] healthy=False poc=NO_BACKENDS
+[560s] healthy=False poc=NO_BACKENDS
+[570s] healthy=False poc=NO_BACKENDS
+[580s] healthy=False poc=NO_BACKENDS
+[590s] healthy=False poc=NO_BACKENDS
+[600s] healthy=False poc=NO_BACKENDS
+[610s] healthy=False poc=NO_BACKENDS
+[620s] healthy=False poc=NO_BACKENDS
+[630s] healthy=False poc=NO_BACKENDS
+[640s] healthy=False poc=NO_BACKENDS
+[650s] healthy=False poc=NO_BACKENDS
+[660s] healthy=False poc=NO_BACKENDS
+[670s] healthy=True poc=IDLE
+READY
+
+{
+    "state": "INFERENCE",
+    "poc_status": "IDLE",
+    "inference_healthy": true,
+    "loaded_model": "/data/hf/Qwen3-235B-A22B-Instruct-2507-FP8"
+}
+
+=== Phase 3 sweep ===
+    [20s] 0 nonces
+    [30s] 0 nonces
+  Result: 0 nonces, 0/min
+
+────────────────────────────────────────
+  Testing batch_size = 16
+────────────────────────────────────────
+    5s warmup done
+    [10s] 16 nonces
+    [20s] 192 nonces
+    [30s] 384 nonces
+  Result: 384 nonces, 768/min
+
+────────────────────────────────────────
+  Testing batch_size = 32
+────────────────────────────────────────
+    5s warmup done
+    [10s] 160 nonces
+    [20s] 352 nonces
+    [30s] 544 nonces
+  Result: 544 nonces, 1088/min
+
+────────────────────────────────────────
+  Testing batch_size = 64
+────────────────────────────────────────
+    5s warmup done
+    [10s] 192 nonces
+    [20s] 384 nonces
+    [30s] 576 nonces
+  Result: 576 nonces, 1152/min
+
+==================================================
+  RESULTS
+==================================================
+     Batch │   Nonces │   Nonces/min
+  ─────────┼──────────┼─────────────
+         2 │        2 │            4  
+         8 │        0 │            0  
+        16 │      384 │          768  
+        32 │      544 │         1088  
+        64 │      576 │         1152 ★
+==================================================
+  ★ Best batch size: 64 (1152 nonces/min)
+
+  NOTE: Best=64 differs from current default (8).
+        Update PHASE1_BATCH_SIZE and the pow_v2_routes.py patch in onstart.sh.
+
+✓ Test complete!
+
+Stopping batch receiver...
