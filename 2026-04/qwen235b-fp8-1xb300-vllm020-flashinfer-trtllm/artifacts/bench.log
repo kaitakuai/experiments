@@ -1,0 +1,83 @@
+
+==================================================
+  PoC v2 Generation Test
+==================================================
+  Model:    Qwen/Qwen3-235B-A22B-Instruct-2507-FP8
+  API:      http://127.0.0.1:8081
+  Callback: http://127.0.0.1:9999
+  Warmup:   5s
+  Duration: 30s per test
+
+Starting batch receiver...
+Batch receiver ready.
+
+==================================================
+  PHASE 3: Batch Size Benchmark
+==================================================
+  Batch sizes: [8, 16, 32, 64, 128]
+  Duration: 35s each (5s warmup + 30s measurement)
+
+────────────────────────────────────────
+  Testing batch_size = 8
+────────────────────────────────────────
+    5s warmup done
+    [10s] 96 nonces
+    [20s] 280 nonces
+    [30s] 464 nonces
+  Result: 464 nonces, 928/min
+
+────────────────────────────────────────
+  Testing batch_size = 16
+────────────────────────────────────────
+    5s warmup done
+    [10s] 192 nonces
+    [20s] 384 nonces
+    [30s] 576 nonces
+  Result: 576 nonces, 1152/min
+
+────────────────────────────────────────
+  Testing batch_size = 32
+────────────────────────────────────────
+    5s warmup done
+    [10s] 192 nonces
+    [20s] 384 nonces
+    [30s] 576 nonces
+  Result: 576 nonces, 1152/min
+
+────────────────────────────────────────
+  Testing batch_size = 64
+────────────────────────────────────────
+    5s warmup done
+    [10s] 192 nonces
+    [20s] 384 nonces
+    [30s] 576 nonces
+  Result: 576 nonces, 1152/min
+
+────────────────────────────────────────
+  Testing batch_size = 128
+────────────────────────────────────────
+    5s warmup done
+    [10s] 0 nonces
+    [20s] 0 nonces
+    [30s] 0 nonces
+  Result: 0 nonces, 0/min
+
+==================================================
+  RESULTS
+==================================================
+     Batch │   Nonces │   Nonces/min
+  ─────────┼──────────┼─────────────
+         8 │      464 │          928  
+        16 │      576 │         1152  
+        32 │      576 │         1152  
+        64 │      576 │         1152 ★
+       128 │        0 │            0  
+==================================================
+  ★ Best batch size: 64 (1152 nonces/min)
+
+  NOTE: Best=64 differs from current default (8).
+        Update PHASE1_BATCH_SIZE and the pow_v2_routes.py patch in onstart.sh.
+
+✓ Test complete!
+
+Stopping batch receiver...
