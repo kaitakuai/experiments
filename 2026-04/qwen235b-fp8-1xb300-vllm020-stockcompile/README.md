@@ -192,6 +192,37 @@ ceiling rather than directly on it.
 5. **Cumulative gain is +54 %** (peak) / **+57 %** (steady) over the
    original 0.19 + TRITON baseline, all on the same 1×B300 silicon.
 
+## Cross-validator bit-compat
+
+Production threshold (`gonka/inference-chain/app/upgrades/v0_2_8/upgrades.go`):
+- `DistThreshold = 0.2` per-nonce L2 (×10 vs library default 0.02)
+- `PMismatch = 0.1` expected-mismatch rate (×100 vs library default 0.001)
+- `FraudThreshold = 0.01` p-value below which fraud is declared
+
+Pairwise L2 distance between this run and prior 1×B300 runs on the same model
+(all `block_hash="TEST_BLOCK"`, k_dim=12 fp16):
+
+| Pair | Per-nonce pass (L2≤0.2) | Mismatch rate | p-value | Verdict |
+|---|---:|---:|---:|---|
+| 0.19 TRITON ↔ 0.19 TRITON tuned-M32768 | 1000/1000 | 0.0 % | 1.00 | ✅ PASS |
+| 0.19 TRITON ↔ 0.19 FLASHINFER_TRTLLM | 982/1000 | 1.8 % | 1.00 | ✅ PASS |
+| 0.19 TRITON ↔ **0.20 FLASHINFER_TRTLLM mode=1 (this run)** | **982/1000** | **1.8 %** | **1.00** | ✅ **PASS** |
+| 0.19 FLASHINFER_TRTLLM ↔ 0.20 mode=1 | 986/1000 | 1.4 % | 1.00 | ✅ PASS |
+| 0.20 FLASHINFER_TRTLLM eager ↔ 0.20 mode=1 | 978/1000 | 2.2 % | 1.00 | ✅ PASS |
+
+Library defaults (`vllm/poc/data.py`: `DEFAULT_DIST_THRESHOLD=0.02`,
+`DEFAULT_P_MISMATCH=0.001`, `DEFAULT_FRAUD_THRESHOLD=0.01`) are stricter and
+would mark every FlashInfer TRTLLM ↔ TRITON (or TRTLLM ↔ TRTLLM) pair as
+fraud (mismatch rate ~97 %, raw L2 mean ~0.085). The chain ships with the
+loosened production values, so the **+54 % FLASHINFER_TRTLLM gain in this
+run is deployable.**
+
+Within the TRITON path, two independent runs are bit-identical (1000/1000
+exact match, L2 = 0.0). Within the FlashInfer TRTLLM path, runs are
+L2 ≈ 0.085 apart from each other — likely from FlashInfer Autotuner picking
+different kernels per session — but all pairs sit comfortably under
+`DistThreshold=0.2` so chain validation accepts them.
+
 ## Files
 
 - `artifacts/nonces_1000.json` — 1088 nonces (1255 n/min steady-state, batch=64)
