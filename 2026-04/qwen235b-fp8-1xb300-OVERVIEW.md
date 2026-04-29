@@ -21,6 +21,12 @@ the same silicon, all production-deployable under the chain's
 | 4 | [qwen235b-fp8-1xb300-vllm020-flashinfer-trtllm](qwen235b-fp8-1xb300-vllm020-flashinfer-trtllm/) | 1152 | 1145 | vLLM 0.19 → 0.20 (+9 %), `--enforce-eager` to dodge compile overhead |
 | 5 | [qwen235b-fp8-1xb300-vllm020-stockcompile](qwen235b-fp8-1xb300-vllm020-stockcompile/) | **1280** | **1255** | `--compilation-config '{"mode": 1}'` (STOCK_TORCH_COMPILE) — keeps `torch.compile` active without vLLM piecewise/passes overhead. **+11 %** over run 4. **★ Best config.** |
 
+Plus one **operability follow-up** (no perf change vs. run 5):
+
+| Folder | Outcome | What changed |
+|---|---|---|
+| [qwen235b-fp8-8xb300-watcher-cold-start-fix](qwen235b-fp8-8xb300-watcher-cold-start-fix/) | k3 → k4 (1280/min preserved) | Env-driven `WATCHER_GRACE_FIRST_HEALTHY=1` + `VLLM_RUNNER_TIMEOUT=3600` so mlnode survives the 22-min cold start of 4× parallel vLLM instances on 8×B300; TP=1 moved from defaults to forced (override-resistant against the network node's TP=2 injection). |
+
 ## Best configuration (from run 5)
 
 ### vLLM CLI (passed via MLNode `additional_args`)
@@ -36,15 +42,23 @@ the same silicon, all production-deployable under the chain's
 
 ```python
 _b300_forced = {
+    "--tensor-parallel-size":  "1",         # k4: moved from defaults to forced
     "--gpu-memory-utilization": "0.95",
     "--max-model-len":          "120000",   # under KV pool ceiling 125408
     "--logprobs-mode":          "processed_logprobs",
+    "--compilation-config":     '{"mode": 1}',
 }
 _b300_defaults = {                          # only set if absent
-    "--tensor-parallel-size": "1",
-    "--max-num-seqs":         "128",
+    "--max-num-seqs": "128",
 }
 ```
+
+> **k4 note:** `--tensor-parallel-size` is now in `_b300_forced` (was in
+> `_b300_defaults` through k3) so the Gonka network node's
+> `--tensor-parallel-size 2` injection in `additional_args` is overwritten
+> with the throughput-optimal TP=1 layout. See
+> [`qwen235b-fp8-8xb300-watcher-cold-start-fix/`](qwen235b-fp8-8xb300-watcher-cold-start-fix/)
+> for the production case that motivated this.
 
 ### Subprocess env (set by `runner.py` before vLLM spawn)
 
@@ -83,7 +97,15 @@ ENV VLLM_ENABLE_CUDA_COMPATIBILITY=0
 
 ### MLNode
 
-- `MAX_UNHEALTHY_COUNT = 9999` in `watcher.py` (don't kill vLLM during cold-start FlashInfer JIT)
+- **k3 (deprecated):** `MAX_UNHEALTHY_COUNT = 9999` in `watcher.py` (blunt
+  hammer to disable the kill-on-unhealthy threshold during cold-start
+  FlashInfer JIT)
+- **k4 (current):** env-driven session-aware first-healthy grace —
+  `WATCHER_GRACE_FIRST_HEALTHY=1` + `VLLM_RUNNER_TIMEOUT=3600` (60 min).
+  Operator-tunable without rebuild; preserves the fast-restart
+  `MAX_UNHEALTHY_COUNT=3` semantics for post-startup crashes. See
+  [`qwen235b-fp8-8xb300-watcher-cold-start-fix/`](qwen235b-fp8-8xb300-watcher-cold-start-fix/)
+  for the design and the 8×B300 production crash that motivated it.
 
 ## Operational notes
 
@@ -125,10 +147,18 @@ ENV VLLM_ENABLE_CUDA_COMPATIBILITY=0
 
 ## Production deployment status
 
-| Image | Built | Tested | Pushed | Notes |
-|---|---|---|---|---|
-| `mlnode-full:0.2.12-vllm0.19.0-b300-k2` (FlashInfer TRTLLM, 1056/min) | ✅ | ⏳ smoke test pending | ⏳ | Ready locally; smoke test on instance and `make release-full HW_VARIANT=b300 KAITAKU_REV=2 PUSH=true` to publish. |
-| `mlnode-full:0.2.12-vllm0.20.0-b300-k3` (this run, 1280/min) | ⏳ | this experiment | ⏳ | Needs `mlnode/.github/trusted-sources.yaml` entry for `vllm_base.0.20.0` plus Dockerfile bump. b300.py needs `--compilation-config '{"mode": 1}'` injected, and the `--enforce-eager` force-flag from k2 dropped. |
+| Image | Per-card | 8-GPU host | Notes |
+|---|---:|---:|---|
+| `mlnode-full:0.2.12-vllm0.19.0-b300-k2` (FlashInfer TRTLLM) | 1056 | 8448 | Superseded by k3/k4. |
+| `mlnode-full:0.2.12-vllm0.19.0-b300-k3` (mode=1 compile) | 1152 | 9216 | Superseded by k4. |
+| `mlnode-full:0.2.12-vllm0.20.0-b300-k3` (mode=1 compile) | **1280** | **10240** | Superseded by k4. |
+| `mlnode-full:0.2.12-vllm0.19.0-b300-k4` (cold-start fix, fall-back) | 1152 | 9216 | Same per-card perf as k3. Adds: env-driven cold-start tolerance, session-aware watcher grace, TP=1 forced (override-resistant). |
+| `mlnode-full:0.2.12-vllm0.20.0-b300-k4` ★ **current production** | **1280** | **10240** | Same per-card perf as k3. Adds: env-driven cold-start tolerance, session-aware watcher grace, TP=1 forced (override-resistant). See [`qwen235b-fp8-8xb300-watcher-cold-start-fix/`](qwen235b-fp8-8xb300-watcher-cold-start-fix/). |
+
+> The k3 GHCR images are NOT deleted (immutable -kN tag policy keeps
+> existing pinned deployments working). The k3 dashboard entries are
+> removed from <https://registry.kaitaku.ai/> so new operators do not
+> pick the deprecated tag.
 
 ## Throughput table (canonical)
 

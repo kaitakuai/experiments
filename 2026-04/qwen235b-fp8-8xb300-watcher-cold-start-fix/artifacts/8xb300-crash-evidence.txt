@@ -1,0 +1,112 @@
+8×B300 crash-loop evidence (host: 95.133.252.112, hostname:
+weak-seed-flourishes-fin-03), captured 2026-04-29 21:14-21:19 UTC.
+
+Image: ghcr.io/kaitakuai/mlnode-full:0.2.12-vllm0.20.0-b300-k3
+Compose: 4× TP=2 vLLM instances on 8×B300, --compilation-config '{"mode":1}',
+Gonka network node POSTed --tensor-parallel-size 2 in additional_args.
+
+================================================================================
+1. Host load average — observed at 21:14 (5+ min after host bring-up):
+================================================================================
+
+  21:17:48 up  2:00,  3 users,  load average: 158.18, 1154.15, 1520.35
+
+  1-min  =  158.18  (recovering)
+  5-min  = 1154.15  (during the storm)
+  15-min = 1520.35  (peak)
+
+  For comparison: typical "high-load" servers rarely exceed loadavg=100;
+  loadavg>1000 means thousands of runnable threads piled up faster than
+  the scheduler could drain them — almost always a fork/restart loop.
+
+================================================================================
+2. mlnode container: RestartCount=6 in ~5 minutes
+================================================================================
+
+  $ docker inspect mlnode-mlnode-308-1 --format '{{.RestartCount}}'
+  6
+
+  $ docker inspect mlnode-mlnode-308-1 --format '{{.State.StartedAt}}'
+  2026-04-29T21:15:25.031791056Z   ← latest restart, the 6th in this episode
+
+================================================================================
+3. mlnode log — the kill chain (one full cycle)
+================================================================================
+
+  2026-04-29 21:14:40 - api.inference.vllm.runner - ERROR -
+      vLLM server did not become available within timeout.
+  2026-04-29 21:14:40 - api.inference.manager - ERROR -
+      Failed to start InferenceManager: vLLM failed to start within
+      the expected timeout: None
+  2026-04-29 21:14:40 - api.inference.manager - ERROR -
+      Async startup failed: vLLM failed to start within the expected
+      timeout: None
+  2026-04-29 21:14:41 - common.manager - ERROR -
+      Manager InferenceManager has failed with exception:
+      vLLM failed to start within the expected timeout: None
+  2026-04-29 21:14:41 - api.watcher - ERROR -
+      Manager InferenceManager is unhealthy (count: 1/3)
+  2026-04-29 21:14:43 - api.watcher - ERROR -
+      Manager InferenceManager is unhealthy (count: 2/3)
+  2026-04-29 21:14:45 - api.watcher - ERROR -
+      Manager InferenceManager is unhealthy (count: 3/3)
+  2026-04-29 21:14:45 - api.watcher - CRITICAL -
+      Manager InferenceManager has been unhealthy 3 times in a row.
+      Shutting down the application.
+
+  Then docker compose `restart: always` re-spawned the container, and
+  the cycle repeated. 6 cycles in ~5 minutes.
+
+================================================================================
+4. vLLM cmdlines spawned per cycle (all 4 instances, observed at 21:14)
+================================================================================
+
+  /usr/bin/python3.12 -m vllm.entrypoints.openai.api_server
+      --model Qwen/Qwen3-235B-A22B-Instruct-2507-FP8
+      --dtype float16
+      --port 5001 / 5002 / 5003 / 5004
+      --host 0.0.0.0
+      --max-model-len 120000
+      --enable-auto-tool-choice
+      --tool-call-parser hermes
+      --tensor-parallel-size 2                  ← from operator's compose
+      --max-num-seqs 128
+      --gpu-memory-utilization 0.95
+      --max-num-batched-tokens 65536
+      --logprobs-mode processed_logprobs
+      --compilation-config {"mode": 1}
+
+================================================================================
+5. Hardcoded constants confirming the kill chain (image: vllm0.20.0-b300-k3)
+================================================================================
+
+  /app/packages/api/src/api/watcher.py:14
+    MAX_UNHEALTHY_COUNT = 3                     ← 3 strikes / 5 sec → kill
+
+  /app/packages/api/src/api/inference/vllm/runner.py:21
+    WAIT_FOR_SERVER_TIMEOUT = 1200              ← 20 min ceiling
+
+  Cold start observed for 4× parallel TP=2 instances on this 8×B300 host:
+    DeepGEMM warmup (2428 kernels per instance, ~1 min each, 4× parallel)
+  + FlashInfer TRTLLM JIT autotune (sm_103a, first-time)
+  + compilation_mode=1 per-shape torch.compile
+  ≈ 22 min total wall-clock before /health responds.
+
+  22 min > 20 min runner ceiling → runner.start() raises →
+  manager._exception sticky → watcher.is_healthy() = False forever →
+  3 strikes / 5 sec → os._exit(1) → docker compose restart → repeat.
+
+================================================================================
+6. Resolution path
+================================================================================
+
+  k4 keeps the same per-card vLLM perf as k3 and adds two layered
+  defenses (env-driven, defaults preserve upstream behavior):
+
+    runner.WAIT_FOR_SERVER_TIMEOUT  →  60 min via VLLM_RUNNER_TIMEOUT=3600
+    watcher.watch_managers          →  session-aware first-healthy grace
+                                       via WATCHER_GRACE_FIRST_HEALTHY=1
+
+  Plus tensor-parallel-size=1 forced (override-resistant) so the
+  network-node-supplied TP=2 is overwritten with the throughput-optimal
+  TP=1 layout (8× independent instances on 8×B300).
