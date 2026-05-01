@@ -1,0 +1,45 @@
+=== batch=16 ===
+Config saved to /work/artifacts_b16/config.json
+  [112/1000] 672 nonces/min (10s)
+  [336/1000] 1008 nonces/min (20s)
+  [576/1000] 1152 nonces/min (30s)
+  [800/1000] 1200 nonces/min (40s)
+  [1040/1000] nonces collected in 46.0s
+Nonces saved: 1040 (1327/min) in 47.0s
+5-lang probe saved to /work/artifacts_b16/inference_5langs.json (0.8s)
+=== Done: /work/artifacts_b16 ===
+=== batch=32 ===
+Config saved to /work/artifacts_b32/config.json
+  [96/1000] 576 nonces/min (10s)
+  [352/1000] 1056 nonces/min (20s)
+  [576/1000] 1152 nonces/min (30s)
+  [832/1000] 1248 nonces/min (40s)
+  [1088/1000] nonces collected in 46.0s
+Nonces saved: 1088 (1389/min) in 47.0s
+5-lang probe saved to /work/artifacts_b32/inference_5langs.json (0.8s)
+=== Done: /work/artifacts_b32 ===
+=== batch=64 ===
+Config saved to /work/artifacts_b64/config.json
+  [0/1000] 0 nonces/min (10s)
+  [0/1000] 0 nonces/min (20s)
+  [0/1000] 0 nonces/min (30s)
+  [0/1000] 0 nonces/min (40s)
+  [0/1000] 0 nonces/min (50s)
+  [0/1000] 0 nonces/min (60s)
+  [0/1000] 0 nonces/min (70s)
+  [0/1000] 0 nonces/min (80s)
+  [0/1000] 0 nonces/min (90s)
+  [0/1000] 0 nonces/min (100s)
+  [0/1000] 0 nonces/min (110s)
+  [0/1000] 0 nonces/min (120s)
+  [0/1000] 0 nonces/min (130s)
+  [0/1000] 0 nonces/min (140s)
+  [0/1000] 0 nonces/min (150s)
+  [0/1000] 0 nonces/min (160s)
+  [0/1000] 0 nonces/min (170s)
+  [0/1000] 0 nonces/min (180s)
+  [0/1000] 0 nonces/min (190s)
+  [0/1000] 0 nonces/min (200s)
+  [0/1000] 0 nonces/min (210s)
+  [0/1000] 0 nonces/min (220s)
+  [0/1000] 0 nonces/min (230s)

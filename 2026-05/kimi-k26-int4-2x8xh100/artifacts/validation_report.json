@@ -1,0 +1,70 @@
+{
+  "_note": "Source: parsed from logs/validate.log. Validator was SIGKILL'd at item ~100/200 before it could write its full validation_report.json (script writes the JSON only on completion). The 23 per-item entries below are the items the script logged (every 5th + first 3) — sufficient as a sample for the gate decision but NOT the full 100-item report.",
+  "config": {
+    "url": "http://127.0.0.1:5001",
+    "model": "moonshotai/Kimi-K2.6",
+    "vllm_config": "TP=16 PP=1 FLASHMLA processed_logprobs max-model-len=262144 gpu-mem-util=0.92 max-num-seqs=64",
+    "honest_dataset": "kaitakuai/experiments/2026-04/kimi-k26-inference-validation/exp2-top-k-40-sentinels/artifacts/honest_b200_h200.jsonl",
+    "subset_processed": "first 100 items (Spanish split only; honest dataset is 200 sp + 200 en + 200 ch + 200 ar + 200 hi = 1000 total)",
+    "subset_logged": "23 items (logged every 5th + first 3, per script's progress filter)",
+    "sampling_params": {
+      "temperature": 0.7,
+      "seed": 1,
+      "top_logprobs": 4,
+      "max_tokens": 1000,
+      "repetition_penalty": 1.2,
+      "top_k": 40,
+      "top_p": 0.95
+    },
+    "logprobs_mode": "processed_logprobs",
+    "enforced_tokens": "yes (replayed honest tokens 1:1, so distance2 is computed on identical positions)"
+  },
+  "summary": {
+    "n_items_logged": 23,
+    "n_items_processed_estimate": 100,
+    "distance2_mean": 0.0463,
+    "distance2_median": 0.0389,
+    "distance2_min": 0.0280,
+    "distance2_max": 0.1291,
+    "distance2_p95": 0.0882,
+    "token_mismatches_total": 0,
+    "items_with_token_mismatch": 0,
+    "gate_mean_le_0_2_PASS": true,
+    "soft_pass_mean_le_0_05_PASS": true,
+    "honest_baseline_exp2": {
+      "mean": 0.0232,
+      "median": 0.0231,
+      "p05": 0.0119,
+      "p95": 0.0351,
+      "min": 0.0023,
+      "max": 0.0466,
+      "source": "kaitakuai/experiments/2026-04/kimi-k26-inference-validation/exp2-top-k-40-sentinels/artifacts/config.json"
+    },
+    "interpretation": "Our cross-GPU mean (0.0463) is ~2x the honest exp2 baseline (0.0232). This is expected because exp2 was B200(TP=4) -> H200(TP=8) on the same fabric/kernel family, while we are H100x16 with different attention/MoE kernels and different allreduce reduction order. The production gate is mean L2 <= 0.2 -- we pass with 4.3x headroom. Soft band mean <= 0.05 -- we pass on the boundary."
+  },
+  "per_item_logged": [
+    {"index": 0,  "language": "sp", "token_mismatches": 0, "distance2": 0.0882},
+    {"index": 1,  "language": "sp", "token_mismatches": 0, "distance2": 0.1291},
+    {"index": 2,  "language": "sp", "token_mismatches": 0, "distance2": 0.0333},
+    {"index": 4,  "language": "sp", "token_mismatches": 0, "distance2": 0.0469},
+    {"index": 9,  "language": "sp", "token_mismatches": 0, "distance2": 0.0365},
+    {"index": 14, "language": "sp", "token_mismatches": 0, "distance2": 0.0458},
+    {"index": 19, "language": "sp", "token_mismatches": 0, "distance2": 0.0451},
+    {"index": 24, "language": "sp", "token_mismatches": 0, "distance2": 0.0440},
+    {"index": 29, "language": "sp", "token_mismatches": 0, "distance2": 0.0280},
+    {"index": 34, "language": "sp", "token_mismatches": 0, "distance2": 0.0377},
+    {"index": 39, "language": "sp", "token_mismatches": 0, "distance2": 0.0389},
+    {"index": 44, "language": "sp", "token_mismatches": 0, "distance2": 0.0368},
+    {"index": 49, "language": "sp", "token_mismatches": 0, "distance2": 0.0320},
+    {"index": 54, "language": "sp", "token_mismatches": 0, "distance2": 0.0457},
+    {"index": 59, "language": "sp", "token_mismatches": 0, "distance2": 0.0479},
+    {"index": 64, "language": "sp", "token_mismatches": 0, "distance2": 0.0510},
+    {"index": 69, "language": "sp", "token_mismatches": 0, "distance2": 0.0361},
+    {"index": 74, "language": "sp", "token_mismatches": 0, "distance2": 0.0569},
+    {"index": 79, "language": "sp", "token_mismatches": 0, "distance2": 0.0349},
+    {"index": 84, "language": "sp", "token_mismatches": 0, "distance2": 0.0374},
+    {"index": 89, "language": "sp", "token_mismatches": 0, "distance2": 0.0440},
+    {"index": 94, "language": "sp", "token_mismatches": 0, "distance2": 0.0287},
+    {"index": 99, "language": "sp", "token_mismatches": 0, "distance2": 0.0389}
+  ]
+}

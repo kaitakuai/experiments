@@ -1,0 +1,40 @@
+{
+  "params": {
+    "max_tokens": 8,
+    "temperature": 0.7,
+    "seed": 1,
+    "top_logprobs": 4,
+    "repetition_penalty": 1.2,
+    "top_k": 40,
+    "top_p": 0.95,
+    "logprobs_mode": "processed_logprobs (set on vLLM side via --logprobs-mode)"
+  },
+  "completions": [
+    {
+      "language": "sp",
+      "prompt": "¿Cuál es la capital de Francia? Responde en una sola frase.",
+      "error": "HTTPConnectionPool(host='127.0.0.1', port=5001): Read timed out. (read timeout=120)"
+    },
+    {
+      "language": "en",
+      "prompt": "What is the capital of France? Answer in one sentence.",
+      "error": "HTTPConnectionPool(host='127.0.0.1', port=5001): Read timed out. (read timeout=120)"
+    },
+    {
+      "language": "ch",
+      "prompt": "法国的首都是哪里？请用一句话回答。",
+      "error": "'choices'"
+    },
+    {
+      "language": "ar",
+      "prompt": "ما هي عاصمة فرنسا؟ أجب في جملة واحدة.",
+      "error": "'choices'"
+    },
+    {
+      "language": "hi",
+      "prompt": "फ्रांस की राजधानी क्या है? एक वाक्य में उत्तर दीजिए।",
+      "error": "'choices'"
+    }
+  ],
+  "time_sec": 300.61672592163086
+}

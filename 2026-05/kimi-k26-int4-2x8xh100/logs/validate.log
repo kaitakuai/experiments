@@ -1,0 +1,25 @@
+Loading honest dataset from /work/honest_b200_h200.jsonl (n=200)...
+Loaded 200 items
+  [1/200] lang=sp d=0.0882 mismatches=0 | 0.67 req/s | ETA 298s
+  [2/200] lang=sp d=0.1291 mismatches=0 | 0.56 req/s | ETA 353s
+  [3/200] lang=sp d=0.0333 mismatches=0 | 0.48 req/s | ETA 413s
+  [5/200] lang=sp d=0.0469 mismatches=0 | 0.33 req/s | ETA 594s
+  [10/200] lang=sp d=0.0365 mismatches=0 | 0.20 req/s | ETA 939s
+  [15/200] lang=sp d=0.0458 mismatches=0 | 0.16 req/s | ETA 1157s
+  [20/200] lang=sp d=0.0451 mismatches=0 | 0.14 req/s | ETA 1329s
+  [25/200] lang=sp d=0.0440 mismatches=0 | 0.11 req/s | ETA 1628s
+  [30/200] lang=sp d=0.0280 mismatches=0 | 0.10 req/s | ETA 1677s
+  [35/200] lang=sp d=0.0377 mismatches=0 | 0.10 req/s | ETA 1629s
+  [40/200] lang=sp d=0.0389 mismatches=0 | 0.10 req/s | ETA 1660s
+  [45/200] lang=sp d=0.0368 mismatches=0 | 0.09 req/s | ETA 1723s
+  [50/200] lang=sp d=0.0320 mismatches=0 | 0.09 req/s | ETA 1724s
+  [55/200] lang=sp d=0.0457 mismatches=0 | 0.08 req/s | ETA 1739s
+  [60/200] lang=sp d=0.0479 mismatches=0 | 0.08 req/s | ETA 1737s
+  [65/200] lang=sp d=0.0510 mismatches=0 | 0.08 req/s | ETA 1602s
+  [70/200] lang=sp d=0.0361 mismatches=0 | 0.09 req/s | ETA 1526s
+  [75/200] lang=sp d=0.0569 mismatches=0 | 0.08 req/s | ETA 1511s
+  [80/200] lang=sp d=0.0349 mismatches=0 | 0.08 req/s | ETA 1462s
+  [85/200] lang=sp d=0.0374 mismatches=0 | 0.08 req/s | ETA 1420s
+  [90/200] lang=sp d=0.0440 mismatches=0 | 0.08 req/s | ETA 1372s
+  [95/200] lang=sp d=0.0287 mismatches=0 | 0.08 req/s | ETA 1283s
+  [100/200] lang=sp d=0.0389 mismatches=0 | 0.08 req/s | ETA 1237s

@@ -1,0 +1,11 @@
+{
+  "gpu": "16x H100 80GB SXM5",
+  "vllm_version": "0.15.1",
+  "model": "moonshotai/Kimi-K2.6",
+  "url": "http://127.0.0.1:5001",
+  "batch_size": 32,
+  "seq_len": 1024,
+  "k_dim": 12,
+  "startup_command": "vllm TP=16 FLASHMLA processed_logprobs ctx=262144",
+  "timestamp": "2026-05-01T10:29:31"
+}

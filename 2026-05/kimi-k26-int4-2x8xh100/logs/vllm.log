@@ -1,0 +1,437 @@
+[0;36m(APIServer pid=703)[0;0m INFO 05-01 10:58:33 [utils.py:325] 
+[0;36m(APIServer pid=703)[0;0m INFO 05-01 10:58:33 [utils.py:325]        █     █     █▄   ▄█
+[0;36m(APIServer pid=703)[0;0m INFO 05-01 10:58:33 [utils.py:325]  ▄▄ ▄█ █     █     █ ▀▄▀ █  version 0.15.1
+[0;36m(APIServer pid=703)[0;0m INFO 05-01 10:58:33 [utils.py:325]   █▄█▀ █     █     █     █  model   /root/.cache/huggingface/kimi-k26
+[0;36m(APIServer pid=703)[0;0m INFO 05-01 10:58:33 [utils.py:325]    ▀▀  ▀▀▀▀▀ ▀▀▀▀▀ ▀     ▀
+[0;36m(APIServer pid=703)[0;0m INFO 05-01 10:58:33 [utils.py:325] 
+[0;36m(APIServer pid=703)[0;0m INFO 05-01 10:58:33 [utils.py:261] non-default args: {'host': '0.0.0.0', 'port': 5001, 'model': '/root/.cache/huggingface/kimi-k26', 'trust_remote_code': True, 'max_model_len': 262144, 'served_model_name': ['moonshotai/Kimi-K2.6'], 'attention_backend': 'FLASHMLA', 'distributed_executor_backend': 'ray', 'pipeline_parallel_size': 2, 'tensor_parallel_size': 8, 'gpu_memory_utilization': 0.92, 'max_num_seqs': 64}
+[0;36m(APIServer pid=703)[0;0m The argument `trust_remote_code` is to be used with Auto classes. It has no effect here and is ignored.
+[0;36m(APIServer pid=703)[0;0m The argument `trust_remote_code` is to be used with Auto classes. It has no effect here and is ignored.
+[0;36m(APIServer pid=703)[0;0m The argument `trust_remote_code` is to be used with Auto classes. It has no effect here and is ignored.
+[0;36m(APIServer pid=703)[0;0m INFO 05-01 10:58:40 [model.py:541] Resolved architecture: KimiK25ForConditionalGeneration
+[0;36m(APIServer pid=703)[0;0m INFO 05-01 10:58:40 [model.py:1561] Using max model len 262144
+[0;36m(APIServer pid=703)[0;0m INFO 05-01 10:58:40 [scheduler.py:226] Chunked prefill is enabled with max_num_batched_tokens=32768.
+[0;36m(APIServer pid=703)[0;0m WARNING 05-01 10:58:40 [vllm.py:613] Async scheduling will be disabled because it is not supported with the `ray` distributed executor backend (only `mp`, `uni`, and `external_launcher` are supported).
+[0;36m(APIServer pid=703)[0;0m INFO 05-01 10:58:40 [vllm.py:624] Asynchronous scheduling is disabled.
+[0;36m(APIServer pid=703)[0;0m INFO 05-01 10:58:40 [cuda.py:224] Forcing kv cache block size to 64 for FlashMLA backend.
+[0;36m(APIServer pid=703)[0;0m [2026-05-01 10:58:41] INFO tokenization_kimi.py:111: Reloaded tiktoken model from /root/.cache/huggingface/kimi-k26/tiktoken.model
+[0;36m(APIServer pid=703)[0;0m [2026-05-01 10:58:41] INFO tokenization_kimi.py:117: #words: 163840 - BOS ID: 163584 - EOS ID: 163585
+[0;36m(APIServer pid=703)[0;0m WARNING 05-01 10:58:41 [registry.py:216] Using a slow tokenizer. This might cause a significant slowdown. Consider using a fast tokenizer instead.
+[0;36m(APIServer pid=703)[0;0m [2026-05-01 10:58:41] INFO tokenization_kimi.py:111: Reloaded tiktoken model from /root/.cache/huggingface/kimi-k26/tiktoken.model
+[0;36m(APIServer pid=703)[0;0m [2026-05-01 10:58:41] INFO tokenization_kimi.py:117: #words: 163840 - BOS ID: 163584 - EOS ID: 163585
+[0;36m(APIServer pid=703)[0;0m WARNING 05-01 10:58:41 [registry.py:216] Using a slow tokenizer. This might cause a significant slowdown. Consider using a fast tokenizer instead.
+[0;36m(APIServer pid=703)[0;0m WARNING 05-01 10:58:41 [serial_utils.py:57] Allowing insecure serialization using pickle due to VLLM_ALLOW_INSECURE_SERIALIZATION=1
+[0;36m(EngineCore_DP0 pid=1101)[0;0m INFO 05-01 10:58:47 [core.py:96] Initializing a V1 LLM engine (v0.15.1) with config: model='/root/.cache/huggingface/kimi-k26', speculative_config=None, tokenizer='/root/.cache/huggingface/kimi-k26', skip_tokenizer_init=False, tokenizer_mode=auto, revision=None, tokenizer_revision=None, trust_remote_code=True, dtype=torch.bfloat16, max_seq_len=262144, download_dir=None, load_format=auto, tensor_parallel_size=8, pipeline_parallel_size=2, data_parallel_size=1, disable_custom_all_reduce=False, quantization=compressed-tensors, enforce_eager=False, enable_return_routed_experts=False, kv_cache_dtype=auto, device_config=cuda, structured_outputs_config=StructuredOutputsConfig(backend='auto', disable_fallback=False, disable_any_whitespace=False, disable_additional_properties=False, reasoning_parser='', reasoning_parser_plugin='', enable_in_reasoning=False), observability_config=ObservabilityConfig(show_hidden_metrics_for_version=None, otlp_traces_endpoint=None, collect_detailed_traces=None, kv_cache_metrics=False, kv_cache_metrics_sample=0.01, cudagraph_metrics=False, enable_layerwise_nvtx_tracing=False, enable_mfu_metrics=False, enable_mm_processor_stats=False, enable_logging_iteration_details=False), seed=0, served_model_name=moonshotai/Kimi-K2.6, enable_prefix_caching=True, enable_chunked_prefill=True, pooler_config=None, compilation_config={'level': None, 'mode': <CompilationMode.VLLM_COMPILE: 3>, 'debug_dump_path': None, 'cache_dir': '', 'compile_cache_save_format': 'binary', 'backend': 'inductor', 'custom_ops': ['all'], 'splitting_ops': ['vllm::unified_attention', 'vllm::unified_attention_with_output', 'vllm::unified_mla_attention', 'vllm::unified_mla_attention_with_output', 'vllm::mamba_mixer2', 'vllm::mamba_mixer', 'vllm::short_conv', 'vllm::linear_attention', 'vllm::plamo2_mamba_mixer', 'vllm::gdn_attention_core', 'vllm::kda_attention', 'vllm::sparse_attn_indexer', 'vllm::rocm_aiter_sparse_attn_indexer', 'vllm::unified_kv_cache_update'], 'compile_mm_encoder': False, 'compile_sizes': [], 'compile_ranges_split_points': [32768], 'inductor_compile_config': {'enable_auto_functionalized_v2': False, 'combo_kernels': True, 'benchmark_combo_kernel': True}, 'inductor_passes': {}, 'cudagraph_mode': <CUDAGraphMode.FULL_AND_PIECEWISE: (2, 1)>, 'cudagraph_num_of_warmups': 1, 'cudagraph_capture_sizes': [1, 2, 4, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128], 'cudagraph_copy_inputs': False, 'cudagraph_specialize_lora': True, 'use_inductor_graph_partition': False, 'pass_config': {'fuse_norm_quant': True, 'fuse_act_quant': True, 'fuse_attn_quant': False, 'eliminate_noops': True, 'enable_sp': False, 'fuse_gemm_comms': False, 'fuse_allreduce_rms': False}, 'max_cudagraph_capture_size': 128, 'dynamic_shapes_config': {'type': <DynamicShapesType.BACKED: 'backed'>, 'evaluate_guards': False, 'assume_32_bit_indexing': True}, 'local_cache_dir': None, 'static_all_moe_layers': []}
+[0;36m(EngineCore_DP0 pid=1101)[0;0m WARNING 05-01 10:58:47 [ray_utils.py:337] Tensor parallel size (16) exceeds available GPUs (8). This may result in Ray placement group allocation failures. Consider reducing tensor_parallel_size to 8 or less, or ensure your Ray cluster has 16 GPUs available.
+[0;36m(EngineCore_DP0 pid=1101)[0;0m 2026-05-01 10:58:47,050	INFO worker.py:1821 -- Connecting to existing Ray cluster at address: 192.168.243.158:6379...
+[0;36m(EngineCore_DP0 pid=1101)[0;0m 2026-05-01 10:58:47,060	INFO worker.py:2007 -- Connected to Ray cluster.
+[0;36m(EngineCore_DP0 pid=1101)[0;0m /usr/local/lib/python3.12/dist-packages/ray/_private/worker.py:2046: FutureWarning: Tip: In future versions of Ray, Ray will no longer override accelerator visible devices env var if num_gpus=0 or num_gpus=None (default). To enable this behavior and turn off this error message, set RAY_ACCEL_ENV_VAR_OVERRIDE_ON_ZERO=0
+[0;36m(EngineCore_DP0 pid=1101)[0;0m   warnings.warn(
+[0;36m(EngineCore_DP0 pid=1101)[0;0m INFO 05-01 10:58:48 [ray_utils.py:402] No current placement group found. Creating a new placement group.
+[0;36m(EngineCore_DP0 pid=1101)[0;0m INFO 05-01 10:58:57 [ray_env.py:66] RAY_NON_CARRY_OVER_ENV_VARS from config: set()
+[0;36m(EngineCore_DP0 pid=1101)[0;0m INFO 05-01 10:58:57 [ray_env.py:69] Copying the following environment variables to workers: ['VLLM_ALLOW_INSECURE_SERIALIZATION', 'VLLM_WORKER_MULTIPROC_METHOD', 'LD_LIBRARY_PATH', 'VLLM_USAGE_SOURCE']
+[0;36m(EngineCore_DP0 pid=1101)[0;0m INFO 05-01 10:58:57 [ray_env.py:74] If certain env vars should NOT be copied, add them to /root/.config/vllm/ray_non_carry_over_env_vars.json file
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1399)[0m [2026-05-01 10:59:11] INFO tokenization_kimi.py:111: Reloaded tiktoken model from /root/.cache/huggingface/kimi-k26/tiktoken.model
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1399)[0m [2026-05-01 10:59:11] INFO tokenization_kimi.py:117: #words: 163840 - BOS ID: 163584 - EOS ID: 163585
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(bundle_reservation_check_func pid=1397)[0m [2026-05-01 10:59:17,572 E 1397 3337] core_worker_process.cc:842: Failed to establish connection to the metrics exporter agent. Metrics will not be exported. Exporter agent status: RpcError: Running out of retries to initialize the metrics agent. rpc_code: 14
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=320, ip=192.168.242.154)[0m [2026-05-01 10:59:11] INFO tokenization_kimi.py:111: Reloaded tiktoken model from /root/.cache/huggingface/kimi-k26/tiktoken.model[32m [repeated 15x across cluster][0m
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=320, ip=192.168.242.154)[0m [2026-05-01 10:59:11] INFO tokenization_kimi.py:117: #words: 163840 - BOS ID: 163584 - EOS ID: 163585[32m [repeated 15x across cluster][0m
+[2026-05-01 10:59:18,018 E 1101 1394] core_worker_process.cc:842: Failed to establish connection to the metrics exporter agent. Metrics will not be exported. Exporter agent status: RpcError: Running out of retries to initialize the metrics agent. rpc_code: 14
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m Loading safetensors checkpoint shards:   0% Completed | 0/64 [00:00<?, ?it/s]
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=320, ip=192.168.242.154)[0m [2026-05-01 10:59:18,556 E 320 725] core_worker_process.cc:842: Failed to establish connection to the metrics exporter agent. Metrics will not be exported. Exporter agent status: RpcError: Running out of retries to initialize the metrics agent. rpc_code: 14[32m [repeated 135x across cluster][0m
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m Loading safetensors checkpoint shards:   3% Completed | 2/64 [00:04<02:06,  2.04s/it]
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m Loading safetensors checkpoint shards:   5% Completed | 3/64 [00:08<02:54,  2.86s/it]
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m Loading safetensors checkpoint shards:   6% Completed | 4/64 [00:11<03:14,  3.24s/it]
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m Loading safetensors checkpoint shards:   8% Completed | 5/64 [00:15<03:18,  3.36s/it]
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m Loading safetensors checkpoint shards:   9% Completed | 6/64 [00:19<03:22,  3.49s/it]
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m Loading safetensors checkpoint shards:  11% Completed | 7/64 [00:22<03:20,  3.52s/it]
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m Loading safetensors checkpoint shards:  12% Completed | 8/64 [00:26<03:18,  3.55s/it]
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m Loading safetensors checkpoint shards:  14% Completed | 9/64 [00:30<03:23,  3.70s/it]
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m Loading safetensors checkpoint shards:  16% Completed | 10/64 [00:34<03:24,  3.79s/it]
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m Loading safetensors checkpoint shards:  17% Completed | 11/64 [00:38<03:26,  3.89s/it]
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m Loading safetensors checkpoint shards:  19% Completed | 12/64 [00:42<03:22,  3.89s/it]
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m Loading safetensors checkpoint shards:  20% Completed | 13/64 [00:46<03:21,  3.95s/it]
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m Loading safetensors checkpoint shards:  22% Completed | 14/64 [00:50<03:19,  3.99s/it]
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m Loading safetensors checkpoint shards:  23% Completed | 15/64 [00:54<03:10,  3.88s/it]
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m Loading safetensors checkpoint shards:  25% Completed | 16/64 [00:58<03:08,  3.92s/it]
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m Loading safetensors checkpoint shards:  27% Completed | 17/64 [01:02<03:04,  3.93s/it]
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m Loading safetensors checkpoint shards:  28% Completed | 18/64 [01:06<03:02,  3.96s/it]
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m Loading safetensors checkpoint shards:  30% Completed | 19/64 [01:10<02:56,  3.92s/it]
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m Loading safetensors checkpoint shards:  31% Completed | 20/64 [01:13<02:48,  3.84s/it]
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m Loading safetensors checkpoint shards:  33% Completed | 21/64 [01:17<02:41,  3.75s/it]
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m Loading safetensors checkpoint shards:  34% Completed | 22/64 [01:21<02:38,  3.77s/it]
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m Loading safetensors checkpoint shards:  36% Completed | 23/64 [01:25<02:37,  3.84s/it]
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m Loading safetensors checkpoint shards:  38% Completed | 24/64 [01:29<02:36,  3.91s/it]
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m Loading safetensors checkpoint shards:  39% Completed | 25/64 [01:33<02:32,  3.90s/it]
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m Loading safetensors checkpoint shards:  41% Completed | 26/64 [01:36<02:27,  3.88s/it]
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m Loading safetensors checkpoint shards:  42% Completed | 27/64 [01:40<02:21,  3.83s/it]
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m Loading safetensors checkpoint shards:  44% Completed | 28/64 [01:44<02:20,  3.92s/it]
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m Loading safetensors checkpoint shards:  45% Completed | 29/64 [01:48<02:17,  3.93s/it]
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m Loading safetensors checkpoint shards:  47% Completed | 30/64 [01:49<01:38,  2.89s/it]
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m Loading safetensors checkpoint shards:  48% Completed | 31/64 [01:53<01:44,  3.16s/it]
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m Loading safetensors checkpoint shards:  50% Completed | 32/64 [01:56<01:46,  3.34s/it]
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m Loading safetensors checkpoint shards:  52% Completed | 33/64 [01:57<01:16,  2.48s/it]
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m Loading safetensors checkpoint shards:  53% Completed | 34/64 [01:57<00:55,  1.85s/it]
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m Loading safetensors checkpoint shards:  55% Completed | 35/64 [01:57<00:40,  1.41s/it]
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m Loading safetensors checkpoint shards:  56% Completed | 36/64 [01:58<00:30,  1.10s/it]
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m Loading safetensors checkpoint shards:  58% Completed | 37/64 [01:58<00:23,  1.13it/s]
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m Loading safetensors checkpoint shards:  59% Completed | 38/64 [01:59<00:19,  1.36it/s]
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m Loading safetensors checkpoint shards:  61% Completed | 39/64 [01:59<00:15,  1.59it/s]
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m Loading safetensors checkpoint shards:  62% Completed | 40/64 [01:59<00:13,  1.80it/s]
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m Loading safetensors checkpoint shards:  64% Completed | 41/64 [02:00<00:11,  1.97it/s]
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m Loading safetensors checkpoint shards:  66% Completed | 42/64 [02:00<00:10,  2.10it/s]
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m Loading safetensors checkpoint shards:  67% Completed | 43/64 [02:01<00:09,  2.23it/s]
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m Loading safetensors checkpoint shards:  69% Completed | 44/64 [02:01<00:08,  2.33it/s]
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m Loading safetensors checkpoint shards:  70% Completed | 45/64 [02:01<00:07,  2.40it/s]
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m Loading safetensors checkpoint shards:  72% Completed | 46/64 [02:02<00:07,  2.46it/s]
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m Loading safetensors checkpoint shards:  73% Completed | 47/64 [02:02<00:06,  2.50it/s]
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m Loading safetensors checkpoint shards:  75% Completed | 48/64 [02:03<00:06,  2.53it/s]
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m Loading safetensors checkpoint shards:  77% Completed | 49/64 [02:03<00:05,  2.55it/s]
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m Loading safetensors checkpoint shards:  78% Completed | 50/64 [02:03<00:05,  2.57it/s]
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m Loading safetensors checkpoint shards:  80% Completed | 51/64 [02:04<00:05,  2.58it/s]
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m Loading safetensors checkpoint shards:  81% Completed | 52/64 [02:04<00:04,  2.59it/s]
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m Loading safetensors checkpoint shards:  83% Completed | 53/64 [02:04<00:04,  2.60it/s]
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m Loading safetensors checkpoint shards:  84% Completed | 54/64 [02:05<00:03,  2.61it/s]
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m Loading safetensors checkpoint shards:  86% Completed | 55/64 [02:05<00:03,  2.62it/s]
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m Loading safetensors checkpoint shards:  88% Completed | 56/64 [02:06<00:03,  2.62it/s]
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m Loading safetensors checkpoint shards:  89% Completed | 57/64 [02:06<00:02,  2.62it/s]
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m Loading safetensors checkpoint shards:  94% Completed | 60/64 [02:06<00:00,  5.26it/s]
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m Loading safetensors checkpoint shards:  95% Completed | 61/64 [02:06<00:00,  4.32it/s]
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m Loading safetensors checkpoint shards:  97% Completed | 62/64 [02:07<00:00,  3.74it/s]
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m Loading safetensors checkpoint shards:  98% Completed | 63/64 [02:07<00:00,  3.37it/s]
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m Loading safetensors checkpoint shards: 100% Completed | 64/64 [02:08<00:00,  3.14it/s]
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m Loading safetensors checkpoint shards: 100% Completed | 64/64 [02:08<00:00,  2.00s/it]
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m 
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=315, ip=192.168.242.154)[0m WARNING 05-01 10:58:57 [system_utils.py:37] Overwriting environment variable LD_LIBRARY_PATH from '/lib/x86_64-linux-gnu:/usr/local/openssl-1.1/lib:/usr/local/nvidia/lib64:/usr/local/cuda/lib64:/usr/local/cuda/lib64' to '/usr/local/lib/python3.12/dist-packages/cv2/../../lib64:/usr/local/lib/python3.12/dist-packages/cv2/../../lib64:/lib/x86_64-linux-gnu:/usr/local/openssl-1.1/lib:/usr/local/nvidia/lib64:/usr/local/cuda/lib64:/usr/local/cuda/lib64'
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1399)[0m WARNING 05-01 10:58:58 [worker_base.py:301] Missing `shared_worker_lock` argument from executor. This argument is needed for mm_processor_cache_type='shm'.
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1399)[0m INFO 05-01 10:59:05 [parallel_state.py:1212] world_size=16 rank=1 local_rank=1 distributed_init_method=tcp://192.168.243.158:48047 backend=nccl
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1416)[0m WARNING 05-01 10:58:57 [system_utils.py:37] Overwriting environment variable LD_LIBRARY_PATH from '/lib/x86_64-linux-gnu:/usr/local/openssl-1.1/lib:/usr/local/nvidia/lib64:/usr/local/cuda/lib64:/usr/local/cuda/lib64' to '/usr/local/lib/python3.12/dist-packages/cv2/../../lib64:/usr/local/lib/python3.12/dist-packages/cv2/../../lib64:/lib/x86_64-linux-gnu:/usr/local/openssl-1.1/lib:/usr/local/nvidia/lib64:/usr/local/cuda/lib64:/usr/local/cuda/lib64'[32m [repeated 15x across cluster] (Ray deduplicates logs by default. Set RAY_DEDUP_LOGS=0 to disable log deduplication, or see https://docs.ray.io/en/master/ray-observability/user-guides/configure-logging.html#log-deduplication for more options.)[0m
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=320, ip=192.168.242.154)[0m WARNING 05-01 10:59:00 [worker_base.py:301] Missing `shared_worker_lock` argument from executor. This argument is needed for mm_processor_cache_type='shm'.[32m [repeated 15x across cluster][0m
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=315, ip=192.168.242.154)[0m INFO 05-01 10:59:06 [pynccl.py:111] vLLM is using nccl==2.27.5
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1400)[0m INFO 05-01 10:59:10 [parallel_state.py:1423] rank 3 in world size 16 is assigned as DP rank 0, PP rank 0, PCP rank 0, TP rank 3, EP rank 3
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=315, ip=192.168.242.154)[0m WARNING 05-01 10:59:11 [registry.py:216] Using a slow tokenizer. This might cause a significant slowdown. Consider using a fast tokenizer instead.
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1416)[0m INFO 05-01 10:59:05 [parallel_state.py:1212] world_size=16 rank=6 local_rank=6 distributed_init_method=tcp://192.168.243.158:48047 backend=nccl[32m [repeated 15x across cluster][0m
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m INFO 05-01 10:59:12 [gpu_model_runner.py:4034] Starting to load model /root/.cache/huggingface/kimi-k26...
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m INFO 05-01 10:59:06 [pynccl.py:111] vLLM is using nccl==2.27.5
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=322, ip=192.168.242.154)[0m INFO 05-01 10:59:12 [mm_encoder_attention.py:77] Using AttentionBackendEnum.FLASH_ATTN for MMEncoderAttention.
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1400)[0m INFO 05-01 10:59:12 [utils.py:130] Hidden layers were unevenly partitioned: [31,30]. This can be manually overridden using the VLLM_PP_LAYER_PARTITION environment variable
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1400)[0m WARNING 05-01 10:59:12 [compressed_tensors.py:766] Acceleration for non-quantized schemes is not supported by Compressed Tensors. Falling back to UnquantizedLinearMethod
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=322, ip=192.168.242.154)[0m INFO 05-01 10:59:25 [cuda.py:328] Using AttentionBackendEnum.FLASHMLA backend.
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=322, ip=192.168.242.154)[0m INFO 05-01 10:59:25 [compressed_tensors_moe.py:196] Using CompressedTensorsWNA16MarlinMoEMethod
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=320, ip=192.168.242.154)[0m INFO 05-01 10:59:10 [parallel_state.py:1423] rank 15 in world size 16 is assigned as DP rank 0, PP rank 1, PCP rank 0, TP rank 7, EP rank 7[32m [repeated 15x across cluster][0m
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1416)[0m WARNING 05-01 10:59:11 [registry.py:216] Using a slow tokenizer. This might cause a significant slowdown. Consider using a fast tokenizer instead.[32m [repeated 15x across cluster][0m
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1396)[0m INFO 05-01 10:59:12 [mm_encoder_attention.py:77] Using AttentionBackendEnum.FLASH_ATTN for MMEncoderAttention.[32m [repeated 15x across cluster][0m
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1396)[0m INFO 05-01 10:59:12 [utils.py:130] Hidden layers were unevenly partitioned: [31,30]. This can be manually overridden using the VLLM_PP_LAYER_PARTITION environment variable[32m [repeated 15x across cluster][0m
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1396)[0m WARNING 05-01 10:59:12 [compressed_tensors.py:766] Acceleration for non-quantized schemes is not supported by Compressed Tensors. Falling back to UnquantizedLinearMethod[32m [repeated 15x across cluster][0m
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=315, ip=192.168.242.154)[0m INFO 05-01 10:59:26 [mla_attention.py:1399] Using FlashAttention prefill for MLA
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m INFO 05-01 11:01:35 [default_loader.py:291] Loading weights took 128.12 seconds
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1396)[0m INFO 05-01 10:59:27 [cuda.py:328] Using AttentionBackendEnum.FLASHMLA backend.[32m [repeated 15x across cluster][0m
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1396)[0m INFO 05-01 10:59:27 [compressed_tensors_moe.py:196] Using CompressedTensorsWNA16MarlinMoEMethod[32m [repeated 15x across cluster][0m
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m INFO 05-01 10:59:27 [mla_attention.py:1399] Using FlashAttention prefill for MLA
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m INFO 05-01 11:01:37 [gpu_model_runner.py:4131] Model loading took 35.83 GiB memory and 144.456913 seconds
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=315, ip=192.168.242.154)[0m INFO 05-01 11:01:50 [default_loader.py:291] Loading weights took 144.55 seconds
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=315, ip=192.168.242.154)[0m INFO 05-01 11:01:52 [gpu_model_runner.py:4131] Model loading took 35.69 GiB memory and 159.564431 seconds
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=322, ip=192.168.242.154)[0m INFO 05-01 11:02:03 [gpu_model_runner.py:4959] Encoder cache will be initialized with a budget of 32768 tokens, and profiled with 7 vision_chunk items of the maximum feature size.
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=315, ip=192.168.242.154)[0m INFO 05-01 11:02:10 [backends.py:812] Using cache directory: /root/.cache/vllm/torch_compile_cache/e121cc5450/rank_8_0/backbone for vLLM's torch.compile
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=315, ip=192.168.242.154)[0m INFO 05-01 11:02:10 [backends.py:872] Dynamo bytecode transform time: 2.42 s
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1424)[0m INFO 05-01 11:02:03 [gpu_model_runner.py:4959] Encoder cache will be initialized with a budget of 32768 tokens, and profiled with 7 vision_chunk items of the maximum feature size.[32m [repeated 15x across cluster][0m
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=315, ip=192.168.242.154)[0m INFO 05-01 11:02:13 [backends.py:302] Cache the graph of compile range (1, 32768) for later use
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=315, ip=192.168.242.154)[0m INFO 05-01 11:02:51 [backends.py:319] Compiling a graph for compile range (1, 32768) takes 39.52 s
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=315, ip=192.168.242.154)[0m INFO 05-01 11:02:51 [monitor.py:34] torch.compile takes 41.94 s in total
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m INFO 05-01 11:02:10 [backends.py:812] Using cache directory: /root/.cache/vllm/torch_compile_cache/4a0dbcc9b1/rank_0_0/backbone for vLLM's torch.compile
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m INFO 05-01 11:02:10 [backends.py:872] Dynamo bytecode transform time: 2.65 s
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1416)[0m INFO 05-01 11:02:14 [backends.py:302] Cache the graph of compile range (1, 32768) for later use[32m [repeated 15x across cluster][0m
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=315, ip=192.168.242.154)[0m INFO 05-01 11:02:53 [gpu_worker.py:356] Available KV cache memory: 29.03 GiB
+[0;36m(EngineCore_DP0 pid=1101)[0;0m INFO 05-01 11:02:57 [kv_cache_utils.py:1307] GPU KV cache size: 897,536 tokens
+[0;36m(EngineCore_DP0 pid=1101)[0;0m INFO 05-01 11:02:57 [kv_cache_utils.py:1312] Maximum concurrency for 262,144 tokens per request: 3.42x
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=315, ip=192.168.242.154)[0m 2026-05-01 11:02:57,141 - INFO - autotuner.py:256 - flashinfer.jit: [Autotuner]: Autotuning process starts ...
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1399)[0m 2026-05-01 11:02:57,184 - INFO - autotuner.py:262 - flashinfer.jit: [Autotuner]: Autotuning process ends
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):   0%|          | 0/19 [00:00<?, ?it/s]
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):   5%|▌         | 1/19 [00:00<00:08,  2.13it/s]
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  16%|█▌        | 3/19 [00:00<00:03,  5.28it/s]
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  26%|██▋       | 5/19 [00:00<00:01,  7.16it/s]
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  37%|███▋      | 7/19 [00:01<00:01,  8.38it/s]
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  47%|████▋     | 9/19 [00:01<00:01,  9.11it/s]
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  58%|█████▊    | 11/19 [00:01<00:00,  9.67it/s]
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  68%|██████▊   | 13/19 [00:01<00:00, 10.08it/s]
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  79%|███████▉  | 15/19 [00:01<00:00, 10.50it/s]
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  89%|████████▉ | 17/19 [00:01<00:00, 11.11it/s]
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m Capturing CUDA graphs (mixed prefill-decode, PIECEWISE): 100%|██████████| 19/19 [00:02<00:00,  8.53it/s]Capturing CUDA graphs (mixed prefill-decode, PIECEWISE): 100%|██████████| 19/19 [00:02<00:00,  8.41it/s]
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m Capturing CUDA graphs (decode, FULL):   0%|          | 0/11 [00:00<?, ?it/s]
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m Capturing CUDA graphs (decode, FULL):  18%|█▊        | 2/11 [00:00<00:00, 10.87it/s]
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m Capturing CUDA graphs (decode, FULL):  36%|███▋      | 4/11 [00:00<00:00, 11.18it/s]
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m Capturing CUDA graphs (decode, FULL):  55%|█████▍    | 6/11 [00:00<00:00, 11.29it/s]
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m Capturing CUDA graphs (decode, FULL):  73%|███████▎  | 8/11 [00:00<00:00, 11.73it/s]
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m Capturing CUDA graphs (decode, FULL):  91%|█████████ | 10/11 [00:00<00:00, 12.11it/s]Capturing CUDA graphs (decode, FULL): 100%|██████████| 11/11 [00:00<00:00, 11.84it/s]
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m INFO 05-01 11:02:56 [backends.py:319] Compiling a graph for compile range (1, 32768) takes 43.63 s
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m INFO 05-01 11:02:56 [monitor.py:34] torch.compile takes 46.28 s in total
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=315, ip=192.168.242.154)[0m INFO 05-01 11:03:00 [custom_all_reduce.py:216] Registering 600 cuda graph addresses
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m INFO 05-01 11:02:57 [gpu_worker.py:356] Available KV cache memory: 29.85 GiB
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=315, ip=192.168.242.154)[0m INFO 05-01 11:03:00 [gpu_model_runner.py:5064] Graph capturing finished in 4 secs, took -5.80 GiB
+[0;36m(EngineCore_DP0 pid=1101)[0;0m INFO 05-01 11:03:01 [core.py:272] init engine (profile, create kv cache, warmup model) took 58.23 seconds
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [2026-05-01 11:03:01] INFO tokenization_kimi.py:111: Reloaded tiktoken model from /root/.cache/huggingface/kimi-k26/tiktoken.model
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [2026-05-01 11:03:01] INFO tokenization_kimi.py:117: #words: 163840 - BOS ID: 163584 - EOS ID: 163585
+[0;36m(EngineCore_DP0 pid=1101)[0;0m WARNING 05-01 11:03:01 [registry.py:216] Using a slow tokenizer. This might cause a significant slowdown. Consider using a fast tokenizer instead.
+[0;36m(EngineCore_DP0 pid=1101)[0;0m WARNING 05-01 11:03:02 [serial_utils.py:57] Allowing insecure serialization using pickle due to VLLM_ALLOW_INSECURE_SERIALIZATION=1
+[0;36m(EngineCore_DP0 pid=1101)[0;0m INFO 05-01 11:03:02 [vllm.py:624] Asynchronous scheduling is disabled.
+[0;36m(APIServer pid=703)[0;0m INFO 05-01 11:03:02 [engine_patch.py:160] PoC engine patch applied successfully to AsyncLLM (V1)
+[0;36m(APIServer pid=703)[0;0m INFO 05-01 11:03:02 [api_server.py:673] Supported tasks: ('generate',)
+[0;36m(APIServer pid=703)[0;0m INFO 05-01 11:03:02 [serving.py:178] Warming up chat template processing...
+[0;36m(APIServer pid=703)[0;0m [2026-05-01 11:03:02] INFO tokenization_kimi.py:111: Reloaded tiktoken model from /root/.cache/huggingface/kimi-k26/tiktoken.model
+[0;36m(APIServer pid=703)[0;0m [2026-05-01 11:03:02] INFO tokenization_kimi.py:117: #words: 163840 - BOS ID: 163584 - EOS ID: 163585
+[0;36m(APIServer pid=703)[0;0m INFO 05-01 11:03:03 [hf.py:310] Detected the chat template content format to be 'string'. You can set `--chat-template-content-format` to override this.
+[0;36m(APIServer pid=703)[0;0m INFO 05-01 11:03:03 [serving.py:213] Chat template warmup completed in 658.9ms
+[0;36m(APIServer pid=703)[0;0m INFO 05-01 11:03:03 [api_server.py:954] Starting vLLM API server 0 on http://0.0.0.0:5001
+[0;36m(APIServer pid=703)[0;0m INFO 05-01 11:03:03 [launcher.py:38] Available routes are:
+[0;36m(APIServer pid=703)[0;0m INFO 05-01 11:03:03 [launcher.py:46] Route: /openapi.json, Methods: HEAD, GET
+[0;36m(APIServer pid=703)[0;0m INFO 05-01 11:03:03 [launcher.py:46] Route: /docs, Methods: HEAD, GET
+[0;36m(APIServer pid=703)[0;0m INFO 05-01 11:03:03 [launcher.py:46] Route: /docs/oauth2-redirect, Methods: HEAD, GET
+[0;36m(APIServer pid=703)[0;0m INFO 05-01 11:03:03 [launcher.py:46] Route: /redoc, Methods: HEAD, GET
+[0;36m(APIServer pid=703)[0;0m INFO 05-01 11:03:03 [launcher.py:46] Route: /scale_elastic_ep, Methods: POST
+[0;36m(APIServer pid=703)[0;0m INFO 05-01 11:03:03 [launcher.py:46] Route: /is_scaling_elastic_ep, Methods: POST
+[0;36m(APIServer pid=703)[0;0m INFO 05-01 11:03:03 [launcher.py:46] Route: /tokenize, Methods: POST
+[0;36m(APIServer pid=703)[0;0m INFO 05-01 11:03:03 [launcher.py:46] Route: /detokenize, Methods: POST
+[0;36m(APIServer pid=703)[0;0m INFO 05-01 11:03:03 [launcher.py:46] Route: /inference/v1/generate, Methods: POST
+[0;36m(APIServer pid=703)[0;0m INFO 05-01 11:03:03 [launcher.py:46] Route: /pause, Methods: POST
+[0;36m(APIServer pid=703)[0;0m INFO 05-01 11:03:03 [launcher.py:46] Route: /resume, Methods: POST
+[0;36m(APIServer pid=703)[0;0m INFO 05-01 11:03:03 [launcher.py:46] Route: /is_paused, Methods: GET
+[0;36m(APIServer pid=703)[0;0m INFO 05-01 11:03:03 [launcher.py:46] Route: /metrics, Methods: GET
+[0;36m(APIServer pid=703)[0;0m INFO 05-01 11:03:03 [launcher.py:46] Route: /health, Methods: GET
+[0;36m(APIServer pid=703)[0;0m INFO 05-01 11:03:03 [launcher.py:46] Route: /v1/chat/completions, Methods: POST
+[0;36m(APIServer pid=703)[0;0m INFO 05-01 11:03:03 [launcher.py:46] Route: /v1/chat/completions/render, Methods: POST
+[0;36m(APIServer pid=703)[0;0m INFO 05-01 11:03:03 [launcher.py:46] Route: /v1/responses, Methods: POST
+[0;36m(APIServer pid=703)[0;0m INFO 05-01 11:03:03 [launcher.py:46] Route: /v1/responses/{response_id}, Methods: GET
+[0;36m(APIServer pid=703)[0;0m INFO 05-01 11:03:03 [launcher.py:46] Route: /v1/responses/{response_id}/cancel, Methods: POST
+[0;36m(APIServer pid=703)[0;0m INFO 05-01 11:03:03 [launcher.py:46] Route: /v1/audio/transcriptions, Methods: POST
+[0;36m(APIServer pid=703)[0;0m INFO 05-01 11:03:03 [launcher.py:46] Route: /v1/audio/translations, Methods: POST
+[0;36m(APIServer pid=703)[0;0m INFO 05-01 11:03:03 [launcher.py:46] Route: /v1/completions, Methods: POST
+[0;36m(APIServer pid=703)[0;0m INFO 05-01 11:03:03 [launcher.py:46] Route: /v1/completions/render, Methods: POST
+[0;36m(APIServer pid=703)[0;0m INFO 05-01 11:03:03 [launcher.py:46] Route: /v1/messages, Methods: POST
+[0;36m(APIServer pid=703)[0;0m INFO 05-01 11:03:03 [launcher.py:46] Route: /v1/models, Methods: GET
+[0;36m(APIServer pid=703)[0;0m INFO 05-01 11:03:03 [launcher.py:46] Route: /load, Methods: GET
+[0;36m(APIServer pid=703)[0;0m INFO 05-01 11:03:03 [launcher.py:46] Route: /version, Methods: GET
+[0;36m(APIServer pid=703)[0;0m INFO 05-01 11:03:03 [launcher.py:46] Route: /ping, Methods: GET
+[0;36m(APIServer pid=703)[0;0m INFO 05-01 11:03:03 [launcher.py:46] Route: /ping, Methods: POST
+[0;36m(APIServer pid=703)[0;0m INFO 05-01 11:03:03 [launcher.py:46] Route: /invocations, Methods: POST
+[0;36m(APIServer pid=703)[0;0m INFO 05-01 11:03:03 [launcher.py:46] Route: /api/v1/pow/init/generate, Methods: POST
+[0;36m(APIServer pid=703)[0;0m INFO 05-01 11:03:03 [launcher.py:46] Route: /api/v1/pow/generate, Methods: POST
+[0;36m(APIServer pid=703)[0;0m INFO 05-01 11:03:03 [launcher.py:46] Route: /api/v1/pow/generate/{request_id}, Methods: GET
+[0;36m(APIServer pid=703)[0;0m INFO 05-01 11:03:03 [launcher.py:46] Route: /api/v1/pow/status, Methods: GET
+[0;36m(APIServer pid=703)[0;0m INFO 05-01 11:03:03 [launcher.py:46] Route: /api/v1/pow/stop, Methods: POST
+[0;36m(APIServer pid=703)[0;0m INFO 05-01 11:03:03 [launcher.py:46] Route: /classify, Methods: POST
+[0;36m(APIServer pid=703)[0;0m INFO 05-01 11:03:03 [launcher.py:46] Route: /v1/embeddings, Methods: POST
+[0;36m(APIServer pid=703)[0;0m INFO 05-01 11:03:03 [launcher.py:46] Route: /score, Methods: POST
+[0;36m(APIServer pid=703)[0;0m INFO 05-01 11:03:03 [launcher.py:46] Route: /v1/score, Methods: POST
+[0;36m(APIServer pid=703)[0;0m INFO 05-01 11:03:03 [launcher.py:46] Route: /rerank, Methods: POST
+[0;36m(APIServer pid=703)[0;0m INFO 05-01 11:03:03 [launcher.py:46] Route: /v1/rerank, Methods: POST
+[0;36m(APIServer pid=703)[0;0m INFO 05-01 11:03:03 [launcher.py:46] Route: /v2/rerank, Methods: POST
+[0;36m(APIServer pid=703)[0;0m INFO 05-01 11:03:03 [launcher.py:46] Route: /pooling, Methods: POST
+[0;36m(APIServer pid=703)[0;0m INFO:     Started server process [703]
+[0;36m(APIServer pid=703)[0;0m INFO:     Waiting for application startup.
+[0;36m(APIServer pid=703)[0;0m INFO:     Application startup complete.
+[0;36m(APIServer pid=703)[0;0m INFO:     127.0.0.1:36010 - "GET /health HTTP/1.1" 200 OK
+[0;36m(APIServer pid=703)[0;0m INFO 05-01 11:03:14 [routes.py:364] PoC /init/generate: artifact_collection_block_v1, 100, artifact_collection_pk_v1, 0, 1, 0, 1, 8, model='moonshotai/Kimi-K2.6' seq_len=1024 k_dim=12, http://127.0.0.1:9998, False
+[0;36m(APIServer pid=703)[0;0m INFO:     127.0.0.1:36020 - "POST /api/v1/pow/init/generate HTTP/1.1" 200 OK
+[0;36m(APIServer pid=703)[0;0m INFO 05-01 11:03:14 [routes.py:288] PoC generation started (node 0/1, group 0/1)
+[0;36m(EngineCore_DP0 pid=1101)[0;0m INFO 05-01 11:03:14 [engine_patch.py:160] PoC engine patch applied successfully to AsyncLLM (V1)
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1399)[0m /usr/local/lib/python3.12/dist-packages/vllm/distributed/parallel_state.py:650: UserWarning: The given buffer is not writable, and PyTorch does not support non-writable tensors. This means you can write to the underlying (supposedly non-writable) buffer using the tensor. You may want to copy the buffer to protect its data or make it writable before converting it to a tensor. This type of warning will be suppressed for the rest of this program. (Triggered internally at /pytorch/torch/csrc/utils/tensor_new.cpp:1581.)
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1399)[0m   object_tensor = torch.frombuffer(pickle.dumps(obj), dtype=torch.uint8)
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1399)[0m [rank1]:[W501 11:03:14.840780832 ProcessGroupNCCL.cpp:4004] Warning: An unbatched P2P op (send/recv) was called on this ProcessGroup with size 2.  In lazy initialization mode, this will result in a new 2-rank NCCL communicator to be created. (function operator())
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1424)[0m 2026-05-01 11:02:57,142 - INFO - autotuner.py:256 - flashinfer.jit: [Autotuner]: Autotuning process starts ...[32m [repeated 15x across cluster][0m
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=320, ip=192.168.242.154)[0m 2026-05-01 11:02:57,180 - INFO - autotuner.py:262 - flashinfer.jit: [Autotuner]: Autotuning process ends[32m [repeated 15x across cluster][0m
+[0;36m(APIServer pid=703)[0;0m INFO 05-01 11:03:19 [routes.py:346] Generated: 88 nonces (982/min)
+[0;36m(APIServer pid=703)[0;0m INFO 05-01 11:03:25 [routes.py:346] Generated: 184 nonces (1020/min)
+[0;36m(APIServer pid=703)[0;0m INFO 05-01 11:03:30 [routes.py:346] Generated: 280 nonces (1032/min)
+[0;36m(APIServer pid=703)[0;0m INFO 05-01 11:03:36 [routes.py:346] Generated: 376 nonces (1039/min)
+[0;36m(APIServer pid=703)[0;0m INFO 05-01 11:03:41 [routes.py:346] Generated: 472 nonces (1043/min)
+[0;36m(APIServer pid=703)[0;0m INFO 05-01 11:03:47 [routes.py:346] Generated: 568 nonces (1045/min)
+[0;36m(APIServer pid=703)[0;0m INFO 05-01 11:03:52 [routes.py:346] Generated: 664 nonces (1047/min)
+[0;36m(APIServer pid=703)[0;0m INFO 05-01 11:03:58 [routes.py:346] Generated: 760 nonces (1048/min)
+[0;36m(APIServer pid=703)[0;0m INFO 05-01 11:04:03 [routes.py:346] Generated: 856 nonces (1049/min)
+[0;36m(APIServer pid=703)[0;0m INFO 05-01 11:04:08 [routes.py:346] Generated: 952 nonces (1050/min)
+[0;36m(APIServer pid=703)[0;0m INFO 05-01 11:04:14 [routes.py:346] Generated: 1048 nonces (1051/min)
+[0;36m(APIServer pid=703)[0;0m INFO 05-01 11:04:15 [routes.py:351] PoC stopped: 1064 nonces in 1.02min
+[0;36m(APIServer pid=703)[0;0m INFO 05-01 11:04:15 [routes.py:416] PoC generation task completed, flag cleared
+[0;36m(APIServer pid=703)[0;0m INFO:     127.0.0.1:45540 - "POST /api/v1/pow/stop HTTP/1.1" 200 OK
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1400)[0m INFO 05-01 11:03:14 [engine_patch.py:160] PoC engine patch applied successfully to AsyncLLM (V1)
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1416)[0m INFO 05-01 11:03:00 [custom_all_reduce.py:216] Registering 620 cuda graph addresses[32m [repeated 15x across cluster][0m
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1401)[0m INFO 05-01 11:03:01 [gpu_model_runner.py:5064] Graph capturing finished in 4 secs, took -6.20 GiB
+[0;36m(EngineCore_DP0 pid=1101)[0;0m INFO 05-01 11:04:16 [ray_executor.py:534] RAY_CGRAPH_get_timeout is set to 300
+[0;36m(EngineCore_DP0 pid=1101)[0;0m INFO 05-01 11:04:16 [ray_executor.py:538] VLLM_USE_RAY_COMPILED_DAG_CHANNEL_TYPE = auto
+[0;36m(EngineCore_DP0 pid=1101)[0;0m INFO 05-01 11:04:16 [ray_executor.py:542] VLLM_USE_RAY_COMPILED_DAG_OVERLAP_COMM = False
+[0;36m(EngineCore_DP0 pid=1101)[0;0m INFO 05-01 11:04:16 [ray_executor.py:601] Using RayPPCommunicator (which wraps vLLM _PP GroupCoordinator) for Ray Compiled Graph communication.
+[0;36m(EngineCore_DP0 pid=1101)[0;0m 2026-05-01 11:04:16,651	INFO torch_tensor_accelerator_channel.py:807 -- Creating communicator group 801c404e-09e0-44a4-81ec-6c006bd83505 on actors: [Actor(RayWorkerWrapper, 48acdd97beb36d6fa013062101000000), Actor(RayWorkerWrapper, ab75a54430f057e5f6b5a94a01000000), Actor(RayWorkerWrapper, 5fd7b8732eb0147c6e97af5f01000000), Actor(RayWorkerWrapper, 7de3cda656197e5d5241b61c01000000), Actor(RayWorkerWrapper, 8dfcb8fa94afc52170f6170701000000), Actor(RayWorkerWrapper, 0ccbdf20bb2b6d0ed307cbe901000000), Actor(RayWorkerWrapper, 47d74389c45bde9d8a6228a001000000), Actor(RayWorkerWrapper, 691bcadc185327e8be1cb06e01000000), Actor(RayWorkerWrapper, 3d4decee5b6aed43785056f701000000), Actor(RayWorkerWrapper, 446e6277e7b5f3c8ae04db6e01000000), Actor(RayWorkerWrapper, f54e3ba039da9dd6b3b4b7c101000000), Actor(RayWorkerWrapper, d8c2485f7ae345f5f2a8224e01000000), Actor(RayWorkerWrapper, 071dd962db3fcc993f3ea9eb01000000), Actor(RayWorkerWrapper, 3bf9753f1602096212ca0dd701000000), Actor(RayWorkerWrapper, 97302271aec13980ae9dd2dc01000000), Actor(RayWorkerWrapper, fa5fa9669b235f72d8db114101000000)]
+[0;36m(EngineCore_DP0 pid=1101)[0;0m 2026-05-01 11:04:16,788	INFO torch_tensor_accelerator_channel.py:833 -- Communicator group initialized.
+[0;36m(EngineCore_DP0 pid=1101)[0;0m ERROR 05-01 11:09:17 [dump_input.py:72] Dumping input data for V1 LLM engine (v0.15.1) with config: model='/root/.cache/huggingface/kimi-k26', speculative_config=None, tokenizer='/root/.cache/huggingface/kimi-k26', skip_tokenizer_init=False, tokenizer_mode=auto, revision=None, tokenizer_revision=None, trust_remote_code=True, dtype=torch.bfloat16, max_seq_len=262144, download_dir=None, load_format=auto, tensor_parallel_size=8, pipeline_parallel_size=2, data_parallel_size=1, disable_custom_all_reduce=False, quantization=compressed-tensors, enforce_eager=False, enable_return_routed_experts=False, kv_cache_dtype=auto, device_config=cuda, structured_outputs_config=StructuredOutputsConfig(backend='auto', disable_fallback=False, disable_any_whitespace=False, disable_additional_properties=False, reasoning_parser='', reasoning_parser_plugin='', enable_in_reasoning=False), observability_config=ObservabilityConfig(show_hidden_metrics_for_version=None, otlp_traces_endpoint=None, collect_detailed_traces=None, kv_cache_metrics=False, kv_cache_metrics_sample=0.01, cudagraph_metrics=False, enable_layerwise_nvtx_tracing=False, enable_mfu_metrics=False, enable_mm_processor_stats=False, enable_logging_iteration_details=False), seed=0, served_model_name=moonshotai/Kimi-K2.6, enable_prefix_caching=True, enable_chunked_prefill=True, pooler_config=None, compilation_config={'level': None, 'mode': <CompilationMode.VLLM_COMPILE: 3>, 'debug_dump_path': None, 'cache_dir': '', 'compile_cache_save_format': 'binary', 'backend': 'inductor', 'custom_ops': ['all'], 'splitting_ops': ['vllm::unified_attention', 'vllm::unified_attention_with_output', 'vllm::unified_mla_attention', 'vllm::unified_mla_attention_with_output', 'vllm::mamba_mixer2', 'vllm::mamba_mixer', 'vllm::short_conv', 'vllm::linear_attention', 'vllm::plamo2_mamba_mixer', 'vllm::gdn_attention_core', 'vllm::kda_attention', 'vllm::sparse_attn_indexer', 'vllm::rocm_aiter_sparse_attn_indexer', 'vllm::unified_kv_cache_update'], 'compile_mm_encoder': False, 'compile_sizes': [], 'compile_ranges_split_points': [32768], 'inductor_compile_config': {'enable_auto_functionalized_v2': False, 'combo_kernels': True, 'benchmark_combo_kernel': True}, 'inductor_passes': {}, 'cudagraph_mode': <CUDAGraphMode.FULL_AND_PIECEWISE: (2, 1)>, 'cudagraph_num_of_warmups': 1, 'cudagraph_capture_sizes': [1, 2, 4, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128], 'cudagraph_copy_inputs': False, 'cudagraph_specialize_lora': True, 'use_inductor_graph_partition': False, 'pass_config': {'fuse_norm_quant': True, 'fuse_act_quant': True, 'fuse_attn_quant': False, 'eliminate_noops': True, 'enable_sp': False, 'fuse_gemm_comms': False, 'fuse_allreduce_rms': False}, 'max_cudagraph_capture_size': 128, 'dynamic_shapes_config': {'type': <DynamicShapesType.BACKED: 'backed'>, 'evaluate_guards': False, 'assume_32_bit_indexing': True}, 'local_cache_dir': None, 'static_all_moe_layers': []}, 
+[0;36m(EngineCore_DP0 pid=1101)[0;0m ERROR 05-01 11:09:17 [dump_input.py:79] Dumping scheduler output for model execution: SchedulerOutput(scheduled_new_reqs=[NewRequestData(req_id=chatcmpl-8d963ec6a764c843-b571bb6c,prompt_token_ids_len=27,prefill_token_ids_len=None,mm_features=[],sampling_params=SamplingParams(n=1, presence_penalty=0.0, frequency_penalty=0.0, repetition_penalty=1.2, temperature=0.7, top_p=0.95, top_k=40, min_p=0.0, seed=1, stop=[], stop_token_ids=[163586], bad_words=[], include_stop_str_in_output=False, ignore_eos=False, max_tokens=8, min_tokens=0, logprobs=4, prompt_logprobs=None, skip_special_tokens=False, spaces_between_special_tokens=True, truncate_prompt_tokens=None, structured_outputs=None, extra_args=None),block_ids=([1],),num_computed_tokens=0,lora_request=None,prompt_embeds_shape=None)], scheduled_cached_reqs=CachedRequestData(req_ids=[],resumed_req_ids=set(),new_token_ids_lens=[],all_token_ids_lens={},new_block_ids=[],num_computed_tokens=[],num_output_tokens=[]), num_scheduled_tokens={chatcmpl-8d963ec6a764c843-b571bb6c: 27}, total_num_scheduled_tokens=27, scheduled_spec_decode_tokens={}, scheduled_encoder_inputs={}, num_common_prefix_blocks=[1], finished_req_ids=[], free_encoder_mm_hashes=[], preempted_req_ids=[], has_structured_output_requests=false, pending_structured_output_tokens=false, num_invalid_spec_tokens=null, kv_connector_metadata=null, ec_connector_metadata=null)
+[0;36m(EngineCore_DP0 pid=1101)[0;0m ERROR 05-01 11:09:17 [dump_input.py:81] Dumping scheduler stats: SchedulerStats(num_running_reqs=1, num_waiting_reqs=0, step_counter=0, current_wave=0, kv_cache_usage=7.131141695781995e-05, prefix_cache_stats=PrefixCacheStats(reset=False, requests=1, queries=27, hits=0, preempted_requests=0, preempted_queries=0, preempted_hits=0), connector_prefix_cache_stats=None, kv_cache_eviction_events=[], spec_decoding_stats=None, kv_connector_stats=None, waiting_lora_adapters={}, running_lora_adapters={}, cudagraph_stats=None, perf_stats=None)
+[0;36m(EngineCore_DP0 pid=1101)[0;0m ERROR 05-01 11:09:17 [core.py:948] EngineCore encountered a fatal error.
+[0;36m(EngineCore_DP0 pid=1101)[0;0m ERROR 05-01 11:09:17 [core.py:948] Traceback (most recent call last):
+[0;36m(EngineCore_DP0 pid=1101)[0;0m ERROR 05-01 11:09:17 [core.py:948]   File "/usr/local/lib/python3.12/dist-packages/ray/dag/compiled_dag_node.py", line 2525, in _execute_until
+[0;36m(EngineCore_DP0 pid=1101)[0;0m ERROR 05-01 11:09:17 [core.py:948]     result = self._dag_output_fetcher.read(timeout)
+[0;36m(EngineCore_DP0 pid=1101)[0;0m ERROR 05-01 11:09:17 [core.py:948]              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[0;36m(EngineCore_DP0 pid=1101)[0;0m ERROR 05-01 11:09:17 [core.py:948]   File "/usr/local/lib/python3.12/dist-packages/ray/experimental/channel/common.py", line 312, in read
+[0;36m(EngineCore_DP0 pid=1101)[0;0m ERROR 05-01 11:09:17 [core.py:948]     outputs = self._read_list(timeout)
+[0;36m(EngineCore_DP0 pid=1101)[0;0m ERROR 05-01 11:09:17 [core.py:948]               ^^^^^^^^^^^^^^^^^^^^^^^^
+[0;36m(EngineCore_DP0 pid=1101)[0;0m ERROR 05-01 11:09:17 [core.py:948]   File "/usr/local/lib/python3.12/dist-packages/ray/experimental/channel/common.py", line 403, in _read_list
+[0;36m(EngineCore_DP0 pid=1101)[0;0m ERROR 05-01 11:09:17 [core.py:948]     raise e
+[0;36m(EngineCore_DP0 pid=1101)[0;0m ERROR 05-01 11:09:17 [core.py:948]   File "/usr/local/lib/python3.12/dist-packages/ray/experimental/channel/common.py", line 385, in _read_list
+[0;36m(EngineCore_DP0 pid=1101)[0;0m ERROR 05-01 11:09:17 [core.py:948]     result = c.read(min(remaining_timeout, iteration_timeout))
+[0;36m(EngineCore_DP0 pid=1101)[0;0m ERROR 05-01 11:09:17 [core.py:948]              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[0;36m(EngineCore_DP0 pid=1101)[0;0m ERROR 05-01 11:09:17 [core.py:948]   File "/usr/local/lib/python3.12/dist-packages/ray/experimental/channel/shared_memory_channel.py", line 776, in read
+[0;36m(EngineCore_DP0 pid=1101)[0;0m ERROR 05-01 11:09:17 [core.py:948]     return self._channel_dict[self._resolve_actor_id()].read(timeout)
+[0;36m(EngineCore_DP0 pid=1101)[0;0m ERROR 05-01 11:09:17 [core.py:948]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[0;36m(EngineCore_DP0 pid=1101)[0;0m ERROR 05-01 11:09:17 [core.py:948]   File "/usr/local/lib/python3.12/dist-packages/ray/experimental/channel/shared_memory_channel.py", line 480, in read
+[0;36m(EngineCore_DP0 pid=1101)[0;0m ERROR 05-01 11:09:17 [core.py:948]     ret = self._worker.get_objects(
+[0;36m(EngineCore_DP0 pid=1101)[0;0m ERROR 05-01 11:09:17 [core.py:948]           ^^^^^^^^^^^^^^^^^^^^^^^^^
+[0;36m(EngineCore_DP0 pid=1101)[0;0m ERROR 05-01 11:09:17 [core.py:948]   File "/usr/local/lib/python3.12/dist-packages/ray/_private/worker.py", line 976, in get_objects
+[0;36m(EngineCore_DP0 pid=1101)[0;0m ERROR 05-01 11:09:17 [core.py:948]     ] = self.core_worker.get_objects(
+[0;36m(EngineCore_DP0 pid=1101)[0;0m ERROR 05-01 11:09:17 [core.py:948]         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[0;36m(EngineCore_DP0 pid=1101)[0;0m ERROR 05-01 11:09:17 [core.py:948]   File "python/ray/_raylet.pyx", line 2875, in ray._raylet.CoreWorker.get_objects
+[0;36m(EngineCore_DP0 pid=1101)[0;0m ERROR 05-01 11:09:17 [core.py:948]   File "python/ray/includes/common.pxi", line 124, in ray._raylet.check_status
+[0;36m(EngineCore_DP0 pid=1101)[0;0m ERROR 05-01 11:09:17 [core.py:948] ray.exceptions.RayChannelTimeoutError: System error: Timed out waiting for object available to read. ObjectID: 00387206330576e3a8bf0d0838f7d76975c0ca920100000002e1f505
+[0;36m(EngineCore_DP0 pid=1101)[0;0m ERROR 05-01 11:09:17 [core.py:948] 
+[0;36m(EngineCore_DP0 pid=1101)[0;0m ERROR 05-01 11:09:17 [core.py:948] The above exception was the direct cause of the following exception:
+[0;36m(EngineCore_DP0 pid=1101)[0;0m ERROR 05-01 11:09:17 [core.py:948] 
+[0;36m(EngineCore_DP0 pid=1101)[0;0m ERROR 05-01 11:09:17 [core.py:948] Traceback (most recent call last):
+[0;36m(EngineCore_DP0 pid=1101)[0;0m ERROR 05-01 11:09:17 [core.py:948]   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/engine/core.py", line 939, in run_engine_core
+[0;36m(EngineCore_DP0 pid=1101)[0;0m ERROR 05-01 11:09:17 [core.py:948]     engine_core.run_busy_loop()
+[0;36m(EngineCore_DP0 pid=1101)[0;0m ERROR 05-01 11:09:17 [core.py:948]   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/engine/core.py", line 966, in run_busy_loop
+[0;36m(EngineCore_DP0 pid=1101)[0;0m ERROR 05-01 11:09:17 [core.py:948]     self._process_engine_step()
+[0;36m(EngineCore_DP0 pid=1101)[0;0m ERROR 05-01 11:09:17 [core.py:948]   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/engine/core.py", line 999, in _process_engine_step
+[0;36m(EngineCore_DP0 pid=1101)[0;0m ERROR 05-01 11:09:17 [core.py:948]     outputs, model_executed = self.step_fn()
+[0;36m(EngineCore_DP0 pid=1101)[0;0m ERROR 05-01 11:09:17 [core.py:948]                               ^^^^^^^^^^^^^^
+[0;36m(EngineCore_DP0 pid=1101)[0;0m ERROR 05-01 11:09:17 [core.py:948]   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/engine/core.py", line 486, in step_with_batch_queue
+[0;36m(EngineCore_DP0 pid=1101)[0;0m ERROR 05-01 11:09:17 [core.py:948]     model_output = future.result()
+[0;36m(EngineCore_DP0 pid=1101)[0;0m ERROR 05-01 11:09:17 [core.py:948]                    ^^^^^^^^^^^^^^^
+[0;36m(EngineCore_DP0 pid=1101)[0;0m ERROR 05-01 11:09:17 [core.py:948]   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/executor/ray_utils.py", line 156, in result
+[0;36m(EngineCore_DP0 pid=1101)[0;0m ERROR 05-01 11:09:17 [core.py:948]     outputs = ray.get(self.ref_or_refs, timeout=timeout)
+[0;36m(EngineCore_DP0 pid=1101)[0;0m ERROR 05-01 11:09:17 [core.py:948]               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[0;36m(EngineCore_DP0 pid=1101)[0;0m ERROR 05-01 11:09:17 [core.py:948]   File "/usr/local/lib/python3.12/dist-packages/ray/_private/auto_init_hook.py", line 22, in auto_init_wrapper
+[0;36m(EngineCore_DP0 pid=1101)[0;0m ERROR 05-01 11:09:17 [core.py:948]     return fn(*args, **kwargs)
+[0;36m(EngineCore_DP0 pid=1101)[0;0m ERROR 05-01 11:09:17 [core.py:948]            ^^^^^^^^^^^^^^^^^^^
+[0;36m(EngineCore_DP0 pid=1101)[0;0m ERROR 05-01 11:09:17 [core.py:948]   File "/usr/local/lib/python3.12/dist-packages/ray/_private/client_mode_hook.py", line 104, in wrapper
+[0;36m(EngineCore_DP0 pid=1101)[0;0m ERROR 05-01 11:09:17 [core.py:948]     return func(*args, **kwargs)
+[0;36m(EngineCore_DP0 pid=1101)[0;0m ERROR 05-01 11:09:17 [core.py:948]            ^^^^^^^^^^^^^^^^^^^^^
+[0;36m(EngineCore_DP0 pid=1101)[0;0m ERROR 05-01 11:09:17 [core.py:948]   File "/usr/local/lib/python3.12/dist-packages/ray/_private/worker.py", line 2940, in get
+[0;36m(EngineCore_DP0 pid=1101)[0;0m ERROR 05-01 11:09:17 [core.py:948]     return object_refs.get(timeout=timeout)
+[0;36m(EngineCore_DP0 pid=1101)[0;0m ERROR 05-01 11:09:17 [core.py:948]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[0;36m(EngineCore_DP0 pid=1101)[0;0m ERROR 05-01 11:09:17 [core.py:948]   File "/usr/local/lib/python3.12/dist-packages/ray/experimental/compiled_dag_ref.py", line 115, in get
+[0;36m(EngineCore_DP0 pid=1101)[0;0m ERROR 05-01 11:09:17 [core.py:948]     self._dag._execute_until(
+[0;36m(EngineCore_DP0 pid=1101)[0;0m ERROR 05-01 11:09:17 [core.py:948]   File "/usr/local/lib/python3.12/dist-packages/ray/dag/compiled_dag_node.py", line 2535, in _execute_until
+[0;36m(EngineCore_DP0 pid=1101)[0;0m ERROR 05-01 11:09:17 [core.py:948]     raise RayChannelTimeoutError(
+[0;36m(EngineCore_DP0 pid=1101)[0;0m ERROR 05-01 11:09:17 [core.py:948] ray.exceptions.RayChannelTimeoutError: System error: If the execution is expected to take a long time, increase RAY_CGRAPH_get_timeout which is currently 300 seconds. Otherwise, this may indicate that the execution is hanging.
+[0;36m(EngineCore_DP0 pid=1101)[0;0m INFO 05-01 11:09:17 [ray_executor.py:120] Shutting down Ray distributed executor. If you see error log from logging.cc regarding SIGTERM received, please ignore because this is the expected termination process in Ray.
+[0;36m(EngineCore_DP0 pid=1101)[0;0m 2026-05-01 11:09:17,184	INFO compiled_dag_node.py:2167 -- Tearing down compiled DAG
+[0;36m(APIServer pid=703)[0;0m ERROR 05-01 11:09:17 [async_llm.py:693] AsyncLLM output_handler failed.
+[0;36m(APIServer pid=703)[0;0m ERROR 05-01 11:09:17 [async_llm.py:693] Traceback (most recent call last):
+[0;36m(APIServer pid=703)[0;0m ERROR 05-01 11:09:17 [async_llm.py:693]   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/engine/async_llm.py", line 649, in output_handler
+[0;36m(APIServer pid=703)[0;0m ERROR 05-01 11:09:17 [async_llm.py:693]     outputs = await engine_core.get_output_async()
+[0;36m(APIServer pid=703)[0;0m ERROR 05-01 11:09:17 [async_llm.py:693]               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[0;36m(APIServer pid=703)[0;0m ERROR 05-01 11:09:17 [async_llm.py:693]   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/engine/core_client.py", line 894, in get_output_async
+[0;36m(APIServer pid=703)[0;0m ERROR 05-01 11:09:17 [async_llm.py:693]     raise self._format_exception(outputs) from None
+[0;36m(APIServer pid=703)[0;0m ERROR 05-01 11:09:17 [async_llm.py:693] vllm.v1.engine.exceptions.EngineDeadError: EngineCore encountered an issue. See stack trace (above) for the root cause.
+[0;36m(EngineCore_DP0 pid=1101)[0;0m 2026-05-01 11:09:17,185	INFO compiled_dag_node.py:2172 -- Cancelling compiled worker on actor: Actor(RayWorkerWrapper, 97302271aec13980ae9dd2dc01000000)
+[0;36m(EngineCore_DP0 pid=1101)[0;0m 2026-05-01 11:09:17,185	INFO compiled_dag_node.py:2172 -- Cancelling compiled worker on actor: Actor(RayWorkerWrapper, 0ccbdf20bb2b6d0ed307cbe901000000)
+[0;36m(EngineCore_DP0 pid=1101)[0;0m 2026-05-01 11:09:17,185	INFO compiled_dag_node.py:2172 -- Cancelling compiled worker on actor: Actor(RayWorkerWrapper, 3d4decee5b6aed43785056f701000000)
+[0;36m(EngineCore_DP0 pid=1101)[0;0m 2026-05-01 11:09:17,185	INFO compiled_dag_node.py:2172 -- Cancelling compiled worker on actor: Actor(RayWorkerWrapper, 446e6277e7b5f3c8ae04db6e01000000)
+[0;36m(EngineCore_DP0 pid=1101)[0;0m 2026-05-01 11:09:17,185	INFO compiled_dag_node.py:2172 -- Cancelling compiled worker on actor: Actor(RayWorkerWrapper, 3bf9753f1602096212ca0dd701000000)
+[0;36m(EngineCore_DP0 pid=1101)[0;0m 2026-05-01 11:09:17,185	INFO compiled_dag_node.py:2172 -- Cancelling compiled worker on actor: Actor(RayWorkerWrapper, f54e3ba039da9dd6b3b4b7c101000000)
+[0;36m(EngineCore_DP0 pid=1101)[0;0m 2026-05-01 11:09:17,185	INFO compiled_dag_node.py:2172 -- Cancelling compiled worker on actor: Actor(RayWorkerWrapper, ab75a54430f057e5f6b5a94a01000000)
+[0;36m(EngineCore_DP0 pid=1101)[0;0m 2026-05-01 11:09:17,185	INFO compiled_dag_node.py:2172 -- Cancelling compiled worker on actor: Actor(RayWorkerWrapper, 7de3cda656197e5d5241b61c01000000)
+[0;36m(EngineCore_DP0 pid=1101)[0;0m 2026-05-01 11:09:17,185	INFO compiled_dag_node.py:2172 -- Cancelling compiled worker on actor: Actor(RayWorkerWrapper, 47d74389c45bde9d8a6228a001000000)
+[0;36m(EngineCore_DP0 pid=1101)[0;0m 2026-05-01 11:09:17,185	INFO compiled_dag_node.py:2172 -- Cancelling compiled worker on actor: Actor(RayWorkerWrapper, 8dfcb8fa94afc52170f6170701000000)
+[0;36m(EngineCore_DP0 pid=1101)[0;0m 2026-05-01 11:09:17,185	INFO compiled_dag_node.py:2172 -- Cancelling compiled worker on actor: Actor(RayWorkerWrapper, 071dd962db3fcc993f3ea9eb01000000)
+[0;36m(APIServer pid=703)[0;0m INFO:     127.0.0.1:54882 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(EngineCore_DP0 pid=1101)[0;0m 2026-05-01 11:09:17,185	INFO compiled_dag_node.py:2172 -- Cancelling compiled worker on actor: Actor(RayWorkerWrapper, d8c2485f7ae345f5f2a8224e01000000)
+[0;36m(EngineCore_DP0 pid=1101)[0;0m 2026-05-01 11:09:17,185	INFO compiled_dag_node.py:2172 -- Cancelling compiled worker on actor: Actor(RayWorkerWrapper, 5fd7b8732eb0147c6e97af5f01000000)
+[0;36m(EngineCore_DP0 pid=1101)[0;0m 2026-05-01 11:09:17,185	INFO compiled_dag_node.py:2172 -- Cancelling compiled worker on actor: Actor(RayWorkerWrapper, 48acdd97beb36d6fa013062101000000)
+[0;36m(EngineCore_DP0 pid=1101)[0;0m 2026-05-01 11:09:17,185	INFO compiled_dag_node.py:2172 -- Cancelling compiled worker on actor: Actor(RayWorkerWrapper, 691bcadc185327e8be1cb06e01000000)
+[0;36m(EngineCore_DP0 pid=1101)[0;0m 2026-05-01 11:09:17,185	INFO compiled_dag_node.py:2172 -- Cancelling compiled worker on actor: Actor(RayWorkerWrapper, fa5fa9669b235f72d8db114101000000)
+[0;36m(APIServer pid=703)[0;0m INFO:     127.0.0.1:43914 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=703)[0;0m INFO:     127.0.0.1:43928 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(EngineCore_DP0 pid=1101)[0;0m 2026-05-01 11:09:17,196	INFO compiled_dag_node.py:2194 -- Waiting for worker tasks to exit
+[0;36m(EngineCore_DP0 pid=1101)[0;0m 2026-05-01 11:09:17,196	INFO compiled_dag_node.py:2197 -- Teardown complete
+[0;36m(EngineCore_DP0 pid=1101)[0;0m Process EngineCore_DP0:
+[0;36m(EngineCore_DP0 pid=1101)[0;0m Traceback (most recent call last):
+[0;36m(EngineCore_DP0 pid=1101)[0;0m   File "/usr/local/lib/python3.12/dist-packages/ray/dag/compiled_dag_node.py", line 2525, in _execute_until
+[0;36m(EngineCore_DP0 pid=1101)[0;0m     result = self._dag_output_fetcher.read(timeout)
+[0;36m(EngineCore_DP0 pid=1101)[0;0m              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[0;36m(EngineCore_DP0 pid=1101)[0;0m   File "/usr/local/lib/python3.12/dist-packages/ray/experimental/channel/common.py", line 312, in read
+[0;36m(EngineCore_DP0 pid=1101)[0;0m     outputs = self._read_list(timeout)
+[0;36m(EngineCore_DP0 pid=1101)[0;0m               ^^^^^^^^^^^^^^^^^^^^^^^^
+[0;36m(EngineCore_DP0 pid=1101)[0;0m   File "/usr/local/lib/python3.12/dist-packages/ray/experimental/channel/common.py", line 403, in _read_list
+[0;36m(EngineCore_DP0 pid=1101)[0;0m     raise e
+[0;36m(EngineCore_DP0 pid=1101)[0;0m   File "/usr/local/lib/python3.12/dist-packages/ray/experimental/channel/common.py", line 385, in _read_list
+[0;36m(EngineCore_DP0 pid=1101)[0;0m     result = c.read(min(remaining_timeout, iteration_timeout))
+[0;36m(EngineCore_DP0 pid=1101)[0;0m              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[0;36m(EngineCore_DP0 pid=1101)[0;0m   File "/usr/local/lib/python3.12/dist-packages/ray/experimental/channel/shared_memory_channel.py", line 776, in read
+[0;36m(EngineCore_DP0 pid=1101)[0;0m     return self._channel_dict[self._resolve_actor_id()].read(timeout)
+[0;36m(EngineCore_DP0 pid=1101)[0;0m            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[0;36m(EngineCore_DP0 pid=1101)[0;0m   File "/usr/local/lib/python3.12/dist-packages/ray/experimental/channel/shared_memory_channel.py", line 480, in read
+[0;36m(EngineCore_DP0 pid=1101)[0;0m     ret = self._worker.get_objects(
+[0;36m(EngineCore_DP0 pid=1101)[0;0m           ^^^^^^^^^^^^^^^^^^^^^^^^^
+[0;36m(EngineCore_DP0 pid=1101)[0;0m   File "/usr/local/lib/python3.12/dist-packages/ray/_private/worker.py", line 976, in get_objects
+[0;36m(EngineCore_DP0 pid=1101)[0;0m     ] = self.core_worker.get_objects(
+[0;36m(EngineCore_DP0 pid=1101)[0;0m         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[0;36m(EngineCore_DP0 pid=1101)[0;0m   File "python/ray/_raylet.pyx", line 2875, in ray._raylet.CoreWorker.get_objects
+[0;36m(EngineCore_DP0 pid=1101)[0;0m   File "python/ray/includes/common.pxi", line 124, in ray._raylet.check_status
+[0;36m(EngineCore_DP0 pid=1101)[0;0m ray.exceptions.RayChannelTimeoutError: System error: Timed out waiting for object available to read. ObjectID: 00387206330576e3a8bf0d0838f7d76975c0ca920100000002e1f505
+[0;36m(EngineCore_DP0 pid=1101)[0;0m 
+[0;36m(EngineCore_DP0 pid=1101)[0;0m The above exception was the direct cause of the following exception:
+[0;36m(EngineCore_DP0 pid=1101)[0;0m 
+[0;36m(EngineCore_DP0 pid=1101)[0;0m Traceback (most recent call last):
+[0;36m(EngineCore_DP0 pid=1101)[0;0m   File "/usr/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+[0;36m(EngineCore_DP0 pid=1101)[0;0m     self.run()
+[0;36m(EngineCore_DP0 pid=1101)[0;0m   File "/usr/lib/python3.12/multiprocessing/process.py", line 108, in run
+[0;36m(EngineCore_DP0 pid=1101)[0;0m     self._target(*self._args, **self._kwargs)
+[0;36m(EngineCore_DP0 pid=1101)[0;0m   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/engine/core.py", line 950, in run_engine_core
+[0;36m(EngineCore_DP0 pid=1101)[0;0m     raise e
+[0;36m(EngineCore_DP0 pid=1101)[0;0m   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/engine/core.py", line 939, in run_engine_core
+[0;36m(EngineCore_DP0 pid=1101)[0;0m     engine_core.run_busy_loop()
+[0;36m(EngineCore_DP0 pid=1101)[0;0m   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/engine/core.py", line 966, in run_busy_loop
+[0;36m(EngineCore_DP0 pid=1101)[0;0m     self._process_engine_step()
+[0;36m(EngineCore_DP0 pid=1101)[0;0m   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/engine/core.py", line 999, in _process_engine_step
+[0;36m(EngineCore_DP0 pid=1101)[0;0m     outputs, model_executed = self.step_fn()
+[0;36m(EngineCore_DP0 pid=1101)[0;0m                               ^^^^^^^^^^^^^^
+[0;36m(EngineCore_DP0 pid=1101)[0;0m   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/engine/core.py", line 486, in step_with_batch_queue
+[0;36m(EngineCore_DP0 pid=1101)[0;0m     model_output = future.result()
+[0;36m(EngineCore_DP0 pid=1101)[0;0m                    ^^^^^^^^^^^^^^^
+[0;36m(EngineCore_DP0 pid=1101)[0;0m   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/executor/ray_utils.py", line 156, in result
+[0;36m(EngineCore_DP0 pid=1101)[0;0m     outputs = ray.get(self.ref_or_refs, timeout=timeout)
+[0;36m(EngineCore_DP0 pid=1101)[0;0m               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[0;36m(EngineCore_DP0 pid=1101)[0;0m   File "/usr/local/lib/python3.12/dist-packages/ray/_private/auto_init_hook.py", line 22, in auto_init_wrapper
+[0;36m(EngineCore_DP0 pid=1101)[0;0m     return fn(*args, **kwargs)
+[0;36m(EngineCore_DP0 pid=1101)[0;0m            ^^^^^^^^^^^^^^^^^^^
+[0;36m(EngineCore_DP0 pid=1101)[0;0m   File "/usr/local/lib/python3.12/dist-packages/ray/_private/client_mode_hook.py", line 104, in wrapper
+[0;36m(EngineCore_DP0 pid=1101)[0;0m     return func(*args, **kwargs)
+[0;36m(EngineCore_DP0 pid=1101)[0;0m            ^^^^^^^^^^^^^^^^^^^^^
+[0;36m(EngineCore_DP0 pid=1101)[0;0m   File "/usr/local/lib/python3.12/dist-packages/ray/_private/worker.py", line 2940, in get
+[0;36m(EngineCore_DP0 pid=1101)[0;0m     return object_refs.get(timeout=timeout)
+[0;36m(EngineCore_DP0 pid=1101)[0;0m            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[0;36m(EngineCore_DP0 pid=1101)[0;0m   File "/usr/local/lib/python3.12/dist-packages/ray/experimental/compiled_dag_ref.py", line 115, in get
+[0;36m(EngineCore_DP0 pid=1101)[0;0m     self._dag._execute_until(
+[0;36m(EngineCore_DP0 pid=1101)[0;0m   File "/usr/local/lib/python3.12/dist-packages/ray/dag/compiled_dag_node.py", line 2535, in _execute_until
+[0;36m(EngineCore_DP0 pid=1101)[0;0m     raise RayChannelTimeoutError(
+[0;36m(EngineCore_DP0 pid=1101)[0;0m ray.exceptions.RayChannelTimeoutError: System error: If the execution is expected to take a long time, increase RAY_CGRAPH_get_timeout which is currently 300 seconds. Otherwise, this may indicate that the execution is hanging.
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [33m(raylet)[0m [2026-05-01 11:09:17,205 C 397 397] (raylet) experimental_mutable_object_provider.cc:154:  An unexpected system state has occurred. You have likely discovered a bug in Ray. Please report this issue at https://github.com/ray-project/ray/issues and we'll work with you to fix it. Check failed: object_manager_->WriteAcquire(info.local_object_id, total_data_size, nullptr, total_metadata_size, info.num_readers, object_backing_store) Status not OK: ChannelError: Channel closed. 
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [33m(raylet)[0m *** StackTrace Information ***
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [33m(raylet)[0m /usr/local/lib/python3.12/dist-packages/ray/core/src/ray/raylet/raylet(+0xf59eca) [0x5727eea2deca] ray::operator<<()
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [33m(raylet)[0m /usr/local/lib/python3.12/dist-packages/ray/core/src/ray/raylet/raylet(+0xf5c4e9) [0x5727eea304e9] ray::RayLog::~RayLog()
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [33m(raylet)[0m /usr/local/lib/python3.12/dist-packages/ray/core/src/ray/raylet/raylet(+0x3f521a) [0x5727edec921a] ray::core::experimental::MutableObjectProvider::HandlePushMutableObject()
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [33m(raylet)[0m /usr/local/lib/python3.12/dist-packages/ray/core/src/ray/raylet/raylet(+0x2b825b) [0x5727edd8c25b] ray::raylet::NodeManager::HandlePushMutableObject()
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [33m(raylet)[0m /usr/local/lib/python3.12/dist-packages/ray/core/src/ray/raylet/raylet(+0x328136) [0x5727eddfc136] ray::rpc::ServerCallImpl<>::HandleRequestImpl()
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [33m(raylet)[0m /usr/local/lib/python3.12/dist-packages/ray/core/src/ray/raylet/raylet(+0x8585db) [0x5727ee32c5db] EventTracker::RecordExecution()
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [33m(raylet)[0m /usr/local/lib/python3.12/dist-packages/ray/core/src/ray/raylet/raylet(+0x84ec5b) [0x5727ee322c5b] std::_Function_handler<>::_M_invoke()
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [33m(raylet)[0m /usr/local/lib/python3.12/dist-packages/ray/core/src/ray/raylet/raylet(+0x84fffb) [0x5727ee323ffb] boost::asio::detail::executor_op<>::do_complete()
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [33m(raylet)[0m /usr/local/lib/python3.12/dist-packages/ray/core/src/ray/raylet/raylet(+0xf256cb) [0x5727ee9f96cb] boost::asio::detail::scheduler::do_run_one()
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [33m(raylet)[0m /usr/local/lib/python3.12/dist-packages/ray/core/src/ray/raylet/raylet(+0xf27c79) [0x5727ee9fbc79] boost::asio::detail::scheduler::run()
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [33m(raylet)[0m /usr/local/lib/python3.12/dist-packages/ray/core/src/ray/raylet/raylet(+0xf28182) [0x5727ee9fc182] boost::asio::io_context::run()
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [33m(raylet)[0m /usr/local/lib/python3.12/dist-packages/ray/core/src/ray/raylet/raylet(+0x2223d7) [0x5727edcf63d7] main
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [33m(raylet)[0m /lib/x86_64-linux-gnu/libc.so.6(+0x29d90) [0x73d498201d90]
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [33m(raylet)[0m /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0x80) [0x73d498201e40] __libc_start_main
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [33m(raylet)[0m /usr/local/lib/python3.12/dist-packages/ray/core/src/ray/raylet/raylet(+0x2444f7) [0x5727edd184f7]
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [33m(raylet)[0m 
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1424)[0m /usr/local/lib/python3.12/dist-packages/vllm/distributed/parallel_state.py:650: UserWarning: The given buffer is not writable, and PyTorch does not support non-writable tensors. This means you can write to the underlying (supposedly non-writable) buffer using the tensor. You may want to copy the buffer to protect its data or make it writable before converting it to a tensor. This type of warning will be suppressed for the rest of this program. (Triggered internally at /pytorch/torch/csrc/utils/tensor_new.cpp:1581.)[32m [repeated 7x across cluster][0m
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=1424)[0m   object_tensor = torch.frombuffer(pickle.dumps(obj), dtype=torch.uint8)[32m [repeated 7x across cluster][0m
+[0;36m(EngineCore_DP0 pid=1101)[0;0m [36m(RayWorkerWrapper pid=320, ip=192.168.242.154)[0m [rank15]:[W501 11:03:14.998611960 ProcessGroupNCCL.cpp:4004] Warning: An unbatched P2P op (send/recv) was called on this ProcessGroup with size 2.  In lazy initialization mode, this will result in a new 2-rank NCCL communicator to be created. (function operator())[32m [repeated 15x across cluster][0m

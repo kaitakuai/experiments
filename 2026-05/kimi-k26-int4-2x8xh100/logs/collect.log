@@ -1,0 +1,81 @@
+Starting callback server...
+Callback server listening on port 9998
+vLLM health: 200
+Config saved to /work/artifacts/config.json
+
+=== Generating 1000 PoC nonces ===
+  Starting PoC generation (batch_size=8)...
+  Init response: {'status': 'OK', 'pow_status': {'status': 'GENERATING'}}
+  [96/1000] 576 nonces/min (10s)
+  [304/1000] 912 nonces/min (20s)
+  [512/1000] 1024 nonces/min (30s)
+  [720/1000] 1080 nonces/min (40s)
+  [936/1000] 1123 nonces/min (50s)
+  [1040/1000] nonces collected in 51.0s
+Nonces saved: 1040 (1200/min) in 52.0s
+
+=== 5-language inference probe (sp/en/ch/ar/hi, processed_logprobs, temp=0.7 seed=1 top_k=40 top_p=0.95) ===
+  [sp] ¿Cuál es la capital de Francia? Responde en una sola frase....
+    ok: 64 tokens, 63 sentinel positions, text=' El usuario pregunta cuál es la capital de Francia y pide que responda en una so'
+  [en] What is the capital of France? Answer in one sentence....
+    ok: 64 tokens, 64 sentinel positions, text=' The user wants to know the capital of France, and I need to answer in exactly o'
+  [ch] 法国的首都是哪里？请用一句话回答。...
+    ok: 64 tokens, 63 sentinel positions, text=' 用户问的是“法国的首都是哪里？”，并要求用一句话回答。\n\n这是一个非常直接的事实性问题，不需要复杂的推理。答案就是：巴黎（Paris）。\n\n我需要确保：\n1.'
+  [ar] ما هي عاصمة فرنسا؟ أجب في جملة واحدة....
+    ok: 64 tokens, 63 sentinel positions, text=' المستخدم يسأل عن عاصمة فرنسا ويطلب الإجابة في جملة واحدة.\nالإجابة الصحيحة: باري'
+  [hi] फ्रांस की राजधानी क्या है? एक वाक्य में उत्तर दीजिए।...
+    ok: 64 tokens, 62 sentinel positions, text=' The user is asking "What is the capital of France?" in Hindi, and requests the '
+5-lang probe saved to /work/artifacts/inference_5langs.json (5.8s)
+
+==============================================================================
+  5-LANGUAGE INFERENCE PROBE — eyeball the logprobs
+==============================================================================
+
+[sp] prompt: ¿Cuál es la capital de Francia? Responde en una sola frase.
+  → text (64 tok, 63 sentinel pos):
+     El usuario pregunta cuál es la capital de Francia y pide que responda en una sola frase. ⏎  ⏎ La respuesta es sencilla: París. ⏎  ⏎ Debo responder con exactamente una frase, como solicita el usuario.
+  first 4 positions:
+    [0]     '9903' (-0.1313)  | top: '9903':-0.13, '1008':-2.10, '0':-9999.00, '1':-9999.00
+    [1]    '76622' (+0.0000)  | top: '76622':+0.00, '2':-9999.00, '0':-9999.00, '1':-9999.00
+    [2]     '1200' (+0.0000)  | top: '1200':+0.00, '2':-9999.00, '0':-9999.00, '1':-9999.00
+    [3]    '32272' (+0.0000)  | top: '32272':+0.00, '2':-9999.00, '0':-9999.00, '1':-9999.00
+
+[en] prompt: What is the capital of France? Answer in one sentence.
+  → text (64 tok, 64 sentinel pos):
+     The user wants to know the capital of France, and I need to answer in exactly one sentence. ⏎  ⏎  The capital of France is Paris. ⏎  ⏎  Let me make sure it's just one sentence: "Paris is the capital 
+  first 4 positions:
+    [0]     '1008' (+0.0000)  | top: '1008':+0.00, '2':-9999.00, '0':-9999.00, '1':-9999.00
+    [1]     '2742' (+0.0000)  | top: '2742':+0.00, '2':-9999.00, '0':-9999.00, '1':-9999.00
+    [2]    '11333' (-0.6215)  | top: '11333':-0.62, '387':-0.77, '0':-9999.00, '1':-9999.00
+    [3]      '308' (+0.0000)  | top: '308':+0.00, '2':-9999.00, '0':-9999.00, '1':-9999.00
+
+[ch] prompt: 法国的首都是哪里？请用一句话回答。
+  → text (64 tok, 63 sentinel pos):
+     用户问的是“法国的首都是哪里？”，并要求用一句话回答。 ⏎  ⏎ 这是一个非常直接的事实性问题，不需要复杂的推理。答案就是：巴黎（Paris）。 ⏎  ⏎ 我需要确保： ⏎ 1. 准确回答问题。 ⏎ 2. 只用一句话。 ⏎ 3. 语言是中文（因为用户用中文提问）。 ⏎  ⏎ 所以合适的回答是："
+  first 4 positions:
+    [0]     '4052' (+0.0000)  | top: '4052':+0.00, '2':-9999.00, '0':-9999.00, '1':-9999.00
+    [1]     '1126' (+0.0000)  | top: '1126':+0.00, '2':-9999.00, '0':-9999.00, '1':-9999.00
+    [2]     '2051' (+0.0000)  | top: '2051':+0.00, '2':-9999.00, '0':-9999.00, '1':-9999.00
+    [3]     '1686' (-0.3432)  | top: '1686':-0.34, '1':-1.24, '0':-9999.00, '2':-9999.00
+
+[ar] prompt: ما هي عاصمة فرنسا؟ أجب في جملة واحدة.
+  → text (64 tok, 63 sentinel pos):
+     المستخدم يسأل عن عاصمة فرنسا ويطلب الإجابة في جملة واحدة. ⏎ الإجابة الصحيحة: باريس. ⏎  ⏎ يجب أن تكون الجملة بالعربية كما هو السؤال. ⏎ "عاصمة فر
+  first 4 positions:
+    [0]    '52137' (+0.0000)  | top: '52137':+0.00, '2':-9999.00, '0':-9999.00, '1':-9999.00
+    [1]   '114455' (+0.0000)  | top: '114455':+0.00, '2':-9999.00, '0':-9999.00, '1':-9999.00
+    [2]      '220' (+0.0000)  | top: '220':+0.00, '2':-9999.00, '0':-9999.00, '1':-9999.00
+    [3]    '19468' (+0.0000)  | top: '19468':+0.00, '2':-9999.00, '0':-9999.00, '1':-9999.00
+
+[hi] prompt: फ्रांस की राजधानी क्या है? एक वाक्य में उत्तर दीजिए।
+  → text (64 tok, 62 sentinel pos):
+     The user is asking "What is the capital of France?" in Hindi, and requests the answer in one sentence. ⏎  ⏎  I need to respond in Hindi since the question was asked in Hindi. ⏎  The answer should be 
+  first 4 positions:
+    [0]     '1008' (+0.0000)  | top: '1008':+0.00, '2':-9999.00, '0':-9999.00, '1':-9999.00
+    [1]     '2742' (+0.0000)  | top: '2742':+0.00, '2':-9999.00, '0':-9999.00, '1':-9999.00
+    [2]      '387' (+0.0000)  | top: '387':+0.00, '2':-9999.00, '0':-9999.00, '1':-9999.00
+    [3]    '15738' (+0.0000)  | top: '15738':+0.00, '2':-9999.00, '0':-9999.00, '1':-9999.00
+==============================================================================
+
+
+=== Done: /work/artifacts ===

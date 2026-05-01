@@ -1,0 +1,22 @@
+=== TP8PP2 batch=8 ===
+Config saved to /work/artifacts_tp8pp2_b8/config.json
+  [80/1000] 480 nonces/min (10s)
+  [256/1000] 768 nonces/min (20s)
+  [432/1000] 864 nonces/min (30s)
+  [608/1000] 912 nonces/min (40s)
+  [784/1000] 941 nonces/min (50s)
+  [960/1000] 960 nonces/min (60s)
+  [1048/1000] nonces collected in 61.0s
+Nonces saved: 1048 (1014/min) in 62.0s
+    ERROR: HTTPConnectionPool(host='127.0.0.1', port=5001): Read timed out. (read timeout=120)
+    ERROR: HTTPConnectionPool(host='127.0.0.1', port=5001): Read timed out. (read timeout=120)
+    ERROR: 'choices'
+    ERROR: 'choices'
+    ERROR: 'choices'
+5-lang probe saved to /work/artifacts_tp8pp2_b8/inference_5langs.json (300.6s)
+  ERROR: HTTPConnectionPool(host='127.0.0.1', port=5001): Read timed out. (read timeout=120)
+  ERROR: HTTPConnectionPool(host='127.0.0.1', port=5001): Read timed out. (read timeout=120)
+  ERROR: 'choices'
+  ERROR: 'choices'
+  ERROR: 'choices'
+=== Done: /work/artifacts_tp8pp2_b8 ===
