@@ -1,0 +1,546 @@
+{
+  "results": [
+    {
+      "n_total": 884,
+      "label_a": "B200_new (vLLM 0.20 b200-k5-kimi-1, no-EP, batched=32k, util=0.95)",
+      "label_b": "B300 FlashInfer (eager+EP, vLLM 0.20)",
+      "stats": {
+        "mean": 0.18500837587174113,
+        "median": 0.17626450955867767,
+        "p25": 0.13654233142733574,
+        "p75": 0.22558905184268951,
+        "p95": 0.3159193009138106,
+        "p99": 0.41140200167894353,
+        "max": 0.5221479535102844
+      },
+      "scenarios": [
+        {
+          "name": "vllm strict (self-validation default)",
+          "dist_threshold": 0.02,
+          "p_mismatch": 0.001,
+          "n_mismatch": 882,
+          "rate": 0.997737556561086,
+          "p_value": 0.0,
+          "fraud_detected": "True"
+        },
+        {
+          "name": "PoC report calibrated honest 98pct",
+          "dist_threshold": 0.173663,
+          "p_mismatch": 0.02,
+          "n_mismatch": 455,
+          "rate": 0.5147058823529411,
+          "p_value": 0.0,
+          "fraud_detected": "True"
+        },
+        {
+          "name": "chain proto default (production)",
+          "dist_threshold": 0.4,
+          "p_mismatch": 0.001,
+          "n_mismatch": 12,
+          "rate": 0.013574660633484163,
+          "p_value": 1.9754008337023534e-10,
+          "fraud_detected": "True"
+        },
+        {
+          "name": "chain proto default + calibrated p_mis",
+          "dist_threshold": 0.4,
+          "p_mismatch": 0.02,
+          "n_mismatch": 12,
+          "rate": 0.013574660633484163,
+          "p_value": 0.9386160831675592,
+          "fraud_detected": "False"
+        }
+      ]
+    },
+    {
+      "n_total": 988,
+      "label_a": "B200_new (vLLM 0.20 b200-k5-kimi-1, no-EP, batched=32k, util=0.95)",
+      "label_b": "B300 Marlin (eager,no-EP, vLLM 0.20)",
+      "stats": {
+        "mean": 0.19093430422525476,
+        "median": 0.18162716925144196,
+        "p25": 0.14344406127929688,
+        "p75": 0.22630898281931877,
+        "p95": 0.32730621993541714,
+        "p99": 0.43024022489786146,
+        "max": 0.5005794167518616
+      },
+      "scenarios": [
+        {
+          "name": "vllm strict (self-validation default)",
+          "dist_threshold": 0.02,
+          "p_mismatch": 0.001,
+          "n_mismatch": 987,
+          "rate": 0.9989878542510121,
+          "p_value": 0.0,
+          "fraud_detected": "True"
+        },
+        {
+          "name": "PoC report calibrated honest 98pct",
+          "dist_threshold": 0.173663,
+          "p_mismatch": 0.02,
+          "n_mismatch": 540,
+          "rate": 0.5465587044534413,
+          "p_value": 0.0,
+          "fraud_detected": "True"
+        },
+        {
+          "name": "chain proto default (production)",
+          "dist_threshold": 0.4,
+          "p_mismatch": 0.001,
+          "n_mismatch": 17,
+          "rate": 0.01720647773279352,
+          "p_value": 7.976360411450816e-16,
+          "fraud_detected": "True"
+        },
+        {
+          "name": "chain proto default + calibrated p_mis",
+          "dist_threshold": 0.4,
+          "p_mismatch": 0.02,
+          "n_mismatch": 17,
+          "rate": 0.01720647773279352,
+          "p_value": 0.765630098189059,
+          "fraud_detected": "False"
+        }
+      ]
+    },
+    {
+      "n_total": 1000,
+      "label_a": "B200_new (vLLM 0.20 b200-k5-kimi-1, no-EP, batched=32k, util=0.95)",
+      "label_b": "H100 ref TP=16",
+      "stats": {
+        "mean": 0.20481655342876912,
+        "median": 0.19415561109781265,
+        "p25": 0.1515686884522438,
+        "p75": 0.2502056583762169,
+        "p95": 0.3322147741913795,
+        "p99": 0.4280631127953529,
+        "max": 0.637442409992218
+      },
+      "scenarios": [
+        {
+          "name": "vllm strict (self-validation default)",
+          "dist_threshold": 0.02,
+          "p_mismatch": 0.001,
+          "n_mismatch": 999,
+          "rate": 0.999,
+          "p_value": 0.0,
+          "fraud_detected": "True"
+        },
+        {
+          "name": "PoC report calibrated honest 98pct",
+          "dist_threshold": 0.173663,
+          "p_mismatch": 0.02,
+          "n_mismatch": 619,
+          "rate": 0.619,
+          "p_value": 0.0,
+          "fraud_detected": "True"
+        },
+        {
+          "name": "chain proto default (production)",
+          "dist_threshold": 0.4,
+          "p_mismatch": 0.001,
+          "n_mismatch": 16,
+          "rate": 0.016,
+          "p_value": 1.6798251347681692e-14,
+          "fraud_detected": "True"
+        },
+        {
+          "name": "chain proto default + calibrated p_mis",
+          "dist_threshold": 0.4,
+          "p_mismatch": 0.02,
+          "n_mismatch": 16,
+          "rate": 0.016,
+          "p_value": 0.8460896927936699,
+          "fraud_detected": "False"
+        }
+      ]
+    },
+    {
+      "n_total": 1000,
+      "label_a": "B200_new (vLLM 0.20 b200-k5-kimi-1, no-EP, batched=32k, util=0.95)",
+      "label_b": "B200_old (vLLM 0.19)",
+      "stats": {
+        "mean": 0.19168371630460024,
+        "median": 0.1797700971364975,
+        "p25": 0.14212998375296593,
+        "p75": 0.23198500648140907,
+        "p95": 0.3305610075592994,
+        "p99": 0.4101509907841682,
+        "max": 0.5779197812080383
+      },
+      "scenarios": [
+        {
+          "name": "vllm strict (self-validation default)",
+          "dist_threshold": 0.02,
+          "p_mismatch": 0.001,
+          "n_mismatch": 999,
+          "rate": 0.999,
+          "p_value": 0.0,
+          "fraud_detected": "True"
+        },
+        {
+          "name": "PoC report calibrated honest 98pct",
+          "dist_threshold": 0.173663,
+          "p_mismatch": 0.02,
+          "n_mismatch": 547,
+          "rate": 0.547,
+          "p_value": 0.0,
+          "fraud_detected": "True"
+        },
+        {
+          "name": "chain proto default (production)",
+          "dist_threshold": 0.4,
+          "p_mismatch": 0.001,
+          "n_mismatch": 12,
+          "rate": 0.012,
+          "p_value": 7.865873023975438e-10,
+          "fraud_detected": "True"
+        },
+        {
+          "name": "chain proto default + calibrated p_mis",
+          "dist_threshold": 0.4,
+          "p_mismatch": 0.02,
+          "n_mismatch": 12,
+          "rate": 0.012,
+          "p_value": 0.9795589254004123,
+          "fraud_detected": "False"
+        }
+      ]
+    },
+    {
+      "n_total": 896,
+      "label_a": "B300 FlashInfer (eager+EP, vLLM 0.20)",
+      "label_b": "B300 Marlin (eager,no-EP, vLLM 0.20)",
+      "stats": {
+        "mean": 0.18689564645319479,
+        "median": 0.17597310990095139,
+        "p25": 0.139288991689682,
+        "p75": 0.22102897614240646,
+        "p95": 0.33254697918891907,
+        "p99": 0.4067120969295501,
+        "max": 0.7420520782470703
+      },
+      "scenarios": [
+        {
+          "name": "vllm strict (self-validation default)",
+          "dist_threshold": 0.02,
+          "p_mismatch": 0.001,
+          "n_mismatch": 894,
+          "rate": 0.9977678571428571,
+          "p_value": 0.0,
+          "fraud_detected": "True"
+        },
+        {
+          "name": "PoC report calibrated honest 98pct",
+          "dist_threshold": 0.173663,
+          "p_mismatch": 0.02,
+          "n_mismatch": 461,
+          "rate": 0.5145089285714286,
+          "p_value": 0.0,
+          "fraud_detected": "True"
+        },
+        {
+          "name": "chain proto default (production)",
+          "dist_threshold": 0.4,
+          "p_mismatch": 0.001,
+          "n_mismatch": 11,
+          "rate": 0.012276785714285714,
+          "p_value": 3.1334464214605226e-09,
+          "fraud_detected": "True"
+        },
+        {
+          "name": "chain proto default + calibrated p_mis",
+          "dist_threshold": 0.4,
+          "p_mismatch": 0.02,
+          "n_mismatch": 11,
+          "rate": 0.012276785714285714,
+          "p_value": 0.9696386706938553,
+          "fraud_detected": "False"
+        }
+      ]
+    },
+    {
+      "n_total": 884,
+      "label_a": "B300 FlashInfer (eager+EP, vLLM 0.20)",
+      "label_b": "H100 ref TP=16",
+      "stats": {
+        "mean": 0.2033997370642336,
+        "median": 0.19389475882053375,
+        "p25": 0.15074030309915543,
+        "p75": 0.2418624944984913,
+        "p95": 0.34558926820755,
+        "p99": 0.43248234957456577,
+        "max": 0.6464269161224365
+      },
+      "scenarios": [
+        {
+          "name": "vllm strict (self-validation default)",
+          "dist_threshold": 0.02,
+          "p_mismatch": 0.001,
+          "n_mismatch": 883,
+          "rate": 0.998868778280543,
+          "p_value": 0.0,
+          "fraud_detected": "True"
+        },
+        {
+          "name": "PoC report calibrated honest 98pct",
+          "dist_threshold": 0.173663,
+          "p_mismatch": 0.02,
+          "n_mismatch": 547,
+          "rate": 0.6187782805429864,
+          "p_value": 0.0,
+          "fraud_detected": "True"
+        },
+        {
+          "name": "chain proto default (production)",
+          "dist_threshold": 0.4,
+          "p_mismatch": 0.001,
+          "n_mismatch": 25,
+          "rate": 0.02828054298642534,
+          "p_value": 9.188316031721422e-28,
+          "fraud_detected": "True"
+        },
+        {
+          "name": "chain proto default + calibrated p_mis",
+          "dist_threshold": 0.4,
+          "p_mismatch": 0.02,
+          "n_mismatch": 25,
+          "rate": 0.02828054298642534,
+          "p_value": 0.05643368527304949,
+          "fraud_detected": "False"
+        }
+      ]
+    },
+    {
+      "n_total": 884,
+      "label_a": "B300 FlashInfer (eager+EP, vLLM 0.20)",
+      "label_b": "B200_old (vLLM 0.19)",
+      "stats": {
+        "mean": 0.18873439022293526,
+        "median": 0.17929231375455856,
+        "p25": 0.14228258281946182,
+        "p75": 0.22227881103754044,
+        "p95": 0.3117664828896522,
+        "p99": 0.41171601563692084,
+        "max": 0.6283093094825745
+      },
+      "scenarios": [
+        {
+          "name": "vllm strict (self-validation default)",
+          "dist_threshold": 0.02,
+          "p_mismatch": 0.001,
+          "n_mismatch": 883,
+          "rate": 0.998868778280543,
+          "p_value": 0.0,
+          "fraud_detected": "True"
+        },
+        {
+          "name": "PoC report calibrated honest 98pct",
+          "dist_threshold": 0.173663,
+          "p_mismatch": 0.02,
+          "n_mismatch": 475,
+          "rate": 0.5373303167420814,
+          "p_value": 0.0,
+          "fraud_detected": "True"
+        },
+        {
+          "name": "chain proto default (production)",
+          "dist_threshold": 0.4,
+          "p_mismatch": 0.001,
+          "n_mismatch": 12,
+          "rate": 0.013574660633484163,
+          "p_value": 1.9754008337023534e-10,
+          "fraud_detected": "True"
+        },
+        {
+          "name": "chain proto default + calibrated p_mis",
+          "dist_threshold": 0.4,
+          "p_mismatch": 0.02,
+          "n_mismatch": 12,
+          "rate": 0.013574660633484163,
+          "p_value": 0.9386160831675592,
+          "fraud_detected": "False"
+        }
+      ]
+    },
+    {
+      "n_total": 988,
+      "label_a": "B300 Marlin (eager,no-EP, vLLM 0.20)",
+      "label_b": "H100 ref TP=16",
+      "stats": {
+        "mean": 0.2051064904217386,
+        "median": 0.1938251331448555,
+        "p25": 0.15221485123038292,
+        "p75": 0.24497216939926147,
+        "p95": 0.34862445294857025,
+        "p99": 0.4236177486181259,
+        "max": 0.5651649236679077
+      },
+      "scenarios": [
+        {
+          "name": "vllm strict (self-validation default)",
+          "dist_threshold": 0.02,
+          "p_mismatch": 0.001,
+          "n_mismatch": 986,
+          "rate": 0.9979757085020243,
+          "p_value": 0.0,
+          "fraud_detected": "True"
+        },
+        {
+          "name": "PoC report calibrated honest 98pct",
+          "dist_threshold": 0.173663,
+          "p_mismatch": 0.02,
+          "n_mismatch": 617,
+          "rate": 0.6244939271255061,
+          "p_value": 0.0,
+          "fraud_detected": "True"
+        },
+        {
+          "name": "chain proto default (production)",
+          "dist_threshold": 0.4,
+          "p_mismatch": 0.001,
+          "n_mismatch": 17,
+          "rate": 0.01720647773279352,
+          "p_value": 7.976360411450816e-16,
+          "fraud_detected": "True"
+        },
+        {
+          "name": "chain proto default + calibrated p_mis",
+          "dist_threshold": 0.4,
+          "p_mismatch": 0.02,
+          "n_mismatch": 17,
+          "rate": 0.01720647773279352,
+          "p_value": 0.765630098189059,
+          "fraud_detected": "False"
+        }
+      ]
+    },
+    {
+      "n_total": 988,
+      "label_a": "B300 Marlin (eager,no-EP, vLLM 0.20)",
+      "label_b": "B200_old (vLLM 0.19)",
+      "stats": {
+        "mean": 0.19259342783684974,
+        "median": 0.183051235973835,
+        "p25": 0.14103539288043976,
+        "p75": 0.23480872064828873,
+        "p95": 0.32134635448455806,
+        "p99": 0.4147341659665107,
+        "max": 0.5085418820381165
+      },
+      "scenarios": [
+        {
+          "name": "vllm strict (self-validation default)",
+          "dist_threshold": 0.02,
+          "p_mismatch": 0.001,
+          "n_mismatch": 987,
+          "rate": 0.9989878542510121,
+          "p_value": 0.0,
+          "fraud_detected": "True"
+        },
+        {
+          "name": "PoC report calibrated honest 98pct",
+          "dist_threshold": 0.173663,
+          "p_mismatch": 0.02,
+          "n_mismatch": 551,
+          "rate": 0.5576923076923077,
+          "p_value": 0.0,
+          "fraud_detected": "True"
+        },
+        {
+          "name": "chain proto default (production)",
+          "dist_threshold": 0.4,
+          "p_mismatch": 0.001,
+          "n_mismatch": 14,
+          "rate": 0.01417004048582996,
+          "p_value": 3.5632541875276772e-12,
+          "fraud_detected": "True"
+        },
+        {
+          "name": "chain proto default + calibrated p_mis",
+          "dist_threshold": 0.4,
+          "p_mismatch": 0.02,
+          "n_mismatch": 14,
+          "rate": 0.01417004048582996,
+          "p_value": 0.9290823837284471,
+          "fraud_detected": "False"
+        }
+      ]
+    },
+    {
+      "n_total": 1000,
+      "label_a": "H100 ref TP=16",
+      "label_b": "B200_old (vLLM 0.19)",
+      "stats": {
+        "mean": 0.2056266511492431,
+        "median": 0.19621911644935608,
+        "p25": 0.1533653847873211,
+        "p75": 0.24656470119953156,
+        "p95": 0.34581571221351626,
+        "p99": 0.41957137405872336,
+        "max": 0.697779655456543
+      },
+      "scenarios": [
+        {
+          "name": "vllm strict (self-validation default)",
+          "dist_threshold": 0.02,
+          "p_mismatch": 0.001,
+          "n_mismatch": 999,
+          "rate": 0.999,
+          "p_value": 0.0,
+          "fraud_detected": "True"
+        },
+        {
+          "name": "PoC report calibrated honest 98pct",
+          "dist_threshold": 0.173663,
+          "p_mismatch": 0.02,
+          "n_mismatch": 629,
+          "rate": 0.629,
+          "p_value": 0.0,
+          "fraud_detected": "True"
+        },
+        {
+          "name": "chain proto default (production)",
+          "dist_threshold": 0.4,
+          "p_mismatch": 0.001,
+          "n_mismatch": 18,
+          "rate": 0.018,
+          "p_value": 5.2861058669556567e-17,
+          "fraud_detected": "True"
+        },
+        {
+          "name": "chain proto default + calibrated p_mis",
+          "dist_threshold": 0.4,
+          "p_mismatch": 0.02,
+          "n_mismatch": 18,
+          "rate": 0.018,
+          "p_value": 0.7052769235148472,
+          "fraud_detected": "False"
+        }
+      ]
+    }
+  ],
+  "scenarios": [
+    [
+      "vllm strict (self-validation default)",
+      0.02,
+      0.001
+    ],
+    [
+      "PoC report calibrated honest 98pct",
+      0.173663,
+      0.02
+    ],
+    [
+      "chain proto default (production)",
+      0.4,
+      0.001
+    ],
+    [
+      "chain proto default + calibrated p_mis",
+      0.4,
+      0.02
+    ]
+  ]
+}
