@@ -1,0 +1,182 @@
+{
+  "results": [
+    {
+      "n_total": 896,
+      "label_a": "B300 FlashInfer eager+EP",
+      "label_b": "B300 Marlin eager no-EP",
+      "stats": {
+        "mean": 0.18689564645319479,
+        "median": 0.17597310990095139,
+        "p25": 0.139288991689682,
+        "p75": 0.22102897614240646,
+        "p95": 0.33254697918891907,
+        "p99": 0.4067120969295501,
+        "max": 0.7420520782470703
+      },
+      "scenarios": [
+        {
+          "name": "vllm strict (self-validation default)",
+          "dist_threshold": 0.02,
+          "p_mismatch": 0.001,
+          "n_mismatch": 894,
+          "rate": 0.9977678571428571,
+          "p_value": 0.0,
+          "fraud_detected": "True"
+        },
+        {
+          "name": "PoC report calibrated honest 98pct",
+          "dist_threshold": 0.173663,
+          "p_mismatch": 0.02,
+          "n_mismatch": 461,
+          "rate": 0.5145089285714286,
+          "p_value": 0.0,
+          "fraud_detected": "True"
+        },
+        {
+          "name": "chain proto default (production)",
+          "dist_threshold": 0.4,
+          "p_mismatch": 0.001,
+          "n_mismatch": 11,
+          "rate": 0.012276785714285714,
+          "p_value": 3.1334464214605226e-09,
+          "fraud_detected": "True"
+        },
+        {
+          "name": "chain proto default + calibrated p_mis",
+          "dist_threshold": 0.4,
+          "p_mismatch": 0.02,
+          "n_mismatch": 11,
+          "rate": 0.012276785714285714,
+          "p_value": 0.9696386706938553,
+          "fraud_detected": "False"
+        }
+      ]
+    },
+    {
+      "n_total": 884,
+      "label_a": "B300 FlashInfer eager+EP",
+      "label_b": "H100 ref TP=16",
+      "stats": {
+        "mean": 0.2033997370642336,
+        "median": 0.19389475882053375,
+        "p25": 0.15074030309915543,
+        "p75": 0.2418624944984913,
+        "p95": 0.34558926820755,
+        "p99": 0.43248234957456577,
+        "max": 0.6464269161224365
+      },
+      "scenarios": [
+        {
+          "name": "vllm strict (self-validation default)",
+          "dist_threshold": 0.02,
+          "p_mismatch": 0.001,
+          "n_mismatch": 883,
+          "rate": 0.998868778280543,
+          "p_value": 0.0,
+          "fraud_detected": "True"
+        },
+        {
+          "name": "PoC report calibrated honest 98pct",
+          "dist_threshold": 0.173663,
+          "p_mismatch": 0.02,
+          "n_mismatch": 547,
+          "rate": 0.6187782805429864,
+          "p_value": 0.0,
+          "fraud_detected": "True"
+        },
+        {
+          "name": "chain proto default (production)",
+          "dist_threshold": 0.4,
+          "p_mismatch": 0.001,
+          "n_mismatch": 25,
+          "rate": 0.02828054298642534,
+          "p_value": 9.188316031721422e-28,
+          "fraud_detected": "True"
+        },
+        {
+          "name": "chain proto default + calibrated p_mis",
+          "dist_threshold": 0.4,
+          "p_mismatch": 0.02,
+          "n_mismatch": 25,
+          "rate": 0.02828054298642534,
+          "p_value": 0.05643368527304949,
+          "fraud_detected": "False"
+        }
+      ]
+    },
+    {
+      "n_total": 988,
+      "label_a": "B300 Marlin eager no-EP",
+      "label_b": "H100 ref TP=16",
+      "stats": {
+        "mean": 0.2051064904217386,
+        "median": 0.1938251331448555,
+        "p25": 0.15221485123038292,
+        "p75": 0.24497216939926147,
+        "p95": 0.34862445294857025,
+        "p99": 0.4236177486181259,
+        "max": 0.5651649236679077
+      },
+      "scenarios": [
+        {
+          "name": "vllm strict (self-validation default)",
+          "dist_threshold": 0.02,
+          "p_mismatch": 0.001,
+          "n_mismatch": 986,
+          "rate": 0.9979757085020243,
+          "p_value": 0.0,
+          "fraud_detected": "True"
+        },
+        {
+          "name": "PoC report calibrated honest 98pct",
+          "dist_threshold": 0.173663,
+          "p_mismatch": 0.02,
+          "n_mismatch": 617,
+          "rate": 0.6244939271255061,
+          "p_value": 0.0,
+          "fraud_detected": "True"
+        },
+        {
+          "name": "chain proto default (production)",
+          "dist_threshold": 0.4,
+          "p_mismatch": 0.001,
+          "n_mismatch": 17,
+          "rate": 0.01720647773279352,
+          "p_value": 7.976360411450816e-16,
+          "fraud_detected": "True"
+        },
+        {
+          "name": "chain proto default + calibrated p_mis",
+          "dist_threshold": 0.4,
+          "p_mismatch": 0.02,
+          "n_mismatch": 17,
+          "rate": 0.01720647773279352,
+          "p_value": 0.765630098189059,
+          "fraud_detected": "False"
+        }
+      ]
+    }
+  ],
+  "scenarios": [
+    [
+      "vllm strict (self-validation default)",
+      0.02,
+      0.001
+    ],
+    [
+      "PoC report calibrated honest 98pct",
+      0.173663,
+      0.02
+    ],
+    [
+      "chain proto default (production)",
+      0.4,
+      0.001
+    ],
+    [
+      "chain proto default + calibrated p_mis",
+      0.4,
+      0.02
+    ]
+  ]
+}
