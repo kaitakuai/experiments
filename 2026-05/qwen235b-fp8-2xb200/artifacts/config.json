@@ -1,0 +1,11 @@
+{
+  "gpu": "B200",
+  "vllm_version": "0.20.0",
+  "model": "Qwen/Qwen3-235B-A22B-Instruct-2507-FP8",
+  "url": "http://127.0.0.1:5001",
+  "batch_size": 64,
+  "seq_len": 1024,
+  "k_dim": 12,
+  "startup_command": "vllm 0.20.0 TP=2 gpu_mem=0.95 max_seqs=128 max_len=120000 max_batched_tokens=65536 kv=fp8 compilation=mode1 (auto-selects FLASHINFER_TRTLLM Fp8 MoE)",
+  "timestamp": "2026-05-10T23:05:14"
+}

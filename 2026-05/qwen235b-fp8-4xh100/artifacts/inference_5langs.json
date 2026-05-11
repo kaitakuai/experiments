@@ -1,0 +1,1863 @@
+{
+  "params": {
+    "max_tokens": 16,
+    "temperature": 0.7,
+    "seed": 1,
+    "top_logprobs": 1,
+    "repetition_penalty": 1.2,
+    "top_k": 40,
+    "top_p": 0.95,
+    "logprobs_mode": "processed_logprobs (set on vLLM side via --logprobs-mode)"
+  },
+  "completions": [
+    {
+      "language": "sp",
+      "prompt": "¿Cuál es la capital de Francia? Responde en una sola frase.",
+      "text": "La capital de Francia es París.",
+      "n_tokens": 10,
+      "n_sentinel_positions": 0,
+      "preview_first_8_positions": [
+        {
+          "token": "8747",
+          "logprob": 0.0,
+          "top_logprobs": [
+            {
+              "token": "8747",
+              "logprob": 0.0
+            }
+          ]
+        },
+        {
+          "token": "6722",
+          "logprob": 0.0,
+          "top_logprobs": [
+            {
+              "token": "6722",
+              "logprob": 0.0
+            }
+          ]
+        },
+        {
+          "token": "409",
+          "logprob": 0.0,
+          "top_logprobs": [
+            {
+              "token": "409",
+              "logprob": 0.0
+            }
+          ]
+        },
+        {
+          "token": "9694",
+          "logprob": 0.0,
+          "top_logprobs": [
+            {
+              "token": "9694",
+              "logprob": 0.0
+            }
+          ]
+        },
+        {
+          "token": "685",
+          "logprob": 0.0,
+          "top_logprobs": [
+            {
+              "token": "685",
+              "logprob": 0.0
+            }
+          ]
+        },
+        {
+          "token": "1531",
+          "logprob": 0.0,
+          "top_logprobs": [
+            {
+              "token": "1531",
+              "logprob": 0.0
+            }
+          ]
+        },
+        {
+          "token": "4270",
+          "logprob": 0.0,
+          "top_logprobs": [
+            {
+              "token": "4270",
+              "logprob": 0.0
+            }
+          ]
+        },
+        {
+          "token": "23422",
+          "logprob": 0.0,
+          "top_logprobs": [
+            {
+              "token": "23422",
+              "logprob": 0.0
+            }
+          ]
+        }
+      ],
+      "full_response": {
+        "id": "chatcmpl-83eb3d1deef4ff92",
+        "object": "chat.completion",
+        "created": 1778457511,
+        "model": "Qwen/Qwen3-235B-A22B-Instruct-2507-FP8",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "La capital de Francia es París.",
+              "refusal": null,
+              "annotations": null,
+              "audio": null,
+              "function_call": null,
+              "tool_calls": [],
+              "reasoning": null
+            },
+            "logprobs": {
+              "content": [
+                {
+                  "token": "8747",
+                  "logprob": 0.0,
+                  "bytes": [
+                    76,
+                    97
+                  ],
+                  "top_logprobs": [
+                    {
+                      "token": "8747",
+                      "logprob": 0.0,
+                      "bytes": [
+                        56,
+                        55,
+                        52,
+                        55
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "token": "6722",
+                  "logprob": 0.0,
+                  "bytes": [
+                    32,
+                    99,
+                    97,
+                    112,
+                    105,
+                    116,
+                    97,
+                    108
+                  ],
+                  "top_logprobs": [
+                    {
+                      "token": "6722",
+                      "logprob": 0.0,
+                      "bytes": [
+                        54,
+                        55,
+                        50,
+                        50
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "token": "409",
+                  "logprob": 0.0,
+                  "bytes": [
+                    32,
+                    100,
+                    101
+                  ],
+                  "top_logprobs": [
+                    {
+                      "token": "409",
+                      "logprob": 0.0,
+                      "bytes": [
+                        52,
+                        48,
+                        57
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "token": "9694",
+                  "logprob": 0.0,
+                  "bytes": [
+                    32,
+                    70,
+                    114,
+                    97,
+                    110,
+                    99
+                  ],
+                  "top_logprobs": [
+                    {
+                      "token": "9694",
+                      "logprob": 0.0,
+                      "bytes": [
+                        57,
+                        54,
+                        57,
+                        52
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "token": "685",
+                  "logprob": 0.0,
+                  "bytes": [
+                    105,
+                    97
+                  ],
+                  "top_logprobs": [
+                    {
+                      "token": "685",
+                      "logprob": 0.0,
+                      "bytes": [
+                        54,
+                        56,
+                        53
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "token": "1531",
+                  "logprob": 0.0,
+                  "bytes": [
+                    32,
+                    101,
+                    115
+                  ],
+                  "top_logprobs": [
+                    {
+                      "token": "1531",
+                      "logprob": 0.0,
+                      "bytes": [
+                        49,
+                        53,
+                        51,
+                        49
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "token": "4270",
+                  "logprob": 0.0,
+                  "bytes": [
+                    32,
+                    80,
+                    97,
+                    114
+                  ],
+                  "top_logprobs": [
+                    {
+                      "token": "4270",
+                      "logprob": 0.0,
+                      "bytes": [
+                        52,
+                        50,
+                        55,
+                        48
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "token": "23422",
+                  "logprob": 0.0,
+                  "bytes": [
+                    195,
+                    173,
+                    115
+                  ],
+                  "top_logprobs": [
+                    {
+                      "token": "23422",
+                      "logprob": 0.0,
+                      "bytes": [
+                        50,
+                        51,
+                        52,
+                        50,
+                        50
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "token": "13",
+                  "logprob": 0.0,
+                  "bytes": [
+                    46
+                  ],
+                  "top_logprobs": [
+                    {
+                      "token": "13",
+                      "logprob": 0.0,
+                      "bytes": [
+                        49,
+                        51
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "token": "151645",
+                  "logprob": 0.0,
+                  "bytes": [
+                    60,
+                    124,
+                    105,
+                    109,
+                    95,
+                    101,
+                    110,
+                    100,
+                    124,
+                    62
+                  ],
+                  "top_logprobs": [
+                    {
+                      "token": "151645",
+                      "logprob": 0.0,
+                      "bytes": [
+                        49,
+                        53,
+                        49,
+                        54,
+                        52,
+                        53
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            "finish_reason": "stop",
+            "stop_reason": null,
+            "token_ids": null
+          }
+        ],
+        "service_tier": null,
+        "system_fingerprint": null,
+        "usage": {
+          "prompt_tokens": 25,
+          "total_tokens": 35,
+          "completion_tokens": 10,
+          "prompt_tokens_details": null
+        },
+        "prompt_logprobs": null,
+        "prompt_token_ids": null,
+        "kv_transfer_params": null
+      }
+    },
+    {
+      "language": "en",
+      "prompt": "What is the capital of France? Answer in one sentence.",
+      "text": "The capital of France is Paris.",
+      "n_tokens": 8,
+      "n_sentinel_positions": 0,
+      "preview_first_8_positions": [
+        {
+          "token": "785",
+          "logprob": 0.0,
+          "top_logprobs": [
+            {
+              "token": "785",
+              "logprob": 0.0
+            }
+          ]
+        },
+        {
+          "token": "6722",
+          "logprob": 0.0,
+          "top_logprobs": [
+            {
+              "token": "6722",
+              "logprob": 0.0
+            }
+          ]
+        },
+        {
+          "token": "315",
+          "logprob": 0.0,
+          "top_logprobs": [
+            {
+              "token": "315",
+              "logprob": 0.0
+            }
+          ]
+        },
+        {
+          "token": "9625",
+          "logprob": 0.0,
+          "top_logprobs": [
+            {
+              "token": "9625",
+              "logprob": 0.0
+            }
+          ]
+        },
+        {
+          "token": "374",
+          "logprob": 0.0,
+          "top_logprobs": [
+            {
+              "token": "374",
+              "logprob": 0.0
+            }
+          ]
+        },
+        {
+          "token": "12095",
+          "logprob": 0.0,
+          "top_logprobs": [
+            {
+              "token": "12095",
+              "logprob": 0.0
+            }
+          ]
+        },
+        {
+          "token": "13",
+          "logprob": 0.0,
+          "top_logprobs": [
+            {
+              "token": "13",
+              "logprob": 0.0
+            }
+          ]
+        },
+        {
+          "token": "151645",
+          "logprob": 0.0,
+          "top_logprobs": [
+            {
+              "token": "151645",
+              "logprob": 0.0
+            }
+          ]
+        }
+      ],
+      "full_response": {
+        "id": "chatcmpl-a1c504118be3a363",
+        "object": "chat.completion",
+        "created": 1778457512,
+        "model": "Qwen/Qwen3-235B-A22B-Instruct-2507-FP8",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "The capital of France is Paris.",
+              "refusal": null,
+              "annotations": null,
+              "audio": null,
+              "function_call": null,
+              "tool_calls": [],
+              "reasoning": null
+            },
+            "logprobs": {
+              "content": [
+                {
+                  "token": "785",
+                  "logprob": 0.0,
+                  "bytes": [
+                    84,
+                    104,
+                    101
+                  ],
+                  "top_logprobs": [
+                    {
+                      "token": "785",
+                      "logprob": 0.0,
+                      "bytes": [
+                        55,
+                        56,
+                        53
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "token": "6722",
+                  "logprob": 0.0,
+                  "bytes": [
+                    32,
+                    99,
+                    97,
+                    112,
+                    105,
+                    116,
+                    97,
+                    108
+                  ],
+                  "top_logprobs": [
+                    {
+                      "token": "6722",
+                      "logprob": 0.0,
+                      "bytes": [
+                        54,
+                        55,
+                        50,
+                        50
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "token": "315",
+                  "logprob": 0.0,
+                  "bytes": [
+                    32,
+                    111,
+                    102
+                  ],
+                  "top_logprobs": [
+                    {
+                      "token": "315",
+                      "logprob": 0.0,
+                      "bytes": [
+                        51,
+                        49,
+                        53
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "token": "9625",
+                  "logprob": 0.0,
+                  "bytes": [
+                    32,
+                    70,
+                    114,
+                    97,
+                    110,
+                    99,
+                    101
+                  ],
+                  "top_logprobs": [
+                    {
+                      "token": "9625",
+                      "logprob": 0.0,
+                      "bytes": [
+                        57,
+                        54,
+                        50,
+                        53
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "token": "374",
+                  "logprob": 0.0,
+                  "bytes": [
+                    32,
+                    105,
+                    115
+                  ],
+                  "top_logprobs": [
+                    {
+                      "token": "374",
+                      "logprob": 0.0,
+                      "bytes": [
+                        51,
+                        55,
+                        52
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "token": "12095",
+                  "logprob": 0.0,
+                  "bytes": [
+                    32,
+                    80,
+                    97,
+                    114,
+                    105,
+                    115
+                  ],
+                  "top_logprobs": [
+                    {
+                      "token": "12095",
+                      "logprob": 0.0,
+                      "bytes": [
+                        49,
+                        50,
+                        48,
+                        57,
+                        53
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "token": "13",
+                  "logprob": 0.0,
+                  "bytes": [
+                    46
+                  ],
+                  "top_logprobs": [
+                    {
+                      "token": "13",
+                      "logprob": 0.0,
+                      "bytes": [
+                        49,
+                        51
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "token": "151645",
+                  "logprob": 0.0,
+                  "bytes": [
+                    60,
+                    124,
+                    105,
+                    109,
+                    95,
+                    101,
+                    110,
+                    100,
+                    124,
+                    62
+                  ],
+                  "top_logprobs": [
+                    {
+                      "token": "151645",
+                      "logprob": 0.0,
+                      "bytes": [
+                        49,
+                        53,
+                        49,
+                        54,
+                        52,
+                        53
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            "finish_reason": "stop",
+            "stop_reason": null,
+            "token_ids": null
+          }
+        ],
+        "service_tier": null,
+        "system_fingerprint": null,
+        "usage": {
+          "prompt_tokens": 20,
+          "total_tokens": 28,
+          "completion_tokens": 8,
+          "prompt_tokens_details": null
+        },
+        "prompt_logprobs": null,
+        "prompt_token_ids": null,
+        "kv_transfer_params": null
+      }
+    },
+    {
+      "language": "ch",
+      "prompt": "法国的首都是哪里？请用一句话回答。",
+      "text": "法国的首都是巴黎。",
+      "n_tokens": 7,
+      "n_sentinel_positions": 0,
+      "preview_first_8_positions": [
+        {
+          "token": "104328",
+          "logprob": 0.0,
+          "top_logprobs": [
+            {
+              "token": "104328",
+              "logprob": 0.0
+            }
+          ]
+        },
+        {
+          "token": "9370",
+          "logprob": 0.0,
+          "top_logprobs": [
+            {
+              "token": "9370",
+              "logprob": 0.0
+            }
+          ]
+        },
+        {
+          "token": "59975",
+          "logprob": 0.0,
+          "top_logprobs": [
+            {
+              "token": "59975",
+              "logprob": 0.0
+            }
+          ]
+        },
+        {
+          "token": "100132",
+          "logprob": 0.0,
+          "top_logprobs": [
+            {
+              "token": "100132",
+              "logprob": 0.0
+            }
+          ]
+        },
+        {
+          "token": "106004",
+          "logprob": 0.0,
+          "top_logprobs": [
+            {
+              "token": "106004",
+              "logprob": 0.0
+            }
+          ]
+        },
+        {
+          "token": "1773",
+          "logprob": 0.0,
+          "top_logprobs": [
+            {
+              "token": "1773",
+              "logprob": 0.0
+            }
+          ]
+        },
+        {
+          "token": "151645",
+          "logprob": 0.0,
+          "top_logprobs": [
+            {
+              "token": "151645",
+              "logprob": 0.0
+            }
+          ]
+        }
+      ],
+      "full_response": {
+        "id": "chatcmpl-b2a5e1043984da20",
+        "object": "chat.completion",
+        "created": 1778457512,
+        "model": "Qwen/Qwen3-235B-A22B-Instruct-2507-FP8",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "法国的首都是巴黎。",
+              "refusal": null,
+              "annotations": null,
+              "audio": null,
+              "function_call": null,
+              "tool_calls": [],
+              "reasoning": null
+            },
+            "logprobs": {
+              "content": [
+                {
+                  "token": "104328",
+                  "logprob": 0.0,
+                  "bytes": [
+                    230,
+                    179,
+                    149,
+                    229,
+                    155,
+                    189
+                  ],
+                  "top_logprobs": [
+                    {
+                      "token": "104328",
+                      "logprob": 0.0,
+                      "bytes": [
+                        49,
+                        48,
+                        52,
+                        51,
+                        50,
+                        56
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "token": "9370",
+                  "logprob": 0.0,
+                  "bytes": [
+                    231,
+                    154,
+                    132
+                  ],
+                  "top_logprobs": [
+                    {
+                      "token": "9370",
+                      "logprob": 0.0,
+                      "bytes": [
+                        57,
+                        51,
+                        55,
+                        48
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "token": "59975",
+                  "logprob": 0.0,
+                  "bytes": [
+                    233,
+                    166,
+                    150
+                  ],
+                  "top_logprobs": [
+                    {
+                      "token": "59975",
+                      "logprob": 0.0,
+                      "bytes": [
+                        53,
+                        57,
+                        57,
+                        55,
+                        53
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "token": "100132",
+                  "logprob": 0.0,
+                  "bytes": [
+                    233,
+                    131,
+                    189,
+                    230,
+                    152,
+                    175
+                  ],
+                  "top_logprobs": [
+                    {
+                      "token": "100132",
+                      "logprob": 0.0,
+                      "bytes": [
+                        49,
+                        48,
+                        48,
+                        49,
+                        51,
+                        50
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "token": "106004",
+                  "logprob": 0.0,
+                  "bytes": [
+                    229,
+                    183,
+                    180,
+                    233,
+                    187,
+                    142
+                  ],
+                  "top_logprobs": [
+                    {
+                      "token": "106004",
+                      "logprob": 0.0,
+                      "bytes": [
+                        49,
+                        48,
+                        54,
+                        48,
+                        48,
+                        52
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "token": "1773",
+                  "logprob": 0.0,
+                  "bytes": [
+                    227,
+                    128,
+                    130
+                  ],
+                  "top_logprobs": [
+                    {
+                      "token": "1773",
+                      "logprob": 0.0,
+                      "bytes": [
+                        49,
+                        55,
+                        55,
+                        51
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "token": "151645",
+                  "logprob": 0.0,
+                  "bytes": [
+                    60,
+                    124,
+                    105,
+                    109,
+                    95,
+                    101,
+                    110,
+                    100,
+                    124,
+                    62
+                  ],
+                  "top_logprobs": [
+                    {
+                      "token": "151645",
+                      "logprob": 0.0,
+                      "bytes": [
+                        49,
+                        53,
+                        49,
+                        54,
+                        52,
+                        53
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            "finish_reason": "stop",
+            "stop_reason": null,
+            "token_ids": null
+          }
+        ],
+        "service_tier": null,
+        "system_fingerprint": null,
+        "usage": {
+          "prompt_tokens": 19,
+          "total_tokens": 26,
+          "completion_tokens": 7,
+          "prompt_tokens_details": null
+        },
+        "prompt_logprobs": null,
+        "prompt_token_ids": null,
+        "kv_transfer_params": null
+      }
+    },
+    {
+      "language": "ar",
+      "prompt": "ما هي عاصمة فرنسا؟ أجب في جملة واحدة.",
+      "text": "عاصمة فرنسا هي باريس.",
+      "n_tokens": 13,
+      "n_sentinel_positions": 0,
+      "preview_first_8_positions": [
+        {
+          "token": "23224",
+          "logprob": 0.0,
+          "top_logprobs": [
+            {
+              "token": "23224",
+              "logprob": 0.0
+            }
+          ]
+        },
+        {
+          "token": "124291",
+          "logprob": 0.0,
+          "top_logprobs": [
+            {
+              "token": "124291",
+              "logprob": 0.0
+            }
+          ]
+        },
+        {
+          "token": "124325",
+          "logprob": 0.0,
+          "top_logprobs": [
+            {
+              "token": "124325",
+              "logprob": 0.0
+            }
+          ]
+        },
+        {
+          "token": "45577",
+          "logprob": 0.0,
+          "top_logprobs": [
+            {
+              "token": "45577",
+              "logprob": 0.0
+            }
+          ]
+        },
+        {
+          "token": "11071",
+          "logprob": 0.0,
+          "top_logprobs": [
+            {
+              "token": "11071",
+              "logprob": 0.0
+            }
+          ]
+        },
+        {
+          "token": "124829",
+          "logprob": 0.0,
+          "top_logprobs": [
+            {
+              "token": "124829",
+              "logprob": 0.0
+            }
+          ]
+        },
+        {
+          "token": "5703",
+          "logprob": 0.0,
+          "top_logprobs": [
+            {
+              "token": "5703",
+              "logprob": 0.0
+            }
+          ]
+        },
+        {
+          "token": "128420",
+          "logprob": 0.0,
+          "top_logprobs": [
+            {
+              "token": "128420",
+              "logprob": 0.0
+            }
+          ]
+        }
+      ],
+      "full_response": {
+        "id": "chatcmpl-87976f186123441f",
+        "object": "chat.completion",
+        "created": 1778457512,
+        "model": "Qwen/Qwen3-235B-A22B-Instruct-2507-FP8",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "عاصمة فرنسا هي باريس.",
+              "refusal": null,
+              "annotations": null,
+              "audio": null,
+              "function_call": null,
+              "tool_calls": [],
+              "reasoning": null
+            },
+            "logprobs": {
+              "content": [
+                {
+                  "token": "23224",
+                  "logprob": 0.0,
+                  "bytes": [
+                    216,
+                    185
+                  ],
+                  "top_logprobs": [
+                    {
+                      "token": "23224",
+                      "logprob": 0.0,
+                      "bytes": [
+                        50,
+                        51,
+                        50,
+                        50,
+                        52
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "token": "124291",
+                  "logprob": 0.0,
+                  "bytes": [
+                    216,
+                    167,
+                    216,
+                    181
+                  ],
+                  "top_logprobs": [
+                    {
+                      "token": "124291",
+                      "logprob": 0.0,
+                      "bytes": [
+                        49,
+                        50,
+                        52,
+                        50,
+                        57,
+                        49
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "token": "124325",
+                  "logprob": 0.0,
+                  "bytes": [
+                    217,
+                    133,
+                    216,
+                    169
+                  ],
+                  "top_logprobs": [
+                    {
+                      "token": "124325",
+                      "logprob": 0.0,
+                      "bytes": [
+                        49,
+                        50,
+                        52,
+                        51,
+                        50,
+                        53
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "token": "45577",
+                  "logprob": 0.0,
+                  "bytes": [
+                    32,
+                    217,
+                    129
+                  ],
+                  "top_logprobs": [
+                    {
+                      "token": "45577",
+                      "logprob": 0.0,
+                      "bytes": [
+                        52,
+                        53,
+                        53,
+                        55,
+                        55
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "token": "11071",
+                  "logprob": 0.0,
+                  "bytes": [
+                    216,
+                    177
+                  ],
+                  "top_logprobs": [
+                    {
+                      "token": "11071",
+                      "logprob": 0.0,
+                      "bytes": [
+                        49,
+                        49,
+                        48,
+                        55,
+                        49
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "token": "124829",
+                  "logprob": 0.0,
+                  "bytes": [
+                    217,
+                    134,
+                    216,
+                    179
+                  ],
+                  "top_logprobs": [
+                    {
+                      "token": "124829",
+                      "logprob": 0.0,
+                      "bytes": [
+                        49,
+                        50,
+                        52,
+                        56,
+                        50,
+                        57
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "token": "5703",
+                  "logprob": 0.0,
+                  "bytes": [
+                    216,
+                    167
+                  ],
+                  "top_logprobs": [
+                    {
+                      "token": "5703",
+                      "logprob": 0.0,
+                      "bytes": [
+                        53,
+                        55,
+                        48,
+                        51
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "token": "128420",
+                  "logprob": 0.0,
+                  "bytes": [
+                    32,
+                    217,
+                    135,
+                    217,
+                    138
+                  ],
+                  "top_logprobs": [
+                    {
+                      "token": "128420",
+                      "logprob": 0.0,
+                      "bytes": [
+                        49,
+                        50,
+                        56,
+                        52,
+                        50,
+                        48
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "token": "27846",
+                  "logprob": 0.0,
+                  "bytes": [
+                    32,
+                    216,
+                    168
+                  ],
+                  "top_logprobs": [
+                    {
+                      "token": "27846",
+                      "logprob": 0.0,
+                      "bytes": [
+                        50,
+                        55,
+                        56,
+                        52,
+                        54
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "token": "35038",
+                  "logprob": 0.0,
+                  "bytes": [
+                    216,
+                    167,
+                    216,
+                    177
+                  ],
+                  "top_logprobs": [
+                    {
+                      "token": "35038",
+                      "logprob": 0.0,
+                      "bytes": [
+                        51,
+                        53,
+                        48,
+                        51,
+                        56
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "token": "124392",
+                  "logprob": 0.0,
+                  "bytes": [
+                    217,
+                    138,
+                    216,
+                    179
+                  ],
+                  "top_logprobs": [
+                    {
+                      "token": "124392",
+                      "logprob": 0.0,
+                      "bytes": [
+                        49,
+                        50,
+                        52,
+                        51,
+                        57,
+                        50
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "token": "13",
+                  "logprob": 0.0,
+                  "bytes": [
+                    46
+                  ],
+                  "top_logprobs": [
+                    {
+                      "token": "13",
+                      "logprob": 0.0,
+                      "bytes": [
+                        49,
+                        51
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "token": "151645",
+                  "logprob": 0.0,
+                  "bytes": [
+                    60,
+                    124,
+                    105,
+                    109,
+                    95,
+                    101,
+                    110,
+                    100,
+                    124,
+                    62
+                  ],
+                  "top_logprobs": [
+                    {
+                      "token": "151645",
+                      "logprob": 0.0,
+                      "bytes": [
+                        49,
+                        53,
+                        49,
+                        54,
+                        52,
+                        53
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            "finish_reason": "stop",
+            "stop_reason": null,
+            "token_ids": null
+          }
+        ],
+        "service_tier": null,
+        "system_fingerprint": null,
+        "usage": {
+          "prompt_tokens": 26,
+          "total_tokens": 39,
+          "completion_tokens": 13,
+          "prompt_tokens_details": null
+        },
+        "prompt_logprobs": null,
+        "prompt_token_ids": null,
+        "kv_transfer_params": null
+      }
+    },
+    {
+      "language": "hi",
+      "prompt": "फ्रांस की राजधानी क्या है? एक वाक्य में उत्तर दीजिए।",
+      "text": "फ्रांस की राजधानी प",
+      "n_tokens": 16,
+      "n_sentinel_positions": 0,
+      "preview_first_8_positions": [
+        {
+          "token": "146934",
+          "logprob": 0.0,
+          "top_logprobs": [
+            {
+              "token": "146934",
+              "logprob": 0.0
+            }
+          ]
+        },
+        {
+          "token": "85033",
+          "logprob": 0.0,
+          "top_logprobs": [
+            {
+              "token": "85033",
+              "logprob": 0.0
+            }
+          ]
+        },
+        {
+          "token": "31411",
+          "logprob": 0.0,
+          "top_logprobs": [
+            {
+              "token": "31411",
+              "logprob": 0.0
+            }
+          ]
+        },
+        {
+          "token": "224",
+          "logprob": 0.0,
+          "top_logprobs": [
+            {
+              "token": "224",
+              "logprob": 0.0
+            }
+          ]
+        },
+        {
+          "token": "78368",
+          "logprob": 0.0,
+          "top_logprobs": [
+            {
+              "token": "78368",
+              "logprob": 0.0
+            }
+          ]
+        },
+        {
+          "token": "47809",
+          "logprob": 0.0,
+          "top_logprobs": [
+            {
+              "token": "47809",
+              "logprob": 0.0
+            }
+          ]
+        },
+        {
+          "token": "43647",
+          "logprob": 0.0,
+          "top_logprobs": [
+            {
+              "token": "43647",
+              "logprob": 0.0
+            }
+          ]
+        },
+        {
+          "token": "14925",
+          "logprob": 0.0,
+          "top_logprobs": [
+            {
+              "token": "14925",
+              "logprob": 0.0
+            }
+          ]
+        }
+      ],
+      "full_response": {
+        "id": "chatcmpl-b6966d0566abc902",
+        "object": "chat.completion",
+        "created": 1778457513,
+        "model": "Qwen/Qwen3-235B-A22B-Instruct-2507-FP8",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "फ्रांस की राजधानी प",
+              "refusal": null,
+              "annotations": null,
+              "audio": null,
+              "function_call": null,
+              "tool_calls": [],
+              "reasoning": null
+            },
+            "logprobs": {
+              "content": [
+                {
+                  "token": "146934",
+                  "logprob": 0.0,
+                  "bytes": [
+                    224,
+                    164,
+                    171
+                  ],
+                  "top_logprobs": [
+                    {
+                      "token": "146934",
+                      "logprob": 0.0,
+                      "bytes": [
+                        49,
+                        52,
+                        54,
+                        57,
+                        51,
+                        52
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "token": "85033",
+                  "logprob": 0.0,
+                  "bytes": [
+                    224,
+                    165,
+                    141,
+                    224,
+                    164,
+                    176
+                  ],
+                  "top_logprobs": [
+                    {
+                      "token": "85033",
+                      "logprob": 0.0,
+                      "bytes": [
+                        56,
+                        53,
+                        48,
+                        51,
+                        51
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "token": "31411",
+                  "logprob": 0.0,
+                  "bytes": [],
+                  "top_logprobs": [
+                    {
+                      "token": "31411",
+                      "logprob": 0.0,
+                      "bytes": [
+                        51,
+                        49,
+                        52,
+                        49,
+                        49
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "token": "224",
+                  "logprob": 0.0,
+                  "bytes": [
+                    224,
+                    164,
+                    190,
+                    224,
+                    164,
+                    130
+                  ],
+                  "top_logprobs": [
+                    {
+                      "token": "224",
+                      "logprob": 0.0,
+                      "bytes": [
+                        50,
+                        50,
+                        52
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "token": "78368",
+                  "logprob": 0.0,
+                  "bytes": [
+                    224,
+                    164,
+                    184
+                  ],
+                  "top_logprobs": [
+                    {
+                      "token": "78368",
+                      "logprob": 0.0,
+                      "bytes": [
+                        55,
+                        56,
+                        51,
+                        54,
+                        56
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "token": "47809",
+                  "logprob": 0.0,
+                  "bytes": [
+                    32,
+                    224,
+                    164,
+                    149
+                  ],
+                  "top_logprobs": [
+                    {
+                      "token": "47809",
+                      "logprob": 0.0,
+                      "bytes": [
+                        52,
+                        55,
+                        56,
+                        48,
+                        57
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "token": "43647",
+                  "logprob": 0.0,
+                  "bytes": [
+                    224,
+                    165,
+                    128
+                  ],
+                  "top_logprobs": [
+                    {
+                      "token": "43647",
+                      "logprob": 0.0,
+                      "bytes": [
+                        52,
+                        51,
+                        54,
+                        52,
+                        55
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "token": "14925",
+                  "logprob": 0.0,
+                  "bytes": [],
+                  "top_logprobs": [
+                    {
+                      "token": "14925",
+                      "logprob": 0.0,
+                      "bytes": [
+                        49,
+                        52,
+                        57,
+                        50,
+                        53
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "token": "108",
+                  "logprob": 0.0,
+                  "bytes": [
+                    32,
+                    224,
+                    164,
+                    176
+                  ],
+                  "top_logprobs": [
+                    {
+                      "token": "108",
+                      "logprob": 0.0,
+                      "bytes": [
+                        49,
+                        48,
+                        56
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "token": "31411",
+                  "logprob": 0.0,
+                  "bytes": [],
+                  "top_logprobs": [
+                    {
+                      "token": "31411",
+                      "logprob": 0.0,
+                      "bytes": [
+                        51,
+                        49,
+                        52,
+                        49,
+                        49
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "token": "250",
+                  "logprob": 0.0,
+                  "bytes": [
+                    224,
+                    164,
+                    190,
+                    224,
+                    164,
+                    156
+                  ],
+                  "top_logprobs": [
+                    {
+                      "token": "250",
+                      "logprob": 0.0,
+                      "bytes": [
+                        50,
+                        53,
+                        48
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "token": "146821",
+                  "logprob": 0.0,
+                  "bytes": [
+                    224,
+                    164,
+                    167
+                  ],
+                  "top_logprobs": [
+                    {
+                      "token": "146821",
+                      "logprob": 0.0,
+                      "bytes": [
+                        49,
+                        52,
+                        54,
+                        56,
+                        50,
+                        49
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "token": "31411",
+                  "logprob": 0.0,
+                  "bytes": [],
+                  "top_logprobs": [
+                    {
+                      "token": "31411",
+                      "logprob": 0.0,
+                      "bytes": [
+                        51,
+                        49,
+                        52,
+                        49,
+                        49
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "token": "101",
+                  "logprob": 0.0,
+                  "bytes": [
+                    224,
+                    164,
+                    190,
+                    224,
+                    164,
+                    168
+                  ],
+                  "top_logprobs": [
+                    {
+                      "token": "101",
+                      "logprob": 0.0,
+                      "bytes": [
+                        49,
+                        48,
+                        49
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "token": "43647",
+                  "logprob": 0.0,
+                  "bytes": [
+                    224,
+                    165,
+                    128
+                  ],
+                  "top_logprobs": [
+                    {
+                      "token": "43647",
+                      "logprob": 0.0,
+                      "bytes": [
+                        52,
+                        51,
+                        54,
+                        52,
+                        55
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "token": "83636",
+                  "logprob": 0.0,
+                  "bytes": [
+                    32,
+                    224,
+                    164,
+                    170
+                  ],
+                  "top_logprobs": [
+                    {
+                      "token": "83636",
+                      "logprob": 0.0,
+                      "bytes": [
+                        56,
+                        51,
+                        54,
+                        51,
+                        54
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            "finish_reason": "length",
+            "stop_reason": null,
+            "token_ids": null
+          }
+        ],
+        "service_tier": null,
+        "system_fingerprint": null,
+        "usage": {
+          "prompt_tokens": 56,
+          "total_tokens": 72,
+          "completion_tokens": 16,
+          "prompt_tokens_details": null
+        },
+        "prompt_logprobs": null,
+        "prompt_token_ids": null,
+        "kv_transfer_params": null
+      }
+    }
+  ],
+  "time_sec": 2.375021457672119
+}

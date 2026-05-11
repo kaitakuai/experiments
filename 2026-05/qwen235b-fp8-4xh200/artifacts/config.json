@@ -1,0 +1,11 @@
+{
+  "gpu": "H200",
+  "vllm_version": "0.20.0",
+  "model": "Qwen/Qwen3-235B-A22B-Instruct-2507-FP8",
+  "url": "http://127.0.0.1:5001",
+  "batch_size": 64,
+  "seq_len": 1024,
+  "k_dim": 12,
+  "startup_command": "vllm 0.20.0 TP=4 gpu_mem=0.92 max_seqs=128 max_len=32K kv=fp8 --enable-expert-parallel --disable-custom-all-reduce env=PR24",
+  "timestamp": "2026-05-10T23:58:50"
+}
