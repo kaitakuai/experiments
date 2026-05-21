@@ -1,0 +1,22 @@
+{
+  "model": "moonshotai/Kimi-K2.6",
+  "dtype": "auto",
+  "additional_args": [
+    "--port", "5001",
+    "--host", "0.0.0.0",
+    "--max-model-len", "120000",
+    "--tool-call-parser", "kimi_k2",
+    "--reasoning-parser", "kimi_k2",
+    "--trust-remote-code",
+    "--tensor-parallel-size", "4",
+    "--gpu-memory-utilization", "0.93",
+    "--max-num-batched-tokens", "32768",
+    "--logprobs-mode", "processed_logprobs",
+    "--compilation-config", "{\"mode\": 3, \"cudagraph_mode\": \"FULL_AND_PIECEWISE\"}",
+    "--attention-backend", "CUTLASS_MLA",
+    "--max-num-seqs", "32",
+    "--mm-encoder-tp-mode", "data",
+    "--enable-auto-tool-choice",
+    "--enable-expert-parallel"
+  ]
+}

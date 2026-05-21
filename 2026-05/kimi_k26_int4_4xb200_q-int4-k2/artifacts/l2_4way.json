@@ -1,0 +1,338 @@
+{
+  "results": [
+    {
+      "n_total": 200,
+      "label_a": "b200-050 (CG,int4-img)",
+      "label_b": "b200-051 (eager)",
+      "stats": {
+        "mean": 0.1874460550583899,
+        "median": 0.1750975251197815,
+        "p25": 0.13735581189393997,
+        "p75": 0.2228398621082306,
+        "p95": 0.34550589621067046,
+        "p99": 0.4489178457856176,
+        "max": 0.5010980367660522
+      },
+      "scenarios": [
+        {
+          "name": "vllm strict (self-validation default)",
+          "dist_threshold": 0.02,
+          "p_mismatch": 0.001,
+          "n_mismatch": 200,
+          "rate": 1.0,
+          "p_value": 0.0,
+          "fraud_detected": "True"
+        },
+        {
+          "name": "PoC report calibrated honest 98pct",
+          "dist_threshold": 0.173663,
+          "p_mismatch": 0.02,
+          "n_mismatch": 103,
+          "rate": 0.515,
+          "p_value": 1.2059957726545914e-117,
+          "fraud_detected": "True"
+        },
+        {
+          "name": "chain proto default (production)",
+          "dist_threshold": 0.4,
+          "p_mismatch": 0.001,
+          "n_mismatch": 5,
+          "rate": 0.025,
+          "p_value": 2.156016418657152e-06,
+          "fraud_detected": "True"
+        },
+        {
+          "name": "chain proto default + calibrated p_mis",
+          "dist_threshold": 0.4,
+          "p_mismatch": 0.02,
+          "n_mismatch": 5,
+          "rate": 0.025,
+          "p_value": 0.3711564198711829,
+          "fraud_detected": "False"
+        }
+      ]
+    },
+    {
+      "n_total": 200,
+      "label_a": "b200-050 (CG,int4-img)",
+      "label_b": "b300-001 (eager)",
+      "stats": {
+        "mean": 0.18880787307396532,
+        "median": 0.17851292341947556,
+        "p25": 0.13530534878373146,
+        "p75": 0.21661857515573502,
+        "p95": 0.3234959259629248,
+        "p99": 0.40491513699293086,
+        "max": 0.48244646191596985
+      },
+      "scenarios": [
+        {
+          "name": "vllm strict (self-validation default)",
+          "dist_threshold": 0.02,
+          "p_mismatch": 0.001,
+          "n_mismatch": 200,
+          "rate": 1.0,
+          "p_value": 0.0,
+          "fraud_detected": "True"
+        },
+        {
+          "name": "PoC report calibrated honest 98pct",
+          "dist_threshold": 0.173663,
+          "p_mismatch": 0.02,
+          "n_mismatch": 107,
+          "rate": 0.535,
+          "p_value": 1.4024836805042605e-124,
+          "fraud_detected": "True"
+        },
+        {
+          "name": "chain proto default (production)",
+          "dist_threshold": 0.4,
+          "p_mismatch": 0.001,
+          "n_mismatch": 3,
+          "rate": 0.015,
+          "p_value": 0.0011337680974626504,
+          "fraud_detected": "True"
+        },
+        {
+          "name": "chain proto default + calibrated p_mis",
+          "dist_threshold": 0.4,
+          "p_mismatch": 0.02,
+          "n_mismatch": 3,
+          "rate": 0.015,
+          "p_value": 0.7648518642272945,
+          "fraud_detected": "False"
+        }
+      ]
+    },
+    {
+      "n_total": 200,
+      "label_a": "b200-050 (CG,int4-img)",
+      "label_b": "b300-002 (CG)",
+      "stats": {
+        "mean": 0.18788617520593107,
+        "median": 0.1785169169306755,
+        "p25": 0.136495690792799,
+        "p75": 0.22267643362283707,
+        "p95": 0.30911569446325293,
+        "p99": 0.46912136882543554,
+        "max": 0.5240505337715149
+      },
+      "scenarios": [
+        {
+          "name": "vllm strict (self-validation default)",
+          "dist_threshold": 0.02,
+          "p_mismatch": 0.001,
+          "n_mismatch": 200,
+          "rate": 1.0,
+          "p_value": 0.0,
+          "fraud_detected": "True"
+        },
+        {
+          "name": "PoC report calibrated honest 98pct",
+          "dist_threshold": 0.173663,
+          "p_mismatch": 0.02,
+          "n_mismatch": 108,
+          "rate": 0.54,
+          "p_value": 2.46380891343487e-126,
+          "fraud_detected": "True"
+        },
+        {
+          "name": "chain proto default (production)",
+          "dist_threshold": 0.4,
+          "p_mismatch": 0.001,
+          "n_mismatch": 3,
+          "rate": 0.015,
+          "p_value": 0.0011337680974626504,
+          "fraud_detected": "True"
+        },
+        {
+          "name": "chain proto default + calibrated p_mis",
+          "dist_threshold": 0.4,
+          "p_mismatch": 0.02,
+          "n_mismatch": 3,
+          "rate": 0.015,
+          "p_value": 0.7648518642272945,
+          "fraud_detected": "False"
+        }
+      ]
+    },
+    {
+      "n_total": 200,
+      "label_a": "b200-051 (eager)",
+      "label_b": "b300-001 (eager)",
+      "stats": {
+        "mean": 0.18092868579551577,
+        "median": 0.1746065765619278,
+        "p25": 0.14087560772895813,
+        "p75": 0.21365036442875862,
+        "p95": 0.3004061713814735,
+        "p99": 0.3572247377038002,
+        "max": 0.4169006645679474
+      },
+      "scenarios": [
+        {
+          "name": "vllm strict (self-validation default)",
+          "dist_threshold": 0.02,
+          "p_mismatch": 0.001,
+          "n_mismatch": 200,
+          "rate": 1.0,
+          "p_value": 0.0,
+          "fraud_detected": "True"
+        },
+        {
+          "name": "PoC report calibrated honest 98pct",
+          "dist_threshold": 0.173663,
+          "p_mismatch": 0.02,
+          "n_mismatch": 101,
+          "rate": 0.505,
+          "p_value": 3.1380245218262226e-114,
+          "fraud_detected": "True"
+        },
+        {
+          "name": "chain proto default (production)",
+          "dist_threshold": 0.4,
+          "p_mismatch": 0.001,
+          "n_mismatch": 1,
+          "rate": 0.005,
+          "p_value": 0.1813511705213643,
+          "fraud_detected": "False"
+        },
+        {
+          "name": "chain proto default + calibrated p_mis",
+          "dist_threshold": 0.4,
+          "p_mismatch": 0.02,
+          "n_mismatch": 1,
+          "rate": 0.005,
+          "p_value": 0.9824120533942784,
+          "fraud_detected": "False"
+        }
+      ]
+    },
+    {
+      "n_total": 200,
+      "label_a": "b200-051 (eager)",
+      "label_b": "b300-002 (CG)",
+      "stats": {
+        "mean": 0.18629260951653123,
+        "median": 0.1699010282754898,
+        "p25": 0.13400373980402946,
+        "p75": 0.22887899726629257,
+        "p95": 0.3255157619714737,
+        "p99": 0.40512711882591235,
+        "max": 0.4274645745754242
+      },
+      "scenarios": [
+        {
+          "name": "vllm strict (self-validation default)",
+          "dist_threshold": 0.02,
+          "p_mismatch": 0.001,
+          "n_mismatch": 200,
+          "rate": 1.0,
+          "p_value": 0.0,
+          "fraud_detected": "True"
+        },
+        {
+          "name": "PoC report calibrated honest 98pct",
+          "dist_threshold": 0.173663,
+          "p_mismatch": 0.02,
+          "n_mismatch": 95,
+          "rate": 0.475,
+          "p_value": 3.4291867537648056e-104,
+          "fraud_detected": "True"
+        },
+        {
+          "name": "chain proto default (production)",
+          "dist_threshold": 0.4,
+          "p_mismatch": 0.001,
+          "n_mismatch": 3,
+          "rate": 0.015,
+          "p_value": 0.0011337680974626504,
+          "fraud_detected": "True"
+        },
+        {
+          "name": "chain proto default + calibrated p_mis",
+          "dist_threshold": 0.4,
+          "p_mismatch": 0.02,
+          "n_mismatch": 3,
+          "rate": 0.015,
+          "p_value": 0.7648518642272945,
+          "fraud_detected": "False"
+        }
+      ]
+    },
+    {
+      "n_total": 200,
+      "label_a": "b300-001 (eager)",
+      "label_b": "b300-002 (CG)",
+      "stats": {
+        "mean": 0.18267364855855703,
+        "median": 0.17051996290683746,
+        "p25": 0.13785407692193985,
+        "p75": 0.2196885459125042,
+        "p95": 0.31278603225946416,
+        "p99": 0.34859569400548895,
+        "max": 0.47508880496025085
+      },
+      "scenarios": [
+        {
+          "name": "vllm strict (self-validation default)",
+          "dist_threshold": 0.02,
+          "p_mismatch": 0.001,
+          "n_mismatch": 200,
+          "rate": 1.0,
+          "p_value": 0.0,
+          "fraud_detected": "True"
+        },
+        {
+          "name": "PoC report calibrated honest 98pct",
+          "dist_threshold": 0.173663,
+          "p_mismatch": 0.02,
+          "n_mismatch": 95,
+          "rate": 0.475,
+          "p_value": 3.4291867537648056e-104,
+          "fraud_detected": "True"
+        },
+        {
+          "name": "chain proto default (production)",
+          "dist_threshold": 0.4,
+          "p_mismatch": 0.001,
+          "n_mismatch": 1,
+          "rate": 0.005,
+          "p_value": 0.1813511705213643,
+          "fraud_detected": "False"
+        },
+        {
+          "name": "chain proto default + calibrated p_mis",
+          "dist_threshold": 0.4,
+          "p_mismatch": 0.02,
+          "n_mismatch": 1,
+          "rate": 0.005,
+          "p_value": 0.9824120533942784,
+          "fraud_detected": "False"
+        }
+      ]
+    }
+  ],
+  "scenarios": [
+    [
+      "vllm strict (self-validation default)",
+      0.02,
+      0.001
+    ],
+    [
+      "PoC report calibrated honest 98pct",
+      0.173663,
+      0.02
+    ],
+    [
+      "chain proto default (production)",
+      0.4,
+      0.001
+    ],
+    [
+      "chain proto default + calibrated p_mis",
+      0.4,
+      0.02
+    ]
+  ]
+}
