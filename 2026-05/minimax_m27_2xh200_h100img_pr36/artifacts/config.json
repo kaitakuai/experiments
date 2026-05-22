@@ -1,0 +1,11 @@
+{
+  "gpu": "H200",
+  "vllm_version": "0.20.0",
+  "model": "/root/models/MiniMax-M2.7",
+  "url": "http://127.0.0.1:8081",
+  "batch_size": 32,
+  "seq_len": 1024,
+  "k_dim": 12,
+  "startup_command": "",
+  "timestamp": "2026-05-22T01:30:45"
+}

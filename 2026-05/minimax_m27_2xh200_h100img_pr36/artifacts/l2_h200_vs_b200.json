@@ -1,0 +1,36 @@
+{
+  "results": [
+    {
+      "n_total": 1000,
+      "label_a": "2xH200 (PR#36)",
+      "label_b": "2xB200 baseline (131k, no patch)",
+      "stats": {
+        "mean": 0.2854682836122811,
+        "median": 0.2620164304971695,
+        "p25": 0.19797422736883163,
+        "p75": 0.3481856733560562,
+        "p95": 0.5138996720314024,
+        "p99": 0.7706873285770415,
+        "max": 1.0922514200210571
+      },
+      "scenarios": [
+        {
+          "name": "v0.2.13 minimax chain",
+          "dist_threshold": 0.75,
+          "p_mismatch": 0.1,
+          "n_mismatch": 11,
+          "rate": 0.011,
+          "p_value": 1.0,
+          "fraud_detected": "False"
+        }
+      ]
+    }
+  ],
+  "scenarios": [
+    [
+      "v0.2.13 minimax chain",
+      0.75,
+      0.1
+    ]
+  ]
+}

@@ -1,0 +1,73 @@
+
+==================================================
+  PoC v2 Generation Test
+==================================================
+  Model:    /root/models/MiniMax-M2.7
+  API:      http://127.0.0.1:8081
+  Callback: http://127.0.0.1:9999
+  Warmup:   5s
+  Duration: 30s per test
+
+Starting batch receiver...
+Batch receiver ready.
+
+==================================================
+  PHASE 3: Batch Size Benchmark
+==================================================
+  Batch sizes: [8, 16, 32, 64]
+  Duration: 35s each (5s warmup + 30s measurement)
+
+────────────────────────────────────────
+  Testing batch_size = 8
+────────────────────────────────────────
+    5s warmup done
+    [10s] 240 nonces
+    [20s] 504 nonces
+    [30s] 776 nonces
+  Result: 776 nonces, 1552/min
+
+────────────────────────────────────────
+  Testing batch_size = 16
+────────────────────────────────────────
+    5s warmup done
+    [10s] 272 nonces
+    [20s] 560 nonces
+    [30s] 848 nonces
+  Result: 848 nonces, 1696/min
+
+────────────────────────────────────────
+  Testing batch_size = 32
+────────────────────────────────────────
+    5s warmup done
+    [10s] 288 nonces
+    [20s] 576 nonces
+    [30s] 864 nonces
+  Result: 864 nonces, 1728/min
+
+────────────────────────────────────────
+  Testing batch_size = 64
+────────────────────────────────────────
+    5s warmup done
+    [10s] 0 nonces
+    [20s] 0 nonces
+    [30s] 0 nonces
+  Result: 0 nonces, 0/min
+
+==================================================
+  RESULTS
+==================================================
+     Batch │   Nonces │   Nonces/min
+  ─────────┼──────────┼─────────────
+         8 │      776 │         1552  
+        16 │      848 │         1696  
+        32 │      864 │         1728 ★
+        64 │        0 │            0  
+==================================================
+  ★ Best batch size: 32 (1728 nonces/min)
+
+  NOTE: Best=32 differs from current default (8).
+        Update PHASE1_BATCH_SIZE and the pow_v2_routes.py patch in onstart.sh.
+
+✓ Test complete!
+
+Stopping batch receiver...

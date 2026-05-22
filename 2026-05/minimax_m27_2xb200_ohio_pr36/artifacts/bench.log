@@ -1,0 +1,73 @@
+
+==================================================
+  PoC v2 Generation Test
+==================================================
+  Model:    /root/models/MiniMax-M2.7
+  API:      http://127.0.0.1:8081
+  Callback: http://127.0.0.1:9999
+  Warmup:   5s
+  Duration: 30s per test
+
+Starting batch receiver...
+Batch receiver ready.
+
+==================================================
+  PHASE 3: Batch Size Benchmark
+==================================================
+  Batch sizes: [8, 16, 32, 64]
+  Duration: 35s each (5s warmup + 30s measurement)
+
+────────────────────────────────────────
+  Testing batch_size = 8
+────────────────────────────────────────
+    5s warmup done
+    [10s] 360 nonces
+    [20s] 752 nonces
+    [30s] 1144 nonces
+  Result: 1144 nonces, 2288/min
+
+────────────────────────────────────────
+  Testing batch_size = 16
+────────────────────────────────────────
+    5s warmup done
+    [10s] 400 nonces
+    [20s] 800 nonces
+    [30s] 1232 nonces
+  Result: 1232 nonces, 2464/min
+
+────────────────────────────────────────
+  Testing batch_size = 32
+────────────────────────────────────────
+    5s warmup done
+    [10s] 416 nonces
+    [20s] 864 nonces
+    [30s] 1312 nonces
+  Result: 1312 nonces, 2624/min
+
+────────────────────────────────────────
+  Testing batch_size = 64
+────────────────────────────────────────
+    5s warmup done
+    [10s] 0 nonces
+    [20s] 0 nonces
+    [30s] 0 nonces
+  Result: 0 nonces, 0/min
+
+==================================================
+  RESULTS
+==================================================
+     Batch │   Nonces │   Nonces/min
+  ─────────┼──────────┼─────────────
+         8 │     1144 │         2288  
+        16 │     1232 │         2464  
+        32 │     1312 │         2624 ★
+        64 │        0 │            0  
+==================================================
+  ★ Best batch size: 32 (2624 nonces/min)
+
+  NOTE: Best=32 differs from current default (8).
+        Update PHASE1_BATCH_SIZE and the pow_v2_routes.py patch in onstart.sh.
+
+✓ Test complete!
+
+Stopping batch receiver...

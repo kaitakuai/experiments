@@ -1,0 +1,50 @@
+{
+  "results": [
+    {
+      "n_total": 1000,
+      "label_a": "2xH200 (h100 img, PR#36)",
+      "label_b": "4xH100 SXM (PR#36)",
+      "stats": {
+        "mean": 0.2535169043857604,
+        "median": 0.23188870400190353,
+        "p25": 0.1716006025671959,
+        "p75": 0.3086649179458618,
+        "p95": 0.462074682116508,
+        "p99": 0.6962291377782821,
+        "max": 1.1061738729476929
+      },
+      "scenarios": [
+        {
+          "name": "vllm strict",
+          "dist_threshold": 0.02,
+          "p_mismatch": 0.001,
+          "n_mismatch": 999,
+          "rate": 0.999,
+          "p_value": 0.0,
+          "fraud_detected": "True"
+        },
+        {
+          "name": "v0.2.13 minimax chain",
+          "dist_threshold": 0.75,
+          "p_mismatch": 0.1,
+          "n_mismatch": 6,
+          "rate": 0.006,
+          "p_value": 1.0,
+          "fraud_detected": "False"
+        }
+      ]
+    }
+  ],
+  "scenarios": [
+    [
+      "vllm strict",
+      0.02,
+      0.001
+    ],
+    [
+      "v0.2.13 minimax chain",
+      0.75,
+      0.1
+    ]
+  ]
+}

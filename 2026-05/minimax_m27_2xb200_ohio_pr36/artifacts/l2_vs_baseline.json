@@ -1,0 +1,50 @@
+{
+  "results": [
+    {
+      "n_total": 1000,
+      "label_a": "2xB200 Ohio (PR#36, 180k)",
+      "label_b": "2xB200 published baseline (131k)",
+      "stats": {
+        "mean": 0.0,
+        "median": 0.0,
+        "p25": 0.0,
+        "p75": 0.0,
+        "p95": 0.0,
+        "p99": 0.0,
+        "max": 0.0
+      },
+      "scenarios": [
+        {
+          "name": "vllm strict",
+          "dist_threshold": 0.02,
+          "p_mismatch": 0.001,
+          "n_mismatch": 0,
+          "rate": 0.0,
+          "p_value": 1.0,
+          "fraud_detected": "False"
+        },
+        {
+          "name": "v0.2.13 minimax chain",
+          "dist_threshold": 0.75,
+          "p_mismatch": 0.1,
+          "n_mismatch": 0,
+          "rate": 0.0,
+          "p_value": 1.0,
+          "fraud_detected": "False"
+        }
+      ]
+    }
+  ],
+  "scenarios": [
+    [
+      "vllm strict",
+      0.02,
+      0.001
+    ],
+    [
+      "v0.2.13 minimax chain",
+      0.75,
+      0.1
+    ]
+  ]
+}
