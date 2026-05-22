@@ -1,0 +1,22 @@
+
+List of Experiments:
++----+---------------------------------+---------------------+-------------------------+------------------------------------+------------------------------------+
+|    | ID                              | Name                | Date                    | Description                        | Parameters                         |
++====+=================================+=====================+=========================+====================================+====================================+
+|  1 | MiniMax-M2.7 4xA100-b inference | 2026-05-22 20:26:42 | compressa-perf conc=... | num_workers: 20                    | TTFT: 2.3476                       |
+|    |                                 |                     |                         | num_tasks: 60                      | TTFT_95: 6.6697                    |
+|    |                                 |                     |                         | node_url: http://127...            | TOP_5_TTFT: 6.6714                 |
+|    |                                 |                     |                         | max_tokens: 300                    | LATENCY: 11.2063                   |
+|    |                                 |                     |                         | model_name: /root/mode...          | LATENCY_95: 15.8895                |
+|    |                                 |                     |                         | no_sign: True                      | TOP_5_LATENCY: 15.8917             |
+|    |                                 |                     |                         | old_sign: False                    | TPOT: 0.0374                       |
+|    |                                 |                     |                         | client_architecture: shared_poo... | THROUGHPUT: 1500.7634              |
+|    |                                 |                     |                         | requester_address: 0x00000000...   | THROUGHPUT_INPUT_TOKENS: 965.8802  |
+|    |                                 |                     |                         | avg_n_input: 541.73                | THROUGHPUT_OUTPUT_TOKENS: 534.8832 |
+|    |                                 |                     |                         | std_n_input: 5.73                  | RPS: 1.7829                        |
+|    |                                 |                     |                         | avg_n_output: 300                  | LONGER_THAN_60_LATENCY: 0          |
+|    |                                 |                     |                         | std_n_output: 0                    | LONGER_THAN_120_LATENCY: 0         |
+|    |                                 |                     |                         |                                    | LONGER_THAN_180_LATENCY: 0         |
+|    |                                 |                     |                         |                                    | FAILED_REQUESTS: 0                 |
+|    |                                 |                     |                         |                                    | FAILED_REQUESTS_PER_HOUR: 0        |
++----+---------------------------------+---------------------+-------------------------+------------------------------------+------------------------------------+

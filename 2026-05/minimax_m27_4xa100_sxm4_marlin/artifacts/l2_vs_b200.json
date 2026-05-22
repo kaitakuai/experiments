@@ -1,0 +1,50 @@
+{
+  "results": [
+    {
+      "n_total": 1000,
+      "label_a": "4xA100 SXM4 (MARLIN, PR#36)",
+      "label_b": "2xB200 published baseline",
+      "stats": {
+        "mean": 0.3295382251776755,
+        "median": 0.3020244240760803,
+        "p25": 0.2228052355349064,
+        "p75": 0.3949064314365387,
+        "p95": 0.6349824249744409,
+        "p99": 0.8275300794839859,
+        "max": 1.108515739440918
+      },
+      "scenarios": [
+        {
+          "name": "vllm strict",
+          "dist_threshold": 0.02,
+          "p_mismatch": 0.001,
+          "n_mismatch": 1000,
+          "rate": 1.0,
+          "p_value": 0.0,
+          "fraud_detected": "True"
+        },
+        {
+          "name": "v0.2.13 minimax chain",
+          "dist_threshold": 0.75,
+          "p_mismatch": 0.1,
+          "n_mismatch": 23,
+          "rate": 0.023,
+          "p_value": 1.0,
+          "fraud_detected": "False"
+        }
+      ]
+    }
+  ],
+  "scenarios": [
+    [
+      "vllm strict",
+      0.02,
+      0.001
+    ],
+    [
+      "v0.2.13 minimax chain",
+      0.75,
+      0.1
+    ]
+  ]
+}

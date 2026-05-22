@@ -1,0 +1,50 @@
+{
+  "results": [
+    {
+      "n_total": 1000,
+      "label_a": "A100 host2",
+      "label_b": "A100 host1",
+      "stats": {
+        "mean": 0.17540929112676532,
+        "median": 0.1610175222158432,
+        "p25": 0.11913135088980198,
+        "p75": 0.21892132610082626,
+        "p95": 0.3212612360715865,
+        "p99": 0.4440059360861778,
+        "max": 0.7905440926551819
+      },
+      "scenarios": [
+        {
+          "name": "vllm strict",
+          "dist_threshold": 0.02,
+          "p_mismatch": 0.001,
+          "n_mismatch": 993,
+          "rate": 0.993,
+          "p_value": 0.0,
+          "fraud_detected": "True"
+        },
+        {
+          "name": "v0.2.13 minimax chain",
+          "dist_threshold": 0.75,
+          "p_mismatch": 0.1,
+          "n_mismatch": 1,
+          "rate": 0.001,
+          "p_value": 1.0,
+          "fraud_detected": "False"
+        }
+      ]
+    }
+  ],
+  "scenarios": [
+    [
+      "vllm strict",
+      0.02,
+      0.001
+    ],
+    [
+      "v0.2.13 minimax chain",
+      0.75,
+      0.1
+    ]
+  ]
+}

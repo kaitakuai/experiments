@@ -1,0 +1,36 @@
+{
+  "results": [
+    {
+      "n_total": 1000,
+      "label_a": "4xA100 host2 (MARLIN)",
+      "label_b": "2xB200 baseline",
+      "stats": {
+        "mean": 0.32858321463875473,
+        "median": 0.3022243529558182,
+        "p25": 0.22510339319705963,
+        "p75": 0.39282460510730743,
+        "p95": 0.6151139020919799,
+        "p99": 0.8465214508771896,
+        "max": 1.174761176109314
+      },
+      "scenarios": [
+        {
+          "name": "v0.2.13 minimax chain",
+          "dist_threshold": 0.75,
+          "p_mismatch": 0.1,
+          "n_mismatch": 24,
+          "rate": 0.024,
+          "p_value": 1.0,
+          "fraud_detected": "False"
+        }
+      ]
+    }
+  ],
+  "scenarios": [
+    [
+      "v0.2.13 minimax chain",
+      0.75,
+      0.1
+    ]
+  ]
+}
