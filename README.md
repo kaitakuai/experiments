@@ -29,3 +29,9 @@ YYYY-MM/
 ## Contributing
 
 Any member of the kaitaku.ai team can open a PR with a new experiment folder. Reports should be self-contained: hardware, software versions, commands, and results in one place so that a reader does not need context from chat.
+
+## License
+
+This repository — reports, data artifacts, and any included scripts — is licensed under the [Apache License 2.0](LICENSE). When referencing or reproducing results, please cite:
+
+> Source: Kaitaku.ai — https://github.com/kaitakuai/experiments
