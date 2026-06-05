@@ -4,7 +4,6 @@
 
 The [kaitaku.ai](https://github.com/kaitakuai) team (Mykola [@baychak](https://github.com/baychak), Pavlo [@clanster](https://github.com/clanster)) handled MiniMax-M2.7 onboarding into the v0.2.13 governance upgrade and the post-deploy bug-fixing that followed across the v0.2.13 cycle. The work covers:
 
-- DeepSeek-V4 hardware survey → pivot to MiniMax-M2.7 (Gleb's call)
 - PoC v2 port from vLLM 0.19.0 to upstream 0.20.0 — base image for the MiniMax integration ([gonka-ai/vllm#37](https://github.com/gonka-ai/vllm/pull/37), image `ghcr.io/kaitakuai/vllm:0.20.0-pocv2`)
 - Cross-hardware MiniMax-M2.7 FP8 validation on B200 / H100 / A100 / H200 (vLLM 0.19 / 0.20 grid)
 - Final validation pass under the micro-update deadline; refresh of 2026-04 H200 artifacts after a stale `config.json` was caught
@@ -17,17 +16,6 @@ MiniMax-M2.7 was activated on mainnet via the v0.2.13 upgrade (commit `178086202
 ---
 
 ## MiniMax-M2.7 — version testing
-
-### DeepSeek-V4 survey and pivot (2026-05-05 … 2026-05-06)
-
-Initial hardware survey for DeepSeek-V4:
-
-| Variant | Required hardware | Outcome |
-|---------|-------------------|---------|
-| DeepSeek-V4 Flash | 8×H100 or 4×H200 | runs, but FP4+FP8 mixed degrades on H100 (needs Blackwell) |
-| DeepSeek-V4 Pro | 8×B300 or 16×B200 or 16×H200 | runs, but PoC OOMs at batch=1 (extra +104 GB on forward) |
-
-**Decision (Gleb, 2026-05-06).** Drop DeepSeek-V4, pivot to MiniMax-M2.7 — closer to the existing Kimi profile.
 
 ### PoC v2 port to vLLM 0.20.0 (2026-05-05)
 
@@ -113,9 +101,9 @@ Gonka core team ([@gmorgachev](https://github.com/gmorgachev), [DavidLiberman](h
 
 | Participant | GitHub | Role | Contribution |
 |-------------|--------|------|--------------|
-| Pavlo | [@clanster](https://github.com/clanster) | kaitakuai | DeepSeek-V4 hardware survey, MiniMax FP8 cross-hardware validation (B200 / H100 / A100 / H200), final validation pass, request-filter validation on vLLM 0.20, thinking_token_budget cluster PRs #1202 / #1204 |
+| Pavlo | [@clanster](https://github.com/clanster) | kaitakuai | MiniMax FP8 cross-hardware validation (B200 / H100 / A100 / H200), final validation pass, request-filter validation on vLLM 0.20, thinking_token_budget cluster PRs #1202 / #1204 |
 | Mykola | [@baychak](https://github.com/baychak) | kaitakuai | PoC v2 port to vLLM 0.20.0 (PR #37 + `vllm:0.20.0-pocv2` image), thinking_token_budget cluster PRs #1212 / #1213 / #1227, PR #1226 review, PR #1233 review, `kv_scratch` cleanup |
-| Gleb | [@gmorgachev](https://github.com/gmorgachev) | Gonka core team | DeepSeek → MiniMax pivot decision, MiniMax governance entry, micro-update deadline, post-deploy benchmark requests (DEEP_GEMM, Qwen3 240k), `kv_scratch` cleanup direction |
+| Gleb | [@gmorgachev](https://github.com/gmorgachev) | Gonka core team | MiniMax governance entry, micro-update deadline, post-deploy benchmark request (Qwen3 240k), `kv_scratch` cleanup direction |
 | David | [DavidLiberman](https://github.com/DavidLiberman) | Gonka core team | Kimi `thinking_token_budget` and corner-case requirements |
 | Danya | [qdanik](https://github.com/qdanik) |  | PR #1226 (per-model dispatch / tool-message shape / reasoning_split), PR #1233 (Kimi reasoning-burn quarantine fix) |
 
