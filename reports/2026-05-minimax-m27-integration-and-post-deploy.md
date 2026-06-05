@@ -96,7 +96,7 @@ Gleb on 2026-05-28: the existing `kv_scratch` Stage2 workaround (from Tamaz) is 
 ## Participants
 
 [kaitakuai](https://github.com/kaitakuai) ([@baychak](https://github.com/baychak), [@clanster](https://github.com/clanster)).
-Gonka core team ([@gmorgachev](https://github.com/gmorgachev), [DavidLiberman](https://github.com/DavidLiberman).
+Gonka core team ([@gmorgachev](https://github.com/gmorgachev), [GLiberman](https://github.com/GLiberman).
 [qdanik](https://github.com/qdanik).
 
 | Participant | GitHub | Role | Contribution |
@@ -104,6 +104,6 @@ Gonka core team ([@gmorgachev](https://github.com/gmorgachev), [DavidLiberman](h
 | Pavlo | [@clanster](https://github.com/clanster) | kaitakuai | MiniMax FP8 cross-hardware validation (B200 / H100 / A100 / H200), final validation pass, request-filter validation on vLLM 0.20, thinking_token_budget cluster PRs #1202 / #1204 |
 | Mykola | [@baychak](https://github.com/baychak) | kaitakuai | PoC v2 port to vLLM 0.20.0 (PR #37 + `vllm:0.20.0-pocv2` image), thinking_token_budget cluster PRs #1212 / #1213 / #1227, PR #1226 review, PR #1233 review, `kv_scratch` cleanup |
 | Gleb | [@gmorgachev](https://github.com/gmorgachev) | Gonka core team | MiniMax governance entry, micro-update deadline, post-deploy benchmark request (Qwen3 240k), `kv_scratch` cleanup direction |
-| David | [DavidLiberman](https://github.com/DavidLiberman) | Gonka core team | Kimi `thinking_token_budget` and corner-case requirements |
+| David | [GLiberman](https://github.com/GLiberman) | Gonka core team | Kimi `thinking_token_budget` and corner-case requirements |
 | Danya | [qdanik](https://github.com/qdanik) |  | PR #1226 (per-model dispatch / tool-message shape / reasoning_split), PR #1233 (Kimi reasoning-burn quarantine fix) |
 

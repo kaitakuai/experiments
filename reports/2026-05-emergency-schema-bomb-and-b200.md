@@ -84,7 +84,7 @@ Announced in the DevOps channel on 2026-05-23.
 ## Participants
 
 [kaitakuai](https://github.com/kaitakuai) ([@baychak](https://github.com/baychak), [@clanster](https://github.com/clanster)).
-Gonka core team ([@gmorgachev](https://github.com/gmorgachev), [DavidLiberman](https://github.com/DavidLiberman).
+Gonka core team ([@gmorgachev](https://github.com/gmorgachev), [GLiberman](https://github.com/GLiberman).
 [qdanik](https://github.com/qdanik)).
 
 | Participant | GitHub | Role | Contribution |
@@ -92,5 +92,5 @@ Gonka core team ([@gmorgachev](https://github.com/gmorgachev), [DavidLiberman](h
 | Pavlo | [@clanster](https://github.com/clanster) | kaitakuai | Defense PRs #1170 / #1171 / #1172, stress-test 109 requests on the new whitelist, log analysis for epoch 266 |
 | Mykola | [@baychak](https://github.com/baychak) | kaitakuai | PR #1174 on-stand repro (mlnode-021 B300) confirming the schema-bomb hypothesis, defense PRs #1177 / #1184 / #1187 / #1195, B200 image reproduction + fixed image + 72-hour soak, stall mass-update outreach |
 | Gleb | [@gmorgachev](https://github.com/gmorgachev) | Gonka core team | Epoch 266 coordination, review of defense PRs |
-| David | [DavidLiberman](https://github.com/DavidLiberman) | Gonka core team | Initial incident flagging (epoch 266 voting-power collapse, stalled-request reports), defense PR review |
+| David | [GLiberman](https://github.com/GLiberman) | Gonka core team | Initial incident flagging (epoch 266 voting-power collapse, stalled-request reports), defense PR review |
 | Danya | [qdanik](https://github.com/qdanik) |  | PR #1174 (request filters base implementation), PR #1180 |
