@@ -69,7 +69,7 @@ Gonka core team ([@gmorgachev](https://github.com/gmorgachev), [GLiberman](https
 | Participant | GitHub | Role | Contribution |
 |-------------|--------|------|--------------|
 | Pavlo | [@clanster](https://github.com/clanster) | kaitakuai | Kimi-K2.6 INT4 on 2×8×H100 InfiniBand cluster (1389 nonces/min), `VLLM_USE_FLASHINFER_MOE_INT4=1` discovery and validation on B300 / B200 |
-| Mykola | [@baychak](https://github.com/baychak) | kaitakuai | nginx 503/502 fix on `network002`, mlnode `gonka1d694r…` investigation and hotfix `v0.2.12-api-post3`, community FAQ — 17 questions / 6 review iterations |
+| Mykola | [@baychak](https://github.com/baychak) | kaitakuai | mlnode investigations and hotfixes, community FAQ — 17 questions / 6 review iterations |
 | Gleb | [@gmorgachev](https://github.com/gmorgachev) | Gonka core team | Initial requests (2×8×H100 cluster, network002 heads-up), PR-formalization suggestion for the MOE INT4 flag |
 | David | [GLiberman](https://github.com/GLiberman) | Gonka core team | mlnode `gonka1d694r…` flagging and joint debug |
 | Tania | [tcharchian](https://github.com/tcharchian) | Gonka core team | Community FAQ request, TEE working-session initiation |
