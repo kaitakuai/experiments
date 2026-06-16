@@ -141,6 +141,9 @@ deterministic per-step salt so the experiment is self-contained.
 - `results/matrix-output.txt`, `results/samehw-output.txt` — raw analyzer output.
 - `results/profiles/prof_{honest,fraud}_{cc,ee,ec}.json` — the per-step profiles.
 - `results/refs/ref_{cc,ee,ec}.json` — the prover reference trajectories.
+- `results/n64/` — the **N=64 per-nonce rerun** for `cc`/`ee` (refs, teacher-forced
+  trajectories, crosshw logs, `n64-analysis.txt`); see FINDINGS "N=64 confirmation".
+  Scripts: `code/prover-genref-n64.sh`, `code/crosshw-validator.sh`, `code/analyze_crosshw_n64.py`.
 
 ## Attribution
 

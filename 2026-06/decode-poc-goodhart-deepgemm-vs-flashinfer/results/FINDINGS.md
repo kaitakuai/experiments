@@ -67,7 +67,10 @@ is the compiled row — where decode-PoC is aligned with the product.
 Run decode-PoC **compiled**. There it (a) does not reward the DeepGEMM trap and
 (b) matches how the product actually serves. Eager decode-PoC carries a small
 residual Goodhart and (per the separability matrix) also fails to detect fraud —
-two independent reasons to compile.
+two independent reasons to compile. _Note: the separability half carries a
+tensor-parallelism confound (prover TP=1 ↔ validator TP=4); see
+`../compiled-matrix/results/FINDINGS.md`. The Goodhart result here is single-GPU
+and is not affected by it._
 
 ## Caveats
 
