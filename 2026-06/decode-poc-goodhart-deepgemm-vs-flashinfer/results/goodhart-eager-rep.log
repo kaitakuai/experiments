@@ -1,0 +1,19 @@
+REP eager (3x per backend):
+REP_START eager 23:02:45
+[flashinfer] start 23:02:45
+[flashinfer] P1 [7.81s]
+[flashinfer] S1 = 1430.3 tok/s
+[flashinfer] P2 [7.5s]
+[flashinfer] S2 = 1441.4 tok/s
+[flashinfer] P3 [7.52s]
+[flashinfer] S3 = 1458.5 tok/s
+[flashinfer] done 23:07:11
+[deepgemm] start 23:07:11
+[deepgemm] P1 [8.4s]
+[deepgemm] S1 = 1505.4 tok/s
+[deepgemm] P2 [8.11s]
+[deepgemm] S2 = 1503.1 tok/s
+[deepgemm] P3 [8.11s]
+[deepgemm] S3 = 1505.1 tok/s
+[deepgemm] done 23:11:29
+REP_DONE eager 23:11:29

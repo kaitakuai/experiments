@@ -1,0 +1,18 @@
+REP_START compiled 23:12:52
+[flashinfer] start 23:12:52
+[flashinfer] P1 [5.72s]
+[flashinfer] S1 = 3573.6 tok/s
+[flashinfer] P2 [5.51s]
+[flashinfer] S2 = 3581.6 tok/s
+[flashinfer] P3 [5.73s]
+[flashinfer] S3 = 3597.8 tok/s
+[flashinfer] done 23:15:34
+[deepgemm] start 23:15:34
+[deepgemm] P1 [6.37s]
+[deepgemm] S1 = 1818.1 tok/s
+[deepgemm] P2 [6.1s]
+[deepgemm] S2 = 1825.3 tok/s
+[deepgemm] P3 [6.11s]
+[deepgemm] S3 = 1813.3 tok/s
+[deepgemm] done 23:19:27
+REP_DONE compiled 23:19:27

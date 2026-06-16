@@ -1,0 +1,15 @@
+nonces=8 steps=65  (k in [0,16))
+
+=== determinism / non-degeneracy ===
+  [cc] step0=[8, 9, 12, 8, 3, 5, 5, 5] distinct=5/8  traj-cells=16/16
+  [ee] step0=[2, 14, 0, 11, 8, 0, 1, 10] distinct=7/8  traj-cells=16/16
+  [ec] step0=[2, 14, 0, 11, 8, 0, 1, 10] distinct=7/8  traj-cells=16/16
+  ee vs ec step0 agree = 1.000  (must be 1.000: shared eager prefill)
+
+=== same-hw compiled-vs-eager coupling ===
+  PREFILL  cc vs ee  step0 disagree = 1.000
+  DECODE   ee vs ec  step1 disagree = 0.375  (clean, no cascade)
+  DECODE   ee vs ec  step2 disagree = 0.625  (cascade onset)
+
+  cascade onset (mean first diverging step):
+    cc~ee=0.00  cc~ec=0.00  ee~ec=2.00

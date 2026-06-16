@@ -1,0 +1,32 @@
+============================================================================================
+РАЗДЕЛИТЕЛЬНАЯ СПОСОБНОСТЬ honest(FP8 cross-hw) vs fraud(AWQ) — MiniMax, B300↔H100, per-step
+============================================================================================
+
+[cc] compiled prefill + compiled decode
+  срез                         honest    fraud  gap (fraud-honest)
+  full (prefill+decode)         0.277    0.581               0.304
+  prefill only (step0)          0.250    0.750               0.500
+  decode only (steps 1..)       0.277    0.578               0.301
+
+[ee] eager prefill + eager decode
+  срез                         honest    fraud  gap (fraud-honest)
+  full (prefill+decode)         0.444    0.467               0.023
+  prefill only (step0)          0.250    0.750               0.500
+  decode only (steps 1..)       0.447    0.463               0.016
+
+[ec] eager prefill + compiled decode
+  срез                         honest    fraud  gap (fraud-honest)
+  full (prefill+decode)         0.552    0.575               0.023
+  prefill only (step0)          0.250    0.625               0.375
+  decode only (steps 1..)       0.557    0.574               0.018
+
+============================================================================================
+7 ЗАПРОШЕННЫХ СЛУЧАЕВ (gap = разделимость, больше = лучше):
+============================================================================================
+  1) compiled prefill + compiled decode      honest=0.277  fraud=0.581  gap=+0.304
+  2) только compiled prefill                 honest=0.250  fraud=0.750  gap=+0.500
+  3) только compiled decode                  honest=0.277  fraud=0.578  gap=+0.301
+  4) eager prefill + eager decode            honest=0.444  fraud=0.467  gap=+0.023
+  5) только eager prefill                    honest=0.250  fraud=0.750  gap=+0.500
+  6) только eager decode                     honest=0.447  fraud=0.463  gap=+0.016
+  7) eager prefill + compiled decode         honest=0.552  fraud=0.575  gap=+0.023

@@ -1,0 +1,21 @@
+GH_START 22:54:45
+PARAMS N_NONCES=48 STEPS=128 seq_len=256 serv:in140/out256/conc64/N256 compile=ENFORCE-EAGER
+[flashinfer] start 22:54:45  env={export VLLM_USE_FLASHINFER_MOE_FP8=1; export VLLM_USE_DEEP_GEMM=0}
+[flashinfer] ready 70s
+[flashinfer] backend-evidence: 
+[flashinfer] P-genref:
+OK   genref: 48 nonces x 129 steps -> /hf/poc-tests/gh_eager_ref_flashinfer.json  [8.06s]
+GENREF_DONE PASS
+[flashinfer] S-serving:
+SERVING: 65536 out-tok / 45.33s = 1445.7 tok/s (ok=256/256 conc=64 out=256)
+[flashinfer] done 22:57:02
+[deepgemm] start 22:57:02  env={export VLLM_USE_FLASHINFER_MOE_FP8=0; export VLLM_USE_DEEP_GEMM=1}
+[deepgemm] ready 70s
+[deepgemm] backend-evidence: 
+[deepgemm] P-genref:
+OK   genref: 48 nonces x 129 steps -> /hf/poc-tests/gh_eager_ref_deepgemm.json  [8.38s]
+GENREF_DONE PASS
+[deepgemm] S-serving:
+SERVING: 65536 out-tok / 43.56s = 1504.6 tok/s (ok=256/256 conc=64 out=256)
+[deepgemm] done 22:59:16
+GH_DONE 22:59:16
