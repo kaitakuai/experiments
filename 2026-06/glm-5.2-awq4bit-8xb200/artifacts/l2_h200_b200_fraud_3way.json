@@ -1,0 +1,86 @@
+{
+  "results": [
+    {
+      "n_total": 1000,
+      "label_a": "fp8_h200",
+      "label_b": "fp8_b200",
+      "stats": {
+        "mean": 0.1882947352565825,
+        "median": 0.18088426440954208,
+        "p25": 0.14430121332406998,
+        "p75": 0.2210569642484188,
+        "p95": 0.3035791411995888,
+        "p99": 0.36525894165039047,
+        "max": 0.5065566897392273
+      },
+      "scenarios": [
+        {
+          "name": "glm chain gate",
+          "dist_threshold": 0.4,
+          "p_mismatch": 0.02,
+          "n_mismatch": 7,
+          "rate": 0.007,
+          "p_value": 0.9997696342230958,
+          "fraud_detected": "False"
+        }
+      ]
+    },
+    {
+      "n_total": 988,
+      "label_a": "fp8_h200",
+      "label_b": "awq_b200_fraud",
+      "stats": {
+        "mean": 0.3420030926976368,
+        "median": 0.3338555693626404,
+        "p25": 0.26299090683460236,
+        "p75": 0.40577615052461624,
+        "p95": 0.5286913901567458,
+        "p99": 0.6538097262382507,
+        "max": 0.7711195945739746
+      },
+      "scenarios": [
+        {
+          "name": "glm chain gate",
+          "dist_threshold": 0.4,
+          "p_mismatch": 0.02,
+          "n_mismatch": 265,
+          "rate": 0.2682186234817814,
+          "p_value": 2.593226598125192e-209,
+          "fraud_detected": "True"
+        }
+      ]
+    },
+    {
+      "n_total": 988,
+      "label_a": "fp8_b200",
+      "label_b": "awq_b200_fraud",
+      "stats": {
+        "mean": 0.3487097252280968,
+        "median": 0.3363986313343048,
+        "p25": 0.2711368650197983,
+        "p75": 0.41180315613746643,
+        "p95": 0.5404272824525833,
+        "p99": 0.6545209056138992,
+        "max": 0.8357123732566833
+      },
+      "scenarios": [
+        {
+          "name": "glm chain gate",
+          "dist_threshold": 0.4,
+          "p_mismatch": 0.02,
+          "n_mismatch": 271,
+          "rate": 0.2742914979757085,
+          "p_value": 6.9835975459326305e-217,
+          "fraud_detected": "True"
+        }
+      ]
+    }
+  ],
+  "scenarios": [
+    [
+      "glm chain gate",
+      0.4,
+      0.02
+    ]
+  ]
+}

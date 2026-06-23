@@ -1,0 +1,69 @@
+
+==================================================
+  PoC v2 Generation Test
+==================================================
+  Model:    /root/models/GLM-5.2-FP8
+  Warmup:   5s
+  Duration: 30s per test
+  Callback: http://127.0.0.1:9999
+
+Starting batch receiver...
+Batch receiver ready.
+
+==================================================
+  PHASE 3: Batch Size Benchmark
+==================================================
+  Batch sizes: [8, 16, 32, 64]
+  Duration: 35s each (5s warmup + 30s measurement)
+
+────────────────────────────────────────
+  Testing batch_size = 8
+────────────────────────────────────────
+    5s warmup done
+    [10s] 0 nonces
+    [20s] 0 nonces
+    [30s] 80 nonces
+  Result: 80 nonces, 160/min
+
+────────────────────────────────────────
+  Testing batch_size = 16
+────────────────────────────────────────
+    5s warmup done
+    [10s] 160 nonces
+    [20s] 320 nonces
+    [30s] 480 nonces
+  Result: 480 nonces, 960/min
+
+────────────────────────────────────────
+  Testing batch_size = 32
+────────────────────────────────────────
+    5s warmup done
+    [10s] 160 nonces
+    [20s] 320 nonces
+    [30s] 480 nonces
+  Result: 480 nonces, 960/min
+
+────────────────────────────────────────
+  Testing batch_size = 64
+────────────────────────────────────────
+    5s warmup done
+    [10s] 128 nonces
+    [20s] 320 nonces
+    [30s] 508 nonces
+  Result: 508 nonces, 1016/min
+
+==================================================
+  RESULTS
+==================================================
+     Batch │   Nonces │   Nonces/min
+  ─────────┼──────────┼─────────────
+         8 │       80 │          160  
+        16 │      480 │          960  
+        32 │      480 │          960  
+        64 │      508 │         1016 ★
+==================================================
+  ★ Best batch size: 64 (1016 nonces/min)
+
+✓ Benchmark complete!
+
+Stopping batch receiver...

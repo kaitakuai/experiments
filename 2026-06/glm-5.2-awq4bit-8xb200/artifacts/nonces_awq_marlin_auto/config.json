@@ -1,0 +1,11 @@
+{
+  "gpu": "NVIDIA_B200",
+  "vllm_version": "0.23.0",
+  "model": "/root/models/GLM-5.2-AWQ-INT4",
+  "url": "http://localhost:8081",
+  "batch_size": 32,
+  "seq_len": 1024,
+  "k_dim": 12,
+  "startup_command": "AWQ-INT4 compressed-tensors MoE=marlin TP=4",
+  "timestamp": "2026-06-23T00:53:49"
+}

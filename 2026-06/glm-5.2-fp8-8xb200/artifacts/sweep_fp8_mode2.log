@@ -1,0 +1,84 @@
+PoC Phase-3 sweep: model=/root/models/GLM-5.2-FP8 role=fp8 backends=auto/auto
+batches=8 16 32 64  url=http://localhost:8081  -> /root/exp/2026-06/glm-5.2-poc-backend-sweep/artifacts/sweep_fp8_auto_auto.log
+
+==================================================
+  PoC v2 Generation Test
+==================================================
+  Model:    /root/models/GLM-5.2-FP8
+  Warmup:   5s
+  Duration: 30s per test
+  Callback: http://127.0.0.1:9999
+
+Starting batch receiver...
+Batch receiver ready.
+
+==================================================
+  PHASE 3: Batch Size Benchmark
+==================================================
+  Batch sizes: [8, 16, 32, 64]
+  Duration: 35s each (5s warmup + 30s measurement)
+
+────────────────────────────────────────
+  Testing batch_size = 8
+────────────────────────────────────────
+    5s warmup done
+    [10s] 96 nonces
+    [20s] 216 nonces
+    [30s] 344 nonces
+  Result: 344 nonces, 688/min
+
+────────────────────────────────────────
+  Testing batch_size = 16
+────────────────────────────────────────
+    5s warmup done
+    [10s] 128 nonces
+    [20s] 256 nonces
+    [30s] 384 nonces
+  Result: 384 nonces, 768/min
+
+────────────────────────────────────────
+  Testing batch_size = 32
+────────────────────────────────────────
+    5s warmup done
+    [10s] 128 nonces
+    [20s] 256 nonces
+    [30s] 384 nonces
+  Result: 384 nonces, 768/min
+
+────────────────────────────────────────
+  Testing batch_size = 64
+────────────────────────────────────────
+    5s warmup done
+    [10s] 120 nonces
+    [20s] 243 nonces
+    [30s] 366 nonces
+  Result: 366 nonces, 732/min
+
+==================================================
+  RESULTS
+==================================================
+     Batch │   Nonces │   Nonces/min
+  ─────────┼──────────┼─────────────
+         8 │      344 │          688  
+        16 │      384 │          768 ★
+        32 │      384 │          768  
+        64 │      366 │          732  
+==================================================
+  ★ Best batch size: 16 (768 nonces/min)
+
+✓ Benchmark complete!
+
+Stopping batch receiver...
+
+Best line (grep for the peak nonces/min and record it in the README table):
+Starting batch receiver...
+Batch receiver ready.
+  PHASE 3: Batch Size Benchmark
+  Batch sizes: [8, 16, 32, 64]
+  Testing batch_size = 8
+  Testing batch_size = 16
+  Testing batch_size = 32
+  Testing batch_size = 64
+     Batch │   Nonces │   Nonces/min
+  ★ Best batch size: 16 (768 nonces/min)
+Stopping batch receiver...

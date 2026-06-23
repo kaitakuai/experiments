@@ -1,0 +1,44 @@
+Starting callback server...
+Callback server listening on port 9998
+vLLM health: 200
+Config saved to artifacts/nonces_awq_marlin_auto/config.json
+
+=== Generating 1000 PoC nonces ===
+  Starting PoC generation (batch_size=32)...
+  Init response: {'status': 'OK', 'backends': 2, 'n_groups': 2, 'results': [{'port': 5001, 'status': 'OK'}, {'port': 5002, 'status': 'OK'}], 'errors': None}
+  [64/1000] 384 nonces/min (10s)
+  [256/1000] 768 nonces/min (20s)
+  [512/1000] 1024 nonces/min (30s)
+  [704/1000] 1056 nonces/min (40s)
+  [896/1000] 1075 nonces/min (50s)
+  [1024/1000] nonces collected in 51.0s
+Nonces saved: 1024 (1181/min) in 52.0s
+
+=== 5-language inference probe (sp/en/ch/ar/hi, processed_logprobs, temp=0.7 seed=1 top_k=40 top_p=0.95) ===
+  [sp] ¿Cuál es la capital de Francia? Responde en una sola frase....
+    ERROR: 'NoneType' object is not subscriptable
+  [en] What is the capital of France? Answer in one sentence....
+    ERROR: 'NoneType' object is not subscriptable
+  [ch] 法国的首都是哪里？请用一句话回答。...
+    ERROR: 'NoneType' object is not subscriptable
+  [ar] ما هي عاصمة فرنسا؟ أجب في جملة واحدة....
+    ERROR: 'NoneType' object is not subscriptable
+  [hi] फ्रांस की राजधानी क्या है? एक वाक्य में उत्तर दीजिए।...
+    ERROR: 'NoneType' object is not subscriptable
+5-lang probe saved to artifacts/nonces_awq_marlin_auto/inference_5langs.json (47.2s)
+
+==============================================================================
+  5-LANGUAGE INFERENCE PROBE — eyeball the logprobs
+==============================================================================
+
+[sp] prompt: ¿Cuál es la capital de Francia? Responde en una sola frase.
+  → text (64 tok, 64 sentinel pos):
+Traceback (most recent call last):
+  File "/root/exp/2026-06/glm-5.2-poc-backend-sweep/artifacts/collect_awq.py", line 452, in <module>
+    main()
+  File "/root/exp/2026-06/glm-5.2-poc-backend-sweep/artifacts/collect_awq.py", line 446, in main
+    print_5lang_eyeball(lang5)
+  File "/root/exp/2026-06/glm-5.2-poc-backend-sweep/artifacts/collect_awq.py", line 320, in print_5lang_eyeball
+    text_oneline = r["text"].replace("\n", " ⏎ ")
+                   ^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'replace'

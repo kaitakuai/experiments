@@ -1,0 +1,11 @@
+{
+  "gpu": "NVIDIA_H200",
+  "vllm_version": "0.23.0",
+  "model": "/root/models/GLM-5.2-FP8",
+  "url": "http://localhost:8081",
+  "batch_size": 32,
+  "seq_len": 1024,
+  "k_dim": 12,
+  "startup_command": "H200 TP=8 KV=bf16 maxnbt=65536 eager",
+  "timestamp": "2026-06-23T04:10:04"
+}

@@ -1,0 +1,2 @@
+awq cyankiwi/GLM-5.2-AWQ-INT4 431c1cd297c7a2f38d17c7b9520b10c15101df25
+fp8 zai-org/GLM-5.2-FP8 31cba24fb749908a485082bdeed6eb1ac6cffc2f
