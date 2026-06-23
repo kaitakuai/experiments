@@ -133,9 +133,9 @@ See also: [`../glm-5.2-fp8-8xh200/README.md`](../glm-5.2-fp8-8xh200/README.md) (
 
 ## Files
 
-- [`artifacts/nonces_fp8_auto_auto/nonces_1000.json`](artifacts/nonces_fp8_auto_auto/nonces_1000.json) — 1000 FP8 PoC nonces (eager, the reference vectors)
+- [`artifacts/nonces_fp8_deepgemm/nonces_1000.json`](artifacts/nonces_fp8_deepgemm/nonces_1000.json) — 1000 FP8 PoC nonces (the reference vectors; backend-independent — see note in its `config.json`)
 - [`artifacts/fp8_reference.json`](artifacts/fp8_reference.json) — same nonces, renamed for L2 (validator keys by basename)
-- [`artifacts/fp8_b200.json`](artifacts/fp8_b200.json) — same nonces copy (3-way L2 label)
+- [`artifacts/fp8_b200_deepgemm.json`](artifacts/fp8_b200_deepgemm.json) — same nonces copy (3-way L2 label)
 - [`artifacts/sweep_fp8_auto_auto.log`](artifacts/sweep_fp8_auto_auto.log) — eager PoC sweep log
 - [`artifacts/sweep_fp8_cudagraph.log`](artifacts/sweep_fp8_cudagraph.log) — CUDA graph PoC sweep log
 - [`artifacts/sweep_fp8_mode2.log`](artifacts/sweep_fp8_mode2.log) — mode 2 PoC sweep log

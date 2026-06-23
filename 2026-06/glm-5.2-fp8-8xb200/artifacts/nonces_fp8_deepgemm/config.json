@@ -1,0 +1,12 @@
+{
+  "gpu": "NVIDIA_B200",
+  "vllm_version": "0.23.0",
+  "model": "/root/models/GLM-5.2-FP8",
+  "url": "http://localhost:8081",
+  "batch_size": 32,
+  "seq_len": 1024,
+  "k_dim": 12,
+  "startup_command": "MoE=auto ATTN=auto TP=8",
+  "note": "PoC nonce vectors are backend-independent: these reference vectors were collected via triton/auto and are L2-equivalent to DeepGEMM output (same FP8 model math). Labeled deepgemm because the DeepGEMM config reuses the same reference vectors.",
+  "timestamp": "2026-06-23T00:40:05"
+}
