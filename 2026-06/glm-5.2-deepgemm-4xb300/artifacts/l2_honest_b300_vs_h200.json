@@ -1,0 +1,36 @@
+{
+  "results": [
+    {
+      "n_total": 1000,
+      "label_a": "honest_b300",
+      "label_b": "honest_h200",
+      "stats": {
+        "mean": 0.18901459779217838,
+        "median": 0.18073852360248566,
+        "p25": 0.14479560777544975,
+        "p75": 0.21740183606743813,
+        "p95": 0.3097695246338844,
+        "p99": 0.3916964122653007,
+        "max": 0.5540446043014526
+      },
+      "scenarios": [
+        {
+          "name": "glm chain gate",
+          "dist_threshold": 0.4,
+          "p_mismatch": 0.02,
+          "n_mismatch": 9,
+          "rate": 0.009,
+          "p_value": 0.9980663140356806,
+          "fraud_detected": "False"
+        }
+      ]
+    }
+  ],
+  "scenarios": [
+    [
+      "glm chain gate",
+      0.4,
+      0.02
+    ]
+  ]
+}

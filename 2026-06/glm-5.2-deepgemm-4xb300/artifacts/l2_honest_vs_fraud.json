@@ -1,0 +1,36 @@
+{
+  "results": [
+    {
+      "n_total": 980,
+      "label_a": "honest_fp8",
+      "label_b": "fraud_awq",
+      "stats": {
+        "mean": 0.3484003370969879,
+        "median": 0.33337777853012085,
+        "p25": 0.2684745639562607,
+        "p75": 0.41259142756462097,
+        "p95": 0.5524874240159987,
+        "p99": 0.676835378408432,
+        "max": 0.898697555065155
+      },
+      "scenarios": [
+        {
+          "name": "glm chain gate",
+          "dist_threshold": 0.4,
+          "p_mismatch": 0.02,
+          "n_mismatch": 279,
+          "rate": 0.28469387755102044,
+          "p_value": 3.4672608706711885e-228,
+          "fraud_detected": "True"
+        }
+      ]
+    }
+  ],
+  "scenarios": [
+    [
+      "glm chain gate",
+      0.4,
+      0.02
+    ]
+  ]
+}
