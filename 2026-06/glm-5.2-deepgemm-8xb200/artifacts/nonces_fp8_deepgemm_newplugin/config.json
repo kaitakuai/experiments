@@ -7,5 +7,5 @@
   "seq_len": 1024,
   "k_dim": 12,
   "startup_command": "MoE=deepgemm ATTN=auto TP=8",
-  "timestamp": "2026-06-23T22:16:07"
+  "timestamp": "2026-06-24T14:38:29"
 }

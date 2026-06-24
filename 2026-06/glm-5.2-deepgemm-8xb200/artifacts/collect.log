@@ -1,19 +1,34 @@
+init-retry patch applied
 Starting callback server...
 Callback server listening on port 9998
 vLLM health: 200
-Config saved to artifacts/nonces_fp8_auto_auto/config.json
+Config saved to /root/work/2026-06/glm/artifacts/nonces_fp8_deepgemm_auto/config.json
 
 === Generating 1000 PoC nonces ===
-  Starting PoC generation (batch_size=32)...
+  Starting PoC generation (batch_size=16)...
   Init response: {'status': 'OK', 'backends': 1, 'n_groups': 1, 'results': [{'port': 5001, 'status': 'OK'}], 'errors': None}
   [64/1000] 384 nonces/min (10s)
   [224/1000] 672 nonces/min (20s)
-  [416/1000] 832 nonces/min (30s)
-  [576/1000] 864 nonces/min (40s)
-  [736/1000] 883 nonces/min (50s)
-  [896/1000] 896 nonces/min (60s)
-  [1088/1000] nonces collected in 66.0s
-Nonces saved: 1088 (974/min) in 67.0s
+  [368/1000] 736 nonces/min (30s)
+  [528/1000] 792 nonces/min (40s)
+  [672/1000] 806 nonces/min (50s)
+  [832/1000] 832 nonces/min (60s)
+  [976/1000] 837 nonces/min (70s)
+  [1056/1000] nonces collected in 71.0s
+Nonces saved: 1056 (880/min) in 72.0s
+
+=== Generating 100 inference logprobs ===
+  [10/100] completions done
+  [20/100] completions done
+  [30/100] completions done
+  [40/100] completions done
+  [50/100] completions done
+  [60/100] completions done
+  [70/100] completions done
+  [80/100] completions done
+  [90/100] completions done
+  [100/100] completions done
+Logprobs saved: 100 in 215.3s
 
 === 5-language inference probe (sp/en/ch/ar/hi, processed_logprobs, temp=0.7 seed=1 top_k=40 top_p=0.95) ===
   [sp] ¿Cuál es la capital de Francia? Responde en una sola frase....
@@ -26,7 +41,7 @@ Nonces saved: 1088 (974/min) in 67.0s
     ERROR: 'NoneType' object is not subscriptable
   [hi] फ्रांस की राजधानी क्या है? एक वाक्य में उत्तर दीजिए।...
     ERROR: 'NoneType' object is not subscriptable
-5-lang probe saved to artifacts/nonces_fp8_auto_auto/inference_5langs.json (55.4s)
+5-lang probe saved to /root/work/2026-06/glm/artifacts/nonces_fp8_deepgemm_auto/inference_5langs.json (22.8s)
 
 ==============================================================================
   5-LANGUAGE INFERENCE PROBE — eyeball the logprobs
@@ -35,11 +50,11 @@ Nonces saved: 1088 (974/min) in 67.0s
 [sp] prompt: ¿Cuál es la capital de Francia? Responde en una sola frase.
   → text (64 tok, 64 sentinel pos):
 Traceback (most recent call last):
-  File "/root/exp/2026-06/glm-5.2-poc-backend-sweep/artifacts/collect_fp8_auto_auto.py", line 452, in <module>
+  File "/root/work/2026-06/glm/artifacts/collect_fp8_deepgemm_auto.py", line 458, in <module>
     main()
-  File "/root/exp/2026-06/glm-5.2-poc-backend-sweep/artifacts/collect_fp8_auto_auto.py", line 446, in main
+  File "/root/work/2026-06/glm/artifacts/collect_fp8_deepgemm_auto.py", line 452, in main
     print_5lang_eyeball(lang5)
-  File "/root/exp/2026-06/glm-5.2-poc-backend-sweep/artifacts/collect_fp8_auto_auto.py", line 320, in print_5lang_eyeball
+  File "/root/work/2026-06/glm/artifacts/collect_fp8_deepgemm_auto.py", line 326, in print_5lang_eyeball
     text_oneline = r["text"].replace("\n", " ⏎ ")
                    ^^^^^^^^^^^^^^^^^
 AttributeError: 'NoneType' object has no attribute 'replace'

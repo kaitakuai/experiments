@@ -1,0 +1,10 @@
+init: {"status":"OK","backends":1,"n_groups":1,"results":[{"port":5001,"status":"OK"}],"errors":
+  t=10s  total=144  cum_nonces/min=863
+  t=20s  total=320  cum_nonces/min=959
+  t=30s  total=512  cum_nonces/min=1023
+  t=40s  total=688  cum_nonces/min=1030
+  t=50s  total=864  cum_nonces/min=1035
+  t=60s  total=1056  cum_nonces/min=1054
+  t=70s  total=1232  cum_nonces/min=1054
+  t=80s  total=1408  cum_nonces/min=1054
+LIVEDONE
