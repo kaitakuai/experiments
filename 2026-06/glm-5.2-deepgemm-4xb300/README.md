@@ -45,8 +45,8 @@ Per-engine honest config (TP=4, DeepGEMM, CUDA graphs):
 
 ```bash
 --tensor-parallel-size 4              # 753B FP8 fits on 4×B300 (176 GB/card of 275)
---gpu-memory-utilization 0.85         # 0.92 for the 1M-context run (still leaves PoC headroom)
---max-model-len 32768                 # PoC; 1048576 for the full-context run (both fit)
+--gpu-memory-utilization 0.92         # leaves PoC headroom even at full context
+--max-model-len 1048576               # FULL 1M context (max_position_embeddings) fits on 4×B300
 --max-num-batched-tokens 16384        # DeepGEMM survives profiling only at small mnbt
 --max-num-seqs 64
 --kv-cache-dtype fp8_e4m3             # B300 sm_100 accepts e4m3 (no fp8_ds_mla needed, unlike H200)
