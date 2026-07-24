@@ -1,0 +1,24 @@
+{
+  "gpu": "NVIDIA B300 SXM6 (275,040 MiB)",
+  "driver": "580.126.09",
+  "vllm_version": "0.25.1",
+  "torch": "2.11.0+cu130",
+  "model": "deepseek-ai/DeepSeek-V4-Flash",
+  "tensor_parallel_size": 1,
+  "kv_cache_dtype": "fp8",
+  "gpu_memory_utilization": 0.9,
+  "max_model_len": 400000,
+  "max_num_batched_tokens": 32768,
+  "compilation_config": {
+    "mode": 3,
+    "cudagraph_mode": "FULL_AND_PIECEWISE",
+    "custom_ops": [
+      "all"
+    ]
+  },
+  "seq_len": 1024,
+  "k_dim": 12,
+  "gpu_kv_cache_tokens": 2604694,
+  "startup_command": "python3 -m vllm.entrypoints.openai.api_server --model deepseek-ai/DeepSeek-V4-Flash --trust-remote-code --kv-cache-dtype fp8 --gpu-memory-utilization 0.90 --max-model-len 400000 --max-num-batched-tokens 32768 --compilation-config '{\"mode\":3,\"cudagraph_mode\":\"FULL_AND_PIECEWISE\",\"custom_ops\":[\"all\"]}' --host 0.0.0.0 --port 8000",
+  "timestamp": "2026-07-24"
+}

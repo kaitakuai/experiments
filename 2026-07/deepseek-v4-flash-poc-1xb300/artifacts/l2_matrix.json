@@ -1,0 +1,44 @@
+{
+  "description": "Cross-implementation L2 of DeepSeek-V4 PoC v2 (murmur3 pseudo-input_ids). 1000 common nonces per pair, chain proto fraud test dist_threshold=0.40, p_mismatch=0.10, p_value_threshold=0.05.",
+  "block_hash": "artifact_collection_block_v1",
+  "seq_len": 1024,
+  "k_dim": 12,
+  "pairs": [
+    {
+      "a": "plugin (out-of-tree, reference)",
+      "b": "in-tree (0.23->0.25 port)",
+      "n": 1000,
+      "median_l2": 0.0024,
+      "mean_l2": 0.0258,
+      "p95_l2": 0.2032,
+      "max_l2": 0.4301,
+      "mismatch_rate_gt_0.40": 0.002,
+      "binomial_p": 1.1e-42,
+      "verdict": "PASS"
+    },
+    {
+      "a": "plugin (out-of-tree, reference)",
+      "b": "qd forward-port (0.25.1)",
+      "n": 1000,
+      "median_l2": 0.0024,
+      "mean_l2": 0.0253,
+      "p95_l2": 0.2031,
+      "max_l2": 0.4343,
+      "mismatch_rate_gt_0.40": 0.001,
+      "binomial_p": 2e-44,
+      "verdict": "PASS"
+    },
+    {
+      "a": "in-tree (0.23->0.25 port)",
+      "b": "qd forward-port (0.25.1)",
+      "n": 1000,
+      "median_l2": 0.0,
+      "mean_l2": 0.0242,
+      "p95_l2": 0.2029,
+      "max_l2": 0.4222,
+      "mismatch_rate_gt_0.40": 0.003,
+      "binomial_p": 4.1e-41,
+      "verdict": "PASS"
+    }
+  ]
+}

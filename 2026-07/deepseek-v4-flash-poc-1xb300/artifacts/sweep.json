@@ -1,0 +1,27 @@
+{
+  "gpu": "1xB300",
+  "model": "deepseek-ai/DeepSeek-V4-Flash",
+  "seq_len": 1024,
+  "config": "compiled mode3 + FULL_AND_PIECEWISE cudagraph, max_model_len=400000",
+  "warmup_s": 5,
+  "measure_s": 30,
+  "results": [
+    {
+      "batch_size": 8,
+      "nonces_30s": 624,
+      "nonces_per_min": 1248
+    },
+    {
+      "batch_size": 16,
+      "nonces_30s": 720,
+      "nonces_per_min": 1440
+    },
+    {
+      "batch_size": 32,
+      "nonces_30s": 736,
+      "nonces_per_min": 1472
+    }
+  ],
+  "best_batch_size": 32,
+  "best_nonces_per_min": 1472
+}
