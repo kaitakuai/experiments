@@ -1,0 +1,53 @@
+{
+  "gpu": "2x NVIDIA H200 NVL (143,771 MiB each, 600 W, NV6 NVLink bridge)",
+  "driver": "580.159.03",
+  "image": "ghcr.io/kaitakuai/mlnode-b300-deepseek-v4-flash:0.2.13-vllm0.25.1-overlay-k4",
+  "image_digest": "sha256:2af898fa516424ea2884b77e40ae480ce61b19a7d0112f8c9b8cc866c8bcb28a",
+  "poc": "gonka-poc plugin (worker-extension-cls gonka_poc.worker.PoCWorkerExtension)",
+  "vllm_version": "0.25.1",
+  "torch": "2.11.0+cu130",
+  "python": "3.12.13",
+  "os": "Ubuntu 22.04.5 LTS",
+  "model": "deepseek-ai/DeepSeek-V4-Flash",
+  "model_size_on_disk": "149 GiB",
+  "runner_py_overrides": {
+    "--tensor-parallel-size": "2 (image default 1; 149 GiB weights exceed one 140 GB H200)",
+    "--max-model-len": "400000 (image default 200000)",
+    "--max-num-batched-tokens": "32768 (image default 16384)"
+  },
+  "runner_py_unchanged": {
+    "--gpu-memory-utilization": "0.90",
+    "--kv-cache-dtype": "fp8",
+    "--logprobs-mode": "processed_logprobs",
+    "--trust-remote-code": true
+  },
+  "modes": {
+    "eager": {
+      "extra_args": [
+        "--enforce-eager"
+      ],
+      "cuda_graphs": false,
+      "cold_start_s": 255,
+      "kv_per_gpu_gib": 39.69,
+      "gpu_kv_cache_tokens": 1225837,
+      "max_concurrency_at_400k": 3.0
+    },
+    "compiled": {
+      "extra_args": [
+        "--compilation-config",
+        "{\"mode\":3,\"cudagraph_mode\":\"FULL_AND_PIECEWISE\",\"custom_ops\":[\"all\"]}"
+      ],
+      "cuda_graphs": "breakable CUDA graph enabled; capture 61 s, 2.41 GiB",
+      "cold_start_s": 225,
+      "kv_per_gpu_gib": 36.88,
+      "gpu_kv_cache_tokens": 1139114
+    }
+  },
+  "poc_params": {
+    "seq_len": 1024,
+    "k_dim": 12,
+    "block_hash": "artifact_collection_block_v1"
+  },
+  "sm90_fix": "ln -s libnvrtc.so.13 libnvrtc.so in /usr/local/cuda/lib64 and targets/x86_64-linux/lib (FlashInfer JIT links -lnvrtc)",
+  "date": "2026-07-24"
+}

@@ -25,9 +25,9 @@ Two results:
    supported one for V4) — 85 s / 2.37 GiB — and pays for it many times over. This is
    the practically important knob for V4 serving.
 
-Cross-validating the nonces: 4×H100 TP=4 agrees with the 1×B300 TP=1 baselines at
-~0.19 median L2 and 2.6–3.1 % mismatch — **PASS** under the chain distance threshold
-with the calibrated `p_mismatch = 0.02`.
+Cross-validating the nonces: 4×H100 TP=4 sits at ~0.19 median L2 against the 1×B300
+TP=1 baselines, with 2.6–3.0 % of nonces beyond distance 0.4. Reported as distances
+only — V4 has no calibrated thresholds yet.
 
 ## Hardware
 
@@ -143,21 +143,22 @@ Turning CUDA graphs on (i.e. *not* passing `--enforce-eager`) is worth **8–15�
 sequential and moderate-concurrency profiles and ~1.9× at maximum concurrency, where the
 GPU is already saturated and kernel-launch overhead is amortised.
 
-## Cross-validation (canonical L2)
+## Nonce cross-validation (distances)
 
-`scripts/compare_nonces.py` — decode_vector → per-nonce L2 → `binomtest(alternative="greater")`,
-`fraud_threshold=0.01`. 1000 common nonces per pair.
+`scripts/compare_nonces.py` — canonical `decode_vector` → per-nonce L2. 1000 common
+nonces per pair.
 
-Verdicts below use the chain distance threshold `0.4` with the calibrated
-`p_mismatch = 0.02`. Every threshold scenario the script reports is preserved in
-`artifacts/l2_matrix.json`.
+**No pass/fail verdict is drawn.** The validation thresholds used elsewhere are
+calibrated for other models; DeepSeek-V4's own limits are still to be set, so the numbers
+below are reported as measurements only. The mismatch column counts nonces further apart
+than 0.4 purely as a descriptive statistic.
 
-| A | B | median L2 | mean L2 | mismatch @0.4 | verdict |
-|---|---|----------:|--------:|--------------:|:-------:|
-| eager 4×H100 | compiled 4×H100 | 0.1857 | 0.1962 | 2.70 % | **PASS** |
-| eager 4×H100 | B300 TP1 plugin | 0.1889 | 0.2033 | 3.00 % | **PASS** |
-| compiled 4×H100 | B300 TP1 plugin | 0.1889 | 0.2005 | 2.60 % | **PASS** |
-| compiled 4×H100 | B300 TP1 in-tree fork | 0.1870 | 0.1998 | 2.90 % | **PASS** |
+| A | B | median L2 | mean L2 | max L2 | nonces >0.4 |
+|---|---|----------:|--------:|-------:|------------:|
+| eager 4×H100 | compiled 4×H100 (same box) | 0.1857 | 0.1962 | 0.704 | 2.70 % |
+| eager 4×H100 | B300 TP1 plugin | 0.1889 | 0.2033 | 1.484 | 3.00 % |
+| compiled 4×H100 | B300 TP1 plugin | 0.1889 | 0.2005 | 1.522 | 2.60 % |
+| compiled 4×H100 | B300 TP1 in-tree fork | 0.1870 | 0.1998 | 1.524 | 2.90 % |
 
 The two runs on the **same box** differ by as much as the **cross-hardware** pairs
 (2.70 % vs 2.6–3.1 %). The dominant term is therefore not hardware, topology or CUDA
@@ -170,7 +171,7 @@ same envelope.
 - `compressa-perf-comparison.md` — full inference tables, eager vs compiled
 - `artifacts/config.json` — hardware, versions, runner.py overrides, per-mode resolution
 - `artifacts/sweep.json` — PoC sweep and collection numbers
-- `artifacts/l2_matrix.json` — canonical L2 verdicts for all pairs
+- `artifacts/l2_matrix.json` — L2 distances and mismatch counts for all pairs
 - `artifacts/nonces_eager.json`, `artifacts/nonces_compiled.json` — 1000+ nonce vectors each
 - `artifacts/h100_4x_v4_poc_{eager,compiled}.log` — raw sweep output
 - `artifacts/h100_4x_v4_compressa_{eager,compiled}.log` — raw compressa output

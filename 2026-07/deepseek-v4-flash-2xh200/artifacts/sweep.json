@@ -1,0 +1,60 @@
+{
+  "gpu": "2xH200 NVL TP=2",
+  "model": "deepseek-ai/DeepSeek-V4-Flash",
+  "seq_len": 1024,
+  "method": "run_pow_generation.py --phase 3 (5 s warmup + 30 s steady state)",
+  "eager": [
+    {
+      "batch_size": 8,
+      "nonces_30s": 480,
+      "nonces_per_min": 960
+    },
+    {
+      "batch_size": 16,
+      "nonces_30s": 512,
+      "nonces_per_min": 1024
+    },
+    {
+      "batch_size": 32,
+      "nonces_30s": 480,
+      "nonces_per_min": 960
+    }
+  ],
+  "compiled": [
+    {
+      "batch_size": 8,
+      "nonces_30s": 488,
+      "nonces_per_min": 976
+    },
+    {
+      "batch_size": 16,
+      "nonces_30s": 496,
+      "nonces_per_min": 992
+    },
+    {
+      "batch_size": 32,
+      "nonces_30s": 448,
+      "nonces_per_min": 896
+    }
+  ],
+  "best": {
+    "eager": {
+      "batch_size": 16,
+      "nonces_per_min": 1024
+    },
+    "compiled": {
+      "batch_size": 16,
+      "nonces_per_min": 992
+    }
+  },
+  "collection": {
+    "eager": {
+      "nonces": 1056,
+      "nonces_per_min": 769
+    },
+    "compiled": {
+      "nonces": 1024,
+      "nonces_per_min": 793
+    }
+  }
+}
