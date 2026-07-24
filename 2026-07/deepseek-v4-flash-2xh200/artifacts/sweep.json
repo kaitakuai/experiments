@@ -1,60 +1,61 @@
 {
-  "gpu": "2xH200 NVL TP=2",
+  "gpu": "2xH200 SXM TP=2",
   "model": "deepseek-ai/DeepSeek-V4-Flash",
   "seq_len": 1024,
   "method": "run_pow_generation.py --phase 3 (5 s warmup + 30 s steady state)",
   "eager": [
     {
       "batch_size": 8,
-      "nonces_30s": 480,
-      "nonces_per_min": 960
+      "nonces_30s": 552,
+      "nonces_per_min": 1104
     },
     {
       "batch_size": 16,
-      "nonces_30s": 512,
-      "nonces_per_min": 1024
+      "nonces_30s": 592,
+      "nonces_per_min": 1184
     },
     {
       "batch_size": 32,
-      "nonces_30s": 480,
-      "nonces_per_min": 960
+      "nonces_30s": 608,
+      "nonces_per_min": 1216
     }
   ],
   "compiled": [
     {
       "batch_size": 8,
-      "nonces_30s": 488,
-      "nonces_per_min": 976
+      "nonces_30s": 552,
+      "nonces_per_min": 1104
     },
     {
       "batch_size": 16,
-      "nonces_30s": 496,
-      "nonces_per_min": 992
+      "nonces_30s": 592,
+      "nonces_per_min": 1184
     },
     {
       "batch_size": 32,
-      "nonces_30s": 448,
-      "nonces_per_min": 896
+      "nonces_30s": 608,
+      "nonces_per_min": 1216
     }
   ],
   "best": {
     "eager": {
-      "batch_size": 16,
-      "nonces_per_min": 1024
+      "batch_size": 32,
+      "nonces_per_min": 1216
     },
     "compiled": {
-      "batch_size": 16,
-      "nonces_per_min": 992
+      "batch_size": 32,
+      "nonces_per_min": 1216
     }
   },
   "collection": {
     "eager": {
       "nonces": 1056,
-      "nonces_per_min": 769
+      "nonces_per_min": 1011
     },
     "compiled": {
-      "nonces": 1024,
-      "nonces_per_min": 793
+      "nonces": 1056,
+      "nonces_per_min": 1011
     }
-  }
+  },
+  "note": "an earlier run on H200 NVL (NV6 bridge) gave 1024 nonces/min peaking at batch 16; SXM is ~19% faster and rises to batch 32"
 }

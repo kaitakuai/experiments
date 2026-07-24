@@ -1,0 +1,52 @@
+{
+  "honest_b200__honest_b300": {
+    "n_compared": 1000,
+    "median_l2": 0.1869448870420456,
+    "pct_above_0.4": 3.5999999999999996
+  },
+  "honest_b200__honest_h200": {
+    "n_compared": 1000,
+    "median_l2": 0.18948683142662048,
+    "pct_above_0.4": 3.8
+  },
+  "honest_b200__fraud_nvfp4": {
+    "n_compared": 1000,
+    "median_l2": 0.21017643809318542,
+    "pct_above_0.4": 6.4
+  },
+  "honest_b200__fraud_v4base": {
+    "n_compared": 1000,
+    "median_l2": 0.43842875957489014,
+    "pct_above_0.4": 61.5
+  },
+  "honest_b300__honest_h200": {
+    "n_compared": 1000,
+    "median_l2": 0.1890771985054016,
+    "pct_above_0.4": 2.8000000000000003
+  },
+  "honest_b300__fraud_nvfp4": {
+    "n_compared": 1000,
+    "median_l2": 0.21382156014442444,
+    "pct_above_0.4": 5.7
+  },
+  "honest_b300__fraud_v4base": {
+    "n_compared": 1000,
+    "median_l2": 0.44369786977767944,
+    "pct_above_0.4": 61.7
+  },
+  "honest_h200__fraud_nvfp4": {
+    "n_compared": 1000,
+    "median_l2": 0.21234050393104553,
+    "pct_above_0.4": 5.800000000000001
+  },
+  "honest_h200__fraud_v4base": {
+    "n_compared": 1000,
+    "median_l2": 0.4418812096118927,
+    "pct_above_0.4": 61.5
+  },
+  "fraud_nvfp4__fraud_v4base": {
+    "n_compared": 1000,
+    "median_l2": 0.4389641582965851,
+    "pct_above_0.4": 61.5
+  }
+}

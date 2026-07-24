@@ -1,5 +1,5 @@
 {
-  "gpu": "2x NVIDIA H200 NVL (143,771 MiB each, 600 W, NV6 NVLink bridge)",
+  "gpu": "2x NVIDIA H200 SXM (143,771 MiB each, 700 W, NV18 full mesh)",
   "driver": "580.159.03",
   "image": "ghcr.io/kaitakuai/mlnode-b300-deepseek-v4-flash:0.2.13-vllm0.25.1-overlay-k4",
   "image_digest": "sha256:2af898fa516424ea2884b77e40ae480ce61b19a7d0112f8c9b8cc866c8bcb28a",
@@ -27,9 +27,9 @@
         "--enforce-eager"
       ],
       "cuda_graphs": false,
-      "cold_start_s": 255,
-      "kv_per_gpu_gib": 39.69,
-      "gpu_kv_cache_tokens": 1225837,
+      "cold_start_s": 315,
+      "kv_per_gpu_gib": 39.33,
+      "gpu_kv_cache_tokens": 1214683,
       "max_concurrency_at_400k": 3.0
     },
     "compiled": {
@@ -37,10 +37,10 @@
         "--compilation-config",
         "{\"mode\":3,\"cudagraph_mode\":\"FULL_AND_PIECEWISE\",\"custom_ops\":[\"all\"]}"
       ],
-      "cuda_graphs": "breakable CUDA graph enabled; capture 61 s, 2.41 GiB",
-      "cold_start_s": 225,
+      "cuda_graphs": "breakable CUDA graph enabled (capture logged)",
+      "cold_start_s": null,
       "kv_per_gpu_gib": 36.88,
-      "gpu_kv_cache_tokens": 1139114
+      "gpu_kv_cache_tokens": 1127930
     }
   },
   "poc_params": {
@@ -49,5 +49,6 @@
     "block_hash": "artifact_collection_block_v1"
   },
   "sm90_fix": "ln -s libnvrtc.so.13 libnvrtc.so in /usr/local/cuda/lib64 and targets/x86_64-linux/lib (FlashInfer JIT links -lnvrtc)",
-  "date": "2026-07-24"
+  "date": "2026-07-24",
+  "form_factor_note": "SXM verified by power.max_limit=700W and NV18 topology (an earlier NVL/600W run was discarded)"
 }

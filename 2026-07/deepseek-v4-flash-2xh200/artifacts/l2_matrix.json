@@ -1,255 +1,45 @@
 {
-  "method": "canonical gonka decode_vector -> per-nonce L2. Distances and mismatch counts only: DeepSeek-V4 has no calibrated validation thresholds yet, so no pass/fail verdict is drawn here.",
-  "block_hash": "artifact_collection_block_v1",
-  "seq_len": 1024,
-  "k_dim": 12,
+  "method": "canonical gonka decode_vector -> per-nonce L2; distances and mismatch counts only (V4 has no calibrated thresholds yet)",
   "pairs": [
     {
-      "a": "eager 2xH200 TP2",
-      "b": "compiled 2xH200 TP2",
-      "mean_l2": 0.1967,
-      "median_l2": 0.184,
-      "max_l2": 0.6632,
-      "scenarios": [
-        {
-          "scenario": "vllm strict (self-validation default)",
-          "dist_threshold": 0.02,
-          "p_mismatch": 0.001,
-          "n_mismatch": 995,
-          "n_total": 1000,
-          "rate_pct": 99.5
-        },
-        {
-          "scenario": "PoC report calibrated honest 98pct",
-          "dist_threshold": 0.174,
-          "p_mismatch": 0.02,
-          "n_mismatch": 552,
-          "n_total": 1000,
-          "rate_pct": 55.2
-        },
-        {
-          "scenario": "chain proto default (production)",
-          "dist_threshold": 0.4,
-          "p_mismatch": 0.001,
-          "n_mismatch": 35,
-          "n_total": 1000,
-          "rate_pct": 3.5
-        },
-        {
-          "scenario": "chain proto default + calibrated p_mis",
-          "dist_threshold": 0.4,
-          "p_mismatch": 0.02,
-          "n_mismatch": 35,
-          "n_total": 1000,
-          "rate_pct": 3.5
-        }
-      ]
+      "a": "eager 2\u00d7H200 SXM",
+      "b": "compiled 2\u00d7H200 SXM (same box)",
+      "median_l2": 0.183,
+      "mean_l2": 0.1963,
+      "max_l2": 1.3466,
+      "mismatch_gt_0.4_pct": 2.9
     },
     {
-      "a": "eager 2xH200 TP2",
-      "b": "B300 TP1 plugin (reference)",
-      "mean_l2": 0.1971,
-      "median_l2": 0.1812,
-      "max_l2": 0.682,
-      "scenarios": [
-        {
-          "scenario": "vllm strict (self-validation default)",
-          "dist_threshold": 0.02,
-          "p_mismatch": 0.001,
-          "n_mismatch": 990,
-          "n_total": 1000,
-          "rate_pct": 99.0
-        },
-        {
-          "scenario": "PoC report calibrated honest 98pct",
-          "dist_threshold": 0.174,
-          "p_mismatch": 0.02,
-          "n_mismatch": 541,
-          "n_total": 1000,
-          "rate_pct": 54.1
-        },
-        {
-          "scenario": "chain proto default (production)",
-          "dist_threshold": 0.4,
-          "p_mismatch": 0.001,
-          "n_mismatch": 29,
-          "n_total": 1000,
-          "rate_pct": 2.9
-        },
-        {
-          "scenario": "chain proto default + calibrated p_mis",
-          "dist_threshold": 0.4,
-          "p_mismatch": 0.02,
-          "n_mismatch": 29,
-          "n_total": 1000,
-          "rate_pct": 2.9
-        }
-      ]
+      "a": "eager 2\u00d7H200 SXM",
+      "b": "B300 TP1 plugin",
+      "median_l2": 0.1891,
+      "mean_l2": 0.1991,
+      "max_l2": 1.3696,
+      "mismatch_gt_0.4_pct": 2.8
     },
     {
-      "a": "compiled 2xH200 TP2",
-      "b": "B300 TP1 plugin (reference)",
-      "mean_l2": 0.1996,
-      "median_l2": 0.1898,
-      "max_l2": 0.7009,
-      "scenarios": [
-        {
-          "scenario": "vllm strict (self-validation default)",
-          "dist_threshold": 0.02,
-          "p_mismatch": 0.001,
-          "n_mismatch": 993,
-          "n_total": 1000,
-          "rate_pct": 99.3
-        },
-        {
-          "scenario": "PoC report calibrated honest 98pct",
-          "dist_threshold": 0.174,
-          "p_mismatch": 0.02,
-          "n_mismatch": 579,
-          "n_total": 1000,
-          "rate_pct": 57.9
-        },
-        {
-          "scenario": "chain proto default (production)",
-          "dist_threshold": 0.4,
-          "p_mismatch": 0.001,
-          "n_mismatch": 25,
-          "n_total": 1000,
-          "rate_pct": 2.5
-        },
-        {
-          "scenario": "chain proto default + calibrated p_mis",
-          "dist_threshold": 0.4,
-          "p_mismatch": 0.02,
-          "n_mismatch": 25,
-          "n_total": 1000,
-          "rate_pct": 2.5
-        }
-      ]
+      "a": "compiled 2\u00d7H200 SXM",
+      "b": "B300 TP1 plugin",
+      "median_l2": 0.1871,
+      "mean_l2": 0.2,
+      "max_l2": 1.2915,
+      "mismatch_gt_0.4_pct": 3.2
     },
     {
-      "a": "compiled 2xH200 TP2",
-      "b": "B300 TP1 in-tree fork",
-      "mean_l2": 0.1996,
-      "median_l2": 0.191,
-      "max_l2": 0.6992,
-      "scenarios": [
-        {
-          "scenario": "vllm strict (self-validation default)",
-          "dist_threshold": 0.02,
-          "p_mismatch": 0.001,
-          "n_mismatch": 993,
-          "n_total": 1000,
-          "rate_pct": 99.3
-        },
-        {
-          "scenario": "PoC report calibrated honest 98pct",
-          "dist_threshold": 0.174,
-          "p_mismatch": 0.02,
-          "n_mismatch": 583,
-          "n_total": 1000,
-          "rate_pct": 58.3
-        },
-        {
-          "scenario": "chain proto default (production)",
-          "dist_threshold": 0.4,
-          "p_mismatch": 0.001,
-          "n_mismatch": 23,
-          "n_total": 1000,
-          "rate_pct": 2.3
-        },
-        {
-          "scenario": "chain proto default + calibrated p_mis",
-          "dist_threshold": 0.4,
-          "p_mismatch": 0.02,
-          "n_mismatch": 23,
-          "n_total": 1000,
-          "rate_pct": 2.3
-        }
-      ]
+      "a": "eager 2\u00d7H200 SXM",
+      "b": "eager 4\u00d7H100 SXM",
+      "median_l2": 0.1884,
+      "mean_l2": 0.1978,
+      "max_l2": 1.0214,
+      "mismatch_gt_0.4_pct": 2.5
     },
     {
-      "a": "eager 2xH200 TP2",
-      "b": "eager 4xH100 TP4",
-      "mean_l2": 0.1977,
-      "median_l2": 0.1824,
-      "max_l2": 1.3416,
-      "scenarios": [
-        {
-          "scenario": "vllm strict (self-validation default)",
-          "dist_threshold": 0.02,
-          "p_mismatch": 0.001,
-          "n_mismatch": 991,
-          "n_total": 1000,
-          "rate_pct": 99.1
-        },
-        {
-          "scenario": "PoC report calibrated honest 98pct",
-          "dist_threshold": 0.174,
-          "p_mismatch": 0.02,
-          "n_mismatch": 551,
-          "n_total": 1000,
-          "rate_pct": 55.1
-        },
-        {
-          "scenario": "chain proto default (production)",
-          "dist_threshold": 0.4,
-          "p_mismatch": 0.001,
-          "n_mismatch": 33,
-          "n_total": 1000,
-          "rate_pct": 3.3
-        },
-        {
-          "scenario": "chain proto default + calibrated p_mis",
-          "dist_threshold": 0.4,
-          "p_mismatch": 0.02,
-          "n_mismatch": 33,
-          "n_total": 1000,
-          "rate_pct": 3.3
-        }
-      ]
-    },
-    {
-      "a": "compiled 2xH200 TP2",
-      "b": "compiled 4xH100 TP4",
-      "mean_l2": 0.1989,
-      "median_l2": 0.1864,
-      "max_l2": 1.456,
-      "scenarios": [
-        {
-          "scenario": "vllm strict (self-validation default)",
-          "dist_threshold": 0.02,
-          "p_mismatch": 0.001,
-          "n_mismatch": 995,
-          "n_total": 1000,
-          "rate_pct": 99.5
-        },
-        {
-          "scenario": "PoC report calibrated honest 98pct",
-          "dist_threshold": 0.174,
-          "p_mismatch": 0.02,
-          "n_mismatch": 571,
-          "n_total": 1000,
-          "rate_pct": 57.1
-        },
-        {
-          "scenario": "chain proto default (production)",
-          "dist_threshold": 0.4,
-          "p_mismatch": 0.001,
-          "n_mismatch": 33,
-          "n_total": 1000,
-          "rate_pct": 3.3
-        },
-        {
-          "scenario": "chain proto default + calibrated p_mis",
-          "dist_threshold": 0.4,
-          "p_mismatch": 0.02,
-          "n_mismatch": 33,
-          "n_total": 1000,
-          "rate_pct": 3.3
-        }
-      ]
+      "a": "eager 2\u00d7H200 SXM",
+      "b": "eager 2\u00d7B200",
+      "median_l2": 0.1891,
+      "mean_l2": 0.203,
+      "max_l2": 1.3275,
+      "mismatch_gt_0.4_pct": 3.7
     }
-  ],
-  "note": "mismatch counts are reported at distance 0.4 purely as a descriptive statistic"
+  ]
 }

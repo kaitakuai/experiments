@@ -1,0 +1,200 @@
++ exec
++ FM=Intel/DeepSeek-V4-Flash-W4A16-AutoRound
++ API=http://127.0.0.1:8081
++ for Q in moe_wna16 gptq_marlin auto_gptq gptq compressed-tensors
++ echo '=== TRY_QUANT moe_wna16 ==='
+=== TRY_QUANT moe_wna16 ===
++ curl -s -X POST http://127.0.0.1:8081/api/v1/inference/down -m 60
++ sleep 15
++ curl -s -X POST http://127.0.0.1:8081/api/v1/inference/up/async -H 'Content-Type: application/json' -d '{"model":"Intel/DeepSeek-V4-Flash-W4A16-AutoRound","dtype":"auto","additional_args":["--enforce-eager","--quantization","moe_wna16"]}' -m 60
++ head -c 150
+{"status":"starting","message":"Inference startup initiated in background"}+ echo
+
++ OK=0
+++ seq 1 60
++ for i in $(seq 1 60)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;d=json.load(sys.stdin);print(d.get('\''status'\''),d.get('\''is_running'\''))'
++ S='in_progress False'
++ case "$S" in
++ sleep 15
++ for i in $(seq 1 60)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;d=json.load(sys.stdin);print(d.get('\''status'\''),d.get('\''is_running'\''))'
++ S='in_progress False'
++ case "$S" in
++ sleep 15
++ for i in $(seq 1 60)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;d=json.load(sys.stdin);print(d.get('\''status'\''),d.get('\''is_running'\''))'
++ S='in_progress False'
++ case "$S" in
++ sleep 15
++ for i in $(seq 1 60)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;d=json.load(sys.stdin);print(d.get('\''status'\''),d.get('\''is_running'\''))'
++ S='in_progress False'
++ case "$S" in
++ sleep 15
++ for i in $(seq 1 60)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;d=json.load(sys.stdin);print(d.get('\''status'\''),d.get('\''is_running'\''))'
++ S='in_progress False'
++ case "$S" in
++ sleep 15
++ for i in $(seq 1 60)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;d=json.load(sys.stdin);print(d.get('\''status'\''),d.get('\''is_running'\''))'
++ S='in_progress False'
++ case "$S" in
++ sleep 15
++ for i in $(seq 1 60)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;d=json.load(sys.stdin);print(d.get('\''status'\''),d.get('\''is_running'\''))'
++ S='failed False'
++ case "$S" in
++ echo '=== QUANT_FAIL moe_wna16 ==='
+=== QUANT_FAIL moe_wna16 ===
++ grep -iE 'AttributeError|ValueError|KeyError|not supported|unsupported|Unknown quant' /root/api.log
++ tail -3
++ cut -c1-140
+(Worker_TP0 pid=4508) ERROR 07-24 23:21:05 [multiproc_executor.py:1008] AttributeError: 'ColumnParallelLinear' object has no attribute 'weig
+(Worker_TP0 pid=4508) AttributeError: /usr/local/lib/python3.12/dist-packages/tilelang/lib/libcudart_stub.so: undefined symbol: cudaDeviceRe
+(Worker_TP1 pid=4509) AttributeError: /usr/local/lib/python3.12/dist-packages/tilelang/lib/libcudart_stub.so: undefined symbol: cudaDeviceRe
++ break
++ '[' 0 = 1 ']'
++ for Q in moe_wna16 gptq_marlin auto_gptq gptq compressed-tensors
++ echo '=== TRY_QUANT gptq_marlin ==='
+=== TRY_QUANT gptq_marlin ===
++ curl -s -X POST http://127.0.0.1:8081/api/v1/inference/down -m 60
++ sleep 15
++ curl -s -X POST http://127.0.0.1:8081/api/v1/inference/up/async -H 'Content-Type: application/json' -d '{"model":"Intel/DeepSeek-V4-Flash-W4A16-AutoRound","dtype":"auto","additional_args":["--enforce-eager","--quantization","gptq_marlin"]}' -m 60
++ head -c 150
+{"status":"starting","message":"Inference startup initiated in background"}+ echo
+
++ OK=0
+++ seq 1 60
++ for i in $(seq 1 60)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;d=json.load(sys.stdin);print(d.get('\''status'\''),d.get('\''is_running'\''))'
++ S='in_progress False'
++ case "$S" in
++ sleep 15
++ for i in $(seq 1 60)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;d=json.load(sys.stdin);print(d.get('\''status'\''),d.get('\''is_running'\''))'
++ S='in_progress False'
++ case "$S" in
++ sleep 15
++ for i in $(seq 1 60)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;d=json.load(sys.stdin);print(d.get('\''status'\''),d.get('\''is_running'\''))'
++ S='in_progress False'
++ case "$S" in
++ sleep 15
++ for i in $(seq 1 60)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;d=json.load(sys.stdin);print(d.get('\''status'\''),d.get('\''is_running'\''))'
++ S='in_progress False'
++ case "$S" in
++ sleep 15
++ for i in $(seq 1 60)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;d=json.load(sys.stdin);print(d.get('\''status'\''),d.get('\''is_running'\''))'
++ S='in_progress False'
++ case "$S" in
++ sleep 15
++ for i in $(seq 1 60)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;d=json.load(sys.stdin);print(d.get('\''status'\''),d.get('\''is_running'\''))'
++ S='failed False'
++ case "$S" in
++ echo '=== QUANT_FAIL gptq_marlin ==='
+=== QUANT_FAIL gptq_marlin ===
++ grep -iE 'AttributeError|ValueError|KeyError|not supported|unsupported|Unknown quant' /root/api.log
++ tail -3
++ cut -c1-140
+(Worker_TP0 pid=5434) ERROR 07-24 23:22:49 [multiproc_executor.py:1008] AttributeError: 'ColumnParallelLinear' object has no attribute 'weig
+(Worker_TP1 pid=5435) AttributeError: /usr/local/lib/python3.12/dist-packages/tilelang/lib/libcudart_stub.so: undefined symbol: cudaDeviceRe
+(Worker_TP0 pid=5434) AttributeError: /usr/local/lib/python3.12/dist-packages/tilelang/lib/libcudart_stub.so: undefined symbol: cudaDeviceRe
++ break
++ '[' 0 = 1 ']'
++ for Q in moe_wna16 gptq_marlin auto_gptq gptq compressed-tensors
++ echo '=== TRY_QUANT auto_gptq ==='
+=== TRY_QUANT auto_gptq ===
++ curl -s -X POST http://127.0.0.1:8081/api/v1/inference/down -m 60
++ sleep 15
++ curl -s -X POST http://127.0.0.1:8081/api/v1/inference/up/async -H 'Content-Type: application/json' -d '{"model":"Intel/DeepSeek-V4-Flash-W4A16-AutoRound","dtype":"auto","additional_args":["--enforce-eager","--quantization","auto_gptq"]}' -m 60
++ head -c 150
+{"status":"starting","message":"Inference startup initiated in background"}+ echo
+
++ OK=0
+++ seq 1 60
++ for i in $(seq 1 60)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;d=json.load(sys.stdin);print(d.get('\''status'\''),d.get('\''is_running'\''))'
++ S='in_progress False'
++ case "$S" in
++ sleep 15
++ for i in $(seq 1 60)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;d=json.load(sys.stdin);print(d.get('\''status'\''),d.get('\''is_running'\''))'
++ S='in_progress False'
++ case "$S" in
++ sleep 15
++ for i in $(seq 1 60)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;d=json.load(sys.stdin);print(d.get('\''status'\''),d.get('\''is_running'\''))'
++ S='in_progress False'
++ case "$S" in
++ sleep 15
++ for i in $(seq 1 60)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;d=json.load(sys.stdin);print(d.get('\''status'\''),d.get('\''is_running'\''))'
++ S='in_progress False'
++ case "$S" in
++ sleep 15
++ for i in $(seq 1 60)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;d=json.load(sys.stdin);print(d.get('\''status'\''),d.get('\''is_running'\''))'
++ S='in_progress False'
++ case "$S" in
++ sleep 15
++ for i in $(seq 1 60)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;d=json.load(sys.stdin);print(d.get('\''status'\''),d.get('\''is_running'\''))'
++ S='failed False'
++ case "$S" in
++ echo '=== QUANT_FAIL auto_gptq ==='
+=== QUANT_FAIL auto_gptq ===
++ grep -iE 'AttributeError|ValueError|KeyError|not supported|unsupported|Unknown quant' /root/api.log
++ tail -3
++ cut -c1-140
+(Worker_TP0 pid=6357) ERROR 07-24 23:24:20 [multiproc_executor.py:1008] AttributeError: 'ColumnParallelLinear' object has no attribute 'weig
+(Worker_TP1 pid=6358) AttributeError: /usr/local/lib/python3.12/dist-packages/tilelang/lib/libcudart_stub.so: undefined symbol: cudaDeviceRe
+(Worker_TP0 pid=6357) AttributeError: /usr/local/lib/python3.12/dist-packages/tilelang/lib/libcudart_stub.so: undefined symbol: cudaDeviceRe
++ break
++ '[' 0 = 1 ']'
++ for Q in moe_wna16 gptq_marlin auto_gptq gptq compressed-tensors
++ echo '=== TRY_QUANT gptq ==='
+=== TRY_QUANT gptq ===
++ curl -s -X POST http://127.0.0.1:8081/api/v1/inference/down -m 60
++ sleep 15
++ curl -s -X POST http://127.0.0.1:8081/api/v1/inference/up/async -H 'Content-Type: application/json' -d '{"model":"Intel/DeepSeek-V4-Flash-W4A16-AutoRound","dtype":"auto","additional_args":["--enforce-eager","--quantization","gptq"]}' -m 60
++ head -c 150
+{"status":"starting","message":"Inference startup initiated in background"}+ echo
+
++ OK=0
+++ seq 1 60
++ for i in $(seq 1 60)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;d=json.load(sys.stdin);print(d.get('\''status'\''),d.get('\''is_running'\''))'
++ S='in_progress False'
++ case "$S" in
++ sleep 15
++ for i in $(seq 1 60)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;d=json.load(sys.stdin);print(d.get('\''status'\''),d.get('\''is_running'\''))'
++ S='in_progress False'
++ case "$S" in
++ sleep 15
