@@ -1,0 +1,62 @@
+{
+  "gpu": "4xH100 SXM5 TP=4",
+  "model": "deepseek-ai/DeepSeek-V4-Flash",
+  "seq_len": 1024,
+  "method": "run_pow_generation.py --phase 3 (5 s warmup + 30 s steady-state via batch receiver)",
+  "eager": [
+    {
+      "batch_size": 8,
+      "nonces_30s": 704,
+      "nonces_per_min": 1408
+    },
+    {
+      "batch_size": 16,
+      "nonces_30s": 752,
+      "nonces_per_min": 1504
+    },
+    {
+      "batch_size": 32,
+      "nonces_30s": 768,
+      "nonces_per_min": 1536
+    }
+  ],
+  "compiled": [
+    {
+      "batch_size": 8,
+      "nonces_30s": 704,
+      "nonces_per_min": 1408
+    },
+    {
+      "batch_size": 16,
+      "nonces_30s": 752,
+      "nonces_per_min": 1504
+    },
+    {
+      "batch_size": 32,
+      "nonces_30s": 768,
+      "nonces_per_min": 1536
+    }
+  ],
+  "best": {
+    "eager": {
+      "batch_size": 32,
+      "nonces_per_min": 1536
+    },
+    "compiled": {
+      "batch_size": 32,
+      "nonces_per_min": 1536
+    }
+  },
+  "collection": {
+    "eager": {
+      "nonces": 1088,
+      "nonces_per_min": 1229,
+      "batch_size": 32
+    },
+    "compiled": {
+      "nonces": 1088,
+      "nonces_per_min": 1227,
+      "batch_size": 32
+    }
+  }
+}

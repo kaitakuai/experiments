@@ -1,0 +1,204 @@
+{
+  "method": "canonical gonka validation (decode_vector -> per-nonce L2 -> binomtest greater); fraud_threshold=0.01",
+  "block_hash": "artifact_collection_block_v1",
+  "seq_len": 1024,
+  "k_dim": 12,
+  "pairs": [
+    {
+      "a": "eager 4xH100 TP4",
+      "b": "compiled 4xH100 TP4",
+      "mean_l2": 0.1962,
+      "median_l2": 0.1857,
+      "max_l2": 0.7044,
+      "scenarios": [
+        {
+          "scenario": "vllm strict (self-validation default)",
+          "dist_threshold": 0.02,
+          "p_mismatch": 0.001,
+          "n_mismatch": 995,
+          "n_total": 1000,
+          "rate_pct": 99.5,
+          "p_value": "0",
+          "verdict": "FRAUD"
+        },
+        {
+          "scenario": "PoC report calibrated honest 98pct",
+          "dist_threshold": 0.174,
+          "p_mismatch": 0.02,
+          "n_mismatch": 557,
+          "n_total": 1000,
+          "rate_pct": 55.7,
+          "p_value": "0",
+          "verdict": "FRAUD"
+        },
+        {
+          "scenario": "chain proto default (production)",
+          "dist_threshold": 0.4,
+          "p_mismatch": 0.001,
+          "n_mismatch": 27,
+          "n_total": 1000,
+          "rate_pct": 2.7,
+          "p_value": "2.52e-29",
+          "verdict": "FRAUD"
+        },
+        {
+          "scenario": "chain proto default + calibrated p_mis",
+          "dist_threshold": 0.4,
+          "p_mismatch": 0.02,
+          "n_mismatch": 27,
+          "n_total": 1000,
+          "rate_pct": 2.7,
+          "p_value": "0.0758",
+          "verdict": "PASS"
+        }
+      ]
+    },
+    {
+      "a": "eager 4xH100 TP4",
+      "b": "B300 TP1 plugin (reference)",
+      "mean_l2": 0.2033,
+      "median_l2": 0.1889,
+      "max_l2": 1.4841,
+      "scenarios": [
+        {
+          "scenario": "vllm strict (self-validation default)",
+          "dist_threshold": 0.02,
+          "p_mismatch": 0.001,
+          "n_mismatch": 994,
+          "n_total": 1000,
+          "rate_pct": 99.4,
+          "p_value": "0",
+          "verdict": "FRAUD"
+        },
+        {
+          "scenario": "PoC report calibrated honest 98pct",
+          "dist_threshold": 0.174,
+          "p_mismatch": 0.02,
+          "n_mismatch": 582,
+          "n_total": 1000,
+          "rate_pct": 58.2,
+          "p_value": "0",
+          "verdict": "FRAUD"
+        },
+        {
+          "scenario": "chain proto default (production)",
+          "dist_threshold": 0.4,
+          "p_mismatch": 0.001,
+          "n_mismatch": 30,
+          "n_total": 1000,
+          "rate_pct": 3.0,
+          "p_value": "9.5e-34",
+          "verdict": "FRAUD"
+        },
+        {
+          "scenario": "chain proto default + calibrated p_mis",
+          "dist_threshold": 0.4,
+          "p_mismatch": 0.02,
+          "n_mismatch": 30,
+          "n_total": 1000,
+          "rate_pct": 3.0,
+          "p_value": "0.0207",
+          "verdict": "PASS"
+        }
+      ]
+    },
+    {
+      "a": "compiled 4xH100 TP4",
+      "b": "B300 TP1 plugin (reference)",
+      "mean_l2": 0.2005,
+      "median_l2": 0.1889,
+      "max_l2": 1.522,
+      "scenarios": [
+        {
+          "scenario": "vllm strict (self-validation default)",
+          "dist_threshold": 0.02,
+          "p_mismatch": 0.001,
+          "n_mismatch": 993,
+          "n_total": 1000,
+          "rate_pct": 99.3,
+          "p_value": "0",
+          "verdict": "FRAUD"
+        },
+        {
+          "scenario": "PoC report calibrated honest 98pct",
+          "dist_threshold": 0.174,
+          "p_mismatch": 0.02,
+          "n_mismatch": 568,
+          "n_total": 1000,
+          "rate_pct": 56.8,
+          "p_value": "0",
+          "verdict": "FRAUD"
+        },
+        {
+          "scenario": "chain proto default (production)",
+          "dist_threshold": 0.4,
+          "p_mismatch": 0.001,
+          "n_mismatch": 26,
+          "n_total": 1000,
+          "rate_pct": 2.6,
+          "p_value": "6.99e-28",
+          "verdict": "FRAUD"
+        },
+        {
+          "scenario": "chain proto default + calibrated p_mis",
+          "dist_threshold": 0.4,
+          "p_mismatch": 0.02,
+          "n_mismatch": 26,
+          "n_total": 1000,
+          "rate_pct": 2.6,
+          "p_value": "0.11",
+          "verdict": "PASS"
+        }
+      ]
+    },
+    {
+      "a": "compiled 4xH100 TP4",
+      "b": "B300 TP1 in-tree fork (PR#65)",
+      "mean_l2": 0.1998,
+      "median_l2": 0.187,
+      "max_l2": 1.5236,
+      "scenarios": [
+        {
+          "scenario": "vllm strict (self-validation default)",
+          "dist_threshold": 0.02,
+          "p_mismatch": 0.001,
+          "n_mismatch": 993,
+          "n_total": 1000,
+          "rate_pct": 99.3,
+          "p_value": "0",
+          "verdict": "FRAUD"
+        },
+        {
+          "scenario": "PoC report calibrated honest 98pct",
+          "dist_threshold": 0.174,
+          "p_mismatch": 0.02,
+          "n_mismatch": 562,
+          "n_total": 1000,
+          "rate_pct": 56.2,
+          "p_value": "0",
+          "verdict": "FRAUD"
+        },
+        {
+          "scenario": "chain proto default (production)",
+          "dist_threshold": 0.4,
+          "p_mismatch": 0.001,
+          "n_mismatch": 29,
+          "n_total": 1000,
+          "rate_pct": 2.9,
+          "p_value": "2.94e-32",
+          "verdict": "FRAUD"
+        },
+        {
+          "scenario": "chain proto default + calibrated p_mis",
+          "dist_threshold": 0.4,
+          "p_mismatch": 0.02,
+          "n_mismatch": 29,
+          "n_total": 1000,
+          "rate_pct": 2.9,
+          "p_value": "0.0329",
+          "verdict": "PASS"
+        }
+      ]
+    }
+  ]
+}
