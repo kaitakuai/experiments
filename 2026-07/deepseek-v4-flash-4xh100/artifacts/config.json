@@ -27,7 +27,6 @@
       "extra_args": [
         "--enforce-eager"
       ],
-      "resolved_compilation_mode": "NONE",
       "cuda_graphs": false,
       "cold_start_s": 180,
       "gpu_kv_cache_tokens": 656967,
@@ -39,7 +38,6 @@
         "--compilation-config",
         "{\"mode\":3,\"cudagraph_mode\":\"FULL_AND_PIECEWISE\",\"custom_ops\":[\"all\"]}"
       ],
-      "resolved_compilation_mode": "NONE (vLLM forces it for DeepseekV4ForCausalLM via VLLM_USE_BREAKABLE_CUDAGRAPH=1)",
       "cuda_graphs": "breakable CUDA graph enabled; capture 85 s, 2.37 GiB",
       "cold_start_s": 285,
       "gpu_kv_cache_tokens": 574611,

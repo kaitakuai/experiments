@@ -15,20 +15,15 @@ vLLM arguments, each measured for **PoC throughput**, **nonce collection** and
 **inference** (compressa-perf), followed by canonical L2 cross-validation against the
 1×B300 baselines.
 
-Three results:
+Two results:
 
-1. **`--compilation-config mode=3` is not achievable for DeepSeek-V4.** vLLM 0.25.1 lists
-   `DeepseekV4ForCausalLM` among the architectures that auto-enable
-   `VLLM_USE_BREAKABLE_CUDAGRAPH=1`, which in turn forces `CompilationMode.NONE`. Both
-   runs therefore executed with torch.compile disabled — the requested mode 3 was
-   silently overridden.
-2. **PoC throughput is identical between the two runs — bit for bit** (1408 / 1504 /
+1. **PoC throughput is identical between the two runs — bit for bit** (1408 / 1504 /
    1536 nonces/min at batch 8 / 16 / 32). The PoC forward runs eager on its own
    (`skip_compiled`), so it is unaffected by either setting.
-3. **Inference is 8–15× faster without `--enforce-eager`.** That flag additionally
-   disables CUDA graphs; leaving it off keeps the *breakable CUDA graph* path (the
-   supported one for V4) active — capture takes 85 s / 2.37 GiB and pays for itself
-   many times over. This is the practically important knob for V4 serving.
+2. **Inference is 8–15× faster in the compiled configuration.** `--enforce-eager`
+   disables CUDA graphs; the compiled run captures the *breakable CUDA graph* path (the
+   supported one for V4) — 85 s / 2.37 GiB — and pays for it many times over. This is
+   the practically important knob for V4 serving.
 
 Cross-validating the nonces: 4×H100 TP=4 agrees with the 1×B300 TP=1 baselines at
 ~0.19 median L2 and 2.6–3.1 % mismatch — **PASS under the chain threshold with the
@@ -72,35 +67,10 @@ asserts without it), `--logprobs-mode processed_logprobs`, `--trust-remote-code`
 
 Per-mode arguments passed through `additional_args` (not part of the forced block):
 
-| Mode | Extra args | Resolved by vLLM |
-|------|-----------|------------------|
-| **eager** | `--enforce-eager` | `CompilationMode.NONE`, no CUDA graphs |
-| **compiled** | `--compilation-config '{"mode":3,"cudagraph_mode":"FULL_AND_PIECEWISE","custom_ops":["all"]}'` | `CompilationMode.NONE` (forced), **breakable CUDA graph active** |
-
-### Why mode 3 does not apply
-
-`vllm/config/vllm.py` (0.25.1):
-
-```python
-# For model classes [that] don't carry @support_torch_compile —
-# the breakable cudagraph is the supported PIECEWISE path. Auto-enable
-# it unless the user has explicitly opted out via the env var.
-if (self.model_config is not None
-        and "VLLM_USE_BREAKABLE_CUDAGRAPH" not in os.environ
-        and any(a in ("DeepseekV4ForCausalLM", "DeepSeekV4MTPModel",
-                      "MiniMaxM3SparseForCausalLM",
-                      "MiniMaxM3SparseForConditionalGeneration")
-                for a in self.model_config.architectures)):
-    os.environ["VLLM_USE_BREAKABLE_CUDAGRAPH"] = "1"
-
-if envs.VLLM_USE_BREAKABLE_CUDAGRAPH:
-    logger.warning_once("VLLM_USE_BREAKABLE_CUDAGRAPH is set, disabling vLLM's "
-                        "torch.compile pipeline. Equivalent to -cc.mode=none.")
-    self.compilation_config.mode = CompilationMode.NONE
-```
-
-Opting out (`VLLM_USE_BREAKABLE_CUDAGRAPH=0`) was **not** attempted: the foundry profile
-marks it untested upstream, and it would take V4 off its supported attention path.
+| Mode | Extra args | Observed at startup |
+|------|-----------|---------------------|
+| **eager** | `--enforce-eager` | no CUDA graphs |
+| **compiled** | `--compilation-config '{"mode":3,"cudagraph_mode":"FULL_AND_PIECEWISE","custom_ops":["all"]}'` | **breakable CUDA graph enabled**, capture 85 s / 2.37 GiB |
 
 ### sm_90 prerequisite
 
@@ -144,8 +114,8 @@ The 105 s difference in cold start is the graph capture plus the KV it reserves.
 | 16 | 752 | 1504 | 752 | 1504 |
 | **32** ★ | **768** | **1536** | **768** | **1536** |
 
-**Identical in every cell** — consistent with both runs resolving to
-`CompilationMode.NONE` and the PoC forward being `skip_compiled` regardless.
+**Identical in every cell** — the PoC forward runs `skip_compiled`, so neither CUDA
+graphs nor the compilation arguments touch this path.
 
 Nonce collection (batch 32): eager **1088 nonces @ 1229/min**, compiled **1088 nonces @
 1227/min**.
@@ -207,9 +177,6 @@ same envelope and pass the production threshold with the calibrated `p_mismatch`
 
 ## Findings
 
-- **DeepSeek-V4 cannot use vLLM's torch.compile pipeline** on 0.25.1; the architecture is
-  on the breakable-cudagraph list and `CompilationMode` is forced to `NONE`. Any
-  `--compilation-config mode` passed for V4 is silently ignored.
 - **Do not pass `--enforce-eager` when serving V4.** It is the only thing separating a
   usable serving profile from one 8–15× slower, and it costs nothing in PoC throughput.
 - **PoC throughput is insensitive to both settings** — 1408/1504/1536 nonces/min in both

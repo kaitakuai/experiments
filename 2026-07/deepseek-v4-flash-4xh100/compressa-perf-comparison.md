@@ -11,20 +11,18 @@ All percentages are relative to **compiled**. For TTFT / TPOT / Latency lower is
 
 ## Configurations Compared
 
-| Mode | vLLM args | What vLLM resolved |
-|------|-----------|--------------------|
-| **enforce-eager** | `--enforce-eager` | `CompilationMode.NONE`, **CUDA graphs off** |
-| **compiled** (baseline) | `--compilation-config '{"mode":3,"cudagraph_mode":"FULL_AND_PIECEWISE","custom_ops":["all"]}'` | `CompilationMode.NONE` (forced for `DeepseekV4ForCausalLM`), **breakable CUDA graph on** |
+| Mode | vLLM args | Observed at startup |
+|------|-----------|---------------------|
+| **enforce-eager** | `--enforce-eager` | **CUDA graphs off** |
+| **compiled** (baseline) | `--compilation-config '{"mode":3,"cudagraph_mode":"FULL_AND_PIECEWISE","custom_ops":["all"]}'` | **breakable CUDA graph on**, capture 85 s / 2.37 GiB |
 
 Common args (from `runner.py`): `--tensor-parallel-size 4 --gpu-memory-utilization 0.90
 --max-model-len 400000 --max-num-batched-tokens 32768 --kv-cache-dtype fp8
 --logprobs-mode processed_logprobs --trust-remote-code
 --worker-extension-cls gonka_poc.worker.PoCWorkerExtension`
 
-**Important:** the requested `mode: 3` never takes effect — vLLM 0.25.1 auto-enables
-`VLLM_USE_BREAKABLE_CUDAGRAPH=1` for this architecture and that forces
-`CompilationMode.NONE`. The real difference between the two columns is therefore
-**CUDA graphs on/off**, which `--enforce-eager` controls.
+CUDA graphs are what separates the two columns: `--enforce-eager` turns them off, the
+compiled configuration captures them at startup.
 
 ## Benchmark Scenarios
 
