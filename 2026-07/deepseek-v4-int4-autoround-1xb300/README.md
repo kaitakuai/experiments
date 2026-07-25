@@ -43,11 +43,14 @@ max concurrency 6.75× at 400k context, zero failed requests.
 
 PoC batch sweep, eager, same card, same day:
 
-| batch | honest FP8 | NVFP4 | **INT4** |
-|------:|-----------:|------:|---------:|
-| 8 | 1184 | 2192 | **560** |
-| 16 | 1664 | 2720 | **800** |
-| **32** | **1664** | 2368 | **832** |
+| batch | honest FP8 | NVFP4 | **INT4 eager** | **INT4 graphs** |
+|------:|-----------:|------:|---------------:|----------------:|
+| 8 | 1184 | 2192 | **560** | 768 |
+| 16 | 1664 | 2720 | **800** | 800 |
+| **32** | **1664** | 2368 | **832** | **832** |
+
+CUDA graphs change nothing for INT4 PoC at batch 32 either — same compute-bound behaviour
+as the other two models on this box.
 
 **INT4 delivers half the nonces of the honest model** (832 vs 1664 at batch 32) and about a
 third of NVFP4's.
@@ -128,6 +131,31 @@ The pattern is the point: **the more profitable a cheat is, the harder it is to 
 
 **Consequence for threshold work:** the defence problem is not a spectrum, it is a single
 target. Everything except NVFP4 is either loud or economically pointless.
+
+## A finding that undercuts the L2 number: INT4 does not reproduce itself
+
+Repeating the collection on the **same card**, changing only the compilation mode:
+
+| Pair | bit-identical | median L2 |
+|---|---:|---:|
+| honest FP8 eager vs graphs | 968/1000 (96.8 %) | 0.0000 |
+| NVFP4 eager vs graphs | 968/1000 (96.8 %) | 0.0000 |
+| **INT4 eager vs graphs** | **0/1000** | **0.1386** |
+
+Both FP8 and NVFP4 reproduce almost bit-for-bit across a mode change. **INT4 does not
+reproduce at all** — not a single identical nonce, and a self-noise of 0.1386, which is
+three quarters of the honest cross-machine floor (0.188).
+
+The likely cause is the patch rather than the quantisation: the BF16 fallback in `_o_proj`
+and the per-forward dequantisation introduce nondeterminism that the native FP8 path does
+not have.
+
+**This weakens the 0.296 figure.** An unknown part of it is run-to-run instability rather
+than model difference. The reported separation of INT4 is therefore an **overestimate of
+unknown size**, and the honest reading is: INT4 is *at most* 0.296 away from honest, and
+its true model-level offset is smaller. This does not change the economic conclusion —
+INT4 is half as fast, so it is not a rational cheat regardless — but it does mean the L2
+row for INT4 should not be used for threshold fitting without a cleaner measurement.
 
 ## Caveats
 
