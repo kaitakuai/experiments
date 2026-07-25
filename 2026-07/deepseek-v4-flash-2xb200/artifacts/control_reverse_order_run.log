@@ -1,0 +1,827 @@
++ exec
++ TP=2
++ MODEL=deepseek-ai/DeepSeek-V4-Flash
++ API=http://127.0.0.1:8081
++ echo '=== RO_SETUP ==='
+=== RO_SETUP ===
++ bash /root/setup_box.sh 2 deepseek-ai/DeepSeek-V4-Flash
++ tail -20
+=== 6) старт mlnode API (порт 8081, толерантный watcher) ===
+++ nvidia-smi --query-gpu=driver_version --format=csv,noheader
+++ head -1
+++ cut -d. -f1
++ DRV=580
++ '[' 580 -lt 580 ']'
++ COMPAT=
++ '[' 580 -lt 580 ']'
++ cat
++ chmod +x /root/start_api.sh
++ sleep 18
++ setsid bash /root/start_api.sh
++ curl -s -m 6 http://127.0.0.1:8081/health
++ python3 -c 'import sys,json;d=json.load(sys.stdin);print('\''  API:'\'',d['\''status'\''],'\''| GPU:'\'',d['\''gpu'\'']['\''count'\''])'
+  API: healthy | GPU: 2
++ echo '=== 7) скачивание весов (setsid, переживёт дисконнект) ==='
+=== 7) скачивание весов (setsid, переживёт дисконнект) ===
++ echo '=== SETUP_DONE (загрузка идёт в фоне) ==='
+=== SETUP_DONE (загрузка идёт в фоне) ===
++ setsid env HF_HUB_ENABLE_HF_TRANSFER=1 hf download deepseek-ai/DeepSeek-V4-Flash --max-workers 16
++ echo '=== RO_WAIT_WEIGHTS ==='
+=== RO_WAIT_WEIGHTS ===
+++ seq 1 160
++ for i in $(seq 1 160)
+++ find /root/.cache/huggingface -name '*.incomplete'
+++ wc -l
++ INC=0
+++ grep -c Downloaded /root/dl.log
+++ echo 0
++ D='0
+0'
++ '[' 0 = 0 ']'
++ '[' '0
+0' -ge 1 ']'
+/root/reverse_order.sh: line 12: [: 0
+0: integer expression expected
++ sleep 30
++ for i in $(seq 1 160)
+++ find /root/.cache/huggingface -name '*.incomplete'
+++ wc -l
++ INC=16
+++ grep -c Downloaded /root/dl.log
+++ echo 0
++ D='0
+0'
++ '[' 16 = 0 ']'
++ sleep 30
++ for i in $(seq 1 160)
+++ find /root/.cache/huggingface -name '*.incomplete'
+++ wc -l
++ INC=0
+++ grep -c Downloaded /root/dl.log
++ D=1
++ '[' 0 = 0 ']'
++ '[' 1 -ge 1 ']'
++ break
++ echo '=== RO_WEIGHTS_OK ==='
+=== RO_WEIGHTS_OK ===
++ mkdir -p /root/out
++ run_sweep compiled
++ M=compiled
++ '[' compiled = eager ']'
++ EXTRA='"--compilation-config", "{\"mode\":3,\"cudagraph_mode\":\"FULL_AND_PIECEWISE\",\"custom_ops\":[\"all\"]}"'
++ curl -s -X POST http://127.0.0.1:8081/api/v1/inference/down -m 60
++ sleep 20
++ echo '=== RO_UP_compiled ==='
+=== RO_UP_compiled ===
++ curl -s -X POST http://127.0.0.1:8081/api/v1/inference/up/async -H 'Content-Type: application/json' -d '{"model":"deepseek-ai/DeepSeek-V4-Flash","dtype":"auto","additional_args":["--compilation-config", "{\"mode\":3,\"cudagraph_mode\":\"FULL_AND_PIECEWISE\",\"custom_ops\":[\"all\"]}"]}' -m 60
++ head -c 120
+{"status":"starting","message":"Inference startup initiated in background"}+ echo
+
+++ seq 1 140
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=True
++ '[' True = True ']'
++ echo '=== RO_compiled_VLLM_UP after 1335s ==='
+=== RO_compiled_VLLM_UP after 1335s ===
++ break
++ curl -s -X POST http://127.0.0.1:8081/api/v1/inference/pow/stop -m 20
++ sleep 3
++ HOST_IP=127.0.0.1
++ python3 -u /root/run_pow_generation.py --phase 3 --skip-check
++ tee /root/out/ro_compiled_sweep.log
++ grep -E 'Testing batch|Best batch'
+  Testing batch_size = 8
+  Testing batch_size = 16
+  Testing batch_size = 32
+  ★ Best batch size: 32 (2304 nonces/min)
++ echo '=== RO_compiled_SWEEP_DONE ==='
+=== RO_compiled_SWEEP_DONE ===
++ run_sweep eager
++ M=eager
++ '[' eager = eager ']'
++ EXTRA='"--enforce-eager"'
++ curl -s -X POST http://127.0.0.1:8081/api/v1/inference/down -m 60
++ sleep 20
++ echo '=== RO_UP_eager ==='
+=== RO_UP_eager ===
++ head -c 120
++ curl -s -X POST http://127.0.0.1:8081/api/v1/inference/up/async -H 'Content-Type: application/json' -d '{"model":"deepseek-ai/DeepSeek-V4-Flash","dtype":"auto","additional_args":["--enforce-eager"]}' -m 60
+{"status":"starting","message":"Inference startup initiated in background"}+ echo
+
+++ seq 1 140
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15
++ for i in $(seq 1 140)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ S=False
++ '[' False = True ']'
++ sleep 15

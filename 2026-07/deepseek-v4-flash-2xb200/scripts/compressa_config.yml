@@ -1,0 +1,48 @@
+# model_name подставляется на боксе: sed -i "s|MODEL_PLACEHOLDER|$MODEL|g" compressa_config.yml
+- model_name: MODEL_PLACEHOLDER
+  experiment_name: "s1_long_prompt_sequential_short_decode"
+  description: "Long prompt, sequential, short decode (20k chars, 5 tasks, 1 runner, 300 tok)"
+  num_tasks: 5
+  num_runners: 1
+  generate_prompts: true
+  num_prompts: 5
+  prompt_length: 20000
+  max_tokens: 300
+  node_url: http://127.0.0.1:8081
+  account_address: "0x0000000000000000000000000000000000000000"
+
+- model_name: MODEL_PLACEHOLDER
+  experiment_name: "s2_short_prompt_high_concurrency"
+  description: "Short prompt, high concurrency (2k chars, 200 tasks, 30 runners, 300 tok)"
+  num_tasks: 200
+  num_runners: 30
+  generate_prompts: true
+  num_prompts: 50
+  prompt_length: 2000
+  max_tokens: 300
+  node_url: http://127.0.0.1:8081
+  account_address: "0x0000000000000000000000000000000000000000"
+
+- model_name: MODEL_PLACEHOLDER
+  experiment_name: "s3_very_long_sequential_long_decode"
+  description: "Very long prompt, sequential, long decode (45k chars, 5 tasks, 1 runner, 1000 tok)"
+  num_tasks: 5
+  num_runners: 1
+  generate_prompts: true
+  num_prompts: 5
+  prompt_length: 45000
+  max_tokens: 1000
+  node_url: http://127.0.0.1:8081
+  account_address: "0x0000000000000000000000000000000000000000"
+
+- model_name: MODEL_PLACEHOLDER
+  experiment_name: "s4_very_long_max_concurrency"
+  description: "Very long prompt, max concurrency (45k chars, 40 tasks, 20 runners, 1000 tok)"
+  num_tasks: 40
+  num_runners: 20
+  generate_prompts: true
+  num_prompts: 20
+  prompt_length: 45000
+  max_tokens: 1000
+  node_url: http://127.0.0.1:8081
+  account_address: "0x0000000000000000000000000000000000000000"

@@ -14,7 +14,8 @@ V4 fits on **two** H200 cards (149 GiB of weights against 2 × 140 GiB), so this
 benchmark as the 4×H100 run one topology step down: TP=2 instead of TP=4. Two runs of the
 same image differing only in the compilation-related arguments.
 
-- **PoC: 1216 nonces/min** at batch 32 — **identical in both modes**, batch for batch. The
+- **PoC: 1216 nonces/min** at batch 32 — **the same in both modes within measurement
+  resolution (< 5 %)**, batch for batch. The
   PoC forward runs `skip_compiled`, and on Hopper neither CUDA graphs nor the compilation
   arguments change it.
 - **Inference: 1.2–18.8× faster with CUDA graphs** (i.e. without `--enforce-eager`),
@@ -85,6 +86,14 @@ Per-mode arguments (passed through `additional_args`, not part of the forced blo
 |------|-----------|---------------------|
 | **eager** | `--enforce-eager` | no CUDA graphs |
 | **compiled** | `--compilation-config '{"mode":3,"cudagraph_mode":"FULL_AND_PIECEWISE","custom_ops":["all"]}'` | **breakable CUDA graph enabled** |
+
+> **What "compiled" actually toggles.** vLLM auto-enables `VLLM_USE_BREAKABLE_CUDAGRAPH`
+> for DeepSeek-V4, which disables the torch.compile pipeline outright ("Equivalent to
+> `-cc.mode=none`"). The `--compilation-config '{"mode":3,...}'` shown here therefore has
+> **no effect** — the only difference between the two configurations is whether
+> `--enforce-eager` is present, i.e. whether the **breakable CUDA graph** is active.
+> Evidence: `../deepseek-v4-flash-2xb200/artifacts/control_startup_cudagraph_evidence.txt`.
+
 
 ### sm_90 prerequisite
 

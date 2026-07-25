@@ -1,0 +1,25 @@
+        _b300_dsv4_plugin_forced = [
+            ('--tensor-parallel-size', '2'),
+            ('--gpu-memory-utilization', '0.90'),
+            ('--max-model-len', '400000'),
+            ('--max-num-batched-tokens', '32768'),
+            ('--kv-cache-dtype', 'fp8'),
+            ('--logprobs-mode', 'processed_logprobs'),
+            ('--worker-extension-cls', 'gonka_poc.worker.PoCWorkerExtension'),
+        ]
+        _b300_dsv4_plugin_flags = [
+            '--trust-remote-code',
+        ]
+        for _flag, _value in _b300_dsv4_plugin_forced:
+            if _flag in self.additional_args:
+                self.additional_args[self.additional_args.index(_flag) + 1] = _value
+            else:
+                self.additional_args.extend([_flag, _value])
+        for _flag in _b300_dsv4_plugin_flags:
+            if _flag not in self.additional_args:
+                self.additional_args.append(_flag)
+        # NOTE: attention-backend / compilation / parsers are intentionally NOT forced.
+        # V4 auto-forces CompilationMode.NONE; PoC forward is eager via gonka-poc
+        # skip_compiled. Default attention is deterministic FlashMLA-DSV4 — pinning a
+        # backend (esp. FlashInfer-DSV4 placeholder scales) would break cross-hw L2.
+        # --- end Kaitaku B300-DeepSeek-V4-Flash plugin hardcodes ---

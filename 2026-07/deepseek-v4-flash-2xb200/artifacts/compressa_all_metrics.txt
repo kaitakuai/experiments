@@ -1,0 +1,73 @@
+
+List of Experiments:
++----+----------------------------------------+---------------------+-------------------------+------------------------------------+
+|    | ID                                     | Name                | Date                    | Description                        |
++====+========================================+=====================+=========================+====================================+
+|  4 | s4_very_long_max_concurrency           | 2026-07-24 22:45:39 | Very long prompt, ma... | TTFT: 5.4581                       |
+|    |                                        |                     |                         | TTFT_95: 14.1936                   |
+|    |                                        |                     |                         | TOP_5_TTFT: 14.1962                |
+|    |                                        |                     |                         | LATENCY: 30.8043                   |
+|    |                                        |                     |                         | LATENCY_95: 52.0719                |
+|    |                                        |                     |                         | TOP_5_LATENCY: 105.3332            |
+|    |                                        |                     |                         | TPOT: 0.2442                       |
+|    |                                        |                     |                         | THROUGHPUT: 5945.1543              |
+|    |                                        |                     |                         | THROUGHPUT_INPUT_TOKENS: 5913.1758 |
+|    |                                        |                     |                         | THROUGHPUT_OUTPUT_TOKENS: 31.9784  |
+|    |                                        |                     |                         | RPS: 0.2535                        |
+|    |                                        |                     |                         | LONGER_THAN_60_LATENCY: 1          |
+|    |                                        |                     |                         | LONGER_THAN_120_LATENCY: 1         |
+|    |                                        |                     |                         | LONGER_THAN_180_LATENCY: 0         |
+|    |                                        |                     |                         | FAILED_REQUESTS: 0                 |
+|    |                                        |                     |                         | FAILED_REQUESTS_PER_HOUR: 0        |
++----+----------------------------------------+---------------------+-------------------------+------------------------------------+
+|  3 | s3_very_long_sequential_long_decode    | 2026-07-24 22:44:21 | Very long prompt, se... | TTFT: 3.2538                       |
+|    |                                        |                     |                         | TTFT_95: 10.1019                   |
+|    |                                        |                     |                         | TOP_5_TTFT: 12.3197                |
+|    |                                        |                     |                         | LATENCY: 13.6829                   |
+|    |                                        |                     |                         | LATENCY_95: 18.6381                |
+|    |                                        |                     |                         | TOP_5_LATENCY: 19.9192             |
+|    |                                        |                     |                         | TPOT: 0.1677                       |
+|    |                                        |                     |                         | THROUGHPUT: 1707.8968              |
+|    |                                        |                     |                         | THROUGHPUT_INPUT_TOKENS: 1701.9332 |
+|    |                                        |                     |                         | THROUGHPUT_OUTPUT_TOKENS: 5.9636   |
+|    |                                        |                     |                         | RPS: 0.0731                        |
+|    |                                        |                     |                         | LONGER_THAN_60_LATENCY: 0          |
+|    |                                        |                     |                         | LONGER_THAN_120_LATENCY: 0         |
+|    |                                        |                     |                         | LONGER_THAN_180_LATENCY: 0         |
+|    |                                        |                     |                         | FAILED_REQUESTS: 0                 |
+|    |                                        |                     |                         | FAILED_REQUESTS_PER_HOUR: 0        |
++----+----------------------------------------+---------------------+-------------------------+------------------------------------+
+|  2 | s2_short_prompt_high_concurrency       | 2026-07-24 22:41:08 | Short prompt, high c... | TTFT: 1.2344                       |
+|    |                                        |                     |                         | TTFT_95: 5.1675                    |
+|    |                                        |                     |                         | TOP_5_TTFT: 6.0365                 |
+|    |                                        |                     |                         | LATENCY: 23.4483                   |
+|    |                                        |                     |                         | LATENCY_95: 46.7738                |
+|    |                                        |                     |                         | TOP_5_LATENCY: 51.8355             |
+|    |                                        |                     |                         | TPOT: 0.1554                       |
+|    |                                        |                     |                         | THROUGHPUT: 1307.6854              |
+|    |                                        |                     |                         | THROUGHPUT_INPUT_TOKENS: 1142.1409 |
+|    |                                        |                     |                         | THROUGHPUT_OUTPUT_TOKENS: 165.5445 |
+|    |                                        |                     |                         | RPS: 1.0971                        |
+|    |                                        |                     |                         | LONGER_THAN_60_LATENCY: 0          |
+|    |                                        |                     |                         | LONGER_THAN_120_LATENCY: 0         |
+|    |                                        |                     |                         | LONGER_THAN_180_LATENCY: 0         |
+|    |                                        |                     |                         | FAILED_REQUESTS: 0                 |
+|    |                                        |                     |                         | FAILED_REQUESTS_PER_HOUR: 0        |
++----+----------------------------------------+---------------------+-------------------------+------------------------------------+
+|  1 | s1_long_prompt_sequential_short_decode | 2026-07-24 22:39:47 | Long prompt, sequent... | TTFT: 0.8276                       |
+|    |                                        |                     |                         | TTFT_95: 1.7952                    |
+|    |                                        |                     |                         | TOP_5_TTFT: 2.0879                 |
+|    |                                        |                     |                         | LATENCY: 14.1897                   |
+|    |                                        |                     |                         | LATENCY_95: 18.7478                |
+|    |                                        |                     |                         | TOP_5_LATENCY: 19.2174             |
+|    |                                        |                     |                         | TPOT: 0.1364                       |
+|    |                                        |                     |                         | THROUGHPUT: 736.0366               |
+|    |                                        |                     |                         | THROUGHPUT_INPUT_TOKENS: 728.7074  |
+|    |                                        |                     |                         | THROUGHPUT_OUTPUT_TOKENS: 7.3292   |
+|    |                                        |                     |                         | RPS: 0.0705                        |
+|    |                                        |                     |                         | LONGER_THAN_60_LATENCY: 0          |
+|    |                                        |                     |                         | LONGER_THAN_120_LATENCY: 0         |
+|    |                                        |                     |                         | LONGER_THAN_180_LATENCY: 0         |
+|    |                                        |                     |                         | FAILED_REQUESTS: 0                 |
+|    |                                        |                     |                         | FAILED_REQUESTS_PER_HOUR: 0        |
++----+----------------------------------------+---------------------+-------------------------+------------------------------------+

@@ -1,0 +1,70 @@
+{
+  "eager": {
+    "s1_long_prompt_sequential_short_decode": {
+      "TTFT": 0.8276,
+      "LATENCY": 14.1897,
+      "TPOT": 0.1364,
+      "THROUGHPUT_OUTPUT_TOKENS": 7.3292,
+      "RPS": 0.0705,
+      "FAILED_REQUESTS": 0.0
+    },
+    "s2_short_prompt_high_concurrency": {
+      "TTFT": 1.2344,
+      "LATENCY": 23.4483,
+      "TPOT": 0.1554,
+      "THROUGHPUT_OUTPUT_TOKENS": 165.544,
+      "RPS": 1.0971,
+      "FAILED_REQUESTS": 0.0
+    },
+    "s3_very_long_sequential_long_decode": {
+      "TTFT": 3.2538,
+      "LATENCY": 13.6829,
+      "TPOT": 0.1677,
+      "THROUGHPUT_OUTPUT_TOKENS": 5.9636,
+      "RPS": 0.0731,
+      "FAILED_REQUESTS": 0.0
+    },
+    "s4_very_long_max_concurrency": {
+      "TTFT": 5.4581,
+      "LATENCY": 30.8043,
+      "TPOT": 0.2442,
+      "THROUGHPUT_OUTPUT_TOKENS": 31.9784,
+      "RPS": 0.2535,
+      "FAILED_REQUESTS": 0.0
+    }
+  },
+  "compiled": {
+    "s1_long_prompt_sequential_short_decode": {
+      "TTFT": 0.2039,
+      "LATENCY": 0.922,
+      "TPOT": 0.0082031,
+      "THROUGHPUT_OUTPUT_TOKENS": 121.9,
+      "RPS": 1.0845,
+      "FAILED_REQUESTS": 0.0
+    },
+    "s2_short_prompt_high_concurrency": {
+      "TTFT": 0.383,
+      "LATENCY": 4.4534,
+      "TPOT": 0.0308,
+      "THROUGHPUT_OUTPUT_TOKENS": 932.258,
+      "RPS": 6.4523,
+      "FAILED_REQUESTS": 0.0
+    },
+    "s3_very_long_sequential_long_decode": {
+      "TTFT": 0.4361,
+      "LATENCY": 1.6301,
+      "TPOT": 0.0087827,
+      "THROUGHPUT_OUTPUT_TOKENS": 113.859,
+      "RPS": 0.6135,
+      "FAILED_REQUESTS": 0.0
+    },
+    "s4_very_long_max_concurrency": {
+      "TTFT": 2.8858,
+      "LATENCY": 6.7858,
+      "TPOT": 0.0661,
+      "THROUGHPUT_OUTPUT_TOKENS": 287.884,
+      "RPS": 2.8052,
+      "FAILED_REQUESTS": 0.0
+    }
+  }
+}

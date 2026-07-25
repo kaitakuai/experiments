@@ -72,6 +72,14 @@ Per-mode arguments passed through `additional_args` (not part of the forced bloc
 | **eager** | `--enforce-eager` | no CUDA graphs |
 | **compiled** | `--compilation-config '{"mode":3,"cudagraph_mode":"FULL_AND_PIECEWISE","custom_ops":["all"]}'` | **breakable CUDA graph enabled**, capture 85 s / 2.37 GiB |
 
+> **What "compiled" actually toggles.** vLLM auto-enables `VLLM_USE_BREAKABLE_CUDAGRAPH`
+> for DeepSeek-V4, which disables the torch.compile pipeline outright ("Equivalent to
+> `-cc.mode=none`"). The `--compilation-config '{"mode":3,...}'` shown here therefore has
+> **no effect** — the only difference between the two configurations is whether
+> `--enforce-eager` is present, i.e. whether the **breakable CUDA graph** is active.
+> Evidence: `../deepseek-v4-flash-2xb200/artifacts/control_startup_cudagraph_evidence.txt`.
+
+
 ### sm_90 prerequisite
 
 The image is built for the B300 (sm_100) profile and lacks the unversioned

@@ -24,6 +24,14 @@ Common args (from `runner.py`): `--tensor-parallel-size 4 --gpu-memory-utilizati
 CUDA graphs are what separates the two columns: `--enforce-eager` turns them off, the
 compiled configuration captures them at startup.
 
+> **What "compiled" actually toggles.** vLLM auto-enables `VLLM_USE_BREAKABLE_CUDAGRAPH`
+> for DeepSeek-V4, which disables the torch.compile pipeline outright ("Equivalent to
+> `-cc.mode=none`"). The `--compilation-config '{"mode":3,...}'` passed below therefore has
+> **no effect**; the only difference between the two configurations is whether
+> `--enforce-eager` is present, i.e. whether the **breakable CUDA graph** is active. Read
+> every "compiled" column in this report as "CUDA graphs on". Evidence:
+> `../deepseek-v4-flash-2xb200/artifacts/control_startup_cudagraph_evidence.txt`.
+
 ## Benchmark Scenarios
 
 | # | Profile | Prompt chars | Tasks | Runners | Max output tokens |
@@ -99,5 +107,5 @@ Failed requests: **0** in every scenario, both modes.
   overhead matters less.
 - **Cost of graphs:** +105 s cold start and 2.66 GiB less KV cache per GPU
   (656,967 → 574,611 tokens, i.e. max concurrency at 400k context 1.64× → 1.44×).
-- **PoC throughput is unaffected** — 1536 nonces/min at batch 32 in both modes
+- **PoC throughput barely moves** (< 5 %, the sweep's resolution) — 1536 nonces/min at batch 32 in both modes
   (see `README.md`).

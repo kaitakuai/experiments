@@ -1,0 +1,423 @@
+Creating shared client manager with 3 clients, 50 connections each for 1 runners
+Creating 3 optimized HTTP clients with 50 connections each
+File descriptor limits: soft=1024, hard=524288
+Low file descriptor limit (1024). Consider increasing with 'ulimit -n 65536'
+Generating 5 prompts with length 20000 and seed 42
+Num of prompts: 5
+Num of tasks: 5
+Num of runners: 1
+Max tokens: 300
+Tables created successfully.
+Experiment created: 
+Experiment(
+    experiment_id=1,
+    experiment_name=s1_long_prompt_sequential_short_decode,
+    experiment_date=2026-07-24 22:39:47.874879,
+    description=Long prompt, sequential, short decode (20k chars, 5 tasks, 1 runner, 300 tok)
+)
+
+Running experiments:   0%|          | 0/5 [00:00<?, ?it/s]Running experiments:  20%|██        | 1/5 [00:07<00:31,  7.81s/it]Running experiments:  40%|████      | 2/5 [00:24<00:39, 13.14s/it]Running experiments:  60%|██████    | 3/5 [00:39<00:27, 13.76s/it]Running experiments:  80%|████████  | 4/5 [00:58<00:15, 15.92s/it]Running experiments: 100%|██████████| 5/5 [01:10<00:00, 14.70s/it]Running experiments: 100%|██████████| 5/5 [01:10<00:00, 14.19s/it]
+Number of failed measurements: 0
+Creating 3 optimized HTTP clients with 50 connections each
+Creating shared client manager with 3 clients, 50 connections each for 30 runners
+Generating 50 prompts with length 2000 and seed 42
+Num of prompts: 50
+Num of tasks: 200
+Num of runners: 30
+Max tokens: 300
+
+Experiment Details:
+ID: 1
+Name: s1_long_prompt_sequential_short_decode
+Date: 2026-07-24 22:39:47
+Description: Long prompt, sequential, short decode (20k chars, 5 tasks, 1 runner, 300 tok)
+
+Experiment Parameters:
+╒═════════════════════╤════════════════════════════════════════════╕
+│           Parameter │                                      Value │
+╞═════════════════════╪════════════════════════════════════════════╡
+│         num_workers │                                          1 │
+├─────────────────────┼────────────────────────────────────────────┤
+│           num_tasks │                                          5 │
+├─────────────────────┼────────────────────────────────────────────┤
+│            node_url │                      http://127.0.0.1:8081 │
+├─────────────────────┼────────────────────────────────────────────┤
+│          max_tokens │                                        300 │
+├─────────────────────┼────────────────────────────────────────────┤
+│          model_name │              deepseek-ai/DeepSeek-V4-Flash │
+├─────────────────────┼────────────────────────────────────────────┤
+│             no_sign │                                       True │
+├─────────────────────┼────────────────────────────────────────────┤
+│            old_sign │                                      False │
+├─────────────────────┼────────────────────────────────────────────┤
+│ client_architecture │                                shared_pool │
+├─────────────────────┼────────────────────────────────────────────┤
+│   requester_address │ 0x0000000000000000000000000000000000000000 │
+├─────────────────────┼────────────────────────────────────────────┤
+│         avg_n_input │                                 10340.2000 │
+├─────────────────────┼────────────────────────────────────────────┤
+│         std_n_input │                                    28.7524 │
+├─────────────────────┼────────────────────────────────────────────┤
+│        avg_n_output │                                        104 │
+├─────────────────────┼────────────────────────────────────────────┤
+│        std_n_output │                                    30.9112 │
+╘═════════════════════╧════════════════════════════════════════════╛
+
+Experiment Metrics:
+╒══════════════════════════╤══════════╕
+│ Metric                   │    Value │
+╞══════════════════════════╪══════════╡
+│ TTFT                     │   0.8276 │
+├──────────────────────────┼──────────┤
+│ TTFT_95                  │   1.7952 │
+├──────────────────────────┼──────────┤
+│ TOP_5_TTFT               │   2.0879 │
+├──────────────────────────┼──────────┤
+│ LATENCY                  │  14.1897 │
+├──────────────────────────┼──────────┤
+│ LATENCY_95               │  18.7478 │
+├──────────────────────────┼──────────┤
+│ TOP_5_LATENCY            │  19.2174 │
+├──────────────────────────┼──────────┤
+│ TPOT                     │   0.1364 │
+├──────────────────────────┼──────────┤
+│ THROUGHPUT               │ 736.037  │
+├──────────────────────────┼──────────┤
+│ THROUGHPUT_INPUT_TOKENS  │ 728.707  │
+├──────────────────────────┼──────────┤
+│ THROUGHPUT_OUTPUT_TOKENS │   7.3292 │
+├──────────────────────────┼──────────┤
+│ RPS                      │   0.0705 │
+├──────────────────────────┼──────────┤
+│ LONGER_THAN_60_LATENCY   │   0      │
+├──────────────────────────┼──────────┤
+│ LONGER_THAN_120_LATENCY  │   0      │
+├──────────────────────────┼──────────┤
+│ LONGER_THAN_180_LATENCY  │   0      │
+├──────────────────────────┼──────────┤
+│ FAILED_REQUESTS          │   0      │
+├──────────────────────────┼──────────┤
+│ FAILED_REQUESTS_PER_HOUR │   0      │
+╘══════════════════════════╧══════════╛
+Tables created successfully.
+Experiment created: 
+Experiment(
+    experiment_id=2,
+    experiment_name=s2_short_prompt_high_concurrency,
+    experiment_date=2026-07-24 22:41:08.870828,
+    description=Short prompt, high concurrency (2k chars, 200 tasks, 30 runners, 300 tok)
+)
+
+Running experiments:   0%|          | 0/200 [00:00<?, ?it/s]Running experiments:   0%|          | 1/200 [00:10<33:58, 10.24s/it]Running experiments:   1%|          | 2/200 [00:10<15:22,  4.66s/it]Running experiments:   2%|▏         | 3/200 [00:16<16:09,  4.92s/it]Running experiments:   2%|▏         | 4/200 [00:16<10:14,  3.14s/it]Running experiments:   2%|▎         | 5/200 [00:17<07:17,  2.25s/it]Running experiments:   4%|▎         | 7/200 [00:17<03:46,  1.17s/it]Running experiments:   4%|▍         | 9/200 [00:17<02:15,  1.41it/s]Running experiments:   5%|▌         | 10/200 [00:17<01:49,  1.73it/s]Running experiments:   6%|▌         | 12/200 [00:20<02:26,  1.28it/s]Running experiments:   6%|▋         | 13/200 [00:20<02:10,  1.43it/s]Running experiments:   7%|▋         | 14/200 [00:20<01:50,  1.68it/s]Running experiments:   8%|▊         | 16/200 [00:20<01:15,  2.45it/s]Running experiments:   8%|▊         | 17/200 [00:21<01:29,  2.04it/s]Running experiments:   9%|▉         | 18/200 [00:22<01:35,  1.90it/s]Running experiments:  10%|▉         | 19/200 [00:23<02:04,  1.45it/s]Running experiments:  10%|█         | 20/200 [00:23<01:43,  1.74it/s]Running experiments:  10%|█         | 21/200 [00:23<01:21,  2.20it/s]Running experiments:  11%|█         | 22/200 [00:25<01:51,  1.59it/s]Running experiments:  12%|█▏        | 23/200 [00:28<04:12,  1.43s/it]Running experiments:  12%|█▏        | 24/200 [00:30<04:25,  1.51s/it]Running experiments:  12%|█▎        | 25/200 [00:31<04:34,  1.57s/it]Running experiments:  13%|█▎        | 26/200 [00:31<03:18,  1.14s/it]Running experiments:  14%|█▎        | 27/200 [00:33<03:33,  1.24s/it]Running experiments:  14%|█▍        | 28/200 [00:33<02:36,  1.10it/s]Running experiments:  14%|█▍        | 29/200 [00:35<03:17,  1.15s/it]Running experiments:  15%|█▌        | 30/200 [00:35<02:24,  1.18it/s]Running experiments:  16%|█▌        | 31/200 [00:37<03:01,  1.07s/it]Running experiments:  16%|█▌        | 32/200 [00:38<02:59,  1.07s/it]Running experiments:  16%|█▋        | 33/200 [00:38<02:25,  1.15it/s]Running experiments:  17%|█▋        | 34/200 [00:39<02:20,  1.18it/s]Running experiments:  18%|█▊        | 35/200 [00:39<01:57,  1.40it/s]Running experiments:  18%|█▊        | 36/200 [00:41<03:11,  1.17s/it]Running experiments:  18%|█▊        | 37/200 [00:42<02:19,  1.17it/s]Running experiments:  20%|█▉        | 39/200 [00:42<01:24,  1.91it/s]Running experiments:  20%|██        | 40/200 [00:45<03:07,  1.17s/it]Running experiments:  21%|██        | 42/200 [00:45<01:52,  1.40it/s]Running experiments:  22%|██▏       | 43/200 [00:46<01:46,  1.48it/s]Running experiments:  22%|██▏       | 44/200 [00:46<01:44,  1.49it/s]Running experiments:  24%|██▍       | 49/200 [00:47<00:44,  3.38it/s]Running experiments:  25%|██▌       | 50/200 [00:47<00:40,  3.71it/s]Running experiments:  26%|██▌       | 51/200 [00:48<00:54,  2.73it/s]Running experiments:  26%|██▌       | 52/200 [00:48<00:55,  2.67it/s]Running experiments:  26%|██▋       | 53/200 [00:50<01:53,  1.30it/s]Running experiments:  27%|██▋       | 54/200 [00:51<01:59,  1.22it/s]Running experiments:  28%|██▊       | 55/200 [00:51<01:33,  1.56it/s]Running experiments:  28%|██▊       | 56/200 [00:52<01:28,  1.62it/s]Running experiments:  28%|██▊       | 57/200 [00:52<01:09,  2.07it/s]Running experiments:  29%|██▉       | 58/200 [00:52<00:54,  2.62it/s]Running experiments:  30%|██▉       | 59/200 [00:53<01:01,  2.29it/s]Running experiments:  30%|███       | 60/200 [00:53<00:48,  2.88it/s]Running experiments:  30%|███       | 61/200 [00:56<02:27,  1.06s/it]Running experiments:  32%|███▏      | 63/200 [00:56<01:39,  1.37it/s]Running experiments:  32%|███▏      | 64/200 [00:56<01:23,  1.63it/s]Running experiments:  33%|███▎      | 66/200 [00:58<01:21,  1.64it/s]Running experiments:  34%|███▎      | 67/200 [00:59<01:50,  1.20it/s]Running experiments:  34%|███▍      | 68/200 [01:00<01:48,  1.21it/s]Running experiments:  34%|███▍      | 69/200 [01:00<01:28,  1.48it/s]Running experiments:  36%|███▌      | 71/200 [01:01<00:57,  2.23it/s]Running experiments:  36%|███▌      | 72/200 [01:01<01:04,  1.99it/s]Running experiments:  36%|███▋      | 73/200 [01:02<01:05,  1.95it/s]Running experiments:  37%|███▋      | 74/200 [01:03<01:27,  1.44it/s]Running experiments:  38%|███▊      | 75/200 [01:06<02:33,  1.22s/it]Running experiments:  38%|███▊      | 76/200 [01:07<02:44,  1.33s/it]Running experiments:  38%|███▊      | 77/200 [01:08<02:10,  1.06s/it]Running experiments:  39%|███▉      | 78/200 [01:09<02:04,  1.02s/it]Running experiments:  40%|███▉      | 79/200 [01:09<01:41,  1.19it/s]Running experiments:  40%|████      | 80/200 [01:09<01:15,  1.58it/s]Running experiments:  40%|████      | 81/200 [01:11<01:53,  1.05it/s]Running experiments:  42%|████▏     | 83/200 [01:11<01:18,  1.50it/s]Running experiments:  42%|████▏     | 84/200 [01:12<01:24,  1.37it/s]Running experiments:  42%|████▎     | 85/200 [01:13<01:26,  1.34it/s]Running experiments:  43%|████▎     | 86/200 [01:13<01:06,  1.72it/s]Running experiments:  44%|████▎     | 87/200 [01:14<01:08,  1.65it/s]Running experiments:  44%|████▍     | 88/200 [01:15<01:26,  1.29it/s]Running experiments:  46%|████▌     | 91/200 [01:15<00:40,  2.68it/s]Running experiments:  46%|████▌     | 92/200 [01:16<00:38,  2.84it/s]Running experiments:  46%|████▋     | 93/200 [01:17<00:52,  2.05it/s]Running experiments:  47%|████▋     | 94/200 [01:18<01:26,  1.22it/s]Running experiments:  48%|████▊     | 95/200 [01:20<01:39,  1.05it/s]Running experiments:  48%|████▊     | 96/200 [01:20<01:30,  1.15it/s]Running experiments:  48%|████▊     | 97/200 [01:21<01:35,  1.08it/s]Running experiments:  49%|████▉     | 98/200 [01:22<01:15,  1.36it/s]Running experiments:  50%|████▉     | 99/200 [01:23<01:39,  1.02it/s]Running experiments:  50%|█████     | 100/200 [01:24<01:16,  1.30it/s]Running experiments:  50%|█████     | 101/200 [01:38<07:55,  4.80s/it]Running experiments:  51%|█████     | 102/200 [01:39<06:11,  3.79s/it]Running experiments:  52%|█████▏    | 103/200 [01:40<04:21,  2.70s/it]Running experiments:  52%|█████▏    | 104/200 [01:40<03:24,  2.13s/it]Running experiments:  52%|█████▎    | 105/200 [01:41<02:37,  1.65s/it]Running experiments:  53%|█████▎    | 106/200 [01:41<01:56,  1.23s/it]Running experiments:  54%|█████▎    | 107/200 [01:44<02:32,  1.64s/it]Running experiments:  54%|█████▍    | 108/200 [01:45<02:21,  1.53s/it]Running experiments:  55%|█████▍    | 109/200 [01:45<01:41,  1.11s/it]Running experiments:  55%|█████▌    | 110/200 [01:45<01:21,  1.11it/s]Running experiments:  56%|█████▌    | 111/200 [01:46<01:03,  1.41it/s]Running experiments:  56%|█████▋    | 113/200 [01:46<00:36,  2.41it/s]Running experiments:  57%|█████▋    | 114/200 [01:46<00:38,  2.24it/s]Running experiments:  57%|█████▊    | 115/200 [01:47<00:39,  2.14it/s]Running experiments:  58%|█████▊    | 116/200 [01:47<00:34,  2.45it/s]Running experiments:  58%|█████▊    | 117/200 [01:48<00:45,  1.81it/s]Running experiments:  60%|█████▉    | 119/200 [01:49<00:35,  2.26it/s]Running experiments:  60%|██████    | 121/200 [01:49<00:31,  2.53it/s]Running experiments:  61%|██████    | 122/200 [01:50<00:30,  2.52it/s]Running experiments:  62%|██████▏   | 123/200 [01:50<00:25,  3.01it/s]Running experiments:  62%|██████▏   | 124/200 [01:50<00:26,  2.83it/s]Running experiments:  62%|██████▎   | 125/200 [01:54<01:30,  1.21s/it]Running experiments:  63%|██████▎   | 126/200 [01:54<01:10,  1.05it/s]Running experiments:  64%|██████▎   | 127/200 [01:56<01:25,  1.17s/it]Running experiments:  64%|██████▍   | 128/200 [01:56<01:11,  1.01it/s]Running experiments:  64%|██████▍   | 129/200 [01:59<01:33,  1.32s/it]Running experiments:  65%|██████▌   | 130/200 [01:59<01:10,  1.01s/it]Running experiments:  66%|██████▌   | 131/200 [01:59<00:54,  1.26it/s]Running experiments:  66%|██████▌   | 132/200 [02:00<00:56,  1.20it/s]Running experiments:  66%|██████▋   | 133/200 [02:00<00:47,  1.41it/s]Running experiments:  67%|██████▋   | 134/200 [02:01<00:40,  1.62it/s]Running experiments:  68%|██████▊   | 135/200 [02:02<00:46,  1.41it/s]Running experiments:  68%|██████▊   | 136/200 [02:02<00:34,  1.86it/s]Running experiments:  68%|██████▊   | 137/200 [02:04<00:58,  1.07it/s]Running experiments:  69%|██████▉   | 138/200 [02:05<00:55,  1.12it/s]Running experiments:  70%|██████▉   | 139/200 [02:05<00:52,  1.16it/s]Running experiments:  70%|███████   | 140/200 [02:06<00:46,  1.30it/s]Running experiments:  70%|███████   | 141/200 [02:06<00:36,  1.62it/s]Running experiments:  72%|███████▏  | 143/200 [02:07<00:26,  2.18it/s]Running experiments:  72%|███████▏  | 144/200 [02:08<00:32,  1.73it/s]Running experiments:  72%|███████▎  | 145/200 [02:08<00:29,  1.88it/s]Running experiments:  73%|███████▎  | 146/200 [02:08<00:24,  2.18it/s]Running experiments:  74%|███████▍  | 148/200 [02:09<00:18,  2.85it/s]Running experiments:  74%|███████▍  | 149/200 [02:11<00:36,  1.41it/s]Running experiments:  75%|███████▌  | 150/200 [02:11<00:28,  1.78it/s]Running experiments:  76%|███████▌  | 151/200 [02:11<00:29,  1.68it/s]Running experiments:  76%|███████▌  | 152/200 [02:12<00:26,  1.84it/s]Running experiments:  76%|███████▋  | 153/200 [02:13<00:39,  1.19it/s]Running experiments:  77%|███████▋  | 154/200 [02:16<00:57,  1.25s/it]Running experiments:  78%|███████▊  | 155/200 [02:16<00:41,  1.09it/s]Running experiments:  78%|███████▊  | 156/200 [02:16<00:35,  1.23it/s]Running experiments:  78%|███████▊  | 157/200 [02:17<00:29,  1.44it/s]Running experiments:  79%|███████▉  | 158/200 [02:17<00:27,  1.54it/s]Running experiments:  80%|███████▉  | 159/200 [02:18<00:28,  1.44it/s]Running experiments:  80%|████████  | 160/200 [02:18<00:21,  1.90it/s]Running experiments:  80%|████████  | 161/200 [02:19<00:17,  2.22it/s]Running experiments:  81%|████████  | 162/200 [02:19<00:19,  1.97it/s]Running experiments:  82%|████████▏ | 163/200 [02:20<00:17,  2.10it/s]Running experiments:  82%|████████▏ | 164/200 [02:21<00:23,  1.53it/s]Running experiments:  82%|████████▎ | 165/200 [02:21<00:18,  1.88it/s]Running experiments:  83%|████████▎ | 166/200 [02:21<00:18,  1.87it/s]Running experiments:  84%|████████▎ | 167/200 [02:22<00:16,  2.00it/s]Running experiments:  84%|████████▍ | 168/200 [02:22<00:16,  1.94it/s]Running experiments:  84%|████████▍ | 169/200 [02:23<00:19,  1.56it/s]Running experiments:  85%|████████▌ | 170/200 [02:25<00:24,  1.24it/s]Running experiments:  86%|████████▌ | 171/200 [02:25<00:22,  1.31it/s]Running experiments:  86%|████████▌ | 172/200 [02:26<00:19,  1.41it/s]Running experiments:  86%|████████▋ | 173/200 [02:26<00:14,  1.86it/s]Running experiments:  87%|████████▋ | 174/200 [02:26<00:12,  2.03it/s]Running experiments:  88%|████████▊ | 175/200 [02:27<00:15,  1.63it/s]Running experiments:  88%|████████▊ | 176/200 [02:28<00:13,  1.84it/s]Running experiments:  88%|████████▊ | 177/200 [02:28<00:13,  1.73it/s]Running experiments:  89%|████████▉ | 178/200 [02:29<00:16,  1.32it/s]Running experiments:  90%|█████████ | 180/200 [02:30<00:12,  1.54it/s]Running experiments:  90%|█████████ | 181/200 [02:31<00:09,  1.92it/s]Running experiments:  92%|█████████▏| 183/200 [02:31<00:06,  2.77it/s]Running experiments:  92%|█████████▏| 184/200 [02:31<00:05,  2.72it/s]Running experiments:  92%|█████████▎| 185/200 [02:32<00:06,  2.47it/s]Running experiments:  93%|█████████▎| 186/200 [02:32<00:06,  2.13it/s]Running experiments:  94%|█████████▎| 187/200 [02:33<00:07,  1.81it/s]Running experiments:  94%|█████████▍| 189/200 [02:34<00:06,  1.76it/s]Running experiments:  95%|█████████▌| 190/200 [02:36<00:08,  1.16it/s]Running experiments:  96%|█████████▌| 191/200 [02:38<00:09,  1.01s/it]Running experiments:  96%|█████████▌| 192/200 [02:40<00:10,  1.29s/it]Running experiments:  96%|█████████▋| 193/200 [02:41<00:09,  1.40s/it]Running experiments:  97%|█████████▋| 194/200 [02:44<00:10,  1.82s/it]Running experiments:  98%|█████████▊| 195/200 [02:46<00:08,  1.74s/it]Running experiments:  98%|█████████▊| 196/200 [02:47<00:05,  1.47s/it]Running experiments:  98%|█████████▊| 197/200 [02:47<00:03,  1.27s/it]Running experiments:  99%|█████████▉| 198/200 [02:54<00:05,  2.73s/it]Running experiments: 100%|█████████▉| 199/200 [02:56<00:02,  2.77s/it]Running experiments: 100%|██████████| 200/200 [03:02<00:00,  3.52s/it]Running experiments: 100%|██████████| 200/200 [03:02<00:00,  1.10it/s]
+Number of failed measurements: 0
+Creating shared client manager with 3 clients, 50 connections each for 1 runners
+Creating 3 optimized HTTP clients with 50 connections each
+Generating 5 prompts with length 45000 and seed 42
+Num of prompts: 5
+Num of tasks: 5
+Num of runners: 1
+Max tokens: 1000
+
+Experiment Details:
+ID: 2
+Name: s2_short_prompt_high_concurrency
+Date: 2026-07-24 22:41:08
+Description: Short prompt, high concurrency (2k chars, 200 tasks, 30 runners, 300 tok)
+
+Experiment Parameters:
+╒═════════════════════╤════════════════════════════════════════════╕
+│           Parameter │                                      Value │
+╞═════════════════════╪════════════════════════════════════════════╡
+│         num_workers │                                         30 │
+├─────────────────────┼────────────────────────────────────────────┤
+│           num_tasks │                                        200 │
+├─────────────────────┼────────────────────────────────────────────┤
+│            node_url │                      http://127.0.0.1:8081 │
+├─────────────────────┼────────────────────────────────────────────┤
+│          max_tokens │                                        300 │
+├─────────────────────┼────────────────────────────────────────────┤
+│          model_name │              deepseek-ai/DeepSeek-V4-Flash │
+├─────────────────────┼────────────────────────────────────────────┤
+│             no_sign │                                       True │
+├─────────────────────┼────────────────────────────────────────────┤
+│            old_sign │                                      False │
+├─────────────────────┼────────────────────────────────────────────┤
+│ client_architecture │                                shared_pool │
+├─────────────────────┼────────────────────────────────────────────┤
+│   requester_address │ 0x0000000000000000000000000000000000000000 │
+├─────────────────────┼────────────────────────────────────────────┤
+│         avg_n_input │                                  1041.0350 │
+├─────────────────────┼────────────────────────────────────────────┤
+│         std_n_input │                                     8.7869 │
+├─────────────────────┼────────────────────────────────────────────┤
+│        avg_n_output │                                   150.8900 │
+├─────────────────────┼────────────────────────────────────────────┤
+│        std_n_output │                                    75.5536 │
+╘═════════════════════╧════════════════════════════════════════════╛
+
+Experiment Metrics:
+╒══════════════════════════╤═══════════╕
+│ Metric                   │     Value │
+╞══════════════════════════╪═══════════╡
+│ TTFT                     │    1.2344 │
+├──────────────────────────┼───────────┤
+│ TTFT_95                  │    5.1675 │
+├──────────────────────────┼───────────┤
+│ TOP_5_TTFT               │    6.0365 │
+├──────────────────────────┼───────────┤
+│ LATENCY                  │   23.4483 │
+├──────────────────────────┼───────────┤
+│ LATENCY_95               │   46.7738 │
+├──────────────────────────┼───────────┤
+│ TOP_5_LATENCY            │   51.8355 │
+├──────────────────────────┼───────────┤
+│ TPOT                     │    0.1554 │
+├──────────────────────────┼───────────┤
+│ THROUGHPUT               │ 1307.69   │
+├──────────────────────────┼───────────┤
+│ THROUGHPUT_INPUT_TOKENS  │ 1142.14   │
+├──────────────────────────┼───────────┤
+│ THROUGHPUT_OUTPUT_TOKENS │  165.544  │
+├──────────────────────────┼───────────┤
+│ RPS                      │    1.0971 │
+├──────────────────────────┼───────────┤
+│ LONGER_THAN_60_LATENCY   │    0      │
+├──────────────────────────┼───────────┤
+│ LONGER_THAN_120_LATENCY  │    0      │
+├──────────────────────────┼───────────┤
+│ LONGER_THAN_180_LATENCY  │    0      │
+├──────────────────────────┼───────────┤
+│ FAILED_REQUESTS          │    0      │
+├──────────────────────────┼───────────┤
+│ FAILED_REQUESTS_PER_HOUR │    0      │
+╘══════════════════════════╧═══════════╛
+Tables created successfully.
+Experiment created: 
+Experiment(
+    experiment_id=3,
+    experiment_name=s3_very_long_sequential_long_decode,
+    experiment_date=2026-07-24 22:44:21.442474,
+    description=Very long prompt, sequential, long decode (45k chars, 5 tasks, 1 runner, 1000 tok)
+)
+
+Running experiments:   0%|          | 0/5 [00:00<?, ?it/s]Running experiments:  20%|██        | 1/5 [00:12<00:51, 12.87s/it]Running experiments:  40%|████      | 2/5 [00:32<00:51, 17.01s/it]Running experiments:  60%|██████    | 3/5 [00:42<00:27, 13.60s/it]Running experiments:  80%|████████  | 4/5 [00:54<00:13, 13.20s/it]Running experiments: 100%|██████████| 5/5 [01:08<00:00, 13.31s/it]Running experiments: 100%|██████████| 5/5 [01:08<00:00, 13.68s/it]
+Number of failed measurements: 0
+Creating 3 optimized HTTP clients with 50 connections each
+Creating shared client manager with 3 clients, 50 connections each for 20 runners
+Generating 20 prompts with length 45000 and seed 42
+Num of prompts: 20
+Num of tasks: 40
+Num of runners: 20
+Max tokens: 1000
+
+Experiment Details:
+ID: 3
+Name: s3_very_long_sequential_long_decode
+Date: 2026-07-24 22:44:21
+Description: Very long prompt, sequential, long decode (45k chars, 5 tasks, 1 runner, 1000 tok)
+
+Experiment Parameters:
+╒═════════════════════╤════════════════════════════════════════════╕
+│           Parameter │                                      Value │
+╞═════════════════════╪════════════════════════════════════════════╡
+│         num_workers │                                          1 │
+├─────────────────────┼────────────────────────────────────────────┤
+│           num_tasks │                                          5 │
+├─────────────────────┼────────────────────────────────────────────┤
+│            node_url │                      http://127.0.0.1:8081 │
+├─────────────────────┼────────────────────────────────────────────┤
+│          max_tokens │                                       1000 │
+├─────────────────────┼────────────────────────────────────────────┤
+│          model_name │              deepseek-ai/DeepSeek-V4-Flash │
+├─────────────────────┼────────────────────────────────────────────┤
+│             no_sign │                                       True │
+├─────────────────────┼────────────────────────────────────────────┤
+│            old_sign │                                      False │
+├─────────────────────┼────────────────────────────────────────────┤
+│ client_architecture │                                shared_pool │
+├─────────────────────┼────────────────────────────────────────────┤
+│   requester_address │ 0x0000000000000000000000000000000000000000 │
+├─────────────────────┼────────────────────────────────────────────┤
+│         avg_n_input │                                 23287.4000 │
+├─────────────────────┼────────────────────────────────────────────┤
+│         std_n_input │                                    39.7215 │
+├─────────────────────┼────────────────────────────────────────────┤
+│        avg_n_output │                                    81.6000 │
+├─────────────────────┼────────────────────────────────────────────┤
+│        std_n_output │                                    17.9805 │
+╘═════════════════════╧════════════════════════════════════════════╛
+
+Experiment Metrics:
+╒══════════════════════════╤═══════════╕
+│ Metric                   │     Value │
+╞══════════════════════════╪═══════════╡
+│ TTFT                     │    3.2538 │
+├──────────────────────────┼───────────┤
+│ TTFT_95                  │   10.1019 │
+├──────────────────────────┼───────────┤
+│ TOP_5_TTFT               │   12.3197 │
+├──────────────────────────┼───────────┤
+│ LATENCY                  │   13.6829 │
+├──────────────────────────┼───────────┤
+│ LATENCY_95               │   18.6381 │
+├──────────────────────────┼───────────┤
+│ TOP_5_LATENCY            │   19.9192 │
+├──────────────────────────┼───────────┤
+│ TPOT                     │    0.1677 │
+├──────────────────────────┼───────────┤
+│ THROUGHPUT               │ 1707.9    │
+├──────────────────────────┼───────────┤
+│ THROUGHPUT_INPUT_TOKENS  │ 1701.93   │
+├──────────────────────────┼───────────┤
+│ THROUGHPUT_OUTPUT_TOKENS │    5.9636 │
+├──────────────────────────┼───────────┤
+│ RPS                      │    0.0731 │
+├──────────────────────────┼───────────┤
+│ LONGER_THAN_60_LATENCY   │    0      │
+├──────────────────────────┼───────────┤
+│ LONGER_THAN_120_LATENCY  │    0      │
+├──────────────────────────┼───────────┤
+│ LONGER_THAN_180_LATENCY  │    0      │
+├──────────────────────────┼───────────┤
+│ FAILED_REQUESTS          │    0      │
+├──────────────────────────┼───────────┤
+│ FAILED_REQUESTS_PER_HOUR │    0      │
+╘══════════════════════════╧═══════════╛
+Tables created successfully.
+Experiment created: 
+Experiment(
+    experiment_id=4,
+    experiment_name=s4_very_long_max_concurrency,
+    experiment_date=2026-07-24 22:45:39.925196,
+    description=Very long prompt, max concurrency (45k chars, 40 tasks, 20 runners, 1000 tok)
+)
+
+Running experiments:   0%|          | 0/40 [00:00<?, ?it/s]Running experiments:   2%|▎         | 1/40 [00:17<11:12, 17.24s/it]Running experiments:   5%|▌         | 2/40 [00:20<05:49,  9.19s/it]Running experiments:   8%|▊         | 3/40 [00:21<03:11,  5.18s/it]Running experiments:  10%|█         | 4/40 [00:21<01:56,  3.24s/it]Running experiments:  15%|█▌        | 6/40 [00:22<01:04,  1.89s/it]Running experiments:  18%|█▊        | 7/40 [00:25<01:10,  2.14s/it]Running experiments:  20%|██        | 8/40 [00:25<00:51,  1.61s/it]Running experiments:  22%|██▎       | 9/40 [00:36<02:06,  4.08s/it]Running experiments:  25%|██▌       | 10/40 [00:37<01:42,  3.41s/it]Running experiments:  28%|██▊       | 11/40 [00:38<01:11,  2.48s/it]Running experiments:  30%|███       | 12/40 [00:39<01:02,  2.24s/it]Running experiments:  32%|███▎      | 13/40 [00:40<00:46,  1.73s/it]Running experiments:  35%|███▌      | 14/40 [00:41<00:40,  1.57s/it]Running experiments:  38%|███▊      | 15/40 [00:41<00:30,  1.22s/it]Running experiments:  40%|████      | 16/40 [00:42<00:22,  1.07it/s]Running experiments:  42%|████▎     | 17/40 [00:42<00:20,  1.12it/s]Running experiments:  45%|████▌     | 18/40 [00:45<00:28,  1.30s/it]Running experiments:  48%|████▊     | 19/40 [00:45<00:20,  1.05it/s]Running experiments:  50%|█████     | 20/40 [00:47<00:24,  1.20s/it]Running experiments:  52%|█████▎    | 21/40 [00:47<00:17,  1.09it/s]Running experiments:  55%|█████▌    | 22/40 [00:50<00:30,  1.68s/it]Running experiments:  60%|██████    | 24/40 [00:52<00:18,  1.17s/it]Running experiments:  62%|██████▎   | 25/40 [00:52<00:14,  1.03it/s]Running experiments:  65%|██████▌   | 26/40 [00:52<00:11,  1.27it/s]Running experiments:  68%|██████▊   | 27/40 [00:52<00:08,  1.56it/s]Running experiments:  70%|███████   | 28/40 [00:53<00:07,  1.66it/s]Running experiments:  72%|███████▎  | 29/40 [00:53<00:05,  2.14it/s]Running experiments:  75%|███████▌  | 30/40 [00:53<00:04,  2.26it/s]Running experiments:  78%|███████▊  | 31/40 [00:56<00:09,  1.02s/it]Running experiments:  80%|████████  | 32/40 [00:56<00:07,  1.11it/s]Running experiments:  82%|████████▎ | 33/40 [00:57<00:05,  1.34it/s]Running experiments:  85%|████████▌ | 34/40 [00:58<00:04,  1.21it/s]Running experiments:  88%|████████▊ | 35/40 [00:59<00:04,  1.24it/s]Running experiments:  90%|█████████ | 36/40 [01:00<00:04,  1.10s/it]Running experiments:  92%|█████████▎| 37/40 [01:03<00:04,  1.64s/it]Running experiments:  95%|█████████▌| 38/40 [01:07<00:04,  2.18s/it]Running experiments:  98%|█████████▊| 39/40 [01:13<00:03,  3.50s/it]Running experiments: 100%|██████████| 40/40 [02:37<00:00, 27.59s/it]Running experiments: 100%|██████████| 40/40 [02:37<00:00,  3.94s/it]
+Number of failed measurements: 0
+
+Experiment Details:
+ID: 4
+Name: s4_very_long_max_concurrency
+Date: 2026-07-24 22:45:39
+Description: Very long prompt, max concurrency (45k chars, 40 tasks, 20 runners, 1000 tok)
+
+Experiment Parameters:
+╒═════════════════════╤════════════════════════════════════════════╕
+│           Parameter │                                      Value │
+╞═════════════════════╪════════════════════════════════════════════╡
+│         num_workers │                                         20 │
+├─────────────────────┼────────────────────────────────────────────┤
+│           num_tasks │                                         40 │
+├─────────────────────┼────────────────────────────────────────────┤
+│            node_url │                      http://127.0.0.1:8081 │
+├─────────────────────┼────────────────────────────────────────────┤
+│          max_tokens │                                       1000 │
+├─────────────────────┼────────────────────────────────────────────┤
+│          model_name │              deepseek-ai/DeepSeek-V4-Flash │
+├─────────────────────┼────────────────────────────────────────────┤
+│             no_sign │                                       True │
+├─────────────────────┼────────────────────────────────────────────┤
+│            old_sign │                                      False │
+├─────────────────────┼────────────────────────────────────────────┤
+│ client_architecture │                                shared_pool │
+├─────────────────────┼────────────────────────────────────────────┤
+│   requester_address │ 0x0000000000000000000000000000000000000000 │
+├─────────────────────┼────────────────────────────────────────────┤
+│         avg_n_input │                                 23321.9500 │
+├─────────────────────┼────────────────────────────────────────────┤
+│         std_n_input │                                    51.9684 │
+├─────────────────────┼────────────────────────────────────────────┤
+│        avg_n_output │                                   126.1250 │
+├─────────────────────┼────────────────────────────────────────────┤
+│        std_n_output │                                   148.5025 │
+╘═════════════════════╧════════════════════════════════════════════╛
+
+Experiment Metrics:
+╒══════════════════════════╤═══════════╕
+│ Metric                   │     Value │
+╞══════════════════════════╪═══════════╡
+│ TTFT                     │    5.4581 │
+├──────────────────────────┼───────────┤
+│ TTFT_95                  │   14.1936 │
+├──────────────────────────┼───────────┤
+│ TOP_5_TTFT               │   14.1962 │
+├──────────────────────────┼───────────┤
+│ LATENCY                  │   30.8043 │
+├──────────────────────────┼───────────┤
+│ LATENCY_95               │   52.0719 │
+├──────────────────────────┼───────────┤
+│ TOP_5_LATENCY            │  105.333  │
+├──────────────────────────┼───────────┤
+│ TPOT                     │    0.2442 │
+├──────────────────────────┼───────────┤
+│ THROUGHPUT               │ 5945.15   │
+├──────────────────────────┼───────────┤
+│ THROUGHPUT_INPUT_TOKENS  │ 5913.18   │
+├──────────────────────────┼───────────┤
+│ THROUGHPUT_OUTPUT_TOKENS │   31.9784 │
+├──────────────────────────┼───────────┤
+│ RPS                      │    0.2535 │
+├──────────────────────────┼───────────┤
+│ LONGER_THAN_60_LATENCY   │    1      │
+├──────────────────────────┼───────────┤
+│ LONGER_THAN_120_LATENCY  │    1      │
+├──────────────────────────┼───────────┤
+│ LONGER_THAN_180_LATENCY  │    0      │
+├──────────────────────────┼───────────┤
+│ FAILED_REQUESTS          │    0      │
+├──────────────────────────┼───────────┤
+│ FAILED_REQUESTS_PER_HOUR │    0      │
+╘══════════════════════════╧═══════════╛
+
+List of Experiments:
++------+----------------------------------------+---------------------+-------------------------------------------------------+
+|   ID | Name                                   | Date                | Description                                           |
++======+========================================+=====================+=======================================================+
+|    4 | s4_very_long_max_concurrency           | 2026-07-24 22:45:39 | Very long prompt, max concurrency (45k chars, 40 t... |
++------+----------------------------------------+---------------------+-------------------------------------------------------+
+|    3 | s3_very_long_sequential_long_decode    | 2026-07-24 22:44:21 | Very long prompt, sequential, long decode (45k cha... |
++------+----------------------------------------+---------------------+-------------------------------------------------------+
+|    2 | s2_short_prompt_high_concurrency       | 2026-07-24 22:41:08 | Short prompt, high concurrency (2k chars, 200 task... |
++------+----------------------------------------+---------------------+-------------------------------------------------------+
+|    1 | s1_long_prompt_sequential_short_decode | 2026-07-24 22:39:47 | Long prompt, sequential, short decode (20k chars, ... |
++------+----------------------------------------+---------------------+-------------------------------------------------------+
+|    |                                        |                     |                         | LONGER_THAN_60_LATENCY: 0          |
+|    |                                        |                     |                         | LONGER_THAN_120_LATENCY: 0         |
+|    |                                        |                     |                         | LONGER_THAN_180_LATENCY: 0         |
+|    |                                        |                     |                         | FAILED_REQUESTS: 0                 |
+|    |                                        |                     |                         | FAILED_REQUESTS_PER_HOUR: 0        |
++----+----------------------------------------+---------------------+-------------------------+------------------------------------+
+|  2 | s2_short_prompt_high_concurrency       | 2026-07-24 22:41:08 | Short prompt, high c... | TTFT: 1.2344                       |
+|    |                                        |                     |                         | TTFT_95: 5.1675                    |
+|    |                                        |                     |                         | TOP_5_TTFT: 6.0365                 |
+|    |                                        |                     |                         | LATENCY: 23.4483                   |
+|    |                                        |                     |                         | LATENCY_95: 46.7738                |
+|    |                                        |                     |                         | TOP_5_LATENCY: 51.8355             |
+|    |                                        |                     |                         | TPOT: 0.1554                       |
+|    |                                        |                     |                         | THROUGHPUT: 1307.6854              |
+|    |                                        |                     |                         | THROUGHPUT_INPUT_TOKENS: 1142.1409 |
+|    |                                        |                     |                         | THROUGHPUT_OUTPUT_TOKENS: 165.5445 |
+|    |                                        |                     |                         | RPS: 1.0971                        |
+|    |                                        |                     |                         | LONGER_THAN_60_LATENCY: 0          |
+|    |                                        |                     |                         | LONGER_THAN_120_LATENCY: 0         |
+|    |                                        |                     |                         | LONGER_THAN_180_LATENCY: 0         |
+|    |                                        |                     |                         | FAILED_REQUESTS: 0                 |
+|    |                                        |                     |                         | FAILED_REQUESTS_PER_HOUR: 0        |
++----+----------------------------------------+---------------------+-------------------------+------------------------------------+
+|  1 | s1_long_prompt_sequential_short_decode | 2026-07-24 22:39:47 | Long prompt, sequent... | TTFT: 0.8276                       |
+|    |                                        |                     |                         | TTFT_95: 1.7952                    |
+|    |                                        |                     |                         | TOP_5_TTFT: 2.0879                 |
+|    |                                        |                     |                         | LATENCY: 14.1897                   |
+|    |                                        |                     |                         | LATENCY_95: 18.7478                |
+|    |                                        |                     |                         | TOP_5_LATENCY: 19.2174             |
+|    |                                        |                     |                         | TPOT: 0.1364                       |
+|    |                                        |                     |                         | THROUGHPUT: 736.0366               |
+|    |                                        |                     |                         | THROUGHPUT_INPUT_TOKENS: 728.7074  |
+|    |                                        |                     |                         | THROUGHPUT_OUTPUT_TOKENS: 7.3292   |
+|    |                                        |                     |                         | RPS: 0.0705                        |
+|    |                                        |                     |                         | LONGER_THAN_60_LATENCY: 0          |
+|    |                                        |                     |                         | LONGER_THAN_120_LATENCY: 0         |
+|    |                                        |                     |                         | LONGER_THAN_180_LATENCY: 0         |
+|    |                                        |                     |                         | FAILED_REQUESTS: 0                 |
+|    |                                        |                     |                         | FAILED_REQUESTS_PER_HOUR: 0        |
++----+----------------------------------------+---------------------+-------------------------+------------------------------------+

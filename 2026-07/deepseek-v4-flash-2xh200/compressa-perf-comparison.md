@@ -24,6 +24,14 @@ Common args (from `runner.py`): `--tensor-parallel-size 2 --gpu-memory-utilizati
 CUDA graphs are what separates the two columns: `--enforce-eager` turns them off, the
 compiled configuration captures them at startup.
 
+> **What "compiled" actually toggles.** vLLM auto-enables `VLLM_USE_BREAKABLE_CUDAGRAPH`
+> for DeepSeek-V4, which disables the torch.compile pipeline outright ("Equivalent to
+> `-cc.mode=none`"). The `--compilation-config '{"mode":3,...}'` passed below therefore has
+> **no effect**; the only difference between the two configurations is whether
+> `--enforce-eager` is present, i.e. whether the **breakable CUDA graph** is active. Read
+> every "compiled" column in this report as "CUDA graphs on". Evidence:
+> `../deepseek-v4-flash-2xb200/artifacts/control_startup_cudagraph_evidence.txt`.
+
 ## Benchmark Scenarios
 
 | # | Profile | Prompt chars | Tasks | Runners | Max output tokens |
@@ -109,6 +117,6 @@ already faster — fewer shards mean less cross-GPU traffic to hide.
   profiles, 2–3× under concurrency.
 - **Cost of graphs:** ~2.7 GiB less KV cache per GPU (1,214,683 → 1,127,930 tokens) plus
   the capture time at startup.
-- **PoC throughput is unaffected on Hopper** — 1216 nonces/min at batch 32 in both modes,
-  identical in every cell (see `README.md`). On Blackwell it is *not* unaffected: 2×B200
-  gains ~70 % from CUDA graphs.
+- **PoC throughput barely moves on Hopper** — 1216 nonces/min at batch 32 in both modes,
+  matching in every cell (see `README.md`). That is a bound of < 5 %, the sweep's
+  resolution, not an exact zero. On Blackwell the same comparison gains ~71 %.

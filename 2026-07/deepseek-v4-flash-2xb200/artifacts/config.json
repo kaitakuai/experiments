@@ -1,0 +1,77 @@
+{
+  "date": "2026-07-24",
+  "model": "deepseek-ai/DeepSeek-V4-Flash",
+  "model_quantization": {
+    "quant_method": "fp8",
+    "fmt": "e4m3",
+    "scale_fmt": "ue8m0",
+    "weight_block_size": [
+      128,
+      128
+    ],
+    "n_routed_experts": 256,
+    "note": "no FP4 in the honest checkpoint"
+  },
+  "image": "ghcr.io/kaitakuai/mlnode-b300-deepseek-v4-flash:0.2.13-vllm0.25.1-overlay-k4",
+  "image_digest": "sha256:2af898fa516424ea2884b77e40ae480ce61b19a7d0112f8c9b8cc866c8bcb28a",
+  "hardware": {
+    "gpu": "NVIDIA B200 SXM",
+    "count": 2,
+    "memory_mib": 183359,
+    "power_limit_w": 1000,
+    "driver": "595.71.05",
+    "interconnect": "NV18",
+    "form_factor_check": "gpu_max_power=1000W \u2192 SXM"
+  },
+  "stack": {
+    "vllm": "0.25.1",
+    "torch": "2.11.0+cu130"
+  },
+  "vllm_args": [
+    "--tensor-parallel-size",
+    "2",
+    "--gpu-memory-utilization",
+    "0.90",
+    "--max-model-len",
+    "400000",
+    "--max-num-batched-tokens",
+    "32768",
+    "--kv-cache-dtype",
+    "fp8",
+    "--logprobs-mode",
+    "processed_logprobs",
+    "--trust-remote-code",
+    "--worker-extension-cls",
+    "gonka_poc.worker.PoCWorkerExtension"
+  ],
+  "modes": {
+    "eager": {
+      "extra_args": [
+        "--enforce-eager"
+      ],
+      "cuda_graphs": false,
+      "gpu_kv_cache_tokens": 2359479,
+      "max_concurrency_400k": 5.9
+    },
+    "compiled": {
+      "extra_args": [
+        "--compilation-config",
+        "{\"mode\":3,\"cudagraph_mode\":\"FULL_AND_PIECEWISE\",\"custom_ops\":[\"all\"]}"
+      ],
+      "cuda_graphs": "breakable CUDA graph (torch.compile disabled by VLLM_USE_BREAKABLE_CUDAGRAPH)",
+      "note": "mode=3 is NOT in effect for V4 \u2014 breakable cudagraph forces -cc.mode=none"
+    }
+  },
+  "poc": {
+    "scheme": "v2 murmur3",
+    "block_hash": "artifact_collection_block_v1",
+    "seq_len": 1024,
+    "k_dim": 12,
+    "nonces_collected": 1000,
+    "sweep_batches": [
+      8,
+      16,
+      32
+    ]
+  }
+}

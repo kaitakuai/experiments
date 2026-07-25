@@ -9,14 +9,20 @@
 
 Two results for DeepSeek-V4-Flash PoC-v2 on vLLM 0.25.1, single B300, TP=1:
 
-1. **Throughput sweep** in the realistic serving config (compiled `mode=3` +
-   `FULL_AND_PIECEWISE` CUDA graphs, `max_model_len=400000`): **1472 nonces/min** at
-   batch_size 32.
+1. **Throughput sweep** in the realistic serving config (CUDA graphs on,
+   `max_model_len=400000`): **1472 nonces/min** at batch_size 32. Note the `mode=3` flags
+   passed here are inert for V4 — see the note below.
 2. **Cross-implementation consensus**: the V4 PoC nonces produced by three independent
    implementations of the same v2 (murmur3) scheme — the out-of-tree plugin, the earlier
    in-tree 0.23→0.25 port, and this 0.25.1 forward-port — are near-identical (median
    pairwise L2 ≈ 0.002) and pass the chain fraud test against each other (binomial
    p ≤ 2e-44). The forward-ported V4 path is consensus-safe.
+
+> **Not comparable with the cross-topology reports.** This run used the Gonka PoC-v2
+> **fork** (PoC compiled into vLLM), TP=1 on one B300. The H100/H200/B200 reports use the
+> `mlnode-*-deepseek-v4-flash:0.2.13-vllm0.25.1-overlay-k4` image with the PoC **plugin**
+> loaded via `--worker-extension-cls`. Throughput here must not be placed in the same
+> table as those numbers.
 
 DeepSeek-V4-Flash needs three PoC-specific fixes on top of the generic PoC forward
 (per-group attention metadata for its heterogeneous KV block sizes, `positions` threaded
@@ -80,9 +86,10 @@ docker run -d --gpus '"device=0"' --shm-size=32g \
      --host 0.0.0.0 --port 8000"
 ```
 
-`--kv-cache-dtype fp8` is required for V4 (FlashMLA path). PoC forward runs
-`skip_compiled=True`, so the compiled/eager choice does not change PoC throughput; the
-compiled config is used so the run matches the fleet's real serving deployment.
+`--kv-cache-dtype fp8` is required for V4 (FlashMLA path). The compiled config is used so
+the run matches the fleet's real serving deployment. Note that on this box the eager/compiled
+choice did not change PoC throughput — but that is a property of this GPU's speed, not of
+the PoC path: on 2×B200 the same toggle is worth +71 %.
 
 ### 4. Run the batch-size sweep
 
@@ -120,7 +127,14 @@ python3 scripts/l2_crossval.py \
 
 ## Results — throughput sweep
 
-Compiled `mode=3` + `FULL_AND_PIECEWISE`, `max_model_len=400000`, seq_len 1024,
+> **What "compiled" actually toggles.** vLLM auto-enables `VLLM_USE_BREAKABLE_CUDAGRAPH`
+> for DeepSeek-V4, which disables the torch.compile pipeline outright ("Equivalent to
+> `-cc.mode=none`"). The `--compilation-config '{"mode":3,...}'` in the command above has
+> **no effect** — the only difference between the two configurations is whether
+> `--enforce-eager` is present, i.e. whether the **breakable CUDA graph** is active.
+> Evidence: `../deepseek-v4-flash-2xb200/artifacts/control_startup_cudagraph_evidence.txt`.
+
+CUDA graphs on, `max_model_len=400000`, seq_len 1024,
 5 s warmup + 30 s measure:
 
 | Batch Size | Nonces (30 s) | Nonces/min |
@@ -129,24 +143,29 @@ Compiled `mode=3` + `FULL_AND_PIECEWISE`, `max_model_len=400000`, seq_len 1024,
 | 16 | 720 | 1440 |
 | **32** ★ | **736** | **1472** |
 
-**Best: batch=32 → 1472 nonces/min.** Throughput is nearly batch-flat (+18% from b8 to
-b32) — the V4 PoC forward is compute-bound. This is ~1.6× the 0.20.0-image baseline
-(~928 nonces/min).
+**Best: batch=32 → 1472 nonces/min.** Throughput is nearly batch-flat (+18 % from b8 to
+b32), i.e. bounded by per-iteration fixed cost rather than by batch parallelism. This is
+~1.6× the 0.20.0-image baseline (~928 nonces/min).
 
 ## Cross-implementation consensus
 
 Same v2 (murmur3) pseudo-`input_ids` scheme, 1000 common nonces per pair, chain proto
 fraud test (`dist_threshold=0.40`, `p_mismatch=0.10`, `p_value_threshold=0.05`):
 
-| A | B | median L2 | mismatch >0.40 | binomial p | Verdict |
-|---|---|----------:|---------------:|-----------:|:-------:|
-| plugin (out-of-tree) | in-tree (0.23→0.25) | 0.0024 | 0.20% | 1.1e-42 | **PASS** |
-| plugin (out-of-tree) | qd forward-port (0.25.1) | 0.0024 | 0.10% | 2.0e-44 | **PASS** |
-| in-tree (0.23→0.25) | qd forward-port (0.25.1) | 0.0000 | 0.30% | 4.1e-41 | **PASS** |
+| A | B | median L2 | mismatch >0.40 | binomial p |
+|---|---|----------:|---------------:|-----------:|
+| plugin (out-of-tree) | in-tree (0.23→0.25) | 0.0024 | 0.20% | 1.1e-42 |
+| plugin (out-of-tree) | qd forward-port (0.25.1) | 0.0024 | 0.10% | 2.0e-44 |
+| in-tree (0.23→0.25) | qd forward-port (0.25.1) | 0.0000 | 0.30% | 4.1e-41 |
 
-All three independent implementations agree within honest bounds. The ~0.002 median L2 is
-numerical noise between kernel paths, far below the 0.40 per-nonce threshold and the 10%
-allowed mismatch rate.
+All three implementations agree to ~0.002 median L2 — numerical noise between kernel
+paths. No verdict is asserted: **V4 thresholds are not calibrated yet**, and the 0.40 /
+10 % parameters above are the reference values used for other models, quoted here only to
+give the numbers scale.
+
+Note the third row: in-tree and the forward-port are bit-identical at the median (0.0000)
+yet still differ on 0.30 % of nonces — the same run-to-run nondeterminism measured
+separately in `../deepseek-v4-flash-2xh200/README.md`, not an implementation difference.
 
 ## Nonce collection
 
@@ -161,16 +180,19 @@ out-of-tree plugin and the earlier in-tree port.
 - `artifacts/nonces_reference_plugin.json` — reference set, out-of-tree plugin
 - `artifacts/nonces_reference_intree.json` — reference set, in-tree 0.23→0.25 port
 - `artifacts/sweep.json` — batch-size throughput sweep
-- `artifacts/l2_matrix.json` — cross-implementation L2 + fraud verdicts
+- `artifacts/l2_matrix.json` — cross-implementation L2 distances and p-values
 
 ## Key observations
 
 - **400k context + compiled fits on a single B300** for V4: sparse-MLA compresses KV
   enough for a 2.6M-token pool (max concurrency ~6.5 at full 400k context).
-- **PoC throughput is compilation-invariant** here (b16/b32 rates are bit-identical to an
-  eager `max_model_len=8192` run) because the PoC forward is `skip_compiled`.
+- **PoC throughput was unchanged by the compilation flags here** (b16/b32 rates match an
+  eager `max_model_len=8192` run). This is **not** a general property: on 2×B200 the same
+  comparison gives +71 % (see `../deepseek-v4-flash-2xb200/README.md`). Where the GPU is
+  fast enough that per-step kernel-launch cost is no longer hidden behind compute, CUDA
+  graphs matter a great deal.
 - **The forward-port is consensus-safe**: nonces match the out-of-tree reference within
-  numerical noise (p ≤ 2e-44), the same verdict as the earlier in-tree port.
+  numerical noise (p ≤ 2e-44), like the earlier in-tree port.
 
 ## Reproducibility checklist
 
