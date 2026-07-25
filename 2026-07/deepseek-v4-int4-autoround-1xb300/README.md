@@ -61,6 +61,28 @@ The memory saved does not compensate either: 142.7 GiB of weights instead of ~25
 KV cache grows only from 2,661,034 to 2,700,687 tokens (+1.5 %), because
 `--gpu-memory-utilization 0.90` caps the pool before the saving matters.
 
+## Serving — INT4 is faster alone and slower under load
+
+compressa-perf, eager, same card, zero failed requests. Metrics recomputed from the raw
+per-request table (`scripts/metrics.py`), because the public `compressa-perf` 0.2.7
+aggregates only TTFT.
+
+| Scenario | out tok/s honest → INT4 | Δ | TPOT Δ |
+|---|---|---:|---:|
+| s1 long prompt, sequential | 14.17 → **19.91** | **+41 %** | −33 % |
+| s2 short prompt, concurrent | 346.63 → 367.25 | +6 % | −10 % |
+| s3 very long, sequential | 14.03 → 14.52 | +3 % | −32 % |
+| **s4 very long, max concurrency** | 110.13 → **89.99** | **−18 %** | **+18 %** |
+
+INT4 **speeds up single-stream decode and slows down heavy concurrency** — the mirror image
+of NVFP4, which gained +42 % exactly on s4. Same mechanism, opposite sign: with one stream
+in flight, decode is bound by weight traffic and 4-bit weights win; with twenty streams the
+bound shifts to compute, and dequantising to bf16 on every forward costs more than the
+smaller weights save.
+
+So INT4's profile is: **half the PoC throughput, better light serving, worse loaded
+serving.** For a node whose reward is PoC-weighted, that is strictly a loss.
+
 ## L2 — INT4 separates three times better than NVFP4
 
 1000 nonces per pair, same `block_hash` / `public_key`.
@@ -118,7 +140,8 @@ target. Everything except NVFP4 is either loud or economically pointless.
   bit-identical, the 0.296 figure is purely quantisation. **That check has not been run**,
   so treat 0.296 as an upper bound that may contain a patch component.
 - Only the eager arm is reported here. The CUDA-graph arm adds nothing for PoC on this box
-  (see `../deepseek-v4-flash-1xb300-cudagraph-ab/`).
+  (see `../deepseek-v4-flash-1xb300-cudagraph-ab/`), though it would likely change the
+  serving numbers — untested for INT4.
 
 ## Files
 
@@ -126,6 +149,7 @@ target. Everything except NVFP4 is either loud or economically pointless.
 |---|---|
 | `artifacts/int4_eager_{nonces.json,poc_sweep.log}` | INT4 run |
 | `artifacts/honest_fp8_eager_*` , `nvfp4_eager_*` | the two comparison runs, same card |
+| `artifacts/*_serving.json` | full serving metrics, INT4 and honest |
 | `artifacts/l2_matrix.json` | the table above |
 | `scripts/pr45645_vllm_only.diff` | the patch, test file stripped |
 | `scripts/full_test_int4.sh` | the driver (uses the patched image) |
