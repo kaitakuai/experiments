@@ -1,0 +1,189 @@
++ M=Intel/DeepSeek-V4-Flash-W4A16-AutoRound
++ API=http://127.0.0.1:8081
++ OUT=/root/out/mingpu
++ mkdir -p /root/out/mingpu
++ try 1 0.96 200000
++ TP=1
++ GMU=0.96
++ MAXLEN=200000
++ echo '=== MG2_TRY tp=1 gmu=0.96 maxlen=200000 ==='
+=== MG2_TRY tp=1 gmu=0.96 maxlen=200000 ===
+++ ps -eo pid,args
+++ grep -F 'uvicorn api.app'
+++ grep -v grep
+++ awk '{print $1}'
++ sleep 10
++ python3 -
+  runner: TP=1 gmu=0.96 maxlen=200000
+++ seq 1 30
+++ seq -s, 0 0
++ for i in $(seq 1 30)
++ curl -s -m 5 http://127.0.0.1:8081/health
++ CUDA_VISIBLE_DEVICES=0
++ WATCHER_MAX_UNHEALTHY_COUNT=9999
++ PYTHONPATH=/app:/app/packages/api/src:/app/packages/pow/src:/app/packages/train/src:/app/packages/common/src
++ setsid python3 -m uvicorn api.app:app --host 0.0.0.0 --port 8081 --app-dir /app/packages/api/src
++ sleep 5
++ for i in $(seq 1 30)
++ curl -s -m 5 http://127.0.0.1:8081/health
++ break
++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/async -X POST -H 'Content-Type: application/json' -d '{"model":"Intel/DeepSeek-V4-Flash-W4A16-AutoRound","dtype":"auto","additional_args":["--enforce-eager"]}' -m 60
++ head -c 130
+{"status":"starting","message":"Inference startup initiated in background"}+ echo
+
++ ok=
+++ seq 1 100
++ for i in $(seq 1 100)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ st=False
++ '[' False = True ']'
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ grep -o '"error":"[^"]*"'
+++ head -1
++ er=
++ '[' -n '' ']'
++ sleep 15
++ for i in $(seq 1 100)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ st=False
++ '[' False = True ']'
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ grep -o '"error":"[^"]*"'
+++ head -1
++ er=
++ '[' -n '' ']'
++ sleep 15
++ for i in $(seq 1 100)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ st=False
++ '[' False = True ']'
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ grep -o '"error":"[^"]*"'
+++ head -1
++ er='"error":"vLLM process exited prematurely: None"'
++ '[' -n '"error":"vLLM process exited prematurely: None"' ']'
++ echo '=== MG2_FAILED tp=1 "error":"vLLM process exited prematurely: None" ==='
+=== MG2_FAILED tp=1 "error":"vLLM process exited prematurely: None" ===
++ grep -aE 'OutOfMemory|No available memory|RuntimeError' /root/api_tp1.log
++ grep -viE 'watcher|manager'
++ head -2
+(EngineCore pid=13009) ERROR 07-25 14:52:06 [core.py:1231] torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 2.00 GiB. GPU 0 has a total capacity of 79.18 GiB of which 1.83 GiB is free. Process 1984311 has 77.34 GiB memory in use. Of the allocated memory 76.68 GiB is allocated by PyTorch, and 4.39 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)
+(EngineCore pid=13009) torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 2.00 GiB. GPU 0 has a total capacity of 79.18 GiB of which 1.83 GiB is free. Process 1984311 has 77.34 GiB memory in use. Of the allocated memory 76.68 GiB is allocated by PyTorch, and 4.39 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)
++ break
++ '[' -n '' ']'
++ curl -s -X POST http://127.0.0.1:8081/api/v1/inference/down -m 90
++ sleep 25
++ try 2 0.96 200000
++ TP=2
++ GMU=0.96
++ MAXLEN=200000
++ echo '=== MG2_TRY tp=2 gmu=0.96 maxlen=200000 ==='
+=== MG2_TRY tp=2 gmu=0.96 maxlen=200000 ===
+++ ps -eo pid,args
+++ grep -F 'uvicorn api.app'
+++ grep -v grep
+++ awk '{print $1}'
++ for p in $(ps -eo pid,args|grep -F "uvicorn api.ap""p"|grep -v grep|awk '{print $1}')
++ kill 12452
++ sleep 10
++ python3 -
+  runner: TP=2 gmu=0.96 maxlen=200000
+++ seq 1 30
+++ seq -s, 0 1
++ for i in $(seq 1 30)
++ curl -s -m 5 http://127.0.0.1:8081/health
++ CUDA_VISIBLE_DEVICES=0,1
++ WATCHER_MAX_UNHEALTHY_COUNT=9999
++ PYTHONPATH=/app:/app/packages/api/src:/app/packages/pow/src:/app/packages/train/src:/app/packages/common/src
++ setsid python3 -m uvicorn api.app:app --host 0.0.0.0 --port 8081 --app-dir /app/packages/api/src
++ sleep 5
++ for i in $(seq 1 30)
++ curl -s -m 5 http://127.0.0.1:8081/health
++ break
++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/async -X POST -H 'Content-Type: application/json' -d '{"model":"Intel/DeepSeek-V4-Flash-W4A16-AutoRound","dtype":"auto","additional_args":["--enforce-eager"]}' -m 60
++ head -c 130
+{"status":"starting","message":"Inference startup initiated in background"}+ echo
+
++ ok=
+++ seq 1 100
++ for i in $(seq 1 100)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ st=False
++ '[' False = True ']'
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ grep -o '"error":"[^"]*"'
+++ head -1
++ er=
++ '[' -n '' ']'
++ sleep 15
++ for i in $(seq 1 100)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ st=False
++ '[' False = True ']'
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ head -1
+++ grep -o '"error":"[^"]*"'
++ er=
++ '[' -n '' ']'
++ sleep 15
++ for i in $(seq 1 100)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ st=False
++ '[' False = True ']'
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ grep -o '"error":"[^"]*"'
+++ head -1
++ er=
++ '[' -n '' ']'
++ sleep 15
++ for i in $(seq 1 100)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ st=False
++ '[' False = True ']'
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ head -1
+++ grep -o '"error":"[^"]*"'
++ er=
++ '[' -n '' ']'
++ sleep 15
++ for i in $(seq 1 100)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ st=False
++ '[' False = True ']'
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ grep -o '"error":"[^"]*"'
+++ head -1
++ er=
++ '[' -n '' ']'
++ sleep 15
++ for i in $(seq 1 100)
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ python3 -c 'import sys,json;print(json.load(sys.stdin).get('\''is_running'\''))'
++ st=False
++ '[' False = True ']'
+++ curl -s -m 6 http://127.0.0.1:8081/api/v1/inference/up/status
+++ grep -o '"error":"[^"]*"'
+++ head -1
++ er='"error":"vLLM process exited prematurely: None"'
++ '[' -n '"error":"vLLM process exited prematurely: None"' ']'
++ echo '=== MG2_FAILED tp=2 "error":"vLLM process exited prematurely: None" ==='
+=== MG2_FAILED tp=2 "error":"vLLM process exited prematurely: None" ===
++ grep -aE 'OutOfMemory|No available memory|RuntimeError' /root/api_tp2.log
++ grep -viE 'watcher|manager'
++ head -2
+(Worker_TP1 pid=14392) ERROR 07-25 14:54:03 [multiproc_executor.py:1008] RuntimeError: torch_call_dispatcher( "aten::empty", "memory_format", stack.data(), TORCH_ABI_VERSION) API call failed at /opt/venv/lib/python3.12/site-packages/torch/include/torch/csrc/stable/ops.h, line 625
+(Worker_TP1 pid=14392) ERROR 07-25 14:54:03 [multiproc_executor.py:1008] RuntimeError: torch_call_dispatcher( "aten::empty", "memory_format", stack.data(), TORCH_ABI_VERSION) API call failed at /opt/venv/lib/python3.12/site-packages/torch/include/torch/csrc/stable/ops.h, line 625
++ break
++ '[' -n '' ']'
++ curl -s -X POST http://127.0.0.1:8081/api/v1/inference/down -m 90
++ sleep 25
++ echo '=== MG2_DONE ==='
+=== MG2_DONE ===

@@ -1,0 +1,312 @@
+2026-07-25 14:51:43,902 - api.routes - WARNING - mlnode-api package metadata not found, version will be reported as 'unknown'
+INFO:     Started server process [12452]
+INFO:     Waiting for application startup.
+2026-07-25 14:51:43,924 - api.models.manager - INFO - ModelManager initialized with cache_dir: /root/.cache/hub, stall_timeout: 600.0s (10.0 min)
+2026-07-25 14:51:43,989 - api.proxy - INFO - vLLM proxy started
+2026-07-25 14:51:43,989 - api.proxy - INFO - Health check loop started, checking every 2.0 seconds
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8081 (Press CTRL+C to quit)
+INFO:     127.0.0.1:45720 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45724 - "POST /api/v1/inference/up/async HTTP/1.1" 200 OK
+2026-07-25 14:51:46,598 - api.inference.vllm.runner - INFO - gpus per instance: 1 (tp_size: 1, pp_size: 1)
+2026-07-25 14:51:46,599 - api.inference.vllm.runner - INFO - total available gpus: 1
+2026-07-25 14:51:46,599 - api.inference.vllm.runner - INFO - instances to start: 1
+2026-07-25 14:51:46,600 - api.inference.vllm.runner - INFO - Starting vLLM instance 0 on port 5001 with GPUs 0 (sleep: 0s)
+2026-07-25 14:51:46,601 - api.inference.vllm.runner - INFO - Setting up proxy with backend ports: [5001]
+2026-07-25 14:51:46,602 - api.proxy - INFO - vLLM proxy setup with 1 backends: [5001]
+2026-07-25 14:51:46,602 - api.inference.vllm.runner - INFO - vLLM proxy integrated with main API server
+INFO:     127.0.0.1:45732 - "GET /api/v1/inference/up/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45740 - "GET /api/v1/inference/up/status HTTP/1.1" 200 OK
+2026-07-25 14:51:47,992 - api.watcher - INFO - Manager InferenceManager reached healthy state in active session — MAX_UNHEALTHY_COUNT=9999 kill threshold now active
+INFO 07-25 14:51:53 [api_utils.py:339] 
+INFO 07-25 14:51:53 [api_utils.py:339]        █     █     █▄   ▄█
+INFO 07-25 14:51:53 [api_utils.py:339]  ▄▄ ▄█ █     █     █ ▀▄▀ █  version 0.25.1
+INFO 07-25 14:51:53 [api_utils.py:339]   █▄█▀ █     █     █     █  model   Intel/DeepSeek-V4-Flash-W4A16-AutoRound
+INFO 07-25 14:51:53 [api_utils.py:339]    ▀▀  ▀▀▀▀▀ ▀▀▀▀▀ ▀     ▀
+INFO 07-25 14:51:53 [api_utils.py:339] 
+INFO 07-25 14:51:53 [api_utils.py:273] non-default args: {'host': '0.0.0.0', 'port': 5001, 'model': 'Intel/DeepSeek-V4-Flash-W4A16-AutoRound', 'trust_remote_code': True, 'max_model_len': 200000, 'enforce_eager': True, 'logprobs_mode': 'processed_logprobs', 'worker_extension_cls': 'gonka_poc.worker.PoCWorkerExtension', 'gpu_memory_utilization': 0.96, 'kv_cache_dtype': 'fp8', 'max_num_batched_tokens': 32768}
+WARNING 07-25 14:51:53 [envs.py:2041] Unknown vLLM environment variable detected: VLLM_BUILD_PIPELINE
+WARNING 07-25 14:51:53 [envs.py:2041] Unknown vLLM environment variable detected: VLLM_USE_FLASHINFER_MOE_FP4
+WARNING 07-25 14:51:53 [envs.py:2041] Unknown vLLM environment variable detected: VLLM_USE_FLASHINFER_MOE_FP8
+WARNING 07-25 14:51:53 [envs.py:2041] Unknown vLLM environment variable detected: VLLM_BUILD_COMMIT
+WARNING 07-25 14:51:53 [envs.py:2041] Unknown vLLM environment variable detected: VLLM_RUNNER_TIMEOUT
+WARNING 07-25 14:51:53 [envs.py:2041] Unknown vLLM environment variable detected: VLLM_USE_V1
+WARNING 07-25 14:51:53 [envs.py:2041] Unknown vLLM environment variable detected: VLLM_BUILD_URL
+WARNING 07-25 14:51:53 [envs.py:2041] Unknown vLLM environment variable detected: VLLM_IMAGE_TAG
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+INFO 07-25 14:51:54 [model.py:619] Resolved architecture: DeepseekV4ForCausalLM
+INFO 07-25 14:51:54 [model.py:633] Defaulting to tokenizer_mode='deepseek_v4' for DeepseekV4ForCausalLM
+INFO 07-25 14:51:54 [model.py:1776] Using max model len 200000
+INFO 07-25 14:51:55 [cache.py:286] Using fp8 data type to store kv cache. It reduces the GPU memory footprint and boosts the performance. Meanwhile, it may cause accuracy drop without a proper scaling factor
+INFO 07-25 14:51:55 [scheduler.py:252] Chunked prefill is enabled with max_num_batched_tokens=32768.
+INFO 07-25 14:51:55 [vllm.py:1042] Asynchronous scheduling is enabled.
+WARNING 07-25 14:51:55 [vllm.py:1096] Enforce eager set, disabling torch.compile and CUDAGraphs. This is equivalent to setting -cc.mode=none -cc.cudagraph_mode=none
+INFO 07-25 14:51:55 [vllm.py:1128] Auto-enabling VLLM_USE_BREAKABLE_CUDAGRAPH=1. Set VLLM_USE_BREAKABLE_CUDAGRAPH=0 to opt out.
+WARNING 07-25 14:51:55 [vllm.py:1134] VLLM_USE_BREAKABLE_CUDAGRAPH is set, disabling vLLM's torch.compile pipeline. Equivalent to -cc.mode=none.
+WARNING 07-25 14:51:55 [vllm.py:1144] Inductor compilation was disabled by user settings, optimizations settings that are only active during inductor compilation will be ignored.
+INFO 07-25 14:51:55 [kernel.py:292] Final IR op priority after setting platform defaults: IrOpPriorityConfig(rms_norm=['vllm_c', 'native'], fused_add_rms_norm=['vllm_c', 'native'])
+INFO 07-25 14:51:55 [vllm.py:1322] Cudagraph is disabled under eager mode
+INFO 07-25 14:51:55 [compilation.py:312] Enabled custom fusions: norm_quant, act_quant
+INFO:     127.0.0.1:51890 - "GET /api/v1/inference/up/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51892 - "GET /api/v1/inference/up/status HTTP/1.1" 200 OK
+(EngineCore pid=13009) INFO 07-25 14:52:04 [core.py:114] Initializing a V1 LLM engine (v0.25.1) with config: model='Intel/DeepSeek-V4-Flash-W4A16-AutoRound', speculative_config=None, tokenizer='Intel/DeepSeek-V4-Flash-W4A16-AutoRound', skip_tokenizer_init=False, tokenizer_mode=deepseek_v4, revision=None, tokenizer_revision=None, trust_remote_code=True, dtype=torch.bfloat16, max_seq_len=200000, download_dir=None, load_format=auto, tensor_parallel_size=1, pipeline_parallel_size=1, data_parallel_size=1, decode_context_parallel_size=1, dcp_comm_backend=ag_rs, disable_custom_all_reduce=False, quantization=inc, quantization_config=None, enforce_eager=True, enable_return_routed_experts=False, kv_cache_dtype=fp8, device_config=cuda, structured_outputs_config=StructuredOutputsConfig(backend='auto', disable_any_whitespace=False, disable_additional_properties=False, reasoning_parser='', reasoning_parser_plugin='', enable_in_reasoning=False), observability_config=ObservabilityConfig(show_hidden_metrics_for_version=None, otlp_traces_endpoint=None, collect_detailed_traces=None, kv_cache_metrics=False, kv_cache_metrics_sample=0.01, cudagraph_metrics=False, enable_layerwise_nvtx_tracing=False, enable_mfu_metrics=False, enable_mm_processor_stats=False, enable_logging_iteration_details=False, jit_monitor_mode='warn', jit_monitor_verbose=False), seed=0, served_model_name=Intel/DeepSeek-V4-Flash-W4A16-AutoRound, enable_prefix_caching=True, enable_chunked_prefill=True, pooler_config=None, compilation_config={'mode': <CompilationMode.NONE: 0>, 'debug_dump_path': None, 'cache_dir': '', 'compile_cache_save_format': 'binary', 'backend': 'inductor', 'custom_ops': ['all'], 'ir_enable_torch_wrap': False, 'splitting_ops': [], 'compile_mm_encoder': False, 'cudagraph_mm_encoder': False, 'encoder_cudagraph_token_budgets': [], 'encoder_cudagraph_max_vision_items_per_batch': 0, 'encoder_cudagraph_max_frames_per_batch': None, 'compile_sizes': [], 'compile_ranges_endpoints': [32768], 'inductor_compile_config': {'enable_auto_functionalized_v2': False, 'size_asserts': False, 'alignment_asserts': False, 'scalar_asserts': False, 'combo_kernels': True, 'benchmark_combo_kernel': True}, 'inductor_passes': {}, 'cudagraph_mode': <CUDAGraphMode.NONE: 0>, 'cudagraph_num_of_warmups': 0, 'cudagraph_capture_sizes': [], 'cudagraph_copy_inputs': False, 'cudagraph_specialize_lora': True, 'use_inductor_graph_partition': False, 'pass_config': {'fuse_norm_quant': True, 'fuse_act_quant': True, 'fuse_attn_quant': False, 'enable_sp': False, 'fuse_gemm_comms': False, 'fuse_allreduce_rms': False, 'fuse_rope_kvcache_cat_mla': False, 'fuse_act_padding': False}, 'max_cudagraph_capture_size': 0, 'dynamic_shapes_config': {'type': <DynamicShapesType.BACKED: 'backed'>, 'evaluate_guards': False, 'assume_32_bit_indexing': False}, 'local_cache_dir': None, 'fast_moe_cold_start': False, 'static_all_moe_layers': []}, kernel_config=KernelConfig(ir_op_priority=IrOpPriorityConfig(rms_norm=['vllm_c', 'native'], fused_add_rms_norm=['vllm_c', 'native']), enable_flashinfer_autotune=True, enable_cutedsl_warmup=True, moe_backend='auto', linear_backend='auto')
+(EngineCore pid=13009) INFO 07-25 14:52:04 [worker_base.py:282] Injected <class 'gonka_poc.worker.extension.PoCWorkerExtension'> into <class 'vllm.v1.worker.gpu_worker.Worker'> for extended collective_rpc calls ['execute_poc_borrow_compat', 'execute_poc_describe_kv', 'execute_poc_forward', 'execute_poc_ping']
+(EngineCore pid=13009) INFO 07-25 14:52:04 [parallel_state.py:1607] world_size=1 rank=0 local_rank=0 distributed_init_method=tcp://172.17.0.2:51159 backend=nccl
+(EngineCore pid=13009) INFO 07-25 14:52:04 [parallel_state.py:1942] rank 0 in world size 1 is assigned as DP rank 0, PP rank 0, PCP rank 0, TP rank 0, EP rank 0, EPLB rank N/A
+(EngineCore pid=13009) INFO 07-25 14:52:05 [gpu_model_runner.py:5210] Starting to load model Intel/DeepSeek-V4-Flash-W4A16-AutoRound...
+(EngineCore pid=13009) INFO 07-25 14:52:06 [auto_gptq.py:357] Using MacheteLinearKernel for AutoGPTQLinearMethod
+(EngineCore pid=13009) INFO 07-25 14:52:06 [attention.py:91] Using DeepSeek's fp8_ds_mla KV cache format.
+(EngineCore pid=13009) INFO 07-25 14:52:06 [int_wna16.py:197] Using 'MARLIN' WNA16 MoE backend.
+(EngineCore pid=13009) INFO 07-25 14:52:06 [attention.py:694] Using FP8 indexer cache for Lightning Indexer.
+(EngineCore pid=13009) ERROR 07-25 14:52:06 [gpu_model_runner.py:5305] Failed to load model - not enough GPU memory. Try lowering --gpu-memory-utilization to free memory for weights, increasing --tensor-parallel-size, or using --quantization. See https://docs.vllm.ai/en/latest/configuration/conserving_memory/ for more tips. (original error: CUDA out of memory. Tried to allocate 2.00 GiB. GPU 0 has a total capacity of 79.18 GiB of which 1.83 GiB is free. Process 1984311 has 77.34 GiB memory in use. Of the allocated memory 76.68 GiB is allocated by PyTorch, and 4.39 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf))
+(EngineCore pid=13009) ERROR 07-25 14:52:06 [core.py:1231] EngineCore failed to start.
+(EngineCore pid=13009) ERROR 07-25 14:52:06 [core.py:1231] Traceback (most recent call last):
+(EngineCore pid=13009) ERROR 07-25 14:52:06 [core.py:1231]   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/engine/core.py", line 1200, in run_engine_core
+(EngineCore pid=13009) ERROR 07-25 14:52:06 [core.py:1231]     engine_core = EngineCoreProc(*args, engine_index=dp_rank, **kwargs)
+(EngineCore pid=13009) ERROR 07-25 14:52:06 [core.py:1231]                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=13009) ERROR 07-25 14:52:06 [core.py:1231]   File "/usr/local/lib/python3.12/dist-packages/vllm/tracing/otel.py", line 178, in sync_wrapper
+(EngineCore pid=13009) ERROR 07-25 14:52:06 [core.py:1231]     return func(*args, **kwargs)
+(EngineCore pid=13009) ERROR 07-25 14:52:06 [core.py:1231]            ^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=13009) ERROR 07-25 14:52:06 [core.py:1231]   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/engine/core.py", line 966, in __init__
+(EngineCore pid=13009) ERROR 07-25 14:52:06 [core.py:1231]     super().__init__(
+(EngineCore pid=13009) ERROR 07-25 14:52:06 [core.py:1231]   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/engine/core.py", line 123, in __init__
+(EngineCore pid=13009) ERROR 07-25 14:52:06 [core.py:1231]     self.model_executor = executor_class(vllm_config)
+(EngineCore pid=13009) ERROR 07-25 14:52:06 [core.py:1231]                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=13009) ERROR 07-25 14:52:06 [core.py:1231]   File "/usr/local/lib/python3.12/dist-packages/vllm/tracing/otel.py", line 178, in sync_wrapper
+(EngineCore pid=13009) ERROR 07-25 14:52:06 [core.py:1231]     return func(*args, **kwargs)
+(EngineCore pid=13009) ERROR 07-25 14:52:06 [core.py:1231]            ^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=13009) ERROR 07-25 14:52:06 [core.py:1231]   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/executor/abstract.py", line 109, in __init__
+(EngineCore pid=13009) ERROR 07-25 14:52:06 [core.py:1231]     self._init_executor()
+(EngineCore pid=13009) ERROR 07-25 14:52:06 [core.py:1231]   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/executor/uniproc_executor.py", line 68, in _init_executor
+(EngineCore pid=13009) ERROR 07-25 14:52:06 [core.py:1231]     self.driver_worker.load_model()
+(EngineCore pid=13009) ERROR 07-25 14:52:06 [core.py:1231]   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/worker/gpu_worker.py", line 413, in load_model
+(EngineCore pid=13009) ERROR 07-25 14:52:06 [core.py:1231]     self.model_runner.load_model(load_dummy_weights=load_dummy_weights)
+(EngineCore pid=13009) ERROR 07-25 14:52:06 [core.py:1231]   File "/usr/local/lib/python3.12/dist-packages/vllm/tracing/otel.py", line 178, in sync_wrapper
+(EngineCore pid=13009) ERROR 07-25 14:52:06 [core.py:1231]     return func(*args, **kwargs)
+(EngineCore pid=13009) ERROR 07-25 14:52:06 [core.py:1231]            ^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=13009) ERROR 07-25 14:52:06 [core.py:1231]   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/worker/gpu_model_runner.py", line 5306, in load_model
+(EngineCore pid=13009) ERROR 07-25 14:52:06 [core.py:1231]     raise e
+(EngineCore pid=13009) ERROR 07-25 14:52:06 [core.py:1231]   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/worker/gpu_model_runner.py", line 5226, in load_model
+(EngineCore pid=13009) ERROR 07-25 14:52:06 [core.py:1231]     self.model = model_loader.load_model(
+(EngineCore pid=13009) ERROR 07-25 14:52:06 [core.py:1231]                  ^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=13009) ERROR 07-25 14:52:06 [core.py:1231]   File "/usr/local/lib/python3.12/dist-packages/vllm/tracing/otel.py", line 178, in sync_wrapper
+(EngineCore pid=13009) ERROR 07-25 14:52:06 [core.py:1231]     return func(*args, **kwargs)
+(EngineCore pid=13009) ERROR 07-25 14:52:06 [core.py:1231]            ^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=13009) ERROR 07-25 14:52:06 [core.py:1231]   File "/usr/local/lib/python3.12/dist-packages/vllm/model_executor/model_loader/base_loader.py", line 55, in load_model
+(EngineCore pid=13009) ERROR 07-25 14:52:06 [core.py:1231]     model = initialize_model(
+(EngineCore pid=13009) ERROR 07-25 14:52:06 [core.py:1231]             ^^^^^^^^^^^^^^^^^
+(EngineCore pid=13009) ERROR 07-25 14:52:06 [core.py:1231]   File "/usr/local/lib/python3.12/dist-packages/vllm/tracing/otel.py", line 178, in sync_wrapper
+(EngineCore pid=13009) ERROR 07-25 14:52:06 [core.py:1231]     return func(*args, **kwargs)
+(EngineCore pid=13009) ERROR 07-25 14:52:06 [core.py:1231]            ^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=13009) ERROR 07-25 14:52:06 [core.py:1231]   File "/usr/local/lib/python3.12/dist-packages/vllm/model_executor/model_loader/utils.py", line 63, in initialize_model
+(EngineCore pid=13009) ERROR 07-25 14:52:06 [core.py:1231]     model = model_class(vllm_config=vllm_config, prefix=prefix)
+(EngineCore pid=13009) ERROR 07-25 14:52:06 [core.py:1231]             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=13009) ERROR 07-25 14:52:06 [core.py:1231]   File "/usr/local/lib/python3.12/dist-packages/vllm/models/deepseek_v4/nvidia/model.py", line 1377, in __init__
+(EngineCore pid=13009) ERROR 07-25 14:52:06 [core.py:1231]     self.model = self.model_cls(
+(EngineCore pid=13009) ERROR 07-25 14:52:06 [core.py:1231]                  ^^^^^^^^^^^^^^^
+(EngineCore pid=13009) ERROR 07-25 14:52:06 [core.py:1231]   File "/usr/local/lib/python3.12/dist-packages/vllm/models/deepseek_v4/nvidia/model.py", line 991, in __init__
+(EngineCore pid=13009) ERROR 07-25 14:52:06 [core.py:1231]     self.start_layer, self.end_layer, self.layers = make_layers(
+(EngineCore pid=13009) ERROR 07-25 14:52:06 [core.py:1231]                                                     ^^^^^^^^^^^^
+(EngineCore pid=13009) ERROR 07-25 14:52:06 [core.py:1231]   File "/usr/local/lib/python3.12/dist-packages/vllm/model_executor/models/utils.py", line 711, in make_layers
+(EngineCore pid=13009) ERROR 07-25 14:52:06 [core.py:1231]     + get_offloader().wrap_modules(
+(EngineCore pid=13009) ERROR 07-25 14:52:06 [core.py:1231]       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=13009) ERROR 07-25 14:52:06 [core.py:1231]   File "/usr/local/lib/python3.12/dist-packages/vllm/model_executor/offloader/base.py", line 104, in wrap_modules
+(EngineCore pid=13009) ERROR 07-25 14:52:06 [core.py:1231]     return list(modules_generator)
+(EngineCore pid=13009) ERROR 07-25 14:52:06 [core.py:1231]            ^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=13009) ERROR 07-25 14:52:06 [core.py:1231]   File "/usr/local/lib/python3.12/dist-packages/vllm/model_executor/models/utils.py", line 712, in <genexpr>
+(EngineCore pid=13009) ERROR 07-25 14:52:06 [core.py:1231]     layer_fn(prefix=f"{prefix}.{idx}") for idx in range(start_layer, end_layer)
+(EngineCore pid=13009) ERROR 07-25 14:52:06 [core.py:1231]     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=13009) ERROR 07-25 14:52:06 [core.py:1231]   File "/usr/local/lib/python3.12/dist-packages/vllm/models/deepseek_v4/nvidia/model.py", line 993, in <lambda>
+(EngineCore pid=13009) ERROR 07-25 14:52:06 [core.py:1231]     lambda prefix: DeepseekV4DecoderLayer(
+(EngineCore pid=13009) ERROR 07-25 14:52:06 [core.py:1231]                    ^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=13009) ERROR 07-25 14:52:06 [core.py:1231]   File "/usr/local/lib/python3.12/dist-packages/vllm/models/deepseek_v4/nvidia/model.py", line 816, in __init__
+(EngineCore pid=13009) ERROR 07-25 14:52:06 [core.py:1231]     self.ffn = DeepseekV4MoE(vllm_config, prefix=f"{prefix}.ffn")
+(EngineCore pid=13009) ERROR 07-25 14:52:06 [core.py:1231]                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=13009) ERROR 07-25 14:52:06 [core.py:1231]   File "/usr/local/lib/python3.12/dist-packages/vllm/models/deepseek_v4/nvidia/model.py", line 605, in __init__
+(EngineCore pid=13009) ERROR 07-25 14:52:06 [core.py:1231]     self._init_fused_moe_experts(vllm_config, config, quant_config, prefix)
+(EngineCore pid=13009) ERROR 07-25 14:52:06 [core.py:1231]   File "/usr/local/lib/python3.12/dist-packages/vllm/models/deepseek_v4/nvidia/model.py", line 675, in _init_fused_moe_experts
+(EngineCore pid=13009) ERROR 07-25 14:52:06 [core.py:1231]     self.experts = FusedMoE(
+(EngineCore pid=13009) ERROR 07-25 14:52:06 [core.py:1231]                    ^^^^^^^^^
+(EngineCore pid=13009) ERROR 07-25 14:52:06 [core.py:1231]   File "/usr/local/lib/python3.12/dist-packages/vllm/model_executor/layers/fused_moe/layer.py", line 367, in FusedMoE
+(EngineCore pid=13009) ERROR 07-25 14:52:06 [core.py:1231]     routed_experts = routed_experts_cls(
+(EngineCore pid=13009) ERROR 07-25 14:52:06 [core.py:1231]                      ^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=13009) ERROR 07-25 14:52:06 [core.py:1231]   File "/usr/local/lib/python3.12/dist-packages/vllm/model_executor/layers/fused_moe/routed_experts.py", line 172, in __init__
+(EngineCore pid=13009) ERROR 07-25 14:52:06 [core.py:1231]     self.quant_method.create_weights(layer=self, **moe_quant_params)
+(EngineCore pid=13009) ERROR 07-25 14:52:06 [core.py:1231]   File "/usr/local/lib/python3.12/dist-packages/vllm/model_executor/layers/quantization/auto_gptq.py", line 537, in create_weights
+(EngineCore pid=13009) ERROR 07-25 14:52:06 [core.py:1231]     torch.empty(
+(EngineCore pid=13009) ERROR 07-25 14:52:06 [core.py:1231]   File "/usr/local/lib/python3.12/dist-packages/torch/utils/_device.py", line 116, in __torch_function__
+(EngineCore pid=13009) ERROR 07-25 14:52:06 [core.py:1231]     return func(*args, **kwargs)
+(EngineCore pid=13009) ERROR 07-25 14:52:06 [core.py:1231]            ^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=13009) ERROR 07-25 14:52:06 [core.py:1231] torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 2.00 GiB. GPU 0 has a total capacity of 79.18 GiB of which 1.83 GiB is free. Process 1984311 has 77.34 GiB memory in use. Of the allocated memory 76.68 GiB is allocated by PyTorch, and 4.39 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)
+(EngineCore pid=13009) Process EngineCore:
+(EngineCore pid=13009) Traceback (most recent call last):
+(EngineCore pid=13009)   File "/usr/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+(EngineCore pid=13009)     self.run()
+(EngineCore pid=13009)   File "/usr/lib/python3.12/multiprocessing/process.py", line 108, in run
+(EngineCore pid=13009)     self._target(*self._args, **self._kwargs)
+(EngineCore pid=13009)   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/engine/core.py", line 1235, in run_engine_core
+(EngineCore pid=13009)     raise e
+(EngineCore pid=13009)   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/engine/core.py", line 1200, in run_engine_core
+(EngineCore pid=13009)     engine_core = EngineCoreProc(*args, engine_index=dp_rank, **kwargs)
+(EngineCore pid=13009)                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=13009)   File "/usr/local/lib/python3.12/dist-packages/vllm/tracing/otel.py", line 178, in sync_wrapper
+(EngineCore pid=13009)     return func(*args, **kwargs)
+(EngineCore pid=13009)            ^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=13009)   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/engine/core.py", line 966, in __init__
+(EngineCore pid=13009)     super().__init__(
+(EngineCore pid=13009)   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/engine/core.py", line 123, in __init__
+(EngineCore pid=13009)     self.model_executor = executor_class(vllm_config)
+(EngineCore pid=13009)                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=13009)   File "/usr/local/lib/python3.12/dist-packages/vllm/tracing/otel.py", line 178, in sync_wrapper
+(EngineCore pid=13009)     return func(*args, **kwargs)
+(EngineCore pid=13009)            ^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=13009)   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/executor/abstract.py", line 109, in __init__
+(EngineCore pid=13009)     self._init_executor()
+(EngineCore pid=13009)   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/executor/uniproc_executor.py", line 68, in _init_executor
+(EngineCore pid=13009)     self.driver_worker.load_model()
+(EngineCore pid=13009)   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/worker/gpu_worker.py", line 413, in load_model
+(EngineCore pid=13009)     self.model_runner.load_model(load_dummy_weights=load_dummy_weights)
+(EngineCore pid=13009)   File "/usr/local/lib/python3.12/dist-packages/vllm/tracing/otel.py", line 178, in sync_wrapper
+(EngineCore pid=13009)     return func(*args, **kwargs)
+(EngineCore pid=13009)            ^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=13009)   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/worker/gpu_model_runner.py", line 5306, in load_model
+(EngineCore pid=13009)     raise e
+(EngineCore pid=13009)   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/worker/gpu_model_runner.py", line 5226, in load_model
+(EngineCore pid=13009)     self.model = model_loader.load_model(
+(EngineCore pid=13009)                  ^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=13009)   File "/usr/local/lib/python3.12/dist-packages/vllm/tracing/otel.py", line 178, in sync_wrapper
+(EngineCore pid=13009)     return func(*args, **kwargs)
+(EngineCore pid=13009)            ^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=13009)   File "/usr/local/lib/python3.12/dist-packages/vllm/model_executor/model_loader/base_loader.py", line 55, in load_model
+(EngineCore pid=13009)     model = initialize_model(
+(EngineCore pid=13009)             ^^^^^^^^^^^^^^^^^
+(EngineCore pid=13009)   File "/usr/local/lib/python3.12/dist-packages/vllm/tracing/otel.py", line 178, in sync_wrapper
+(EngineCore pid=13009)     return func(*args, **kwargs)
+(EngineCore pid=13009)            ^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=13009)   File "/usr/local/lib/python3.12/dist-packages/vllm/model_executor/model_loader/utils.py", line 63, in initialize_model
+(EngineCore pid=13009)     model = model_class(vllm_config=vllm_config, prefix=prefix)
+(EngineCore pid=13009)             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=13009)   File "/usr/local/lib/python3.12/dist-packages/vllm/models/deepseek_v4/nvidia/model.py", line 1377, in __init__
+(EngineCore pid=13009)     self.model = self.model_cls(
+(EngineCore pid=13009)                  ^^^^^^^^^^^^^^^
+(EngineCore pid=13009)   File "/usr/local/lib/python3.12/dist-packages/vllm/models/deepseek_v4/nvidia/model.py", line 991, in __init__
+(EngineCore pid=13009)     self.start_layer, self.end_layer, self.layers = make_layers(
+(EngineCore pid=13009)                                                     ^^^^^^^^^^^^
+(EngineCore pid=13009)   File "/usr/local/lib/python3.12/dist-packages/vllm/model_executor/models/utils.py", line 711, in make_layers
+(EngineCore pid=13009)     + get_offloader().wrap_modules(
+(EngineCore pid=13009)       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=13009)   File "/usr/local/lib/python3.12/dist-packages/vllm/model_executor/offloader/base.py", line 104, in wrap_modules
+(EngineCore pid=13009)     return list(modules_generator)
+(EngineCore pid=13009)            ^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=13009)   File "/usr/local/lib/python3.12/dist-packages/vllm/model_executor/models/utils.py", line 712, in <genexpr>
+(EngineCore pid=13009)     layer_fn(prefix=f"{prefix}.{idx}") for idx in range(start_layer, end_layer)
+(EngineCore pid=13009)     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=13009)   File "/usr/local/lib/python3.12/dist-packages/vllm/models/deepseek_v4/nvidia/model.py", line 993, in <lambda>
+(EngineCore pid=13009)     lambda prefix: DeepseekV4DecoderLayer(
+(EngineCore pid=13009)                    ^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=13009)   File "/usr/local/lib/python3.12/dist-packages/vllm/models/deepseek_v4/nvidia/model.py", line 816, in __init__
+(EngineCore pid=13009)     self.ffn = DeepseekV4MoE(vllm_config, prefix=f"{prefix}.ffn")
+(EngineCore pid=13009)                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=13009)   File "/usr/local/lib/python3.12/dist-packages/vllm/models/deepseek_v4/nvidia/model.py", line 605, in __init__
+(EngineCore pid=13009)     self._init_fused_moe_experts(vllm_config, config, quant_config, prefix)
+(EngineCore pid=13009)   File "/usr/local/lib/python3.12/dist-packages/vllm/models/deepseek_v4/nvidia/model.py", line 675, in _init_fused_moe_experts
+(EngineCore pid=13009)     self.experts = FusedMoE(
+(EngineCore pid=13009)                    ^^^^^^^^^
+(EngineCore pid=13009)   File "/usr/local/lib/python3.12/dist-packages/vllm/model_executor/layers/fused_moe/layer.py", line 367, in FusedMoE
+(EngineCore pid=13009)     routed_experts = routed_experts_cls(
+(EngineCore pid=13009)                      ^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=13009)   File "/usr/local/lib/python3.12/dist-packages/vllm/model_executor/layers/fused_moe/routed_experts.py", line 172, in __init__
+(EngineCore pid=13009)     self.quant_method.create_weights(layer=self, **moe_quant_params)
+(EngineCore pid=13009)   File "/usr/local/lib/python3.12/dist-packages/vllm/model_executor/layers/quantization/auto_gptq.py", line 537, in create_weights
+(EngineCore pid=13009)     torch.empty(
+(EngineCore pid=13009)   File "/usr/local/lib/python3.12/dist-packages/torch/utils/_device.py", line 116, in __torch_function__
+(EngineCore pid=13009)     return func(*args, **kwargs)
+(EngineCore pid=13009)            ^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=13009) torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 2.00 GiB. GPU 0 has a total capacity of 79.18 GiB of which 1.83 GiB is free. Process 1984311 has 77.34 GiB memory in use. Of the allocated memory 76.68 GiB is allocated by PyTorch, and 4.39 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)
+[rank0]:[W725 14:52:07.641039729 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/usr/local/lib/python3.12/dist-packages/gonka_poc/entrypoint/api_router.py", line 333, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/gonka_poc/entrypoint/api_router.py", line 325, in main
+    uvloop.run(_run_server(args))
+  File "/usr/local/lib/python3.12/dist-packages/uvloop/__init__.py", line 96, in run
+    return __asyncio.run(
+           ^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/runners.py", line 195, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "uvloop/loop.pyx", line 1518, in uvloop.loop.Loop.run_until_complete
+  File "/usr/local/lib/python3.12/dist-packages/uvloop/__init__.py", line 48, in wrapper
+    return await main
+           ^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/gonka_poc/entrypoint/api_router.py", line 181, in _run_server
+    async with build_async_engine_client(args) as engine_client:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/vllm/entrypoints/openai/api_server.py", line 100, in build_async_engine_client
+    async with build_async_engine_client_from_engine_args(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/vllm/entrypoints/openai/api_server.py", line 136, in build_async_engine_client_from_engine_args
+    async_llm = AsyncLLM.from_vllm_config(
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/vllm/v1/engine/async_llm.py", line 217, in from_vllm_config
+    return cls(
+           ^^^^
+  File "/usr/local/lib/python3.12/dist-packages/vllm/v1/engine/async_llm.py", line 146, in __init__
+    self.engine_core = EngineCoreClient.make_async_mp_client(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/vllm/tracing/otel.py", line 178, in sync_wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/vllm/v1/engine/core_client.py", line 132, in make_async_mp_client
+    return AsyncMPClient(*client_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/vllm/tracing/otel.py", line 178, in sync_wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/vllm/v1/engine/core_client.py", line 963, in __init__
+    super().__init__(
+  File "/usr/local/lib/python3.12/dist-packages/vllm/v1/engine/core_client.py", line 573, in __init__
+    with launch_core_engines(
+         ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/contextlib.py", line 144, in __exit__
+    next(self.gen)
+  File "/usr/local/lib/python3.12/dist-packages/vllm/v1/engine/utils.py", line 1213, in launch_core_engines
+    wait_for_engine_startup(
+  File "/usr/local/lib/python3.12/dist-packages/vllm/v1/engine/utils.py", line 1272, in wait_for_engine_startup
+    raise RuntimeError(
+RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}
+2026-07-25 14:52:10,620 - api.inference.manager - ERROR - Failed to start InferenceManager: vLLM process exited prematurely: None
+2026-07-25 14:52:10,621 - api.inference.manager - ERROR - Async startup failed: vLLM process exited prematurely: None
+2026-07-25 14:52:11,995 - common.manager - ERROR - Manager InferenceManager has failed with exception: vLLM process exited prematurely: None
+2026-07-25 14:52:11,996 - api.watcher - ERROR - Manager InferenceManager is unhealthy (count: 1/9999)
+2026-07-25 14:52:13,996 - common.manager - ERROR - Manager InferenceManager has failed with exception: vLLM process exited prematurely: None
+2026-07-25 14:52:13,997 - api.watcher - ERROR - Manager InferenceManager is unhealthy (count: 2/9999)
+2026-07-25 14:52:15,997 - common.manager - ERROR - Manager InferenceManager has failed with exception: vLLM process exited prematurely: None
+2026-07-25 14:52:15,997 - api.watcher - ERROR - Manager InferenceManager is unhealthy (count: 3/9999)
+INFO:     127.0.0.1:53872 - "GET /api/v1/inference/up/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53880 - "GET /api/v1/inference/up/status HTTP/1.1" 200 OK
+2026-07-25 14:52:16,743 - api.inference.manager - INFO - Starting vLLM service shutdown...
+2026-07-25 14:52:16,743 - api.inference.manager - INFO - Terminating vLLM processes and cleaning up state...
+2026-07-25 14:52:16,744 - api.inference.vllm.runner - INFO - Stopping vLLM processes...
+2026-07-25 14:52:16,930 - api.inference.vllm.runner - INFO - vLLM processes stopped.
+2026-07-25 14:52:16,930 - api.inference.manager - INFO - Shutdown complete
+INFO:     127.0.0.1:53890 - "POST /api/v1/inference/down HTTP/1.1" 200 OK
+2026-07-25 14:52:17,997 - api.watcher - INFO - Manager InferenceManager returned to STOPPED — resetting cold-start grace for next session
+2026-07-25 14:52:17,997 - api.watcher - INFO - Manager InferenceManager is healthy again, resetting unhealthy count
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+2026-07-25 14:52:42,090 - api.proxy - INFO - vLLM proxy stopped
+INFO:     Application shutdown complete.
+INFO:     Finished server process [12452]

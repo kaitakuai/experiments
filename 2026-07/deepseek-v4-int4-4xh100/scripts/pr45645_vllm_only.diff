@@ -1,0 +1,222 @@
+diff --git a/vllm/model_executor/layers/quantization/utils/mxfp4_utils.py b/vllm/model_executor/layers/quantization/utils/mxfp4_utils.py
+index db88ba273cd2..e8d42eed07a1 100644
+--- a/vllm/model_executor/layers/quantization/utils/mxfp4_utils.py
++++ b/vllm/model_executor/layers/quantization/utils/mxfp4_utils.py
+@@ -103,6 +103,47 @@ def _swizzle_mxfp4(quant_tensor, scale, num_warps=8):
+     return quant_tensor, InFlexData(), scale
+ 
+ 
++def dequant_mxfp4_to_bf16(x: torch.Tensor, scales: torch.Tensor) -> torch.Tensor:
++    """Dequantize MXFP4 tensor to BF16 (compressed-tensors format).
++
++    Args:
++        x: packed uint8 tensor of shape (M, K/2), two FP4 values per byte.
++        scales: uint8 E8M0 scale tensor of shape (M, K/group).
++
++    Returns:
++        Dequantized bfloat16 tensor of shape (M, K).
++    """
++    from vllm.model_executor.layers.quantization.utils.nvfp4_emulation_utils import (  # noqa: E501
++        break_fp4_bytes,
++        kE2M1ToFloat_handle,
++    )
++
++    device = x.device
++
++    # Decode E8M0 uint8 → float32 scales.
++    scale_i32 = scales.to(torch.int32)
++    scale_f32 = torch.where(
++        scale_i32 == 0,
++        torch.zeros_like(scale_i32, dtype=torch.float32),
++        torch.exp2((scale_i32 - 127).to(torch.float32)),
++    )
++
++    if kE2M1ToFloat_handle.val.device != device:
++        kE2M1ToFloat_handle.val = kE2M1ToFloat_handle.val.to(device)
++
++    w_fp32 = break_fp4_bytes(x, torch.float32)
++    M, K = w_fp32.shape
++    groups = scale_f32.shape[-1]
++    block = K // groups
++    if block * groups != K:
++        raise ValueError(
++            f"MXFP4 scale shape {tuple(scales.shape)} incompatible with "
++            f"weight shape {tuple(w_fp32.shape)} (need K % groups == 0)."
++        )
++    w_fp32 = (w_fp32.view(M, groups, block) * scale_f32.unsqueeze(-1)).view(M, K)
++    return w_fp32.to(torch.bfloat16).contiguous()
++
++
+ def _dequant_mxfp4(
+     x: torch.Tensor, scale: torch.Tensor, float_dtype: torch.dtype
+ ) -> torch.Tensor:
+diff --git a/vllm/models/deepseek_v4/nvidia/flashmla.py b/vllm/models/deepseek_v4/nvidia/flashmla.py
+index 9fa4e1c11b94..d39c31f276f1 100644
+--- a/vllm/models/deepseek_v4/nvidia/flashmla.py
++++ b/vllm/models/deepseek_v4/nvidia/flashmla.py
+@@ -40,6 +40,22 @@ def __init__(self, *args, **kwargs) -> None:
+         self._einsum_recipe, self._tma_aligned_scales = compute_fp8_einsum_recipe()
+ 
+     def _o_proj(self, o: torch.Tensor, positions: torch.Tensor) -> torch.Tensor:
++        # Keep wo_a on the BF16 reference if it's dequantized.
++        # E.g. W4A16, MXFP8, MXFP4 kernels are not ready.
++        if not hasattr(self.wo_a, "weight_scale_inv"):
++            # Using BF16 reference wo_a path (same as ROCm).
++            from vllm.models.deepseek_v4.amd.rocm import rocm_inv_rope_einsum
++
++            z = rocm_inv_rope_einsum(
++                self.rotary_emb,
++                o,
++                positions,
++                self.rope_head_dim,
++                self.n_local_groups,
++                self.o_lora_rank,
++                self.wo_a,
++            )
++            return self.wo_b(z.flatten(1))
+         return deep_gemm_fp8_o_proj(
+             o,
+             positions,
+@@ -345,3 +361,86 @@ def _forward_prefill(
+                 topk_length=combined_lens,
+                 out=output[query_start:query_end],
+             )
++
++
++# The following is a one-time materialization pass to dequantize the MXFP4 / MXFP8
++# weights of ``wo_a`` consumed via raw ``torch.mm`` / 3D einsum paths to bf16 in-place.
++# TODO: remove after the relevant kernels support MXFP4 / MXFP8 directly.
++def _materialize_mxfp_wo_a_bf16(model: torch.nn.Module) -> None:
++    """Dequantize MX-quantized weights of wo_a consumed via raw ``torch.mm`` /
++    3D einsum paths to bf16 in-place.
++
++    DeepSeek V4's attention path bypasses the CT linear method for two
++    weights:
++
++    * ``mla_attn.wo_a`` — a per-group projection that the FP8 path
++      evaluates as a 3D einsum (``tgd,grd->tgr``); the reference
++      fallback views ``wo_a.weight`` directly.
++
++    Neither path understands MX-quantized layouts (MXFP4 packed
++    ``weight_packed`` + ``weight_scale`` uint8 E8M0; MXFP8 group=32
++    ``weight`` fp8_e4m3fn + ``weight_scale`` uint8 E8M0). For
++    correctness we materialize a bf16 ``weight`` once after loading
++    and swap the quant method to ``UnquantizedLinearMethod`` so the
++    model loader's ``process_weights_after_loading`` doesn't try to
++    repack the already-removed packed buffers.
++    """
++    from vllm.model_executor.layers.linear import UnquantizedLinearMethod
++    from vllm.model_executor.layers.quantization.utils.mxfp4_utils import (
++        dequant_mxfp4_to_bf16,
++    )
++    from vllm.model_executor.layers.quantization.utils.mxfp8_utils import (
++        dequant_mxfp8_to_bf16,
++    )
++
++    def _dequant_to_bf16(layer: torch.nn.Module) -> torch.Tensor | None:
++        # MXFP4 packed: weight_packed (M, K/2) uint8 + weight_scale
++        #   (M, K/group) uint8 E8M0 → bf16 (M, K).
++        if hasattr(layer, "weight_packed"):
++            return dequant_mxfp4_to_bf16(
++                layer.weight_packed.data, layer.weight_scale.data
++            )
++
++        # MXFP8 group=32: weight (M, K) fp8_e4m3fn + weight_scale
++        #   (M, K/32) uint8 E8M0 → bf16 (M, K). Detect via fp8 dtype on
++        #   ``weight`` plus a uint8 ``weight_scale`` companion.
++        weight = getattr(layer, "weight", None)
++        weight_scale = getattr(layer, "weight_scale", None)
++        if (
++            weight is not None
++            and weight_scale is not None
++            and weight.dtype == torch.float8_e4m3fn
++            and weight_scale.dtype == torch.uint8
++        ):
++            return dequant_mxfp8_to_bf16(weight.data, weight_scale.data).contiguous()
++
++        return None
++
++    # Only materialize `wo_a` modules — keep other paths untouched.
++    for module in model.modules():
++        wo_a = getattr(module, "wo_a", None)
++        if wo_a is None:
++            continue
++
++        layer = wo_a
++        # Preserve block-FP8 / special einsum paths and skip already-processed.
++        if hasattr(layer, "weight_scale_inv") or getattr(
++            layer, "_mxfp4_dequantized", False
++        ):
++            continue
++
++        bf16 = _dequant_to_bf16(layer)
++        if bf16 is None:
++            continue
++
++        new_weight = torch.nn.Parameter(bf16, requires_grad=False)
++        layer.register_parameter("weight", new_weight)
++        for attr in ("weight_packed", "weight_scale"):
++            if hasattr(layer, attr):
++                delattr(layer, attr)
++        layer.quant_method = UnquantizedLinearMethod()
++        import contextlib
++
++        with contextlib.suppress(AttributeError):
++            delattr(layer, "scheme")
++        layer._mxfp4_dequantized = True
+diff --git a/vllm/models/deepseek_v4/nvidia/model.py b/vllm/models/deepseek_v4/nvidia/model.py
+index 364754f9d77c..a320dbf08773 100644
+--- a/vllm/models/deepseek_v4/nvidia/model.py
++++ b/vllm/models/deepseek_v4/nvidia/model.py
+@@ -41,6 +41,9 @@
+ )
+ from vllm.model_executor.layers.logits_processor import LogitsProcessor
+ from vllm.model_executor.layers.quantization import QuantizationConfig
++from vllm.model_executor.layers.quantization.compressed_tensors.compressed_tensors import (  # noqa: E501
++    CompressedTensorsConfig,
++)
+ from vllm.model_executor.layers.vocab_parallel_embedding import (
+     ParallelLMHead,
+     VocabParallelEmbedding,
+@@ -1282,6 +1285,24 @@ def __init__(self, *, vllm_config: VllmConfig, prefix: str = ""):
+ 
+         self.set_moe_parameters()
+ 
++        # Only for compressed-tensors MXFP format.
++        # Set self.wo_a_using_ct_mxfp_quant = True for later usage in load_weights()
++        quant_config = vllm_config.quant_config
++        self.wo_a_using_ct_mxfp_quant = False
++        if isinstance(quant_config, CompressedTensorsConfig):
++            # Only care about wo_a because _materialize_mxfp_wo_a_bf16 only
++            # dequantizes wo_a for the BF16 fallback path.
++            for module_name, module in self.model.named_modules():
++                if not module_name.endswith("attn.wo_a"):
++                    continue
++                scheme_dict = quant_config.get_scheme_dict(module, module_name)
++                weight_quant = scheme_dict.get("weights") if scheme_dict else None
++                if quant_config._is_mxfp4(weight_quant) or quant_config._is_mxfp8(
++                    weight_quant
++                ):
++                    self.wo_a_using_ct_mxfp_quant = True
++                    break
++
+     def set_moe_parameters(self) -> None:
+         self.expert_weights: MutableSequence[Sequence[torch.Tensor]] = []
+         self.num_expert_groups = getattr(self.config, "n_group", 1)
+@@ -1334,6 +1355,16 @@ def load_weights(self, weights: Iterable[tuple[str, torch.Tensor]]) -> set[str]:
+         loader = AutoWeightsLoader(self, skip_substrs=["mtp."])
+         loaded_params = loader.load_weights(weights, mapper=self.hf_to_vllm_mapper)
+         self.model.finalize_mega_moe_weights()
++
++        # Only for compressed-tensors MXFP format.
++        # Dequantized wo_a weight to reuse the BF16 reference wo_a path
++        # since mxfp4/8 kernel is not ready yet. Only run the one-time
++        # materialization when MXFP4/8 quant_config is detected.
++        if self.wo_a_using_ct_mxfp_quant:
++            from .flashmla import _materialize_mxfp_wo_a_bf16
++
++            _materialize_mxfp_wo_a_bf16(self.model)
++
+         return loaded_params
+ 
+     def get_expert_mapping(self) -> list[tuple[str, str, int, str]]:
