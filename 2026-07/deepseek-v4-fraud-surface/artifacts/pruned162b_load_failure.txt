@@ -1,0 +1,28 @@
+Model: 0xSero/DeepSeek-V4-Flash-162B
+Config: n_routed_experts=144 (upstream DeepSeek-V4-Flash has 256), num_hidden_layers=43,
+        hidden_size=4096, quantization_config = {quant_method: fp8, fmt: e4m3,
+        weight_block_size: [128,128]}  -- i.e. EXPERT-PRUNED, quantisation unchanged.
+Image:  ghcr.io/kaitakuai/mlnode-b300-deepseek-v4-flash:0.2.13-vllm0.25.1-overlay-k4
+Host:   1x B300 SXM6, driver 580.126.09, vLLM 0.25.1, TP=1
+
+Both arms failed identically at engine init (eager and CUDA-graphs); the failure is in a
+CUDA kernel launcher, so compilation flags cannot affect it.
+
+Verbatim from the engine log:
+
+(EngineCore) ERROR core.py:1231 Traceback (most recent call last):
+(EngineCore) ERROR core.py:1231 RuntimeError: topkGatingSoftplusSqrtKernelLauncher,
+    /workspace/csrc/libtorch_stable/moe/topk_softplus_sqrt_kernels.cu:626,
+    Unsupported expert number: 144
+...
+RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}
+api.inference.manager - ERROR - Failed to start InferenceManager: vLLM process exited prematurely
+
+Engine config line confirms the model and the args actually used:
+  model='0xSero/DeepSeek-V4-Flash-162B', quantization=deepseek_v4_fp8,
+  max_seq_len=400000, tensor_parallel_size=1, kv_cache_dtype=fp8, enforce_eager=True
+
+NOTE ON PROVENANCE: these lines are verbatim excerpts read from /root/api.log inside the
+benchmark container during the run. The container was removed before the file was copied
+out, so the complete log is not preserved. The failure reproduces in ~3 minutes on any
+B300 with this image, so the full log can be regenerated cheaply if needed.

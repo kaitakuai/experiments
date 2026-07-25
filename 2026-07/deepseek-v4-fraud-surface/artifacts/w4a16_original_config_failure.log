@@ -1,0 +1,119 @@
+2026-07-25 04:06:48,162 - api.routes - WARNING - mlnode-api package metadata not found, version will be reported as 'unknown'
+INFO:     Started server process [48]
+INFO:     Waiting for application startup.
+2026-07-25 04:06:48,216 - api.models.manager - INFO - ModelManager initialized with cache_dir: /root/.cache/hub, stall_timeout: 600.0s (10.0 min)
+2026-07-25 04:06:48,238 - api.proxy - INFO - vLLM proxy started
+2026-07-25 04:06:48,238 - api.proxy - INFO - Health check loop started, checking every 2.0 seconds
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8081 (Press CTRL+C to quit)
+INFO:     127.0.0.1:45612 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45620 - "POST /api/v1/inference/up/async HTTP/1.1" 200 OK
+2026-07-25 04:06:50,435 - api.inference.vllm.runner - INFO - gpus per instance: 1 (tp_size: 1, pp_size: 1)
+2026-07-25 04:06:50,436 - api.inference.vllm.runner - INFO - total available gpus: 1
+2026-07-25 04:06:50,436 - api.inference.vllm.runner - INFO - instances to start: 1
+2026-07-25 04:06:50,436 - api.inference.vllm.runner - INFO - Starting vLLM instance 0 on port 5001 with GPUs 0 (sleep: 0s)
+2026-07-25 04:06:50,437 - api.inference.vllm.runner - INFO - Setting up proxy with backend ports: [5001]
+2026-07-25 04:06:50,437 - api.proxy - INFO - vLLM proxy setup with 1 backends: [5001]
+2026-07-25 04:06:50,437 - api.inference.vllm.runner - INFO - vLLM proxy integrated with main API server
+INFO:     127.0.0.1:45626 - "GET /api/v1/inference/up/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45628 - "GET /api/v1/inference/up/status HTTP/1.1" 200 OK
+2026-07-25 04:06:52,240 - api.watcher - INFO - Manager InferenceManager reached healthy state in active session — MAX_UNHEALTHY_COUNT=9999 kill threshold now active
+INFO 07-25 04:06:57 [api_utils.py:339] 
+INFO 07-25 04:06:57 [api_utils.py:339]        █     █     █▄   ▄█
+INFO 07-25 04:06:57 [api_utils.py:339]  ▄▄ ▄█ █     █     █ ▀▄▀ █  version 0.25.1
+INFO 07-25 04:06:57 [api_utils.py:339]   █▄█▀ █     █     █     █  model   canada-quant/DeepSeek-V4-Flash-W4A16-FP8
+INFO 07-25 04:06:57 [api_utils.py:339]    ▀▀  ▀▀▀▀▀ ▀▀▀▀▀ ▀     ▀
+INFO 07-25 04:06:57 [api_utils.py:339] 
+INFO 07-25 04:06:57 [api_utils.py:273] non-default args: {'host': '0.0.0.0', 'port': 5001, 'model': 'canada-quant/DeepSeek-V4-Flash-W4A16-FP8', 'trust_remote_code': True, 'max_model_len': 400000, 'enforce_eager': True, 'logprobs_mode': 'processed_logprobs', 'worker_extension_cls': 'gonka_poc.worker.PoCWorkerExtension', 'gpu_memory_utilization': 0.9, 'kv_cache_dtype': 'fp8', 'max_num_batched_tokens': 32768}
+WARNING 07-25 04:06:57 [envs.py:2041] Unknown vLLM environment variable detected: VLLM_BUILD_PIPELINE
+WARNING 07-25 04:06:57 [envs.py:2041] Unknown vLLM environment variable detected: VLLM_USE_FLASHINFER_MOE_FP4
+WARNING 07-25 04:06:57 [envs.py:2041] Unknown vLLM environment variable detected: VLLM_USE_FLASHINFER_MOE_FP8
+WARNING 07-25 04:06:57 [envs.py:2041] Unknown vLLM environment variable detected: VLLM_BUILD_COMMIT
+WARNING 07-25 04:06:57 [envs.py:2041] Unknown vLLM environment variable detected: VLLM_RUNNER_TIMEOUT
+WARNING 07-25 04:06:57 [envs.py:2041] Unknown vLLM environment variable detected: VLLM_USE_V1
+WARNING 07-25 04:06:57 [envs.py:2041] Unknown vLLM environment variable detected: VLLM_BUILD_URL
+WARNING 07-25 04:06:57 [envs.py:2041] Unknown vLLM environment variable detected: VLLM_IMAGE_TAG
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/dist-packages/huggingface_hub/dataclasses.py", line 251, in validate
+    validator(self)
+  File "/usr/local/lib/python3.12/dist-packages/transformers/configuration_utils.py", line 505, in validate_layer_type
+    raise ValueError(f"The `{layer_types}` entries must be in {ALLOWED_LAYER_TYPES} but got {layers}")
+ValueError: The `mlp_layer_types` entries must be in ('full_attention', 'sliding_attention', 'chunked_attention', 'compressed_sparse_attention', 'heavily_compressed_attention', 'minimax_m3_sparse', 'conv', 'sparse', 'dense', 'hybrid', 'hybrid_sliding', 'moe', 'deepseek_sparse_attention', 'linear_attention') but got ['hash_moe', 'hash_moe', 'hash_moe', 'moe', 'moe', 'moe', 'moe', 'moe', 'moe', 'moe', 'moe', 'moe', 'moe', 'moe', 'moe', 'moe', 'moe', 'moe', 'moe', 'moe', 'moe', 'moe', 'moe', 'moe', 'moe', 'moe', 'moe', 'moe', 'moe', 'moe', 'moe', 'moe', 'moe', 'moe', 'moe', 'moe', 'moe', 'moe', 'moe', 'moe', 'moe', 'moe', 'moe']
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/usr/local/lib/python3.12/dist-packages/gonka_poc/entrypoint/api_router.py", line 333, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/gonka_poc/entrypoint/api_router.py", line 325, in main
+    uvloop.run(_run_server(args))
+  File "/usr/local/lib/python3.12/dist-packages/uvloop/__init__.py", line 96, in run
+    return __asyncio.run(
+           ^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/runners.py", line 195, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "uvloop/loop.pyx", line 1518, in uvloop.loop.Loop.run_until_complete
+  File "/usr/local/lib/python3.12/dist-packages/uvloop/__init__.py", line 48, in wrapper
+    return await main
+           ^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/gonka_poc/entrypoint/api_router.py", line 181, in _run_server
+    async with build_async_engine_client(args) as engine_client:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/vllm/entrypoints/openai/api_server.py", line 100, in build_async_engine_client
+    async with build_async_engine_client_from_engine_args(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/vllm/entrypoints/openai/api_server.py", line 124, in build_async_engine_client_from_engine_args
+    vllm_config = engine_args.create_engine_config(usage_context=usage_context)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/vllm/engine/arg_utils.py", line 1851, in create_engine_config
+    model_config = self.create_model_config()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/vllm/engine/arg_utils.py", line 1614, in create_model_config
+    return ModelConfig(
+           ^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/pydantic/_internal/_dataclasses.py", line 121, in __init__
+    s.__pydantic_validator__.validate_python(ArgsKwargs(args, kwargs), self_instance=s)
+  File "/usr/local/lib/python3.12/dist-packages/vllm/config/model.py", line 555, in __post_init__
+    hf_config = get_config(
+                ^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/vllm/transformers_utils/config.py", line 701, in get_config
+    config_dict, config = config_parser.parse(
+                          ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/vllm/transformers_utils/config.py", line 278, in parse
+    config = AutoConfig.from_pretrained(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/transformers/models/auto/configuration_auto.py", line 419, in from_pretrained
+    return config_class.from_dict(config_dict, **unused_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/transformers/configuration_utils.py", line 868, in from_dict
+    config = cls(**config_dict)
+             ^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/vllm/transformers_utils/configs/deepseek_v4.py", line 23, in __init__
+    super().__init__(**kwargs)
+  File "/usr/local/lib/python3.12/dist-packages/huggingface_hub/dataclasses.py", line 276, in init_with_validate
+    cls.validate(self)  # type: ignore [attr-defined]
+    ^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/huggingface_hub/dataclasses.py", line 253, in validate
+    raise StrictDataclassClassValidationError(validator=validator.__name__, cause=e) from e
+huggingface_hub.errors.StrictDataclassClassValidationError: Class validation error for validator 'validate_layer_type':
+    ValueError: The `mlp_layer_types` entries must be in ('full_attention', 'sliding_attention', 'chunked_attention', 'compressed_sparse_attention', 'heavily_compressed_attention', 'minimax_m3_sparse', 'conv', 'sparse', 'dense', 'hybrid', 'hybrid_sliding', 'moe', 'deepseek_sparse_attention', 'linear_attention') but got ['hash_moe', 'hash_moe', 'hash_moe', 'moe', 'moe', 'moe', 'moe', 'moe', 'moe', 'moe', 'moe', 'moe', 'moe', 'moe', 'moe', 'moe', 'moe', 'moe', 'moe', 'moe', 'moe', 'moe', 'moe', 'moe', 'moe', 'moe', 'moe', 'moe', 'moe', 'moe', 'moe', 'moe', 'moe', 'moe', 'moe', 'moe', 'moe', 'moe', 'moe', 'moe', 'moe', 'moe', 'moe']
+2026-07-25 04:07:02,441 - api.inference.manager - ERROR - Failed to start InferenceManager: vLLM process exited prematurely: None
+2026-07-25 04:07:02,441 - api.inference.manager - ERROR - Async startup failed: vLLM process exited prematurely: None
+2026-07-25 04:07:04,242 - common.manager - ERROR - Manager InferenceManager has failed with exception: vLLM process exited prematurely: None
+2026-07-25 04:07:04,243 - api.watcher - ERROR - Manager InferenceManager is unhealthy (count: 1/9999)
+INFO:     127.0.0.1:58156 - "GET /api/v1/inference/up/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58160 - "GET /api/v1/inference/up/status HTTP/1.1" 200 OK
