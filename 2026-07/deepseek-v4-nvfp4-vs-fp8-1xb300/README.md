@@ -11,8 +11,11 @@
 
 ## Why this run exists
 
-NVFP4 is the only quantised V4 checkpoint that loads at all (INT4/GPTQ cannot — see
-`../deepseek-v4-fraud-surface/`). It is therefore *the* realistic cheat: a node that runs
+NVFP4 is the only quantised V4 checkpoint that loads at all: GPTQ/AutoRound and
+compressed-tensors 4-bit both fail in the V4 weight loader, which understands only FP8
+block scales and FP4 experts, and expert-pruned variants fail in the MoE router CUDA
+kernel, which hard-codes the allowed expert counts. It is therefore *the* realistic cheat:
+a node that runs
 NVFP4 instead of FP8 produces nonces that per-nonce L2 barely distinguishes from honest
 ones. The open question was how much such a node actually gains.
 
