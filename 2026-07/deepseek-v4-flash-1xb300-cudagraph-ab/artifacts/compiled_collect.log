@@ -1,0 +1,80 @@
+Starting callback server...
+Callback server listening on port 9998
+vLLM health: 200
+Config saved to /root/compiled_arts/config.json
+
+=== Generating 1000 PoC nonces ===
+  Starting PoC generation (batch_size=32)...
+  Init response: {'status': 'OK', 'backends': 1, 'n_groups': 1, 'results': [{'port': 5001, 'status': 'OK'}], 'errors': None}
+  [96/1000] 576 nonces/min (10s)
+  [352/1000] 1056 nonces/min (20s)
+  [608/1000] 1216 nonces/min (30s)
+  [864/1000] 1296 nonces/min (40s)
+  [1088/1000] nonces collected in 46.0s
+Nonces saved: 1088 (1375/min) in 47.5s
+
+=== 5-language inference probe (sp/en/ch/ar/hi, processed_logprobs, temp=0.7 seed=1 top_k=40 top_p=0.95) ===
+  [sp] ¿Cuál es la capital de Francia? Responde en una sola frase....
+    ok: 9 tokens, 9 sentinel positions, text='La capital de Francia es París.'
+  [en] What is the capital of France? Answer in one sentence....
+    ok: 8 tokens, 8 sentinel positions, text='The capital of France is Paris.'
+  [ch] 法国的首都是哪里？请用一句话回答。...
+    ok: 6 tokens, 6 sentinel positions, text='法国首都为巴黎。'
+  [ar] ما هي عاصمة فرنسا؟ أجب في جملة واحدة....
+    ok: 9 tokens, 9 sentinel positions, text='عاصمة فرنسا هي باريس.'
+  [hi] फ्रांस की राजधानी क्या है? एक वाक्य में उत्तर दीजिए।...
+    ok: 16 tokens, 16 sentinel positions, text='फ्रांस की राजधानी पेरिस है।'
+5-lang probe saved to /root/compiled_arts/inference_5langs.json (0.7s)
+
+==============================================================================
+  5-LANGUAGE INFERENCE PROBE — eyeball the logprobs
+==============================================================================
+
+[sp] prompt: ¿Cuál es la capital de Francia? Responde en una sola frase.
+  → text (9 tok, 9 sentinel pos):
+    La capital de Francia es París.
+  first 4 positions:
+    [0]     '7529' (+0.0000)  | top: '7529':+0.00, '2':-9999.00, '0':-9999.00, '1':-9999.00
+    [1]     '6102' (+0.0000)  | top: '6102':+0.00, '2':-9999.00, '0':-9999.00, '1':-9999.00
+    [2]      '392' (+0.0000)  | top: '392':+0.00, '2':-9999.00, '0':-9999.00, '1':-9999.00
+    [3]    '66401' (+0.0000)  | top: '66401':+0.00, '2':-9999.00, '0':-9999.00, '1':-9999.00
+
+[en] prompt: What is the capital of France? Answer in one sentence.
+  → text (8 tok, 8 sentinel pos):
+    The capital of France is Paris.
+  first 4 positions:
+    [0]      '671' (+0.0000)  | top: '671':+0.00, '2':-9999.00, '0':-9999.00, '1':-9999.00
+    [1]     '6102' (+0.0000)  | top: '6102':+0.00, '2':-9999.00, '0':-9999.00, '1':-9999.00
+    [2]      '294' (+0.0000)  | top: '294':+0.00, '2':-9999.00, '0':-9999.00, '1':-9999.00
+    [3]     '8760' (+0.0000)  | top: '8760':+0.00, '2':-9999.00, '0':-9999.00, '1':-9999.00
+
+[ch] prompt: 法国的首都是哪里？请用一句话回答。
+  → text (6 tok, 6 sentinel pos):
+    法国首都为巴黎。
+  first 4 positions:
+    [0]    '17550' (-0.5812)  | top: '17550':-0.58, '102240':-0.82, '0':-9999.00, '1':-9999.00
+    [1]    '41175' (+0.0000)  | top: '41175':+0.00, '2':-9999.00, '0':-9999.00, '1':-9999.00
+    [2]      '545' (-0.5208)  | top: '545':-0.52, '33870':-1.06, '12388':-2.84, '0':-9999.00
+    [3]    '33870' (+0.0000)  | top: '33870':+0.00, '2':-9999.00, '0':-9999.00, '1':-9999.00
+
+[ar] prompt: ما هي عاصمة فرنسا؟ أجب في جملة واحدة.
+  → text (9 tok, 9 sentinel pos):
+    عاصمة فرنسا هي باريس.
+  first 4 positions:
+    [0]     '1183' (+0.0000)  | top: '1183':+0.00, '2':-9999.00, '0':-9999.00, '1':-9999.00
+    [1]    '12003' (+0.0000)  | top: '12003':+0.00, '2':-9999.00, '0':-9999.00, '1':-9999.00
+    [2]    '18391' (+0.0000)  | top: '18391':+0.00, '2':-9999.00, '0':-9999.00, '1':-9999.00
+    [3]   '115151' (+0.0000)  | top: '115151':+0.00, '2':-9999.00, '0':-9999.00, '1':-9999.00
+
+[hi] prompt: फ्रांस की राजधानी क्या है? एक वाक्य में उत्तर दीजिए।
+  → text (16 tok, 16 sentinel pos):
+    फ्रांस की राजधानी पेरिस है।
+  first 4 positions:
+    [0]    '97904' (+0.0000)  | top: '97904':+0.00, '2':-9999.00, '0':-9999.00, '1':-9999.00
+    [1]    '11364' (-0.1241)  | top: '11364':-0.12, '48932':-2.15, '0':-9999.00, '1':-9999.00
+    [2]    '27271' (+0.0000)  | top: '27271':+0.00, '2':-9999.00, '0':-9999.00, '1':-9999.00
+    [3]    '11931' (+0.0000)  | top: '11931':+0.00, '2':-9999.00, '0':-9999.00, '1':-9999.00
+==============================================================================
+
+
+=== Done: /root/compiled_arts ===

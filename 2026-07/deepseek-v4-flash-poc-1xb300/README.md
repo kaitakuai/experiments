@@ -88,8 +88,9 @@ docker run -d --gpus '"device=0"' --shm-size=32g \
 
 `--kv-cache-dtype fp8` is required for V4 (FlashMLA path). The compiled config is used so
 the run matches the fleet's real serving deployment. Note that on this box the eager/compiled
-choice did not change PoC throughput — but that is a property of this GPU's speed, not of
-the PoC path: on 2×B200 the same toggle is worth +71 %.
+choice did not change PoC throughput at batch 32 (measured later as a proper A/B: 1664 vs
+1728) — but that reflects this configuration being compute-bound, not the PoC path being
+insensitive: on 2×B200 the same toggle is worth +71 %.
 
 ### 4. Run the batch-size sweep
 
@@ -186,11 +187,13 @@ out-of-tree plugin and the earlier in-tree port.
 
 - **400k context + compiled fits on a single B300** for V4: sparse-MLA compresses KV
   enough for a 2.6M-token pool (max concurrency ~6.5 at full 400k context).
-- **PoC throughput was unchanged by the compilation flags here** (b16/b32 rates match an
-  eager `max_model_len=8192` run). This is **not** a general property: on 2×B200 the same
-  comparison gives +71 % (see `../deepseek-v4-flash-2xb200/README.md`). Where the GPU is
-  fast enough that per-step kernel-launch cost is no longer hidden behind compute, CUDA
-  graphs matter a great deal.
+- **PoC throughput was unchanged by the compilation flags here.** A proper A/B was run
+  later on B300 TP=1 with the k4 plugin image and confirms it: 1664 (eager) vs 1728
+  (graphs on) at batch 32, i.e. one measurement quantum. But this is configuration-specific,
+  not architectural — the same comparison on 2×B200 gives +71 %. At batch 8 even this B300
+  gains +39 %. Throughput is the minimum of the kernel-launch limit and the compute limit;
+  graphs remove the former, so they help only where it was binding. See
+  `../deepseek-v4-flash-2xb200/README.md`.
 - **The forward-port is consensus-safe**: nonces match the out-of-tree reference within
   numerical noise (p ≤ 2e-44), like the earlier in-tree port.
 

@@ -22,9 +22,10 @@
    Our `--compilation-config '{"mode":3,...}'` has no effect. The only thing separating the
    two columns of this report is whether `--enforce-eager` is passed, i.e. whether the
    **breakable CUDA graph** is active.
-4. **Blackwell is not intrinsically much faster at this workload** — in eager mode B200
-   does 1344 nonces/min against H200 SXM's 1216, only +10 %. The gap opens only once graphs
-   remove the per-step launch cost.
+4. **The gain is not an architecture property.** A later A/B on 1×B300 TP=1 — also
+   Blackwell — gained only 3.8 % at batch 32, because that configuration is already
+   compute-bound in eager. What decides the gain is whether kernel-launch cost is the
+   binding limit; see the section below.
 
 ## What "compiled" really is
 
@@ -85,18 +86,40 @@ window — in the original ordering the shape had already been captured during t
 phase. **Conclusion: the +71 % is a genuine CUDA-graph effect, not ordering** — compiled-first
 and compiled-second produce identical throughput.
 
-## Why the gain is huge here and absent on Hopper
+## What actually determines the CUDA-graph gain
 
-Launch overhead is CPU-side work and roughly GPU-independent; measured, it caps this
-workload at ~1300–1400 nonces/min. H200 SXM already produces 1216 nonces/min in eager — its
-kernel time is long enough to hide the launch cost behind asynchronous dispatch, so
-removing that cost buys nothing measurable. B200 computes roughly twice as fast, the launch
-cost stops being covered, and graphs recover it. The arithmetic is consistent:
-2304 ≈ 2 × 1216.
+Throughput here is **the minimum of two limits**: how fast the host can launch kernels, and
+how fast the GPU can compute. CUDA graphs remove the launch limit, so the gain appears only
+when that limit was the binding one.
 
-Note also that Hopper's "exactly zero gain" is at the resolution limit: the sweep counts
-nonces in multiples of the batch size over 30 s, so one quantum is 64 nonces/min ≈ 5 %.
-The honest statement is **"< 5 % on Hopper"**, not "exactly zero".
+Measured across four configurations, all V4-Flash, all k4 image, batch 32:
+
+| Config | eager | graphs on | gain | binding limit in eager |
+|---|---:|---:|---:|---|
+| 2×B200 TP=2 | 1344 | **2304** | **+71 %** | launch |
+| 1×B300 TP=1 | 1664 | 1728 | +3.8 % | compute |
+| 2×H200 SXM TP=2 | 1216 | 1216 | < 5 % | compute |
+| 4×H100 TP=4 | 1536 | 1536 | < 5 % | compute |
+
+The B300 run settles it: **the gain is not a property of the architecture.** B300 is
+Blackwell like B200, yet gains nothing at batch 32 — because with TP=1 on a fast host
+(240-vCPU EPYC) it is already at its compute ceiling in eager. TP=2 doubles the per-step
+launch work and adds cross-worker synchronisation, which is why 2×B200 was launch-bound at
+1344 despite having two GPUs' worth of compute available.
+
+The same B300 run shows the mechanism directly at small batch, where launch cost dominates:
+
+| batch | eager | graphs on | gain |
+|------:|------:|----------:|-----:|
+| 8 | 1184 | 1648 | **+39 %** |
+| 16 | 1664 | 1696 | +1.9 % |
+| 32 | 1664 | 1728 | +3.8 % |
+
+Both modes converge on the same ~1700 ceiling; graphs merely reach it at a smaller batch.
+
+**Practical rule:** do not assume a fleet-wide answer. Whether `--enforce-eager` costs 70 %
+or 4 % depends on TP, host CPU speed and batch size together — measure the actual serving
+configuration.
 
 ## Serving — compressa-perf
 

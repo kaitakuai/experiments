@@ -1,0 +1,23 @@
+{
+  "b300_eager__b300_graphs": {
+    "n_compared": 1000,
+    "bit_identical": 968,
+    "pct_bit_identical": 96.8,
+    "median_l2": 0.0,
+    "pct_above_0.4": 0.0
+  },
+  "b300_eager__b200": {
+    "n_compared": 1000,
+    "bit_identical": 0,
+    "pct_bit_identical": 0.0,
+    "median_l2": 0.1882486343383789,
+    "pct_above_0.4": 3.6999999999999997
+  },
+  "b300_eager__h200": {
+    "n_compared": 1000,
+    "bit_identical": 0,
+    "pct_bit_identical": 0.0,
+    "median_l2": 0.1889324188232422,
+    "pct_above_0.4": 2.7
+  }
+}

@@ -1,0 +1,8 @@
+WARNING 07-25 00:41:06 [vllm.py:1134] VLLM_USE_BREAKABLE_CUDAGRAPH is set, disabling vLLM's torch.compile pipeline. Equivalent to -cc.mode=none.
+(EngineCore pid=1026) INFO 07-25 00:52:17 [kv_cache_utils.py:2146] GPU KV cache size: 2,661,034 tokens
+(EngineCore pid=1026) WARNING 07-25 00:55:42 [vllm.py:1134] VLLM_USE_BREAKABLE_CUDAGRAPH is set, disabling vLLM's torch.compile pipeline. Equivalent to -cc.mode=none.
+INFO 07-25 00:59:20 [vllm.py:1128] Auto-enabling VLLM_USE_BREAKABLE_CUDAGRAPH=1. Set VLLM_USE_BREAKABLE_CUDAGRAPH=0 to opt out.
+WARNING 07-25 00:59:20 [vllm.py:1134] VLLM_USE_BREAKABLE_CUDAGRAPH is set, disabling vLLM's torch.compile pipeline. Equivalent to -cc.mode=none.
+(EngineCore pid=4918) INFO 07-25 01:02:54 [breakable_cudagraph.py:288] Breakable CUDA graph enabled
+(EngineCore pid=4918) INFO 07-25 01:09:59 [kv_cache_utils.py:2146] GPU KV cache size: 2,604,694 tokens
+(EngineCore pid=4918) WARNING 07-25 01:14:09 [vllm.py:1134] VLLM_USE_BREAKABLE_CUDAGRAPH is set, disabling vLLM's torch.compile pipeline. Equivalent to -cc.mode=none.
