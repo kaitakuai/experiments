@@ -8,16 +8,31 @@ Each input is a nonces file as produced by collect_artifacts.py:
 Usage:
     python3 l2_crossval.py A.json B.json [--dist-threshold 0.40] [--p-mismatch 0.10] [--p-value 0.05]
 
-The fraud test treats the null hypothesis as "the node is fraudulent" (mismatches
-each nonce with probability >= p_mismatch). If P(X <= observed_mismatches | Binomial(N, p_mismatch))
-is below p_value, the fraud hypothesis is rejected and the two sets are consensus-consistent (PASS).
+Fraud test — identical to the chain rule in gonka-ai/vllm `vllm/poc/data.py::fraud_test`:
+
+    H0  : the node is honest, i.e. the per-nonce mismatch rate equals p_mismatch.
+    H1  : the mismatch rate is *greater* than p_mismatch.
+    stat: p_value = P(X >= observed_mismatches | Binomial(N, p_mismatch))   (upper tail)
+    rule: FRAUD when p_value < p_value_threshold, otherwise PASS.
+
+So the burden of proof is on the accusation: an inconclusive result reads as "not proven
+fraudulent", never as fraud. This mirrors production exactly.
+
+NOTE — this file previously used the *opposite* convention (H0 = "the node is fraudulent",
+lower tail P(X <= k), PASS only when that was significant). That inverted the meaning of an
+inconclusive result: production would have called such a node honest while this script
+called it fraud. The two disagreed for any mismatch rate between roughly 8.5 % and 11.6 %
+at N=1000, p_mismatch=0.10. No measurement in this repository fell in that band, so no
+reported verdict changes — but the convention is now aligned.
 """
 import argparse
 import base64
 import json
 import statistics
 import struct
-from math import comb, sqrt
+from math import sqrt
+
+from scipy.stats import binomtest
 
 
 def load(path):
@@ -48,17 +63,18 @@ def main():
     )
     n = len(dists)
     k = sum(1 for d in dists if d > args.dist_threshold)
-    p_lower = sum(
-        comb(n, i) * (args.p_mismatch ** i) * ((1 - args.p_mismatch) ** (n - i))
-        for i in range(0, k + 1)
-    )
-    verdict = "PASS" if p_lower < args.p_value else "FRAUD"
+    # Chain rule (vllm/poc/data.py::fraud_test): one-sided binomial, upper tail.
+    # H0 = honest. Reject H0 -> fraud. Inconclusive -> PASS.
+    p_value = float(
+        binomtest(k, n, args.p_mismatch, alternative="greater").pvalue
+    ) if n else 1.0
+    verdict = "FRAUD" if p_value < args.p_value else "PASS"
 
     print(f"common nonces      : {n}")
     print(f"L2 median/mean/p95 : {dists[n // 2]:.6f} / {statistics.mean(dists):.6f} / {dists[int(n * 0.95)]:.6f}")
     print(f"L2 max             : {dists[-1]:.6f}")
     print(f"mismatches (>{args.dist_threshold}) : {k}/{n} ({100 * k / n:.2f}%)")
-    print(f"binomial P(X<=k)   : {p_lower:.3e}  (threshold {args.p_value})")
+    print(f"binomial P(X>=k)   : {p_value:.3e}  (fraud if < {args.p_value})")
     print(f"VERDICT            : {verdict}")
 
 
