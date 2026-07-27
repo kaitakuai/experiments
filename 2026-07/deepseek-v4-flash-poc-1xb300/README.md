@@ -15,8 +15,9 @@ Two results for DeepSeek-V4-Flash PoC-v2 on vLLM 0.25.1, single B300, TP=1:
 2. **Cross-implementation consensus**: the V4 PoC nonces produced by three independent
    implementations of the same v2 (murmur3) scheme — the out-of-tree plugin, the earlier
    in-tree 0.23→0.25 port, and this 0.25.1 forward-port — are near-identical (median
-   pairwise L2 ≈ 0.002) and pass the chain fraud test against each other (binomial
-   p ≤ 2e-44). The forward-ported V4 path is consensus-safe.
+   pairwise L2 ≈ 0.002) and pass the chain fraud test against each other (0.1–0.3 %
+   mismatches against a 10 % baseline, p = 1.000). The forward-ported V4 path is
+   consensus-safe.
 
 > **Not comparable with the cross-topology reports.** This run used the Gonka PoC-v2
 > **fork** (PoC compiled into vLLM), TP=1 on one B300. The H100/H200/B200 reports use the
@@ -153,11 +154,20 @@ b32), i.e. bounded by per-iteration fixed cost rather than by batch parallelism.
 Same v2 (murmur3) pseudo-`input_ids` scheme, 1000 common nonces per pair, chain proto
 fraud test (`dist_threshold=0.40`, `p_mismatch=0.10`, `p_value_threshold=0.05`):
 
-| A | B | median L2 | mismatch >0.40 | binomial p |
-|---|---|----------:|---------------:|-----------:|
-| plugin (out-of-tree) | in-tree (0.23→0.25) | 0.0024 | 0.20% | 1.1e-42 |
-| plugin (out-of-tree) | qd forward-port (0.25.1) | 0.0024 | 0.10% | 2.0e-44 |
-| in-tree (0.23→0.25) | qd forward-port (0.25.1) | 0.0000 | 0.30% | 4.1e-41 |
+| A | B | median L2 | mismatch >0.40 | p = P(X ≥ k) | verdict |
+|---|---|----------:|---------------:|-----------:|:---:|
+| plugin (out-of-tree) | in-tree (0.23→0.25) | 0.0024 | 0.20% | 1.000 | PASS |
+| plugin (out-of-tree) | qd forward-port (0.25.1) | 0.0024 | 0.10% | 1.000 | PASS |
+| in-tree (0.23→0.25) | qd forward-port (0.25.1) | 0.0000 | 0.30% | 1.000 | PASS |
+
+**These p-values were restated on 2026-07-25.** The script originally used the opposite
+null hypothesis from the chain (H0 = "the node is fraudulent", lower tail `P(X ≤ k)`), which
+produced values like `1.1e-42` here. Under the chain rule in
+`gonka-ai/vllm vllm/poc/data.py::fraud_test` — H0 = "the node is honest", upper tail
+`P(X ≥ k)`, fraud when `p < 0.05` — the same data gives `p = 1.000`. The conclusion is
+unchanged (0.1–0.3 % mismatches against a 10 % baseline is nowhere near fraud), but the
+earlier numbers read as overwhelming evidence when in the chain's convention they would have
+meant the opposite. `scripts/l2_crossval.py` now implements the chain rule.
 
 All three implementations agree to ~0.002 median L2 — numerical noise between kernel
 paths. No verdict is asserted: **V4 thresholds are not calibrated yet**, and the 0.40 /
@@ -195,7 +205,8 @@ out-of-tree plugin and the earlier in-tree port.
   graphs remove the former, so they help only where it was binding. See
   `../deepseek-v4-flash-2xb200/README.md`.
 - **The forward-port is consensus-safe**: nonces match the out-of-tree reference within
-  numerical noise (p ≤ 2e-44), like the earlier in-tree port.
+  numerical noise (0.1 % mismatches against a 10 % baseline, p = 1.000), like the earlier
+  in-tree port.
 
 ## Reproducibility checklist
 

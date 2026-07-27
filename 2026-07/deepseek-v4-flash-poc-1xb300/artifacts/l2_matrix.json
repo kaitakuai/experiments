@@ -1,44 +1,36 @@
 {
-  "description": "Cross-implementation L2 of DeepSeek-V4 PoC v2 (murmur3 pseudo-input_ids). 1000 common nonces per pair, chain proto fraud test dist_threshold=0.40, p_mismatch=0.10, p_value_threshold=0.05.",
-  "block_hash": "artifact_collection_block_v1",
-  "seq_len": 1024,
-  "k_dim": 12,
-  "pairs": [
-    {
-      "a": "plugin (out-of-tree, reference)",
-      "b": "in-tree (0.23->0.25 port)",
-      "n": 1000,
-      "median_l2": 0.0024,
-      "mean_l2": 0.0258,
-      "p95_l2": 0.2032,
-      "max_l2": 0.4301,
-      "mismatch_rate_gt_0.40": 0.002,
-      "binomial_p": 1.1e-42,
+  "_method": "chain rule, gonka-ai/vllm vllm/poc/data.py::fraud_test \u2014 H0 = node is honest, p = P(X >= k | Binomial(n, 0.10)), fraud when p < 0.05",
+  "_restated": "2026-07-25: recomputed after l2_crossval.py was aligned with the chain; earlier values used the opposite null hypothesis (lower tail)",
+  "dist_threshold": 0.4,
+  "p_mismatch": 0.1,
+  "p_value_threshold": 0.05,
+  "pairs": {
+    "plugin__intree": {
+      "n_compared": 1000,
+      "n_mismatch": 2,
+      "pct_mismatch": 0.2,
+      "median_l2": 0.0024124574847519398,
+      "mean_l2": 0.02579834684729576,
+      "p_value": 1.0,
       "verdict": "PASS"
     },
-    {
-      "a": "plugin (out-of-tree, reference)",
-      "b": "qd forward-port (0.25.1)",
-      "n": 1000,
-      "median_l2": 0.0024,
-      "mean_l2": 0.0253,
-      "p95_l2": 0.2031,
-      "max_l2": 0.4343,
-      "mismatch_rate_gt_0.40": 0.001,
-      "binomial_p": 2e-44,
+    "plugin__qd_forward_port": {
+      "n_compared": 1000,
+      "n_mismatch": 1,
+      "pct_mismatch": 0.1,
+      "median_l2": 0.0024124574847519398,
+      "mean_l2": 0.025273466482758522,
+      "p_value": 1.0,
       "verdict": "PASS"
     },
-    {
-      "a": "in-tree (0.23->0.25 port)",
-      "b": "qd forward-port (0.25.1)",
-      "n": 1000,
+    "intree__qd_forward_port": {
+      "n_compared": 1000,
+      "n_mismatch": 3,
+      "pct_mismatch": 0.3,
       "median_l2": 0.0,
-      "mean_l2": 0.0242,
-      "p95_l2": 0.2029,
-      "max_l2": 0.4222,
-      "mismatch_rate_gt_0.40": 0.003,
-      "binomial_p": 4.1e-41,
+      "mean_l2": 0.02424469217658043,
+      "p_value": 1.0,
       "verdict": "PASS"
     }
-  ]
+  }
 }
