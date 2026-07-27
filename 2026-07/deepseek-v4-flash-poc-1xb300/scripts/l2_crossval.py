@@ -29,10 +29,15 @@ import argparse
 import base64
 import json
 import statistics
-import struct
-from math import sqrt
 
+import numpy as np
 from scipy.stats import binomtest
+
+# Parameters used for the V4 measurements in this repository.
+# The chain passes these per model; they are not fixed constants.
+DEFAULT_DIST_THRESHOLD = 0.40
+DEFAULT_P_MISMATCH = 0.10
+DEFAULT_FRAUD_THRESHOLD = 0.05
 
 
 def load(path):
@@ -41,16 +46,17 @@ def load(path):
 
 
 def vec(b64):
-    return struct.unpack("<12e", base64.b64decode(b64))
+    """Identical to vllm/poc/data.py::decode_vector — fp16 LE decoded into fp32."""
+    return np.frombuffer(base64.b64decode(b64), dtype="<f2").astype(np.float32)
 
 
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("a")
     ap.add_argument("b")
-    ap.add_argument("--dist-threshold", type=float, default=0.40)
-    ap.add_argument("--p-mismatch", type=float, default=0.10)
-    ap.add_argument("--p-value", type=float, default=0.05)
+    ap.add_argument("--dist-threshold", type=float, default=DEFAULT_DIST_THRESHOLD)
+    ap.add_argument("--p-mismatch", type=float, default=DEFAULT_P_MISMATCH)
+    ap.add_argument("--p-value", type=float, default=DEFAULT_FRAUD_THRESHOLD)
     args = ap.parse_args()
 
     a, b = load(args.a), load(args.b)
@@ -58,8 +64,9 @@ def main():
     if not common:
         raise SystemExit("no common nonces")
 
+    # float(np.linalg.norm(...)) in fp32 — same arithmetic as vllm/poc/data.py::is_mismatch
     dists = sorted(
-        sqrt(sum((x - y) ** 2 for x, y in zip(vec(a[n]), vec(b[n])))) for n in common
+        float(np.linalg.norm(vec(a[n]) - vec(b[n]))) for n in common
     )
     n = len(dists)
     k = sum(1 for d in dists if d > args.dist_threshold)
