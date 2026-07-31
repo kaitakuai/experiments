@@ -3,8 +3,10 @@
 **Date:** 2026-07-31 (scaffold; runs pending)
 **Model:** `deepseek-ai/DeepSeek-V4-Flash-0731` @ `9e165c30e2704aec5d9d593cce3eebd58bbef1cb`
 **Hardware:** 1×NVIDIA B300 SXM6
-**Stack:** `mlnode-b300-deepseek-v4-flash:0.2.14-vllm0.25.1-overlay-k9` — the release-candidate
-image (vllm `release/v0.25.1` @04a165c0 + `gonka-vllm-plugins` v0.1.1). No rebuild needed:
+**Stack:** `mlnode-b300-deepseek-v4-flash:0.2.14-vllm0.25.1-overlay-k10`
+`@sha256:a6213dac621c1634a82940533190c9a5149b6535a5690c69ca6d3919c74c8138` — the
+release-candidate image: vllm `release/v0.25.1` @04a165c0 + `gonka-vllm-plugins`
+v0.1.1 + mlnode from the gonka-ai release branch `vllm-0.25.1-upgrade` @1b07e5c6. No rebuild needed:
 the checkpoint keeps the architecture (`DeepseekV4ForCausalLM`, 43 layers, same
 `compress_ratios` prefix), and the new `dspark_*` config fields drive the speculative
 decoder only, which the PoC path does not use.
