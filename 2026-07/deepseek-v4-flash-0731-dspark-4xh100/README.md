@@ -14,6 +14,8 @@ A/B on a second Hopper topology.
 
 ## Summary
 
+- **DSpark costs nothing in PoC**: 1504 nonces/min at batch 16 with and without it, 1408 vs
+  1424 at batch 8. A node can speculate for serving without losing weight.
 - **DSpark preserves the output.** Teacher forcing puts DSpark at **97.87 %** argmax
   agreement against a **98.36 %** control — a 1.45 σ difference, i.e. within the noise of
   the measurement itself.
@@ -24,7 +26,33 @@ A/B on a second Hopper topology.
 - k10 still ships both k9 defects (`VLLM_USE_V2_MODEL_RUNNER=0`, missing `libnvrtc.so`).
   It does drop the hardcoded forced args, which is an improvement.
 
-## Result 1 — does DSpark change what the model would have said?
+## Result 1 — PoC throughput: DSpark costs nothing
+
+Nonces/min, `run_pow_generation.py --phase 3` (5 s warmup + 30 s steady state), both arms on
+the chosen configuration (`gmu 0.85`, `maxnbt 16384`):
+
+| batch | DSpark off | DSpark on | previous `-Flash`, 4×H100 (2026-07-24) |
+|---:|---:|---:|---:|
+| 8 | 1424 | 1408 | — |
+| 16 | **1504** | **1504** | — |
+| 32 | 0 *(see below)* | 0 *(see below)* | **1536** |
+
+**Identical at batch 16 and within 1 % at batch 8.** Speculative decoding neither helps nor
+hurts the PoC forward, which is what the design implies — PoC runs through the worker
+extension and the draft model takes no part in it. This repeats on 4×H100 what the 2×H200 run
+found (1215 vs 1216), now on a second topology and a second image.
+
+The batch-32 zero is **not** a DSpark effect — it appears in both arms. It is requirement 1 of
+*The parameter trap* below: a PoC forward at batch 32 submits 32768 tokens, which does not fit
+the metadata buffer that `max-num-batched-tokens 16384` sizes. It is a hard configuration
+limit, not a crash, and it is why the previous checkpoint's 1536 (measured at batch 32 under
+`maxnbt 32768`) is not directly comparable to the 1504 here.
+
+**Practical reading for the fleet:** a node can enable DSpark for serving without losing PoC
+weight. On 80 GB cards the cost is not DSpark but the configuration it forces — batch 16
+instead of 32, i.e. 1504 against the 1536 the previous checkpoint reached, about 2 %.
+
+## Result 2 — does DSpark change what the model would have said?
 
 Comparing generated *texts* between arms does not work: the engine is nondeterministic run
 to run (the 2×H200 report measured 2/5 identical for the *same* arm sampled twice), so texts
@@ -48,7 +76,7 @@ The control matters more than the headline: without it, 97.87 % reads as "DSpark
 tokens". It does not — a non-speculative run loses the same 1.6 %, which is the numerical
 noise floor of this engine, not an artefact of speculation.
 
-## Result 2 — serving A/B (both arms on the V2 runner, one flag apart)
+## Result 3 — serving A/B (both arms on the V2 runner, one flag apart)
 
 | scenario | tok/s off | tok/s on | × | TPOT off | TPOT on | × | tok/chunk | fails |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
@@ -94,11 +122,10 @@ Measured, DSpark on, per card:
 | gmu 0.85, maxnbt 32768 | 13.20 GiB | — | **fails at graph capture** |
 | **gmu 0.85, maxnbt 16384** | **19.57 GiB** | **1,039,126** | **works**: s4 passes with 0 failures |
 
-The chosen configuration carries a cost: with `maxnbt 16384` the PoC batch is capped at 8
-(1024 × 8 = 8192, leaving headroom for DSpark's draft tokens). The sweep gives 1408 nonces/min
-at batch 8 and 1504 at batch 16, against 1536 for the previous checkpoint at batch 32 — so
-running DSpark on 80 GB cards costs roughly 2–8 % of PoC throughput, not the 20 % a naive
-reading of the batch-8 number suggests.
+The chosen configuration carries a cost: with `maxnbt 16384` the PoC batch tops out at 16
+(1024 × 16 = 16384, exactly the buffer), so batch 32 is unavailable. That costs about 2 % of
+PoC throughput — 1504 nonces/min against the 1536 the previous checkpoint reached at batch 32
+under `maxnbt 32768`.
 
 **The dangerous case is the first row.** It starts cleanly, reports a healthy KV cache, serves
 small requests fine, and only dies once a long-prompt concurrent load arrives. A configuration
@@ -116,9 +143,10 @@ plugin ↔ V2-runner combination, unrelated to DSpark.
 Consequently the cross-machine L2 questions are answered only by the 2×H200 report, where
 DSpark on/off and V1/V2 both measured below the honest floor.
 
-**PoC sweep at batch 32 returns 0 nonces with DSpark** at `maxnbt 16384` — expected from
-requirement 1 above (32768 tokens do not fit a 16384 buffer), listed here so the zero in
-`artifacts/logs/sweep_dspark_on.log` is not read as a crash.
+**PoC sweep at batch 32 returns 0 nonces in BOTH arms** at `maxnbt 16384` — expected from
+requirement 1 above (32768 tokens do not fit a 16384 buffer). Listed here so the zero in
+`artifacts/logs/sweep_dspark_{on,off}.log` is not read as a crash, and not as a DSpark defect:
+the baseline returns the same zero.
 
 ## Files
 

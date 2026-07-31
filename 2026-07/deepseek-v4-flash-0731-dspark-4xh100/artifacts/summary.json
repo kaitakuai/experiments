@@ -81,5 +81,18 @@
     "sigma": 4.77,
     "z": 1.45,
     "verdict": "within noise"
+  },
+  "poc_sweep_nonces_per_min": {
+    "dspark_off": {
+      "8": 1424,
+      "16": 1504,
+      "32": 0
+    },
+    "dspark_on": {
+      "8": 1408,
+      "16": 1504,
+      "32": 0
+    },
+    "note": "batch 32 = 0 in both arms: 32768 tokens exceed the maxnbt 16384 metadata buffer"
   }
 }
