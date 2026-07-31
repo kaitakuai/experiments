@@ -1,0 +1,85 @@
+=== SERVING dspark_on s1_long_prompt_sequential_short_decode ===
+{
+  "scenario": "s1_long_prompt_sequential_short_decode",
+  "prompt_chars": 20000,
+  "num_tasks": 5,
+  "concurrency": 1,
+  "max_tokens": 300,
+  "wall_s": 4.72,
+  "TTFT": 0.1842,
+  "TTFT_95": 0.2098,
+  "LATENCY": 0.9429,
+  "LATENCY_95": 0.9939,
+  "TPOT": 0.00254,
+  "OUTPUT_TOKENS": 1500,
+  "OUTPUT_CHUNKS": 331,
+  "TOKENS_PER_CHUNK": 4.532,
+  "OUTPUT_TOK_PER_S": 318.08,
+  "RPS": 1.0603,
+  "FAILED_REQUESTS": 0,
+  "errors": []
+}
+=== SERVING dspark_on s2_short_prompt_high_concurrency ===
+{
+  "scenario": "s2_short_prompt_high_concurrency",
+  "prompt_chars": 2000,
+  "num_tasks": 200,
+  "concurrency": 30,
+  "max_tokens": 300,
+  "wall_s": 56.64,
+  "TTFT": 3.6149,
+  "TTFT_95": 26.6982,
+  "LATENCY": 8.2695,
+  "LATENCY_95": 31.0043,
+  "TPOT": 0.01611,
+  "OUTPUT_TOKENS": 58966,
+  "OUTPUT_CHUNKS": 16772,
+  "TOKENS_PER_CHUNK": 3.516,
+  "OUTPUT_TOK_PER_S": 1041.14,
+  "RPS": 3.5313,
+  "FAILED_REQUESTS": 0,
+  "errors": []
+}
+=== SERVING dspark_on s3_very_long_sequential_long_decode ===
+{
+  "scenario": "s3_very_long_sequential_long_decode",
+  "prompt_chars": 45000,
+  "num_tasks": 5,
+  "concurrency": 1,
+  "max_tokens": 1000,
+  "wall_s": 11.92,
+  "TTFT": 0.3752,
+  "TTFT_95": 0.406,
+  "LATENCY": 2.3844,
+  "LATENCY_95": 3.3736,
+  "TPOT": 0.00227,
+  "OUTPUT_TOKENS": 4472,
+  "OUTPUT_CHUNKS": 868,
+  "TOKENS_PER_CHUNK": 5.152,
+  "OUTPUT_TOK_PER_S": 375.08,
+  "RPS": 0.4194,
+  "FAILED_REQUESTS": 0,
+  "errors": []
+}
+=== SERVING dspark_on s4_very_long_max_concurrency ===
+{
+  "scenario": "s4_very_long_max_concurrency",
+  "prompt_chars": 45000,
+  "num_tasks": 40,
+  "concurrency": 20,
+  "max_tokens": 1000,
+  "wall_s": 32.23,
+  "TTFT": 4.5314,
+  "TTFT_95": 11.976,
+  "LATENCY": 14.7129,
+  "LATENCY_95": 23.1978,
+  "TPOT": 0.01316,
+  "OUTPUT_TOKENS": 34107,
+  "OUTPUT_CHUNKS": 6302,
+  "TOKENS_PER_CHUNK": 5.412,
+  "OUTPUT_TOK_PER_S": 1058.32,
+  "RPS": 1.2412,
+  "FAILED_REQUESTS": 0,
+  "errors": []
+}
+=== SERVING dspark_on DONE ===

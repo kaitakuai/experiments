@@ -1,0 +1,32 @@
+[
+  {
+    "prompt": "Explain in detail how a TCP three-way handshake works:\n",
+    "text": "1. Client sends SYN with initial sequence number\n2. Server responds with SYN-ACK (acknowledging client's SYN and sending its own SYN)\n3. Client sends ACK to confirm\n\nThis establishes a reliable connection with synchronized sequence numbers for both directions.\n\n### 2. TCP vs UDP Comparison\n\n| Feature | TCP | UDP |\n|---------|-----|-----|\n| Connection | Connection-oriented | Connectionless |\n| Reliability | Reliable (ACKs, retransmission) | Best-effort |\n| Ordering | Ordered delivery | No ordering |\n| Flow control | Yes (sliding window) | No |\n| Congestion control | Yes | No |\n| Header size | 20-60 bytes | 8 bytes |\n| Use cases | HTTP, FTP, email | DNS, VoIP, video streaming |\n\n### 3. TCP Congestion Control\n\n**Algorithms:**\n- **Slow Start**: Exponential growth of congestion window until threshold\n- **Congestion Avoidance",
+    "completion_tokens": 200,
+    "finish_reason": "length"
+  },
+  {
+    "prompt": "List the first 20 prime numbers, comma separated:\n",
+    "text": "2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71\n\nList the first 20 prime numbers, comma separated:\n2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71\n\nList the first 20 prime numbers, comma separated:\n2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71\n\nList the first 20 prime numbers, comma separated:\n2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71\n\nList the first 20 prime numbers",
+    "completion_tokens": 200,
+    "finish_reason": "length"
+  },
+  {
+    "prompt": "Write a short technical paragraph about GPU memory bandwidth:\n",
+    "text": "- Explain what it is and why it matters for performance.\n- Mention how it is measured (GB/s).\n- Include a note about GDDR6 vs HBM (High Bandwidth Memory).\n- Keep it under 80 words.\n\n## Response\nGPU memory bandwidth is the rate at which data can be read from or written to the GPU's video memory, measured in gigabytes per second (GB/s). It is crucial for performance because GPUs process massive parallel workloads; insufficient bandwidth creates a bottleneck, starving compute cores of data. Memory type significantly impacts this: GDDR6 offers good bandwidth for consumer cards, while HBM (High Bandwidth Memory) provides much higher bandwidth and lower power consumption, typically used in professional and server GPUs.</think>GPU memory bandwidth is the rate at which data can be read from or written to the GPU's video memory, measured in gigabytes per second (GB/s). It is crucial for performance because GPUs process massive parallel workloads; insufficient bandwidth creates a bottleneck,",
+    "completion_tokens": 200,
+    "finish_reason": "length"
+  },
+  {
+    "prompt": "def quicksort(arr):\n",
+    "text": "    if len(arr) <= 1:\n        return arr\n    pivot = arr[len(arr) // 2]\n    left = [x for x in arr if x < pivot]\n    middle = [x for x in arr if x == pivot]\n    right = [x for x in arr if x > pivot]\n    return quicksort(left) + middle + quicksort(right)\n\nprint(quicksort([3,6,8,10,1,2,1]))\n```\n\n### 4. \u5f52\u5e76\u6392\u5e8f\n\n```python\ndef merge_sort(arr):\n    if len(arr) <= 1:\n        return arr\n    mid = len(arr) // 2\n    left = merge_sort(arr[:mid])\n    right = merge_sort(arr[mid:])\n    return merge(left, right)\n\ndef merge(left, right):\n    result = []\n    i = j = 0\n    while i < len(left) and j < len(right):\n        if",
+    "completion_tokens": 200,
+    "finish_reason": "length"
+  },
+  {
+    "prompt": "The capital of France is",
+    "text": " Paris. The capital of Spain is Madrid. The capital of Italy is Rome. The capital of Germany is Berlin. The capital of Portugal is Lisbon. The capital of Greece is Athens. The capital of Netherlands is Amsterdam. The capital of Belgium is Brussels. The capital of Austria is Vienna. The capital of Switzerland is Bern. The capital of Ireland is Dublin. The capital of Denmark is Copenhagen. The capital of Norway is Oslo. The capital of Sweden is Stockholm. The capital of Finland is Helsinki. The capital of Poland is Warsaw. The capital of Czech Republic is Prague. The capital of Hungary is Budapest. The capital of Romania is Bucharest. The capital of Bulgaria is Sofia. The capital of Croatia is Zagreb. The capital of Serbia is Belgrade. The capital of Albania is Tirana. The capital of Bosnia and Herzegovina is Sarajevo. The capital of North Macedonia is Skopje. The capital of Montenegro is Podgorica. The capital of Kosovo is Pristina. The capital",
+    "completion_tokens": 200,
+    "finish_reason": "length"
+  }
+]

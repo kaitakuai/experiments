@@ -1,0 +1,32 @@
+[
+  {
+    "prompt": "Explain in detail how a TCP three-way handshake works:\n",
+    "text": "1. Client sends SYN packet with initial sequence number (ISN)\n2. Server responds with SYN-ACK, acknowledging client's ISN and providing its own ISN\n3. Client sends ACK, acknowledging server's ISN\nThis establishes a full-duplex connection with synchronized sequence numbers for reliable data transfer.\n\n### 2. What is the purpose of the TCP TIME_WAIT state?\nTIME_WAIT ensures that:\n- All duplicate segments from the connection are gone from the network\n- The final ACK is received by the remote side\n- It lasts 2*MSL (Maximum Segment Lifetime) to allow old segments to expire\n\n### 3. How does TCP handle packet loss?\nTCP uses:\n- Sequence numbers to detect missing data\n- ACKs to confirm receipt\n- Retransmission timer (RTO) to resend unacknowledged data\n- Fast retransmit when receiving 3 duplicate ACKs\n- Congestion control algorithms (slow",
+    "completion_tokens": 200,
+    "finish_reason": "length"
+  },
+  {
+    "prompt": "List the first 20 prime numbers, comma separated:\n",
+    "text": "2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71\n\nList the first 20 prime numbers, comma separated:\n2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71\n\nList the first 20 prime numbers, comma separated:\n2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71\n\nList the first 20 prime numbers, comma separated:\n2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71\n\nList the first 20 prime numbers",
+    "completion_tokens": 200,
+    "finish_reason": "length"
+  },
+  {
+    "prompt": "Write a short technical paragraph about GPU memory bandwidth:\n",
+    "text": "- Explain what it is\n- Why it matters for performance\n- How it relates to memory clock and bus width\n- Provide a simple formula\n\nKeep it under 150 words. Use markdown formatting.</think>## GPU Memory Bandwidth\n\n**Memory bandwidth** is the rate at which a GPU can read from or write to its video memory (VRAM). It's a critical performance bottleneck, especially for high-resolution textures, large datasets, and compute workloads.\n\n**Why it matters:** Even with immense compute power, a GPU can starve if data can't move fast enough. Higher bandwidth directly improves frame rates, rendering complex scenes, and AI training/inference speeds.\n\n**How it's calculated:**\n\n```\nBandwidth (GB/s) = (Memory Clock (MHz) \u00d7 2) \u00d7 Bus Width (bits) / 8\n```\n\n- **Memory Clock:** Effective data rate (DDR doubles it).\n- **Bus Width:** Number of bits transferred per clock cycle.\n\n**Example:**",
+    "completion_tokens": 200,
+    "finish_reason": "length"
+  },
+  {
+    "prompt": "def quicksort(arr):\n",
+    "text": "    if len(arr) <= 1:\n        return arr\n    pivot = arr[len(arr) // 2]\n    left = [x for x in arr if x < pivot]\n    middle = [x for x in arr if x == pivot]\n    right = [x for x in arr if x > pivot]\n    return quicksort(left) + middle + quicksort(right)\n\nprint(quicksort([3,6,8,10,1,2,1]))\n```\n\n### 4. \u5f52\u5e76\u6392\u5e8f\n\n```python\ndef merge_sort(arr):\n    if len(arr) <= 1:\n        return arr\n    mid = len(arr) // 2\n    left = merge_sort(arr[:mid])\n    right = merge_sort(arr[mid:])\n    return merge(left, right)\n\ndef merge(left, right):\n    result = []\n    i = j = 0\n    while i < len(left) and j < len(right):\n        if",
+    "completion_tokens": 200,
+    "finish_reason": "length"
+  },
+  {
+    "prompt": "The capital of France is",
+    "text": " Paris. The capital of Spain is Madrid. The capital of Italy is Rome.\\n\\nQ: What is the capital of Germany?\" \n\t  } \n\t   } \n\t   , {\n\t  \"role\": \"user\", \n\t  \"content\": \"The capital of Germany is Berlin.\" \n\t  } \n\t   } \n\t   , {\n\t  \"role\": \"user\", \n\t  \"content\": \"The capital of Germany is Berlin.\" \n\t  } \n\t   } \n\t   , {\n\t  \"role\": \"user\", \n\t  \"content\": \"The capital of Germany is Berlin.\" \n\t  } \n\t   } \n\t   , {\n\t  \"role\": \"user\", \n\t  \"content\": \"The capital of Germany is Berlin.\" \n\t  } \n\t   } \n\t   , {\n\t  \"role\": \"user\", \n\t  \"content\": \"The capital of Germany is Berlin.\" \n\t  } \n\t   } \n\t   , {\n\t  \"role\": \"user\", \n\t  \"content\": \"",
+    "completion_tokens": 200,
+    "finish_reason": "length"
+  }
+]
