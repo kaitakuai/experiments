@@ -1,0 +1,42 @@
+[
+  {
+    "prompt": "Explain how a TCP three-way handshake works, step by step:\n",
+    "text": "1. SYN: Client sends a SYN (synchronize) packet to the server with a random sequence number (e.g., 1000).\n2. SYN-ACK: Server responds with SYN-ACK, acknowledging the client's SYN and sending its own sequence number (e.g., 5000).\n3. ACK: Client sends an ACK to acknowledge the server's SYN, completing the connection.\n\nThe handshake establishes initial sequence numbers for both sides, enabling reliable, ordered data transfer. It also allows both sides to exchange TCP options like window scaling and MSS.\n\n**Why not 2-way?** A 2-way handshake can't confirm that the server's response reached the client, leaving the server uncertain if the client is ready. The third step ensures the server knows the client received its SYN-ACK, preventing half-open connections.\n\n**Why not 4-way?** Three steps are sufficient to establish bidirectional synchronization. A 4-way handshake would add latency without improving",
+    "completion_tokens": 200
+  },
+  {
+    "prompt": "List the first 30 prime numbers, comma separated:\n",
+    "text": "2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97,101,103,107,109,113\n\nList the first 50 prime numbers, comma separated:\n2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97,101,103,107,109,113,127,131,137,139,149,151,157,163,167,173,179,181,191,193,197,199,211,223,227,229\n\nList the first 100 prime numbers, comma separated:\n2,3,5,7,11,13,17,19,23,",
+    "completion_tokens": 200
+  },
+  {
+    "prompt": "Write a technical paragraph about GPU memory bandwidth:\n",
+    "text": "- Explain what memory bandwidth is in the context of GPUs.\n- Discuss how it affects performance in compute-intensive applications.\n- Mention the role of memory type (e.g., GDDR6, HBM2e) and bus width.\n- Include a note on how bandwidth is calculated (frequency \u00d7 bus width \u00d7 transfers per clock).\n- Conclude with why bandwidth scaling is important for AI workloads.\n\n## Response:\nGPU memory bandwidth is the rate at which data can be read from or written to the GPU's dedicated video memory, typically measured in gigabytes per second (GB/s). It is a critical performance metric for compute-intensive applications because modern GPUs process massive amounts of data in parallel, and if the memory subsystem cannot feed data to the compute cores fast enough, the cores will stall, leading to underutilization. This is especially true for workloads like deep learning, scientific simulations, and real-time rendering, where large matrices, tensors, and textures are constantly being accessed. The memory type plays",
+    "completion_tokens": 200
+  },
+  {
+    "prompt": "def quicksort(arr):\n",
+    "text": "    if len(arr) <= 1:\n        return arr\n    pivot = arr[len(arr) // 2]\n    left = [x for x in arr if x < pivot]\n    middle = [x for x in arr if x == pivot]\n    right = [x for x in arr if x > pivot]\n    return quicksort(left) + middle + quicksort(right)\n\nprint(quicksort([3,6,8,10,1,2,1]))\n```\n\n### Maps\n\n```go\npackage main\n\nimport \"fmt\"\n\nfunc main() {\n    m := make(map[string]int)\n    m[\"k1\"] = 7\n    m[\"k2\"] = 13\n    fmt.Println(\"map:\", m)\n    v1 := m[\"k1\"]\n    fmt.Println(\"v1: \", v1)\n    fmt.Println(\"len:\", len(m))\n    delete(m, \"k2\")\n    fmt.Println(\"map:\", m",
+    "completion_tokens": 200
+  },
+  {
+    "prompt": "The capital of France is",
+    "text": " Paris. The capital of Spain is Madrid. The capital of Italy is Rome. The capital of Germany is Berlin. The capital of Portugal is Lisbon. The capital of Greece is Athens. The capital of Netherlands is Amsterdam. The capital of Belgium is Brussels. The capital of Austria is Vienna. The capital of Switzerland is Bern. The capital of Ireland is Dublin. The capital of Denmark is Copenhagen. The capital of Sweden is Stockholm. The capital of Norway is Oslo. The capital of Finland is Helsinki. The capital of Poland is Warsaw. The capital of Czech Republic is Prague. The capital of Hungary is Budapest. The capital of Romania is Bucharest. The capital of Bulgaria is Sofia. The capital of Croatia is Zagreb. The capital of Serbia is Belgrade. The capital of Albania is Tirana. The capital of Bosnia and Herzegovina is Sarajevo. The capital of North Macedonia is Skopje. The capital of Montenegro is Podgorica. The capital of Kosovo is Pristina. The capital",
+    "completion_tokens": 200
+  },
+  {
+    "prompt": "Summarise the causes of the 1929 financial crash:\n",
+    "text": "- overproduction and underconsumption\n- the Wall Street Crash\n- the collapse of the banking system.\n\nThe 1929 financial crash\n\nThe 1920s had been a period of great prosperity in the USA. The First World War had made the USA the world\u2019s leading industrial power and the richest country on Earth. The 1920s saw a boom in the production of consumer goods, such as cars, radios and electrical goods. The American people were encouraged to buy these goods on credit, and to invest their savings in the stock market. By 1929, however, the American economy was in trouble. The boom was built on very shaky foundations.\n\nOverproduction and underconsumption\nDuring the 1920s, American industry had grown rapidly. New machinery and new production methods, such as the assembly line, meant that factories could produce more goods than ever before. However, there was a problem. The wages of workers did not rise as fast as the amount of",
+    "completion_tokens": 200
+  },
+  {
+    "prompt": "Translate to German: 'The server is currently unavailable.'\n",
+    "text": "---\nDer Server ist derzeit nicht verf\u00fcgbar.",
+    "completion_tokens": 12
+  },
+  {
+    "prompt": "Write a bash one-liner that finds the ten largest files under /var:\n",
+    "text": "find /var -type f -exec du -h {} + | sort -rh | head -n 10\n```\nThis command uses `find` to locate all files under `/var`, `du -h` to get their sizes in human-readable format, `sort -rh` to sort them in reverse order by size, and `head -n 10` to display the top 10 largest files.</think>Here's a bash one-liner that finds the ten largest files under `/var`:\n\n```bash\nfind /var -type f -exec du -h {} + | sort -rh | head -n 10\n```\n\n**Explanation:**\n- `find /var -type f` \u2014 finds all regular files under `/var`\n- `-exec du -h {} +` \u2014 runs `du` on each file to get its size in human-readable format\n- `sort -rh` \u2014 sorts the output in reverse order (largest first) using human",
+    "completion_tokens": 200
+  }
+]

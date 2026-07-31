@@ -1,0 +1,42 @@
+[
+  {
+    "prompt": "Explain how a TCP three-way handshake works, step by step:\n",
+    "text": "1. SYN: Client sends a SYN (synchronize) packet with a random sequence number (e.g., 1000) to the server.\n2. SYN-ACK: Server responds with a SYN-ACK packet, acknowledging the client's sequence number (1001) and sending its own random sequence number (e.g., 5000).\n3. ACK: Client sends an ACK packet acknowledging the server's sequence number (5001). The connection is now established.\n\nThis handshake ensures both sides are ready to send and receive data and synchronizes sequence numbers for reliable communication.`,\n    },\n    {\n      id: 'tcp-4way',\n      title: 'TCP 4-Way Handshake (Connection Termination)',\n      description: 'How TCP connections are closed gracefully',\n      content: `Explain how a TCP 4-way handshake (connection termination) works, step by step:\n1. FIN: Client sends a FIN (finish) packet to the",
+    "completion_tokens": 200
+  },
+  {
+    "prompt": "List the first 30 prime numbers, comma separated:\n",
+    "text": "2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97,101,103,107,109,113\n\nList the first 50 Fibonacci numbers, comma separated:\n0,1,1,2,3,5,8,13,21,34,55,89,144,233,377,610,987,1597,2584,4181,6765,10946,17711,28657,46368,75025,121393,196418,317811,514229,832040,1346269,2178309,3524578,5702887,9227465,14930352,24157817,39088169,63245986,102334155,165580141,267914296,433494437,701",
+    "completion_tokens": 200
+  },
+  {
+    "prompt": "Write a technical paragraph about GPU memory bandwidth:\n",
+    "text": "- Explain what it is\n- Why it matters for performance\n- How it relates to memory capacity\n- Include a concrete example with numbers\n\n## Response:\nGPU memory bandwidth is the rate at which data can be read from or written to the GPU's video memory (VRAM), typically measured in gigabytes per second (GB/s). It is a critical performance metric because modern GPUs are massively parallel processors that can perform trillions of floating-point operations per second, and they need a constant supply of data to keep those compute units busy. If the memory bandwidth is insufficient, the GPU will stall waiting for data, leaving compute resources idle\u2014a condition known as being \"memory-bound.\" This is especially important for workloads like deep learning, where training a neural network involves repeatedly moving large weight matrices and activation tensors between compute cores and memory, or for high-resolution gaming, where the GPU must stream textures and geometry data at 60+ frames per second.\n\nThe relationship between memory bandwidth and memory capacity",
+    "completion_tokens": 200
+  },
+  {
+    "prompt": "def quicksort(arr):\n",
+    "text": "    if len(arr) <= 1:\n        return arr\n    pivot = arr[len(arr) // 2]\n    left = [x for x in arr if x < pivot]\n    middle = [x for x in arr if x == pivot]\n    right = [x for x in arr if x > pivot]\n    return quicksort(left) + middle + quicksort(right)\n\nprint(quicksort([3,6,8,10,1,2,1]))\n```\n\n### 4. \u5f52\u5e76\u6392\u5e8f\n\n```python\ndef merge_sort(arr):\n    if len(arr) <= 1:\n        return arr\n    mid = len(arr) // 2\n    left = merge_sort(arr[:mid])\n    right = merge_sort(arr[mid:])\n    return merge(left, right)\n\ndef merge(left, right):\n    result = []\n    i = j = 0\n    while i < len(left) and j < len(right):\n        if",
+    "completion_tokens": 200
+  },
+  {
+    "prompt": "The capital of France is",
+    "text": " Paris. The capital of Spain is Madrid. The capital of Italy is Rome. The capital of Germany is Berlin. The capital of Portugal is Lisbon. The capital of Greece is Athens. The capital of Netherlands is Amsterdam. The capital of Belgium is Brussels. The capital of Austria is Vienna. The capital of Switzerland is Bern. The capital of Ireland is Dublin. The capital of Denmark is Copenhagen. The capital of Sweden is Stockholm. The capital of Norway is Oslo. The capital of Finland is Helsinki. The capital of Poland is Warsaw. The capital of Czech Republic is Prague. The capital of Hungary is Budapest. The capital of Romania is Bucharest. The capital of Bulgaria is Sofia. The capital of Croatia is Zagreb. The capital of Serbia is Belgrade. The capital of Albania is Tirana. The capital of Bosnia and Herzegovina is Sarajevo. The capital of North Macedonia is Skopje. The capital of Montenegro is Podgorica. The capital of Kosovo is Pristina. The capital",
+    "completion_tokens": 200
+  },
+  {
+    "prompt": "Summarise the causes of the 1929 financial crash:\n",
+    "text": "- overproduction in industry and agriculture\n- the Wall Street Crash\n- the collapse of the banking system\n- the collapse of the international financial system.\n\nThe 1929 financial crash\n\nThe Great Depression of 1929\u201333 was the most severe economic crisis in the history of the capitalist world. It began with the Wall Street Crash in October 1929 and spread across the world. The crisis had a devastating effect on the economies of the major capitalist countries, including Germany, which was particularly badly hit.\n\nCauses of the crash\n\nOverproduction in industry and agriculture\nDuring the 1920s, the US economy boomed. New production methods, such as the assembly line, made industry more efficient. However, wages did not keep pace with production. This meant that by 1929, US industry was producing more goods than people could afford to buy. The same was true of agriculture, where new machinery and improved farming methods led to overproduction. As a result, prices fell",
+    "completion_tokens": 200
+  },
+  {
+    "prompt": "Translate to German: 'The server is currently unavailable.'\n",
+    "text": "    German: Der Server ist derzeit nicht verf\u00fcgbar.\n    German (auto): Der Server ist derzeit nicht verf\u00fcgbar.\n    Usage: '\"The server is currently unavailable.\" is a common error message displayed when a website or service cannot be reached due to server issues.'\n    Example: 'Wenn du diese Meldung siehst, versuche es sp\u00e4ter erneut. (If you see this message, try again later.)'\n  - id: 2\n    English: 'The server is currently unavailable.'\n    German: Der Server ist derzeit nicht verf\u00fcgbar.\n    German (auto): Der Server ist derzeit nicht verf\u00fcgbar.\n    Usage: '\"The server is currently unavailable.\" is a common error message displayed when a website or service cannot be reached due to server issues.'\n    Example: 'Wenn du diese Meldung siehst, versuche es sp\u00e4ter erneut. (If you see this message, try again later.)'\n  - id",
+    "completion_tokens": 200
+  },
+  {
+    "prompt": "Write a bash one-liner that finds the ten largest files under /var:\n",
+    "text": "find /var -type f -exec du -h {} + | sort -rh | head -n 10\n```\nThis command uses `find` to locate all files under `/var`, `du -h` to get their sizes in human-readable format, `sort -rh` to sort them in reverse order by size, and `head -n 10` to display the top 10 largest files.</think>Write a bash one-liner that finds the ten largest files under /var:\n```bash\nfind /var -type f -exec du -h {} + | sort -rh | head -n 10\n```\nThis command uses `find` to locate all files under `/var`, `du -h` to get their sizes in human-readable format, `sort -rh` to sort them in reverse order by size, and `head -n 10` to display the top 10 largest files.",
+    "completion_tokens": 189
+  }
+]

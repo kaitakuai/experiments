@@ -1,0 +1,15 @@
+=== GMU85_TEST_START ===
+ENGINE_UP after 195s
+(EngineCore pid=25444) INFO 07-31 21:03:57 [kv_cache_utils.py:2146] GPU KV cache size: 1,039,126 tokens
+=== GMU85_TEST_SWEEP (does batch 32 survive now?) ===
+     Batch │   Nonces │   Nonces/min
+         8 │      608 │         1216  
+        16 │      752 │         1504 ★
+        32 │        0 │            0  
+  ★ Best batch size: 16 (1504 nonces/min)
+=== GMU85_TEST_S4 (the scenario that OOM'd in both arms) ===
+  "scenario": "s4_very_long_max_concurrency",
+  "TOKENS_PER_CHUNK": 5.716,
+  "OUTPUT_TOK_PER_S": 1055.2,
+  "FAILED_REQUESTS": 0,
+=== GMU85_TEST_DONE ===

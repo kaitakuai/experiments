@@ -1,0 +1,56 @@
+{
+  "source": "/root/final4/gen_dspark_off.json",
+  "positions": 1588,
+  "argmax_hits": 1562,
+  "pct": 98.3627,
+  "per_prompt": [
+    {
+      "prompt": "Explain how a TCP three-way handshake wo",
+      "positions": 200,
+      "argmax_hits": 197,
+      "pct": 98.5
+    },
+    {
+      "prompt": "List the first 30 prime numbers, comma s",
+      "positions": 200,
+      "argmax_hits": 199,
+      "pct": 99.5
+    },
+    {
+      "prompt": "Write a technical paragraph about GPU me",
+      "positions": 200,
+      "argmax_hits": 195,
+      "pct": 97.5
+    },
+    {
+      "prompt": "def quicksort(arr):\n",
+      "positions": 200,
+      "argmax_hits": 200,
+      "pct": 100.0
+    },
+    {
+      "prompt": "The capital of France is",
+      "positions": 200,
+      "argmax_hits": 197,
+      "pct": 98.5
+    },
+    {
+      "prompt": "Summarise the causes of the 1929 financi",
+      "positions": 200,
+      "argmax_hits": 193,
+      "pct": 96.5
+    },
+    {
+      "prompt": "Translate to German: 'The server is curr",
+      "positions": 200,
+      "argmax_hits": 195,
+      "pct": 97.5
+    },
+    {
+      "prompt": "Write a bash one-liner that finds the te",
+      "positions": 188,
+      "argmax_hits": 186,
+      "pct": 98.936
+    }
+  ]
+}

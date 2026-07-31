@@ -1,0 +1,94 @@
+=== ARM_ON ===
+ENGINE_UP after 210s
+=== dspark_on_SWEEP ===
+     Batch │   Nonces │   Nonces/min
+         8 │      704 │         1408  
+        16 │      752 │         1504 ★
+        32 │        0 │            0  
+  ★ Best batch size: 16 (1504 nonces/min)
+=== dspark_on_GEN ===
+  gen 1/8 tokens=200
+  gen 2/8 tokens=200
+  gen 3/8 tokens=200
+  gen 4/8 tokens=200
+  gen 5/8 tokens=200
+  gen 6/8 tokens=200
+  gen 7/8 tokens=12
+  gen 8/8 tokens=200
+GEN_SAVED /root/final4/gen_dspark_on.json
+=== dspark_on_SERVING ===
+  "OUTPUT_TOK_PER_S": 395.62,
+  "scenario": "s2_short_prompt_high_concurrency",
+  "TTFT": 0.4437,
+  "TPOT": 0.01017,
+  "TOKENS_PER_CHUNK": 3.579,
+  "OUTPUT_TOK_PER_S": 2484.48,
+  "scenario": "s3_very_long_sequential_long_decode",
+  "TTFT": 0.2699,
+  "TPOT": 0.00194,
+  "TOKENS_PER_CHUNK": 5.564,
+  "OUTPUT_TOK_PER_S": 469.9,
+  "scenario": "s4_very_long_max_concurrency",
+  "TTFT": 1.1481,
+  "TPOT": 0.00975,
+  "TOKENS_PER_CHUNK": 5.327,
+  "OUTPUT_TOK_PER_S": 1890.72,
+=== dspark_on_DONE ===
+=== ARM_OFF ===
+ENGINE_UP after 210s
+=== dspark_off_SWEEP ===
+     Batch │   Nonces │   Nonces/min
+         8 │      712 │         1424  
+        16 │      752 │         1504 ★
+        32 │        0 │            0  
+  ★ Best batch size: 16 (1504 nonces/min)
+=== dspark_off_GEN ===
+  gen 1/8 tokens=200
+  gen 2/8 tokens=200
+  gen 3/8 tokens=200
+  gen 4/8 tokens=200
+  gen 5/8 tokens=200
+  gen 6/8 tokens=200
+  gen 7/8 tokens=200
+  gen 8/8 tokens=189
+GEN_SAVED /root/final4/gen_dspark_off.json
+=== dspark_off_SERVING ===
+  "OUTPUT_TOK_PER_S": 133.43,
+  "scenario": "s2_short_prompt_high_concurrency",
+  "TTFT": 0.4131,
+  "TPOT": 0.01374,
+  "TOKENS_PER_CHUNK": 1.0,
+  "OUTPUT_TOK_PER_S": 1880.85,
+  "scenario": "s3_very_long_sequential_long_decode",
+  "TTFT": 0.2526,
+  "TPOT": 0.00697,
+  "TOKENS_PER_CHUNK": 1.0,
+  "OUTPUT_TOK_PER_S": 138.61,
+  "scenario": "s4_very_long_max_concurrency",
+  "TTFT": 1.4244,
+  "TPOT": 0.01574,
+  "TOKENS_PER_CHUNK": 1.0,
+  "OUTPUT_TOK_PER_S": 1050.23,
+=== dspark_off_DONE ===
+=== EQUIV ===
+  check 1/8  187/200 argmax
+  check 2/8  200/200 argmax
+  check 3/8  196/200 argmax
+  check 4/8  199/200 argmax
+  check 5/8  199/200 argmax
+  check 6/8  191/200 argmax
+  check 7/8  11/11 argmax
+  check 8/8  198/200 argmax
+{"positions": 1411, "argmax_hits": 1381, "pct": 97.8738}
+CHECK_SAVED /root/final4/equiv_dspark_on.json
+  check 1/8  197/200 argmax
+  check 2/8  199/200 argmax
+  check 3/8  195/200 argmax
+  check 4/8  200/200 argmax
+  check 5/8  197/200 argmax
+  check 6/8  193/200 argmax
+  check 7/8  195/200 argmax
+  check 8/8  186/188 argmax
+{"positions": 1588, "argmax_hits": 1562, "pct": 98.3627}
+CHECK_SAVED /root/final4/equiv_control.json
+=== ALL_DONE ===

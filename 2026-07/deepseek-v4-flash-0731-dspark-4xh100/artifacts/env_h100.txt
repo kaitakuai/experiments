@@ -1,0 +1,20 @@
+### gpu
+index, name, memory.total [MiB], power.max_limit [W], driver_version
+0, NVIDIA H100 80GB HBM3, 81559 MiB, 700.00 W, 580.126.20
+1, NVIDIA H100 80GB HBM3, 81559 MiB, 700.00 W, 580.126.20
+2, NVIDIA H100 80GB HBM3, 81559 MiB, 700.00 W, 580.126.20
+3, NVIDIA H100 80GB HBM3, 81559 MiB, 700.00 W, 580.126.20
+	[4mGPU0	GPU1	GPU2	GPU3	NIC0	CPU Affinity	NUMA Affinity	GPU NUMA ID[0m
+GPU0	 X 	NV18	NV18	NV18	SYS	0-103	0		N/A
+GPU1	NV18	 X 	NV18	NV18	SYS	104-207	1		N/A
+
+### image
+k10 @ sha256:a6213dac621c1634a82940533190c9a5149b6535a5690c69ca6d3919c74c8138
+
+### versions
+0.25.1 2.11.0+cu130
+
+### fixes applied
+libnvrtc.so symlink; VLLM_USE_V2_MODEL_RUNNER=1
+### final args
+TP=4 gmu=0.85 maxlen=400000 maxnbt=16384 kv=fp8

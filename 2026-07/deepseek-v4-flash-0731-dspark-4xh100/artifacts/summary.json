@@ -1,0 +1,85 @@
+{
+  "serving": {
+    "s1_long_prompt_sequential_short_decode": {
+      "off": {
+        "OUTPUT_TOK_PER_S": 133.43,
+        "TPOT": 0.00696,
+        "TTFT": 0.1677,
+        "FAILED_REQUESTS": 0,
+        "TOKENS_PER_CHUNK": 1.0
+      },
+      "on": {
+        "OUTPUT_TOK_PER_S": 395.62,
+        "TPOT": 0.00201,
+        "TTFT": 0.1584,
+        "FAILED_REQUESTS": 0,
+        "TOKENS_PER_CHUNK": 4.95
+      },
+      "tok_s_x": 2.965,
+      "tpot_x": 3.463
+    },
+    "s2_short_prompt_high_concurrency": {
+      "off": {
+        "OUTPUT_TOK_PER_S": 1880.85,
+        "TPOT": 0.01374,
+        "TTFT": 0.4131,
+        "FAILED_REQUESTS": 0,
+        "TOKENS_PER_CHUNK": 1.0
+      },
+      "on": {
+        "OUTPUT_TOK_PER_S": 2484.48,
+        "TPOT": 0.01017,
+        "TTFT": 0.4437,
+        "FAILED_REQUESTS": 0,
+        "TOKENS_PER_CHUNK": 3.579
+      },
+      "tok_s_x": 1.321,
+      "tpot_x": 1.351
+    },
+    "s3_very_long_sequential_long_decode": {
+      "off": {
+        "OUTPUT_TOK_PER_S": 138.61,
+        "TPOT": 0.00697,
+        "TTFT": 0.2526,
+        "FAILED_REQUESTS": 0,
+        "TOKENS_PER_CHUNK": 1.0
+      },
+      "on": {
+        "OUTPUT_TOK_PER_S": 469.9,
+        "TPOT": 0.00194,
+        "TTFT": 0.2699,
+        "FAILED_REQUESTS": 0,
+        "TOKENS_PER_CHUNK": 5.564
+      },
+      "tok_s_x": 3.39,
+      "tpot_x": 3.593
+    },
+    "s4_very_long_max_concurrency": {
+      "off": {
+        "OUTPUT_TOK_PER_S": 1050.23,
+        "TPOT": 0.01574,
+        "TTFT": 1.4244,
+        "FAILED_REQUESTS": 0,
+        "TOKENS_PER_CHUNK": 1.0
+      },
+      "on": {
+        "OUTPUT_TOK_PER_S": 1890.72,
+        "TPOT": 0.00975,
+        "TTFT": 1.1481,
+        "FAILED_REQUESTS": 0,
+        "TOKENS_PER_CHUNK": 5.327
+      },
+      "tok_s_x": 1.8,
+      "tpot_x": 1.614
+    }
+  },
+  "equivalence": {
+    "dspark_pct": 97.8738,
+    "control_pct": 98.3627,
+    "dspark_misses": 30,
+    "expected_at_control_rate": 23.1,
+    "sigma": 4.77,
+    "z": 1.45,
+    "verdict": "within noise"
+  }
+}
