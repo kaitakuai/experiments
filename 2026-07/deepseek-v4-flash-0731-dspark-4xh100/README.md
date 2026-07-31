@@ -133,12 +133,27 @@ that fails at startup is safer than one that fails an hour in.
 
 ## What this run did not produce
 
-**No nonce vectors from this box.** `collect_artifacts.py` wedged the engine at every batch
-size tried (8, 16, 32), each time through the PoC plugin's compat shim
-(`gonka_poc/_compat/v0_25.py`) hitting the `token_to_req_indices` assertion or an empty
-`Worker failed with error ''`. The PoC *sweep* runs on the same endpoints and works, so this is
-specific to the collector's path, not to PoC in general. It is an open defect of the
-plugin ↔ V2-runner combination, unrelated to DSpark.
+**No nonce vectors from this box** — and the reason is a gap in this run's coverage, not a
+defect we established.
+
+`collect_artifacts.py` wedged the engine at every batch tried (32, 16, 8), through the PoC
+plugin's compat shim (`gonka_poc/_compat/v0_25.py`) hitting the `token_to_req_indices`
+assertion or an empty `Worker failed with error ''`. The PoC *sweep* runs the same endpoints
+and works.
+
+The tempting conclusion — "the collector is broken against the V2 runner" — is **wrong**. The
+companion 2×H200 run collected ten 1000-nonce sets with the collector under the V2 runner
+*with DSpark enabled* (`artifacts/logs/api_v2_dspark.log` in that folder records
+`Using V2 Model Runner`, `speculative_config=SpeculativeConfig(method='dspark'…)` and
+`max_num_batched_tokens=32768`), at batch 32.
+
+What actually differs is the configuration: every collector attempt here ran under
+`maxnbt 16384`, never under the `maxnbt 32768` that works on H200. The one H100 configuration
+with `maxnbt 32768` that started (`gmu 0.90`) had already lost its engine to the s4 OOM before
+the collector ran. So the collector was never exercised on 4×H100 in a configuration known to
+work elsewhere, and this run cannot say whether the failure comes from the halved buffer, from
+TP=4, or from the tighter memory. Batch 8 (8192 tokens) failing rules out the buffer-size
+explanation on its own, which leaves TP and memory as the open candidates.
 
 Consequently the cross-machine L2 questions are answered only by the 2×H200 report, where
 DSpark on/off and V1/V2 both measured below the honest floor.
