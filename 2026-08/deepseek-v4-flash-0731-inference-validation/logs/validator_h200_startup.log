@@ -1,0 +1,7 @@
+(Worker_TP0 pid=1125) INFO 08-01 20:44:34 [attention.py:91] Using DeepSeek's fp8_ds_mla KV cache format.
+(Worker_TP0 pid=1125) INFO 08-01 20:44:34 [mxfp4.py:622] Using 'MARLIN' Mxfp4 MoE backend.
+(Worker_TP0 pid=1125) INFO 08-01 20:45:07 [gpu_model_runner.py:5307] Model loading took 74.08 GiB memory and 31.301672 seconds
+(Worker_TP0 pid=1125) INFO 08-01 20:47:16 [gpu_worker.py:553] CUDA graph memory profiling is enabled (default since v0.21.0). The current --gpu-memory-utilization=0.9200 is equivalent to --gpu-memory-utilization=0.9108 without CUDA graph memory profiling. To maintain the same effective KV cache size as before, increase --gpu-memory-utilization to 0.9292. To disable, set VLLM_MEMORY_PROFILER_ESTIMATE_CUDAGRAPHS=0.
+(Worker_TP1 pid=1126) INFO 08-01 20:47:16 [gpu_worker.py:553] CUDA graph memory profiling is enabled (default since v0.21.0). The current --gpu-memory-utilization=0.9200 is equivalent to --gpu-memory-utilization=0.9108 without CUDA graph memory profiling. To maintain the same effective KV cache size as before, increase --gpu-memory-utilization to 0.9292. To disable, set VLLM_MEMORY_PROFILER_ESTIMATE_CUDAGRAPHS=0.
+(EngineCore pid=760) INFO 08-01 20:47:16 [kv_cache_utils.py:2146] GPU KV cache size: 543,999 tokens
+(APIServer pid=34) INFO:     Application startup complete.
