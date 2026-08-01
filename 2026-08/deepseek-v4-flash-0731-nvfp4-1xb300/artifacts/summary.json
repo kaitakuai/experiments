@@ -1,0 +1,176 @@
+{
+  "nvfp4_vs_honest": {
+    "s1": {
+      "n": 1000,
+      "median": 0.19972,
+      "p95": 0.362258,
+      "mismatches": 25,
+      "mismatch_pct": 2.5,
+      "p_value": 1.0
+    },
+    "s2": {
+      "n": 1000,
+      "median": 0.19853,
+      "p95": 0.372021,
+      "mismatches": 30,
+      "mismatch_pct": 3.0,
+      "p_value": 1.0
+    },
+    "s3": {
+      "n": 1000,
+      "median": 0.196074,
+      "p95": 0.368313,
+      "mismatches": 29,
+      "mismatch_pct": 2.9,
+      "p_value": 1.0
+    }
+  },
+  "poc_sweep_nonces_per_min": {
+    "official_dspark_off": {
+      "8": 1504,
+      "16": 1696,
+      "32": 1728
+    },
+    "official_dspark_on": {
+      "8": 1648,
+      "16": 1696,
+      "32": 1728
+    },
+    "nvfp4_dspark_off": {
+      "8": 2576,
+      "16": 2752,
+      "32": 2816
+    },
+    "nvfp4_dspark_on": {
+      "8": 2576,
+      "16": 2752,
+      "32": 2816
+    }
+  },
+  "serving": {
+    "official": {
+      "dspark_off": [
+        {
+          "scenario": "s1_long_prompt_sequential_short_decode",
+          "TPOT": 0.00678,
+          "TOKENS_PER_CHUNK": 1.001,
+          "OUTPUT_TOK_PER_S": 81.39,
+          "FAILED_REQUESTS": 0.0
+        },
+        {
+          "scenario": "s2_short_prompt_high_concurrency",
+          "TPOT": 0.01461,
+          "TOKENS_PER_CHUNK": 1.0,
+          "OUTPUT_TOK_PER_S": 1328.93,
+          "FAILED_REQUESTS": 0.0
+        },
+        {
+          "scenario": "s3_very_long_sequential_long_decode",
+          "TPOT": 0.00678,
+          "TOKENS_PER_CHUNK": 1.0,
+          "OUTPUT_TOK_PER_S": 143.02,
+          "FAILED_REQUESTS": 0.0
+        },
+        {
+          "scenario": "s4_very_long_max_concurrency",
+          "TPOT": 0.01562,
+          "TOKENS_PER_CHUNK": 1.0,
+          "OUTPUT_TOK_PER_S": 1039.79,
+          "FAILED_REQUESTS": 0.0
+        }
+      ],
+      "dspark_on": [
+        {
+          "scenario": "s1_long_prompt_sequential_short_decode",
+          "TPOT": 0.00191,
+          "TOKENS_PER_CHUNK": 5.367,
+          "OUTPUT_TOK_PER_S": 304.65,
+          "FAILED_REQUESTS": 0.0
+        },
+        {
+          "scenario": "s2_short_prompt_high_concurrency",
+          "TPOT": 0.01812,
+          "TOKENS_PER_CHUNK": 3.638,
+          "OUTPUT_TOK_PER_S": 1301.19,
+          "FAILED_REQUESTS": 0.0
+        },
+        {
+          "scenario": "s3_very_long_sequential_long_decode",
+          "TPOT": 0.00192,
+          "TOKENS_PER_CHUNK": 6.036,
+          "OUTPUT_TOK_PER_S": 429.41,
+          "FAILED_REQUESTS": 0.0
+        },
+        {
+          "scenario": "s4_very_long_max_concurrency",
+          "TPOT": 0.00729,
+          "TOKENS_PER_CHUNK": 5.694,
+          "OUTPUT_TOK_PER_S": 2180.04,
+          "FAILED_REQUESTS": 0.0
+        }
+      ]
+    },
+    "nvfp4": {
+      "dspark_off": [
+        {
+          "scenario": "s1_long_prompt_sequential_short_decode",
+          "TPOT": 0.00675,
+          "TOKENS_PER_CHUNK": 1.0,
+          "OUTPUT_TOK_PER_S": 142.39,
+          "FAILED_REQUESTS": 0.0
+        },
+        {
+          "scenario": "s2_short_prompt_high_concurrency",
+          "TPOT": 0.01435,
+          "TOKENS_PER_CHUNK": 1.0,
+          "OUTPUT_TOK_PER_S": 1598.45,
+          "FAILED_REQUESTS": 0.0
+        },
+        {
+          "scenario": "s3_very_long_sequential_long_decode",
+          "TPOT": 0.00676,
+          "TOKENS_PER_CHUNK": 1.0,
+          "OUTPUT_TOK_PER_S": 144.81,
+          "FAILED_REQUESTS": 0.0
+        },
+        {
+          "scenario": "s4_very_long_max_concurrency",
+          "TPOT": 0.01465,
+          "TOKENS_PER_CHUNK": 1.0,
+          "OUTPUT_TOK_PER_S": 1163.69,
+          "FAILED_REQUESTS": 0.0
+        }
+      ],
+      "dspark_on": [
+        {
+          "scenario": "s1_long_prompt_sequential_short_decode",
+          "TPOT": 0.00737,
+          "TOKENS_PER_CHUNK": 1.214,
+          "OUTPUT_TOK_PER_S": 130.77,
+          "FAILED_REQUESTS": 0.0
+        },
+        {
+          "scenario": "s2_short_prompt_high_concurrency",
+          "TPOT": 0.02375,
+          "TOKENS_PER_CHUNK": 1.143,
+          "OUTPUT_TOK_PER_S": 1148.75,
+          "FAILED_REQUESTS": 0.0
+        },
+        {
+          "scenario": "s3_very_long_sequential_long_decode",
+          "TPOT": 0.00731,
+          "TOKENS_PER_CHUNK": 1.239,
+          "OUTPUT_TOK_PER_S": 134.96,
+          "FAILED_REQUESTS": 0.0
+        },
+        {
+          "scenario": "s4_very_long_max_concurrency",
+          "TPOT": 0.01788,
+          "TOKENS_PER_CHUNK": 1.218,
+          "OUTPUT_TOK_PER_S": 974.76,
+          "FAILED_REQUESTS": 0.0
+        }
+      ]
+    }
+  }
+}
