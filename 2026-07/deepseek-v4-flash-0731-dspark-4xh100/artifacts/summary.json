@@ -94,5 +94,75 @@
       "32": 0
     },
     "note": "batch 32 = 0 in both arms: 32768 tokens exceed the maxnbt 16384 metadata buffer"
+  },
+  "l2": {
+    "dspark_on_vs_off_h100": {
+      "s1": {
+        "n": 1000,
+        "median": 0.178446,
+        "mismatch_pct": 1.7
+      },
+      "s2": {
+        "n": 1000,
+        "median": 0.17024,
+        "mismatch_pct": 1.9
+      },
+      "s3": {
+        "n": 1000,
+        "median": 0.169952,
+        "mismatch_pct": 1.4
+      }
+    },
+    "h100_vs_h200_no_spec": {
+      "s1": {
+        "n": 1000,
+        "median": 0.175362,
+        "mismatch_pct": 1.3
+      },
+      "s2": {
+        "n": 1000,
+        "median": 0.173035,
+        "mismatch_pct": 1.9
+      },
+      "s3": {
+        "n": 1000,
+        "median": 0.168464,
+        "mismatch_pct": 1.5
+      }
+    },
+    "h100_dspark_vs_h200_no_spec": {
+      "s1": {
+        "n": 1000,
+        "median": 0.172104,
+        "mismatch_pct": 1.4
+      },
+      "s2": {
+        "n": 1000,
+        "median": 0.170712,
+        "mismatch_pct": 1.9
+      },
+      "s3": {
+        "n": 1000,
+        "median": 0.17035,
+        "mismatch_pct": 1.6
+      }
+    },
+    "batch_invariance_control": {
+      "b8_vs_b16": {
+        "n": 1000,
+        "median": 0.0,
+        "mismatch_pct": 0.2
+      },
+      "b8_vs_b32": {
+        "n": 1000,
+        "median": 0.0,
+        "mismatch_pct": 0.3
+      },
+      "b16_vs_b32": {
+        "n": 1000,
+        "median": 0.0,
+        "mismatch_pct": 0.1
+      }
+    }
   }
 }

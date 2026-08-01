@@ -9,13 +9,17 @@
 
 Companion to `../deepseek-v4-flash-0731-2xh200`, which established that DSpark exists,
 that the k9/k10 images disable it, and that it does not disturb PoC. This run answers the
-question that one left open — **does DSpark change the output** — and repeats the serving
-A/B on a second Hopper topology.
+question that one left open — **does DSpark change the output** — repeats the serving A/B on
+a second Hopper topology, and adds nonce vectors from a second GPU model so the cross-machine
+honest floor is measured rather than assumed.
 
 ## Summary
 
 - **DSpark costs nothing in PoC**: 1504 nonces/min at batch 16 with and without it, 1408 vs
-  1424 at batch 8. A node can speculate for serving without losing weight.
+  1424 at batch 8, and nonce *values* agree to within the honest floor. A node can speculate
+  for serving without losing weight or failing validation.
+- **A heterogeneous fleet validates**: 4×H100 with DSpark against 2×H200 without measures
+  0.170–0.172, below the 0.188 floor, across GPU model, card count, TP and batch size.
 - **DSpark preserves the output.** Teacher forcing puts DSpark at **97.87 %** argmax
   agreement against a **98.36 %** control — a 1.45 σ difference, i.e. within the noise of
   the measurement itself.
@@ -52,7 +56,54 @@ limit, not a crash, and it is why the previous checkpoint's 1536 (measured at ba
 weight. On 80 GB cards the cost is not DSpark but the configuration it forces — batch 16
 instead of 32, i.e. 1504 against the 1536 the previous checkpoint reached, about 2 %.
 
-## Result 2 — does DSpark change what the model would have said?
+## Result 2 — nonce vectors: DSpark changes nothing, and the fleet may be heterogeneous
+
+Collected after the runs above, on a second 4×H100 box, at **batch 16** under the working
+configuration (`gmu 0.90`, `maxnbt 32768`). Three seeds per arm, 1000 nonces each.
+
+| comparison | median L2 (s1 / s2 / s3) | mismatches > 0.4 |
+|---|---|---:|
+| DSpark on vs off — same box, TP=4 | 0.178 / 0.170 / 0.170 | 1.4–1.9 % |
+| 4×H100 vs 2×H200, both without speculation | 0.175 / 0.173 / 0.168 | 1.3–1.9 % |
+| 4×H100 **with** DSpark vs 2×H200 without — worst realistic cross-fleet case | 0.172 / 0.171 / 0.170 | 1.4–1.9 % |
+| *reference: honest floor between different GPU models* | *0.188* | *2.5–3.8 %* |
+
+**All nine comparisons sit below the honest floor.** The middle row varies four things at once
+— GPU model, card count, tensor-parallel degree and collection batch — and still lands under
+it. A validator on 2×H200 and a prover on 4×H100 running DSpark agree within ordinary noise.
+
+This also settles the question the July handoff left open: the cross-machine honest floor on
+the current seed set is ~0.17, not something larger.
+
+### Why batch 16 here and batch 32 on H200 is not a problem
+
+Nonce values do not depend on the collection batch. From the committed
+`../deepseek-v4-seed-stability-1xb300` artifacts, same seed and machine and mode, batch alone
+varying:
+
+| pair | median L2 | mismatches > 0.4 |
+|---|---:|---:|
+| b8 vs b16 | **0.000000** | 0.2 % |
+| b8 vs b32 | **0.000000** | 0.3 % |
+| b16 vs b32 | **0.000000** | 0.1 % |
+
+Median exactly zero — the sets are bit-identical apart from one to three nonces per thousand
+at batch boundaries, an order below the honest floor. Sets taken at different batch sizes
+validate each other directly.
+
+### The configuration that satisfies both requirements
+
+`TP=4, --gpu-memory-utilization 0.90, --max-model-len 400000, --max-num-batched-tokens 32768,
+--kv-cache-dtype fp8` runs 400k-context inference **and** PoC at batch 16 with DSpark enabled.
+KV lands at 17.16 GiB per card against the 15.26 GiB a single 400k request needs.
+
+Lowering `gmu` to make room for graph capture does not work: at 0.80 the KV drops to 9.24 GiB
+and at 0.75 to 5.28 GiB, and the engine refuses to start — *"To serve at least one request
+with the model's max seq len (400000), 15.26 GiB KV cache is needed"*. The s4 serving OOM
+therefore has to be addressed with `--max-num-seqs`, which bounds the runtime peak without
+taking memory from the context. **That knob was not tested in this run.**
+
+## Result 3 — does DSpark change what the model would have said?
 
 Comparing generated *texts* between arms does not work: the engine is nondeterministic run
 to run (the 2×H200 report measured 2/5 identical for the *same* arm sampled twice), so texts
@@ -76,7 +127,7 @@ The control matters more than the headline: without it, 97.87 % reads as "DSpark
 tokens". It does not — a non-speculative run loses the same 1.6 %, which is the numerical
 noise floor of this engine, not an artefact of speculation.
 
-## Result 3 — serving A/B (both arms on the V2 runner, one flag apart)
+## Result 4 — serving A/B (both arms on the V2 runner, one flag apart)
 
 | scenario | tok/s off | tok/s on | × | TPOT off | TPOT on | × | tok/chunk | fails |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
@@ -133,30 +184,13 @@ that fails at startup is safer than one that fails an hour in.
 
 ## What this run did not produce
 
-**No nonce vectors from this box** — and the reason is a gap in this run's coverage, not a
-defect we established.
-
-`collect_artifacts.py` wedged the engine at every batch tried (32, 16, 8), through the PoC
-plugin's compat shim (`gonka_poc/_compat/v0_25.py`) hitting the `token_to_req_indices`
-assertion or an empty `Worker failed with error ''`. The PoC *sweep* runs the same endpoints
-and works.
-
-The tempting conclusion — "the collector is broken against the V2 runner" — is **wrong**. The
-companion 2×H200 run collected ten 1000-nonce sets with the collector under the V2 runner
-*with DSpark enabled* (`artifacts/logs/api_v2_dspark.log` in that folder records
-`Using V2 Model Runner`, `speculative_config=SpeculativeConfig(method='dspark'…)` and
-`max_num_batched_tokens=32768`), at batch 32.
-
-What actually differs is the configuration: every collector attempt here ran under
-`maxnbt 16384`, never under the `maxnbt 32768` that works on H200. The one H100 configuration
-with `maxnbt 32768` that started (`gmu 0.90`) had already lost its engine to the s4 OOM before
-the collector ran. So the collector was never exercised on 4×H100 in a configuration known to
-work elsewhere, and this run cannot say whether the failure comes from the halved buffer, from
-TP=4, or from the tighter memory. Batch 8 (8192 tokens) failing rules out the buffer-size
-explanation on its own, which leaves TP and memory as the open candidates.
-
-Consequently the cross-machine L2 questions are answered only by the 2×H200 report, where
-DSpark on/off and V1/V2 both measured below the honest floor.
+**The nonce collector needs `max-num-batched-tokens 32768`.** Every attempt during the runs
+above used `maxnbt 16384` and failed — at batch 16 the PoC forward submits exactly 16384
+tokens, filling the metadata buffer with nothing left for DSpark's draft tokens
+(`gonka_poc/_compat/v0_25.py → sparse_mla.py:204 → backend.py:535`,
+`assert buffer.shape[0] >= max(num_mapped_tokens, num_tokens)`). Re-running at 32768 collected
+all six sets on the first attempt. Neither TP=4 nor the tighter memory was involved — an
+earlier revision of this report guessed at those and was wrong.
 
 **PoC sweep at batch 32 returns 0 nonces in BOTH arms** at `maxnbt 16384` — expected from
 requirement 1 above (32768 tokens do not fit a 16384 buffer). Listed here so the zero in
@@ -168,6 +202,9 @@ the baseline returns the same zero.
 | path | what |
 |---|---|
 | `artifacts/summary.json` | every table above, machine-readable |
+| `artifacts/nonces_dspark_{on,off}_{s1,s2,s3}.json` | 6 × 1000 nonces, batch 16, three seeds per arm |
+| `artifacts/env_nonces.txt` | engine args and measured KV for the nonce runs |
+| `artifacts/logs/nonce_collection.log` | the collection run, including the two failed `gmu` attempts |
 | `artifacts/equiv_dspark_on.json`, `artifacts/equiv_control.json` | teacher-forcing results, per prompt |
 | `artifacts/gen_dspark_{on,off}.json` | the recorded greedy completions that were replayed |
 | `artifacts/serving_dspark_{on,off}.json` | four scenarios per arm |
@@ -176,6 +213,7 @@ the baseline returns the same zero.
 | `artifacts/env_h100.txt` | hardware, driver, versions, applied fixes |
 | `scripts/setup_h100.sh` | box preparation incl. both k10 fixes |
 | `scripts/final4_h100.sh` | the A/B driver as run |
+| `scripts/nonces_h100.sh` | nonce collection driver (collector first, on a clean engine) |
 | `scripts/equiv_probe.py` | teacher-forcing probe (`gen` / `check`) |
 | `scripts/serving_bench.py` | serving load generator (counts tokens via `usage`, not SSE chunks) |
 
@@ -198,7 +236,9 @@ Engine args used by both arms, differing only by `--speculative-config`:
 - [x] The equivalence claim carries its own control, and the control is reported
 - [x] Significance stated (z = 1.45) rather than asserted qualitatively
 - [x] Configuration probes committed as logs, including the ones that failed
-- [x] Failed and missing measurements named explicitly (nonce collection, batch-32 sweep)
+- [x] Nonce vectors collected for both arms on three seeds; batch-invariance shown, not assumed
+- [x] An earlier wrong attribution (nonce collector vs TP/memory) retracted in place
+- [x] Failed measurements named explicitly (batch-32 sweep, the two starved `gmu` attempts)
 - [x] Cross-topology comparison uses the same instrument as the H200 report
 - [x] No links to `.claude/`, no absolute local paths, no host addresses
 - [x] No verdicts asserted — V4 thresholds are not calibrated

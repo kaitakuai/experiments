@@ -1,0 +1,25 @@
+=== ARM_OFF (no speculation: loosest memory, closest to the July 4xH100 run) ===
+ENGINE_UP gmu=0.90 after 525s
+(Worker pid=3322) INFO 08-01 00:42:46 [gpu_worker.py:360] Using V2 Model Runner
+(EngineCore pid=2926) INFO 08-01 00:44:13 [kv_cache_utils.py:2146] GPU KV cache size: 656,818 tokens
+--- dspark_off s1 ---
+PoC seeds: block_hash=bce35dd795a5a622... public_key=4dfe8269e29777a4...
+  Init response: {'status': 'OK', 'backends': 1, 'n_groups': 1, 'results': [{'port': 5001, 'status': 'OK'}], 'errors': None}
+  OK /root/nonces/nonces_dspark_off_s1.json
+--- dspark_off s2 ---
+PoC seeds: block_hash=013161c6f44ac2b1... public_key=0414b03cf44ff446...
+  Init response: {'status': 'OK', 'backends': 1, 'n_groups': 1, 'results': [{'port': 5001, 'status': 'OK'}], 'errors': None}
+  OK /root/nonces/nonces_dspark_off_s2.json
+--- dspark_off s3 ---
+PoC seeds: block_hash=ab21f3846ba67e1d... public_key=6090df4a07e69c2a...
+  Init response: {'status': 'OK', 'backends': 1, 'n_groups': 1, 'results': [{'port': 5001, 'status': 'OK'}], 'errors': None}
+  OK /root/nonces/nonces_dspark_off_s3.json
+=== ARM_ON (DSpark; lower gmu to leave room for graph capture) ===
+ENGINE_FAILED gmu=0.80
+gmu 0.80 failed, retrying at 0.75
+ENGINE_FAILED gmu=0.75
+=== RESULT ===
+-rw-r--r-- 1 root root 66201 Aug  1 00:51 /root/nonces/nonces_dspark_off_s1.json
+-rw-r--r-- 1 root root 66201 Aug  1 00:52 /root/nonces/nonces_dspark_off_s2.json
+-rw-r--r-- 1 root root 66201 Aug  1 00:53 /root/nonces/nonces_dspark_off_s3.json
+=== ALL_DONE ===
