@@ -1,4 +1,4 @@
-# NVFP4 against 0731 on 1×B300: +63 % PoC, indistinguishable by L2 — and it cannot speculate
+# NVFP4 against 0731 on 1×B300: +63 % PoC, still hidden in the noise — and it cannot speculate
 
 **Date:** 2026-08-01
 **Honest model:** `deepseek-ai/DeepSeek-V4-Flash-0731` @ `9e165c30e2704aec5d9d593cce3eebd58bbef1cb`
@@ -19,10 +19,12 @@ checkpoints measured back to back on the same GPU, same seeds, same instrument.
 - **The July fraud vector survives the checkpoint refresh, unchanged in profit.** NVFP4 gives
   **2816 nonces/min against 1728 honest — +63.0 %**. In July, on the previous checkpoint and
   this same card, it was 2720 against 1664: also +63 %.
-- **It is now closer to honest noise than before.** Median L2 **0.196–0.200** with **2.5–3.0 %**
-  of nonces beyond 0.4, against an honest floor of 0.188 at 2.5–3.8 %. The mismatch rate now
-  sits *inside* the honest range, so no threshold on that statistic separates them. On the old
-  checkpoint NVFP4 measured 0.21 at 5.7–6.4 %.
+- **Its separation from honest noise is unchanged — slightly better, if anything.** Median L2
+  **0.196–0.200** at **2.5–3.0 %** mismatches, against an honest floor measured on this same
+  checkpoint of **0.173 at 1.3–1.9 %**. In July, on the previous checkpoint, NVFP4 sat at
+  0.199–0.210 at 4.1–5.1 % against a 0.188 floor. Both moved down together; the gap went from
+  0.015 to 0.025. The distributions still overlap, so a threshold still cannot separate them —
+  but the refresh did not widen the hole.
 - **But NVFP4 cannot use DSpark.** Acceptance collapses to **1.14–1.24 tokens per step**
   against 3.6–6.0 for the honest checkpoint, and enabling speculation makes serving *slower*.
   An honest node with DSpark delivers 429 tok/s in long single-stream decode; the NVFP4 node
@@ -78,13 +80,22 @@ NVFP4 against honest, same card, same three seeds, both without speculation:
 | s3 | 1000 | 0.1961 | 0.368 | 29 (2.9 %) | 1.000 |
 | *honest floor, for scale* | | *0.188* | | *2.5–3.8 %* | |
 
-**The mismatch rate falls entirely inside the honest range.** A validator counting mismatches
-cannot separate an NVFP4 node from an honest one on a different GPU model, at any threshold —
-the distributions overlap rather than merely sit close.
+**The distributions overlap.** NVFP4's median sits at 0.198 against an honest floor of 0.173
+measured on this same checkpoint (H100 ↔ H200, `../../2026-07/deepseek-v4-flash-0731-dspark-4xh100`),
+i.e. about 14 % above it, with tails that run into each other. A single-sample threshold cannot
+separate the two; only an aggregate over many nonces can, and that is what the binomial test is
+for — which, at `p_mismatch = 0.10`, returns 1.000 here.
 
-The median is 0.196–0.200 against a 0.188 floor, so a *median-based* rule has about 5 % of
-headroom to work with. That is thinner than it was on the previous checkpoint, where NVFP4 sat
-at 0.21 against the same floor. The refresh moved the fraud toward honest noise, not away.
+**Compared with July, the separation did not get worse.** On the previous checkpoint NVFP4
+measured 0.199–0.210 at 4.1–5.1 % against a 0.188 floor; now it is 0.196–0.200 at 2.5–3.0 %
+against a 0.173 floor. Both the fraud and the floor moved down, and the absolute gap grew from
+0.015 to 0.025. An earlier revision of this report claimed the opposite by comparing the new
+mismatch rate against the *old* floor's range — that was a reading error, not a measurement.
+
+**One caveat on what was measured.** NVFP4 is compared against honest on the *same card*, which
+isolates the quantisation effect. A real validator runs elsewhere and sees quantisation *plus*
+cross-machine noise summed. That pairing — NVFP4 on one GPU model against honest on another —
+is not in this run and should be measured before any threshold is set.
 
 For scale, the rest of the ladder measured in this series: repeat on the same GPU 0.000,
 honest across GPU models 0.188, **NVFP4 0.197**, INT4 0.296, wrong checkpoint 0.443, foreign
