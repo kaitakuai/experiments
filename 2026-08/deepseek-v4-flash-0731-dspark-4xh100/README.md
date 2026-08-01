@@ -78,7 +78,7 @@ the current seed set is ~0.17, not something larger.
 ### Why batch 16 here and batch 32 on H200 is not a problem
 
 Nonce values do not depend on the collection batch. From the committed
-`../deepseek-v4-seed-stability-1xb300` artifacts, same seed and machine and mode, batch alone
+`../../2026-07/deepseek-v4-seed-stability-1xb300` artifacts, same seed and machine and mode, batch alone
 varying:
 
 | pair | median L2 | mismatches > 0.4 |

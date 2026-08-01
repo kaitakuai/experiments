@@ -13,7 +13,7 @@ decoder only, which the PoC path does not use.
 
 Requested by Vlad (gonka-ai) on 2026-07-31: rerun nonce/min and threshold
 calibration for the refreshed checkpoint, mirroring
-`../deepseek-v4-flash-poc-1xb300`.
+`../../2026-07/deepseek-v4-flash-poc-1xb300`.
 
 ## Plan
 

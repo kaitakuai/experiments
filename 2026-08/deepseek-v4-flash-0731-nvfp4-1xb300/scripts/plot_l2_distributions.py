@@ -16,8 +16,8 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
 R = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "..")
-H200 = f"{R}/2026-07/deepseek-v4-flash-0731-2xh200/artifacts"
-H100 = f"{R}/2026-07/deepseek-v4-flash-0731-dspark-4xh100/artifacts"
+H200 = f"{R}/2026-08/deepseek-v4-flash-0731-2xh200/artifacts"
+H100 = f"{R}/2026-08/deepseek-v4-flash-0731-dspark-4xh100/artifacts"
 B300 = f"{R}/2026-08/deepseek-v4-flash-0731-nvfp4-1xb300/artifacts"
 OLD = f"{R}/2026-07/deepseek-v4-flash-2xh200/artifacts"
 

@@ -81,7 +81,7 @@ NVFP4 against honest, same card, same three seeds, both without speculation:
 | *honest floor, for scale* | | *0.188* | | *2.5–3.8 %* | |
 
 **The distributions overlap.** NVFP4's median sits at 0.198 against an honest floor of 0.173
-measured on this same checkpoint (H100 ↔ H200, `../../2026-07/deepseek-v4-flash-0731-dspark-4xh100`),
+measured on this same checkpoint (H100 ↔ H200, `../deepseek-v4-flash-0731-dspark-4xh100`),
 i.e. about 14 % above it, with tails that run into each other. A single-sample threshold cannot
 separate the two; only an aggregate over many nonces can, and that is what the binomial test is
 for — which, at `p_mismatch = 0.10`, returns 1.000 here.
@@ -152,7 +152,7 @@ speculative flag: `--tensor-parallel-size 1 --gpu-memory-utilization 0.90 --max-
 --worker-extension-cls gonka_poc.worker.PoCWorkerExtension --trust-remote-code`.
 
 The k10 image needs two fixes before it runs at all, both carried in `scripts/b300_setup.sh`
-and documented in `../2026-07/deepseek-v4-flash-0731-2xh200`: a `libnvrtc.so` symlink, and
+and documented in `../deepseek-v4-flash-0731-2xh200`: a `libnvrtc.so` symlink, and
 `VLLM_USE_V2_MODEL_RUNNER=1` (the image ships `0`, which disables every form of speculative
 decoding).
 

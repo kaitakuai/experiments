@@ -127,7 +127,7 @@ seeds. Speculative decoding and the runner version are both safe to vary across 
 ## Result 4 — old vs new checkpoint is far outside honest noise
 
 Same seed pair, same 2×H200 topology, `nonces_v1_off_legacyseed.json` against the committed
-`../deepseek-v4-flash-2xh200/artifacts/nonces_eager.json`:
+`../../2026-07/deepseek-v4-flash-2xh200/artifacts/nonces_eager.json`:
 
 **median L2 0.648, 88.6 % of nonces beyond 0.4.** For scale: the honest floor is 0.188, a
 V4-Base checkpoint substitution measured 0.443, and a foreign model saturates at ~1.41. Serving
