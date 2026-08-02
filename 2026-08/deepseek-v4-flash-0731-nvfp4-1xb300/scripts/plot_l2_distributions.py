@@ -18,7 +18,8 @@ import matplotlib.pyplot as plt
 R = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "..")
 H200 = f"{R}/2026-08/deepseek-v4-flash-0731-2xh200/artifacts"
 H100 = f"{R}/2026-08/deepseek-v4-flash-0731-dspark-4xh100/artifacts"
-B300 = f"{R}/2026-08/deepseek-v4-flash-0731-nvfp4-1xb300/artifacts"
+B300N = f"{R}/2026-08/deepseek-v4-flash-0731-nvfp4-1xb300/artifacts"
+B300H = f"{R}/2026-08/deepseek-v4-flash-0731-1xb300/artifacts"
 OLD = f"{R}/2026-07/deepseek-v4-flash-2xh200/artifacts"
 
 
@@ -53,8 +54,8 @@ series = [
      [(f"{H100}/nonces_dspark_off_{s}.json", f"{H100}/nonces_dspark_on_{s}.json") for s in S],
      "#54A24B"),
     ("NVFP4-фродер\nпротив честной, одна карта",
-     [(f"{B300}/nonces_official_dspark_off_{s}.json",
-       f"{B300}/nonces_nvfp4_dspark_off_{s}.json") for s in S],
+     [(f"{B300H}/nonces_dspark_off_{s}.json",
+       f"{B300N}/nonces_nvfp4_dspark_off_{s}.json") for s in S],
      "#E45756"),
     ("Подмена чекпоинта\nстарый -Flash вместо 0731",
      [(f"{H200}/nonces_v1_off_legacyseed.json", f"{OLD}/nonces_eager.json")],

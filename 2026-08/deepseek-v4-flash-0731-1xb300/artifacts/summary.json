@@ -1,0 +1,87 @@
+{
+  "topology": "1xB300 SXM6 TP=1",
+  "poc_sweep_nonces_per_min": {
+    "dspark_off": {
+      "8": 1504,
+      "16": 1696,
+      "32": 1728
+    },
+    "dspark_on": {
+      "8": 1648,
+      "16": 1696,
+      "32": 1728
+    }
+  },
+  "serving": {
+    "dspark_off": [
+      {
+        "scenario": "s1_long_prompt_sequential_short_decode",
+        "TPOT": 0.00678,
+        "TOKENS_PER_CHUNK": 1.001,
+        "OUTPUT_TOK_PER_S": 81.39,
+        "FAILED_REQUESTS": 0.0
+      },
+      {
+        "scenario": "s2_short_prompt_high_concurrency",
+        "TPOT": 0.01461,
+        "TOKENS_PER_CHUNK": 1.0,
+        "OUTPUT_TOK_PER_S": 1328.93,
+        "FAILED_REQUESTS": 0.0
+      },
+      {
+        "scenario": "s3_very_long_sequential_long_decode",
+        "TPOT": 0.00678,
+        "TOKENS_PER_CHUNK": 1.0,
+        "OUTPUT_TOK_PER_S": 143.02,
+        "FAILED_REQUESTS": 0.0
+      },
+      {
+        "scenario": "s4_very_long_max_concurrency",
+        "TPOT": 0.01562,
+        "TOKENS_PER_CHUNK": 1.0,
+        "OUTPUT_TOK_PER_S": 1039.79,
+        "FAILED_REQUESTS": 0.0
+      }
+    ],
+    "dspark_on": [
+      {
+        "scenario": "s1_long_prompt_sequential_short_decode",
+        "TPOT": 0.00191,
+        "TOKENS_PER_CHUNK": 5.367,
+        "OUTPUT_TOK_PER_S": 304.65,
+        "FAILED_REQUESTS": 0.0
+      },
+      {
+        "scenario": "s2_short_prompt_high_concurrency",
+        "TPOT": 0.01812,
+        "TOKENS_PER_CHUNK": 3.638,
+        "OUTPUT_TOK_PER_S": 1301.19,
+        "FAILED_REQUESTS": 0.0
+      },
+      {
+        "scenario": "s3_very_long_sequential_long_decode",
+        "TPOT": 0.00192,
+        "TOKENS_PER_CHUNK": 6.036,
+        "OUTPUT_TOK_PER_S": 429.41,
+        "FAILED_REQUESTS": 0.0
+      },
+      {
+        "scenario": "s4_very_long_max_concurrency",
+        "TPOT": 0.00729,
+        "TOKENS_PER_CHUNK": 5.694,
+        "OUTPUT_TOK_PER_S": 2180.04,
+        "FAILED_REQUESTS": 0.0
+      }
+    ]
+  },
+  "kv_cache_tokens": {
+    "dspark_off": 2660974,
+    "dspark_on": 2211880
+  },
+  "dspark_speedup": {
+    "s1_long_prompt_sequential_short_decode": 3.743,
+    "s2_short_prompt_high_concurrency": 0.979,
+    "s3_very_long_sequential_long_decode": 3.002,
+    "s4_very_long_max_concurrency": 2.097
+  }
+}

@@ -11,8 +11,10 @@
 > the parameters this series has used throughout (`dist_threshold 0.40, p_mismatch 0.10`),
 > not as a network policy.
 
-Four configurations on one card: honest and NVFP4, each with DSpark off and on. Both
-checkpoints measured back to back on the same GPU, same seeds, same instrument.
+NVFP4 measured against the honest baseline on the same card, back to back, same seeds, same
+instrument. **The honest arms have their own folder** —
+`../deepseek-v4-flash-0731-1xb300` — and this report reads its nonce sets and serving numbers
+rather than duplicating them.
 
 ## Summary
 
@@ -178,10 +180,11 @@ quietly omitted:
 | `artifacts/summary.json` | every table above, machine-readable |
 | `artifacts/l2_distributions_0731.png` | the distribution figure |
 | `scripts/plot_l2_distributions.py` | regenerates the figure from committed artifacts |
-| `artifacts/nonces_{official,nvfp4}_dspark_off_{s1,s2,s3}.json` | 6 × 1000 nonces, batch 32, three seeds |
+| `artifacts/nonces_nvfp4_dspark_off_{s1,s2,s3}.json` | 3 × 1000 nonces, batch 32, three seeds |
+| `../deepseek-v4-flash-0731-1xb300/artifacts/` | the honest baseline this is measured against |
 | `artifacts/serving_from_logs.json` | 16 serving measurements recovered from the run logs |
-| `artifacts/serving_official_dspark_off.json` | the one raw serving JSON that transferred |
-| `artifacts/logs/b300_run.log`, `artifacts/logs/b300_nvfp4.log` | both runs, sweeps and serving inline |
+| `artifacts/serving_from_logs.json` | serving measurements recovered from the run logs |
+| `artifacts/logs/b300_nvfp4.log` | the NVFP4 run, sweeps and serving inline |
 | `artifacts/logs/api_b300.log` | engine log across all four bring-ups |
 | `artifacts/logs/env_b300.txt` | hardware, versions, engine args, measured KV |
 | `scripts/b300_setup.sh` | container preparation on our own box, incl. both k10 fixes |
