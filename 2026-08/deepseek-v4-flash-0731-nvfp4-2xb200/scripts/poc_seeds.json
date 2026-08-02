@@ -1,0 +1,30 @@
+{
+  "provenance": "kaitakuai V4 PoC validation seed set, generated 2026-07-25",
+  "seeds": [
+    {
+      "id": "s1",
+      "block_hash": "bce35dd795a5a622a9092ec1234eecbc157f4d03bdf117527b8a877bec6489b3",
+      "public_key": "4dfe8269e29777a44cd5ec412aabed42afd9a410cef2dbefe6b5cd6b983d9d5c"
+    },
+    {
+      "id": "s2",
+      "block_hash": "013161c6f44ac2b1ab4b519001a2fa72e00d61508542c2156a996d9331b85ff0",
+      "public_key": "0414b03cf44ff44637d10c69dae0c42ee815dc63cf3a3a5e61abb81cb0f5eebb"
+    },
+    {
+      "id": "s3",
+      "block_hash": "ab21f3846ba67e1d46b686a2d1fad2e004a0c6b1fc2271b46340703866ce6351",
+      "public_key": "6090df4a07e69c2a3cc68576dc743182df91549b298be9c7de2588e8467ca83b"
+    },
+    {
+      "id": "s4",
+      "block_hash": "1a6c3ce1cab84370d7c031742e89e2d745288a36682540d524a0eb942b378635",
+      "public_key": "2b6d44885b47257e8c2b8d4bbf5cfec4268a4ef455f88395b828cd370e3f4439"
+    },
+    {
+      "id": "s5",
+      "block_hash": "b9bfb5ffa65bea1d3e0055ee16a26465d2b7dbc0d3c22f2c93dc40d0ae1ee478",
+      "public_key": "cf1c557c78f4ff8465b87952936f5d9b6888ca063e59117e84add99acbd55f70"
+    }
+  ]
+}

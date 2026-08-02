@@ -1,0 +1,72 @@
+{
+  "topology": "2xB200 SXM TP=2",
+  "candidate": "MJPansa/DeepSeek-V4-Flash-0731-NVFP4",
+  "poc_sweep_nonces_per_min": {
+    "nvfp4": {
+      "8": 2416,
+      "16": 3104,
+      "32": 3200
+    },
+    "honest": {
+      "8": 2032,
+      "16": 2272,
+      "32": 2304
+    }
+  },
+  "serving_nvfp4": {
+    "s1_long_prompt_sequential_short_decode": {
+      "OUTPUT_TOK_PER_S": 136.97,
+      "TPOT": 0.00659,
+      "TTFT": 0.2085,
+      "TOKENS_PER_CHUNK": 1.001,
+      "FAILED_REQUESTS": 0
+    },
+    "s2_short_prompt_high_concurrency": {
+      "OUTPUT_TOK_PER_S": 2283.63,
+      "TPOT": 0.01174,
+      "TTFT": 0.193,
+      "TOKENS_PER_CHUNK": 1.0,
+      "FAILED_REQUESTS": 0
+    },
+    "s3_very_long_sequential_long_decode": {
+      "OUTPUT_TOK_PER_S": 147.91,
+      "TPOT": 0.00654,
+      "TTFT": 0.2194,
+      "TOKENS_PER_CHUNK": 1.0,
+      "FAILED_REQUESTS": 0
+    },
+    "s4_very_long_max_concurrency": {
+      "OUTPUT_TOK_PER_S": 1468.27,
+      "TPOT": 0.01166,
+      "TTFT": 1.0267,
+      "TOKENS_PER_CHUNK": 1.0,
+      "FAILED_REQUESTS": 0
+    }
+  },
+  "l2": {
+    "nvfp4_vs_honest": {
+      "s1": {
+        "n": 1000,
+        "median": 0.202558,
+        "mismatch_pct": 1.7,
+        "bit_identical": 0,
+        "p_value": 1.0
+      },
+      "s2": {
+        "n": 1000,
+        "median": 0.197956,
+        "mismatch_pct": 3.2,
+        "bit_identical": 0,
+        "p_value": 1.0
+      },
+      "s3": {
+        "n": 1000,
+        "median": 0.196502,
+        "mismatch_pct": 2.0,
+        "bit_identical": 0,
+        "p_value": 1.0
+      }
+    }
+  },
+  "poc_gain_pct": 38.9
+}

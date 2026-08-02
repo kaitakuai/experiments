@@ -1,0 +1,24 @@
+### gpu
+index, name, memory.total [MiB], power.max_limit [W], driver_version
+0, NVIDIA B200, 183359 MiB, 1000.00 W, 580.126.09
+1, NVIDIA B200, 183359 MiB, 1000.00 W, 580.126.09
+	[4mGPU0	GPU1	CPU Affinity	NUMA Affinity	GPU NUMA ID[0m
+GPU0	 X 	NV18	48-95,144-191	1		N/A
+GPU1	NV18	 X 	48-95,144-191	1		N/A
+
+### image
+k10 @ sha256:a6213dac621c1634a82940533190c9a5149b6535a5690c69ca6d3919c74c8138
+
+### vllm
+0.25.1 2.11.0+cu130
+
+### engine args
+TP=2 gmu=0.90 max-model-len=400000 max-num-batched-tokens=32768 kv=fp8 logprobs-mode=processed_logprobs
+
+### KV
+(EngineCore pid=2833) INFO 08-02 21:54:46 [kv_cache_utils.py:2146] GPU KV cache size: 2,359,599 tokens
+(EngineCore pid=12297) INFO 08-02 22:27:01 [kv_cache_utils.py:2146] GPU KV cache size: 2,071,252 tokens
+(EngineCore pid=16160) INFO 08-02 22:51:48 [kv_cache_utils.py:2146] GPU KV cache size: 2,235,197 tokens
+
+### fixes
+libnvrtc.so symlink; VLLM_USE_V2_MODEL_RUNNER=1

@@ -1,0 +1,135 @@
+{
+  "topology": "2xB200 SXM TP=2",
+  "poc_sweep_nonces_per_min": {
+    "dspark_off": {
+      "8": 2032,
+      "16": 2272,
+      "32": 2304
+    },
+    "dspark_on": {
+      "8": 2192,
+      "16": 2272,
+      "32": 2304
+    }
+  },
+  "serving": {
+    "dspark_off": {
+      "s1_long_prompt_sequential_short_decode": {
+        "OUTPUT_TOK_PER_S": 60.18,
+        "TPOT": 0.00665,
+        "TTFT": 2.997,
+        "TOKENS_PER_CHUNK": 1.0,
+        "FAILED_REQUESTS": 0
+      },
+      "s2_short_prompt_high_concurrency": {
+        "OUTPUT_TOK_PER_S": 1478.6,
+        "TPOT": 0.01658,
+        "TTFT": 0.8315,
+        "TOKENS_PER_CHUNK": 1.0,
+        "FAILED_REQUESTS": 0
+      },
+      "s3_very_long_sequential_long_decode": {
+        "OUTPUT_TOK_PER_S": 104.47,
+        "TPOT": 0.00665,
+        "TTFT": 2.5353,
+        "TOKENS_PER_CHUNK": 1.0,
+        "FAILED_REQUESTS": 0
+      },
+      "s4_very_long_max_concurrency": {
+        "OUTPUT_TOK_PER_S": 1383.53,
+        "TPOT": 0.01213,
+        "TTFT": 1.4438,
+        "TOKENS_PER_CHUNK": 1.0,
+        "FAILED_REQUESTS": 0
+      }
+    },
+    "dspark_on": {
+      "s1_long_prompt_sequential_short_decode": {
+        "OUTPUT_TOK_PER_S": 232.65,
+        "TPOT": 0.002,
+        "TTFT": 0.6916,
+        "TOKENS_PER_CHUNK": 4.702,
+        "FAILED_REQUESTS": 0
+      },
+      "s2_short_prompt_high_concurrency": {
+        "OUTPUT_TOK_PER_S": 855.9,
+        "TPOT": 0.02916,
+        "TTFT": 1.3379,
+        "TOKENS_PER_CHUNK": 3.558,
+        "FAILED_REQUESTS": 0
+      },
+      "s3_very_long_sequential_long_decode": {
+        "OUTPUT_TOK_PER_S": 343.97,
+        "TPOT": 0.00173,
+        "TTFT": 1.084,
+        "TOKENS_PER_CHUNK": 5.718,
+        "FAILED_REQUESTS": 0
+      },
+      "s4_very_long_max_concurrency": {
+        "OUTPUT_TOK_PER_S": 2963.42,
+        "TPOT": 0.00556,
+        "TTFT": 0.8927,
+        "TOKENS_PER_CHUNK": 5.803,
+        "FAILED_REQUESTS": 0
+      }
+    }
+  },
+  "kv_cache_tokens": {
+    "dspark_off": 2359599,
+    "dspark_on": 2071252
+  },
+  "l2": {
+    "dspark_on_vs_off": {
+      "s1": {
+        "n": 1000,
+        "median": 0.0,
+        "mismatch_pct": 0.1,
+        "bit_identical": 968,
+        "p_value": 1.0
+      },
+      "s2": {
+        "n": 1000,
+        "median": 0.0,
+        "mismatch_pct": 0.0,
+        "bit_identical": 968,
+        "p_value": 1.0
+      },
+      "s3": {
+        "n": 1000,
+        "median": 0.0,
+        "mismatch_pct": 0.0,
+        "bit_identical": 968,
+        "p_value": 1.0
+      }
+    },
+    "vs_1xb300_honest": {
+      "s1": {
+        "n": 1000,
+        "median": 0.180815,
+        "mismatch_pct": 1.2,
+        "bit_identical": 0,
+        "p_value": 1.0
+      },
+      "s2": {
+        "n": 1000,
+        "median": 0.179066,
+        "mismatch_pct": 2.1,
+        "bit_identical": 0,
+        "p_value": 1.0
+      },
+      "s3": {
+        "n": 1000,
+        "median": 0.177474,
+        "mismatch_pct": 0.8,
+        "bit_identical": 0,
+        "p_value": 1.0
+      }
+    }
+  },
+  "dspark_speedup": {
+    "s1_long_prompt_sequential_short_decode": 3.866,
+    "s2_short_prompt_high_concurrency": 0.579,
+    "s3_very_long_sequential_long_decode": 3.293,
+    "s4_very_long_max_concurrency": 2.142
+  }
+}

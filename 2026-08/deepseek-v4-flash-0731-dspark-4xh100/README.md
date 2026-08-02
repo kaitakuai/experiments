@@ -68,6 +68,14 @@ configuration (`gmu 0.90`, `maxnbt 32768`). Three seeds per arm, 1000 nonces eac
 | 4×H100 **with** DSpark vs 2×H200 without — worst realistic cross-fleet case | 0.172 / 0.171 / 0.170 | 1.4–1.9 % |
 | *reference: honest floor between different GPU models* | *0.188* | *2.5–3.8 %* |
 
+**Later correction.** On 2×B200 the same comparison came out **bit-identical** — 968 of 1000
+nonces match exactly, the 32 that differ being the batch-boundary artefact
+(`../deepseek-v4-flash-0731-2xb200`). Blackwell reproduces its own forward bit for bit and
+Hopper does not, so the 0.170–0.178 measured here is **the hardware's non-determinism, not an
+effect of speculation**. The conclusion — that DSpark is safe to enable — is unchanged and in
+fact stronger.
+
+
 **All nine comparisons sit below the honest floor.** The middle row varies four things at once
 — GPU model, card count, tensor-parallel degree and collection batch — and still lands under
 it. A validator on 2×H200 and a prover on 4×H100 running DSpark agree within ordinary noise.

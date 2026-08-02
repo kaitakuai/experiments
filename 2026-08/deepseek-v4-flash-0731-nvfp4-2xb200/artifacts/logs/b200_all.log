@@ -1,0 +1,130 @@
+=== WEIGHTS_READY ===
+=== HONEST ===
+=== ARM_OFF ===
+ENGINE_UP after 1605s
+INFO 08-02 21:40:05 [api_utils.py:273] non-default args: {'host': '0.0.0.0', 'port': 5001, 'model': 'deepseek-ai/DeepSeek-V4-Flash-0731', 'trust_remote_code': True, 'max_model_len': 400000, 'logprobs_mode': 'processed_logprobs', 'tensor_parallel_size': 2, 'worker_extension_cls': 'gonka_poc.worker.PoCWorkerExtension', 'gpu_memory_utilization': 0.9, 'kv_cache_
+(Worker pid=3245) INFO 08-02 21:40:43 [gpu_worker.py:360] Using V2 Model Runner
+(EngineCore pid=2833) INFO 08-02 21:54:46 [kv_cache_utils.py:2146] GPU KV cache size: 2,359,599 tokens
+=== dspark_off_SWEEP ===
+     Batch │   Nonces │   Nonces/min
+         8 │     1016 │         2032  
+        16 │     1136 │         2272  
+        32 │     1152 │         2304 ★
+  ★ Best batch size: 32 (2304 nonces/min)
+=== dspark_off_NONCES ===
+PoC seeds: block_hash=bce35dd795a5a622... public_key=4dfe8269e29777a4...
+  OK s1
+PoC seeds: block_hash=013161c6f44ac2b1... public_key=0414b03cf44ff446...
+  OK s2
+PoC seeds: block_hash=ab21f3846ba67e1d... public_key=6090df4a07e69c2a...
+  OK s3
+=== dspark_off_SERVING ===
+  "scenario": "s1_long_prompt_sequential_short_decode",
+  "TPOT": 0.00665,
+  "TOKENS_PER_CHUNK": 1.0,
+  "OUTPUT_TOK_PER_S": 60.18,
+  "FAILED_REQUESTS": 0,
+  "scenario": "s2_short_prompt_high_concurrency",
+  "TPOT": 0.01658,
+  "TOKENS_PER_CHUNK": 1.0,
+  "OUTPUT_TOK_PER_S": 1478.6,
+  "FAILED_REQUESTS": 0,
+  "scenario": "s3_very_long_sequential_long_decode",
+  "TPOT": 0.00665,
+  "TOKENS_PER_CHUNK": 1.0,
+  "OUTPUT_TOK_PER_S": 104.47,
+  "FAILED_REQUESTS": 0,
+  "scenario": "s4_very_long_max_concurrency",
+  "TPOT": 0.01213,
+  "TOKENS_PER_CHUNK": 1.0,
+  "OUTPUT_TOK_PER_S": 1383.53,
+  "FAILED_REQUESTS": 0,
+=== dspark_off_DONE ===
+=== ARM_ON ===
+ENGINE_UP after 1170s
+INFO 08-02 22:12:49 [api_utils.py:273] non-default args: {'host': '0.0.0.0', 'port': 5001, 'model': 'deepseek-ai/DeepSeek-V4-Flash-0731', 'trust_remote_code': True, 'max_model_len': 400000, 'logprobs_mode': 'processed_logprobs', 'tensor_parallel_size': 2, 'worker_extension_cls': 'gonka_poc.worker.PoCWorkerExtension', 'gpu_memory_utilization': 0.9, 'kv_cache_
+(EngineCore pid=12297) INFO 08-02 22:27:01 [kv_cache_utils.py:2146] GPU KV cache size: 2,071,252 tokens
+(Worker_TP1 pid=12694) INFO 08-02 22:31:37 [speculator.py:101] Capturing model for DSpark speculator...
+(Worker_TP0 pid=12693) INFO 08-02 22:31:37 [speculator.py:101] Capturing model for DSpark speculator...
+=== dspark_on_SWEEP ===
+     Batch │   Nonces │   Nonces/min
+         8 │     1096 │         2192  
+        16 │     1136 │         2272  
+        32 │     1152 │         2304 ★
+  ★ Best batch size: 32 (2304 nonces/min)
+=== dspark_on_NONCES ===
+PoC seeds: block_hash=bce35dd795a5a622... public_key=4dfe8269e29777a4...
+  OK s1
+PoC seeds: block_hash=013161c6f44ac2b1... public_key=0414b03cf44ff446...
+  OK s2
+PoC seeds: block_hash=ab21f3846ba67e1d... public_key=6090df4a07e69c2a...
+  OK s3
+=== dspark_on_SERVING ===
+  "scenario": "s1_long_prompt_sequential_short_decode",
+  "TPOT": 0.002,
+  "TOKENS_PER_CHUNK": 4.702,
+  "OUTPUT_TOK_PER_S": 232.65,
+  "FAILED_REQUESTS": 0,
+  "scenario": "s2_short_prompt_high_concurrency",
+  "TPOT": 0.02916,
+  "TOKENS_PER_CHUNK": 3.558,
+  "OUTPUT_TOK_PER_S": 855.9,
+  "FAILED_REQUESTS": 0,
+  "scenario": "s3_very_long_sequential_long_decode",
+  "TPOT": 0.00173,
+  "TOKENS_PER_CHUNK": 5.718,
+  "OUTPUT_TOK_PER_S": 343.97,
+  "FAILED_REQUESTS": 0,
+  "scenario": "s4_very_long_max_concurrency",
+  "TPOT": 0.00556,
+  "TOKENS_PER_CHUNK": 5.803,
+  "OUTPUT_TOK_PER_S": 2963.42,
+  "FAILED_REQUESTS": 0,
+=== dspark_on_DONE ===
+=== ALL_DONE ===
+=== WAIT_NVFP4_WEIGHTS ===
+NVFP4_WEIGHTS_OK
+=== NVFP4 ===
+=== ARM_OFF ===
+ENGINE_UP after 1125s
+INFO 08-02 22:37:53 [api_utils.py:273] non-default args: {'host': '0.0.0.0', 'port': 5001, 'model': 'MJPansa/DeepSeek-V4-Flash-0731-NVFP4', 'trust_remote_code': True, 'max_model_len': 400000, 'logprobs_mode': 'processed_logprobs', 'tensor_parallel_size': 2, 'worker_extension_cls': 'gonka_poc.worker.PoCWorkerExtension', 'gpu_memory_utilization': 0.9, 'kv_cach
+(Worker_TP0 pid=12693) INFO 08-02 22:31:37 [speculator.py:101] Capturing model for DSpark speculator...
+(Worker pid=16577) INFO 08-02 22:38:18 [gpu_worker.py:360] Using V2 Model Runner
+(EngineCore pid=16160) INFO 08-02 22:51:48 [kv_cache_utils.py:2146] GPU KV cache size: 2,235,197 tokens
+=== dspark_off_SWEEP ===
+     Batch │   Nonces │   Nonces/min
+         8 │     1208 │         2416  
+        16 │     1552 │         3104  
+        32 │     1600 │         3200 ★
+  ★ Best batch size: 32 (3200 nonces/min)
+=== dspark_off_NONCES ===
+PoC seeds: block_hash=bce35dd795a5a622... public_key=4dfe8269e29777a4...
+  OK s1
+PoC seeds: block_hash=013161c6f44ac2b1... public_key=0414b03cf44ff446...
+  OK s2
+PoC seeds: block_hash=ab21f3846ba67e1d... public_key=6090df4a07e69c2a...
+  OK s3
+=== dspark_off_SERVING ===
+  "scenario": "s1_long_prompt_sequential_short_decode",
+  "TPOT": 0.00659,
+  "TOKENS_PER_CHUNK": 1.001,
+  "OUTPUT_TOK_PER_S": 136.97,
+  "FAILED_REQUESTS": 0,
+  "scenario": "s2_short_prompt_high_concurrency",
+  "TPOT": 0.01174,
+  "TOKENS_PER_CHUNK": 1.0,
+  "OUTPUT_TOK_PER_S": 2283.63,
+  "FAILED_REQUESTS": 0,
+  "scenario": "s3_very_long_sequential_long_decode",
+  "TPOT": 0.00654,
+  "TOKENS_PER_CHUNK": 1.0,
+  "OUTPUT_TOK_PER_S": 147.91,
+  "FAILED_REQUESTS": 0,
+  "scenario": "s4_very_long_max_concurrency",
+  "TPOT": 0.01166,
+  "TOKENS_PER_CHUNK": 1.0,
+  "OUTPUT_TOK_PER_S": 1468.27,
+  "FAILED_REQUESTS": 0,
+=== dspark_off_DONE ===
+=== ALL_DONE ===
+=== CAMPAIGN_DONE ===
