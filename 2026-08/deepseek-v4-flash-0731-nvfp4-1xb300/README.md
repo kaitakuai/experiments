@@ -1,4 +1,6 @@
-# NVFP4 against 0731 on 1×B300: +63 % PoC, still hidden in the noise — and it cannot speculate
+# NVFP4 against 0731 on 1×B300: +63 % PoC, still hidden in the noise
+
+> **Correction (2026-08-10).** The original title ended "— and it cannot speculate". That was wrong: the collapse was a vLLM loader bug, now fixed. See the correction section below.
 
 **Date:** 2026-08-01
 **Honest model:** `deepseek-ai/DeepSeek-V4-Flash-0731` @ `9e165c30e2704aec5d9d593cce3eebd58bbef1cb`
@@ -16,6 +18,28 @@ instrument. **The honest arms have their own folder** —
 `../deepseek-v4-flash-0731-1xb300` — and this report reads its nonce sets and serving numbers
 rather than duplicating them.
 
+## Later correction (2026-08-10): the DSpark conclusion was wrong
+
+The acceptance collapse measured here is real and reproduces exactly, but its cause is a **vLLM
+loader bug, not a property of NVFP4**. The conversion leaves the DSpark draft (`mtp.*`) experts
+in MXFP4 and declares that with an `ignore` list the FP8 loader never reads; the global
+`moe_quant_algo: NVFP4` then reaches the draft layers, and NVFP4 kernels read MXFP4 weights.
+The draft emits garbage, so every speculative token is rejected.
+
+With a one-branch fix, NVFP4 speculates at honest-checkpoint level (acceptance 3.5-6.05).
+`nvidia/DeepSeek-V4-Flash-NVFP4` has the identical config layout and is affected the same way.
+
+Two claims above therefore do not stand:
+
+- that NVFP4 trades speculative decoding for PoC weight - it does not, it keeps both;
+- that non-speculative decode timing is a behavioural tell for this fraud - it is not, once the
+  bug is fixed there is no known tell.
+
+Everything else here - the PoC gain, the L2 distances, the invisibility conclusion, the method -
+is unaffected: the draft plays no part in nonce generation.
+
+Root cause, measurements and the fix: `../deepseek-v4-flash-0731-nvfp4-dspark-1xb300`.
+
 ## Summary
 
 - **The July fraud vector survives the checkpoint refresh, unchanged in profit.** NVFP4 gives
@@ -27,7 +51,8 @@ rather than duplicating them.
   0.199–0.210 at 4.1–5.1 % against a 0.188 floor. Both moved down together; the gap went from
   0.015 to 0.025. The distributions still overlap, so a threshold still cannot separate them —
   but the refresh did not widen the hole.
-- **But NVFP4 cannot use DSpark.** Acceptance collapses to **1.14–1.24 tokens per step**
+- ~~**But NVFP4 cannot use DSpark.**~~ **RETRACTED 2026-08-10 — see the correction below.**
+  Acceptance collapses to **1.14–1.24 tokens per step**
   against 3.6–6.0 for the honest checkpoint, and enabling speculation makes serving *slower*.
   An honest node with DSpark delivers 429 tok/s in long single-stream decode; the NVFP4 node
   delivers 135 — **3.2× less**.
@@ -103,7 +128,9 @@ For scale, the rest of the ladder measured in this series: repeat on the same GP
 honest across GPU models 0.188, **NVFP4 0.197**, INT4 0.296, wrong checkpoint 0.443, foreign
 model ~1.41.
 
-## Result 3 — the cost the fraudster pays: no speculative decoding
+## Result 3 — ~~the cost the fraudster pays: no speculative decoding~~
+
+**Superseded.** The NVFP4 + DSpark column below measures the loader bug, not the checkpoint. With the fix, NVFP4 speculates at honest level and pays no such cost.
 
 Serving, tokens/s (`tok/chunk` is the observed acceptance — 1.00 means no speculation):
 

@@ -14,6 +14,28 @@
 The second topology for this fraud vector, after `../deepseek-v4-flash-0731-nvfp4-1xb300`.
 The question it answers: does the hole found on one card survive a different tensor split.
 
+## Later correction (2026-08-10): the DSpark conclusion was wrong
+
+The acceptance collapse measured here is real and reproduces exactly, but its cause is a **vLLM
+loader bug, not a property of NVFP4**. The conversion leaves the DSpark draft (`mtp.*`) experts
+in MXFP4 and declares that with an `ignore` list the FP8 loader never reads; the global
+`moe_quant_algo: NVFP4` then reaches the draft layers, and NVFP4 kernels read MXFP4 weights.
+The draft emits garbage, so every speculative token is rejected.
+
+With a one-branch fix, NVFP4 speculates at honest-checkpoint level (acceptance 3.5-6.05).
+`nvidia/DeepSeek-V4-Flash-NVFP4` has the identical config layout and is affected the same way.
+
+Two claims above therefore do not stand:
+
+- that NVFP4 trades speculative decoding for PoC weight - it does not, it keeps both;
+- that non-speculative decode timing is a behavioural tell for this fraud - it is not, once the
+  bug is fixed there is no known tell.
+
+Everything else here - the PoC gain, the L2 distances, the invisibility conclusion, the method -
+is unaffected: the draft plays no part in nonce generation.
+
+Root cause, measurements and the fix: `../deepseek-v4-flash-0731-nvfp4-dspark-1xb300`.
+
 ## Summary
 
 - **Yes for the invisibility, no for the size of the prize.** NVFP4 earns **+38.9 %** here
@@ -80,7 +102,7 @@ any threshold is set.
 
 Tokens/s, zero failures. Raw NVFP4 beats raw honest by 12–47 % — the quantisation genuinely is
 faster. But against an honest node **that speculates**, it loses by 3× in the two single-stream
-scenarios, exactly as on 1×B300, because DSpark does not work on the quantised checkpoint
+scenarios, exactly as on 1×B300, because DSpark does not work on the quantised checkpoint **(superseded — a loader bug, now fixed)**
 (measured there: acceptance collapses to 1.14–1.24 tokens per step against 3.6–6.0).
 
 The fraudster therefore trades away the single largest serving improvement the new checkpoint
