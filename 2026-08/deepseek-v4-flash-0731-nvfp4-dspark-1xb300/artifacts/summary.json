@@ -1,0 +1,94 @@
+{
+  "_provenance": "TRANSCRIBED from the live run output, not regenerated from committed logs. The host was lost to a host-key rotation before artifact retrieval; see 'What is missing from this folder, and why' in README.md. Every number below appeared in the run output of the scripts in ../scripts.",
+  "date": "2026-08-10",
+  "hardware": {
+    "gpu": "NVIDIA B300 SXM6 AC",
+    "count_used": 1,
+    "memory_mb": 275040,
+    "power_max_limit_w": 1100,
+    "driver": "580.126.09",
+    "tensor_parallel_size": 1,
+    "cpu_cores": 60,
+    "host_ram_gb": 501,
+    "note": "box had 2 B300; the run used device=0 only"
+  },
+  "image": {
+    "ref": "ghcr.io/kaitakuai/mlnode-b300-deepseek-v4-flash-0731:3.0.14-post2-vllm0.25.1-rc3-overlay-k4",
+    "index_digest": "sha256:de43e29193bc4cda1b3aa47f3ce24601851b95026b5d84031858a3b091e052b9",
+    "amd64_manifest_digest": "sha256:c0a1804737b447f186b79d7d8edd29022ecff364a4e2997c0c43b2e8d8b07d43",
+    "vllm": "0.25.1",
+    "fixes_needed": "none"
+  },
+  "model": {
+    "repo": "MJPansa/DeepSeek-V4-Flash-0731-NVFP4",
+    "revision": "64d64cd89bc63a66aa46506da89d7821f7491c62",
+    "size_on_disk_gb": 164,
+    "shards": 48,
+    "integrity": "all 48 shard sizes match the HF API; conversion-receipt.json does NOT match the published files",
+    "honest_counterpart": "deepseek-ai/DeepSeek-V4-Flash-0731 @ 9e165c30e2704aec5d9d593cce3eebd58bbef1cb (156 GB)"
+  },
+  "engine_facts": {
+    "quantization": "deepseek_v4_fp8",
+    "expert_dtype": "fp4",
+    "model_runner": "V2",
+    "dspark_draft_params": 96,
+    "kv_cache_tokens_nvfp4": 1956349,
+    "kv_cache_tokens_honest_same_image": 2211880,
+    "kv_delta_pct": -11.6,
+    "bring_up_seconds": { "cold": 570, "warm": 135 },
+    "baked_args": {
+      "tensor_parallel_size": 1,
+      "gpu_memory_utilization": 0.9,
+      "max_model_len": 400000,
+      "max_num_batched_tokens": 32768,
+      "kv_cache_dtype": "fp8",
+      "logprobs_mode": "processed_logprobs",
+      "tokenizer_mode": "deepseek_v4",
+      "speculative_config": {
+        "method": "dspark",
+        "num_speculative_tokens": 7,
+        "draft_sample_method": "greedy"
+      }
+    }
+  },
+  "acceptance_tokens_per_chunk": {
+    "_note": "streamed tokens per chunk; 1.0 means no draft token was ever accepted",
+    "stock_run_a": { "s1": 1.205, "s2": 1.149, "s3": 1.203, "s4": 1.244 },
+    "stock_run_b": { "s1": 1.205, "s2": 1.145, "s3": 1.192, "s4": null },
+    "patch_layer_index": { "s1": 5.0, "s2": 3.636, "s3": 5.171, "s4": 5.534 },
+    "patch_quantized_layers_map": { "s1": 3.75, "s2": 3.485, "s3": 6.053, "s4": 5.341 },
+    "honest_same_image_other_box": { "s1": 4.225, "s2": 3.588, "s3": 6.038, "s4": 5.557 },
+    "honest_july_reference_same_card": { "s1": 5.37, "s2": 3.64, "s3": 6.04, "s4": 5.69 }
+  },
+  "serving_output_tokens_per_s": {
+    "_note": "same box for all three NVFP4 rows; the honest row is a DIFFERENT box (30 cores) and is not comparable",
+    "stock": { "s1": 76.0, "s2": 697.6, "s3": 105.0, "s4": 935.0 },
+    "patch_layer_index": { "s1": 423.7, "s2": 3149.5, "s3": 454.4, "s4": 2521.0 },
+    "patch_quantized_layers_map": { "s1": 330.93, "s2": 2685.88, "s3": 525.61, "s4": 2337.68 },
+    "failed_requests": 0
+  },
+  "poc_nonces_per_min": {
+    "_note": "measured on the layer-index build; PoC does not touch the draft layers, so both patch forms give the same figures",
+    "nvfp4_sweep_1": { "b8": 2320, "b16": 2720, "b32": 2816 },
+    "nvfp4_sweep_2": { "b8": 2544, "b16": 2720, "b32": 2752 },
+    "nvfp4_2026_08_01_reference": { "b32": 2816 },
+    "honest_same_image": { "b8": 1648, "b16": 1696, "b32": 1728 },
+    "gain_at_b32_pct": 61
+  },
+  "enforced_tokens_replay": {
+    "_note": "generate greedy with top_logprobs, replay the same token sequence, compare",
+    "stock": { "tokens": 64, "matched": 64, "logprobs_present": true },
+    "patch_layer_index": { "tokens": 64, "matched": 64, "logprobs_present": true },
+    "patch_quantized_layers_map": { "tokens": 64, "matched": 64, "logprobs_present": true },
+    "greedy_text_identical_across_all_three": true
+  },
+  "root_cause": {
+    "runtime_expert_prefixes": "model.layers.{i}.ffn.experts",
+    "routed_experts_seen": 46,
+    "target_layers": 43,
+    "draft_layers": [43, 44, 45],
+    "config_map_keys": "layers.{i}.ffn.experts (no 'model.' prefix), 43 entries, none for the draft",
+    "ignore_key_read_by_loader": false,
+    "official_nvidia_checkpoint_same_layout": true
+  }
+}
