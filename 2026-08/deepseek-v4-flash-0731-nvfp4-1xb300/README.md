@@ -8,8 +8,8 @@
 > is therefore credited without its time. The error is not a fixed bias: callbacks
 > arrive in bulk roughly every five seconds, so the drain second either catches a
 > whole delivery or none. The same sweep on MLNode 3.0.16 measured 0.0 %, 17.6 %
-> and 18.4 % inflation at batches 8, 16 and 32. The scripts now divide by the
-> boundary snapshot and report post-boundary callbacks separately. A current-stack
+> and 18.4 % inflation at batches 8, 16 and 32. This experiment's script now
+> divides by the boundary snapshot and reports post-boundary callbacks separately. A current-stack
 > rerun and a live 35-block cross-check are below. No constant correction can be
 > applied to the old k10 numbers, because the error was noise, not a scale factor.
 
