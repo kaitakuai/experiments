@@ -270,8 +270,8 @@ def stop_batch_receiver():
 
 
 def wait_for_batch_receiver_ready(timeout_s: int = 30) -> bool:
-    start_time = time.time()
-    while time.time() - start_time < timeout_s:
+    start_time = time.monotonic()
+    while time.monotonic() - start_time < timeout_s:
         try:
             response = requests.get(f"{BATCH_RECEIVER_LOCAL_URL}/health", timeout=2)
             if response.status_code == 200:
@@ -431,7 +431,7 @@ def run_phase1_generation_validation():
     
     # Clear stats after warmup and start measuring
     clear_batch_receiver()
-    start_time = time.time()
+    start_time = time.monotonic()
     
     # Wait for generation duration with progress (every 10s)
     for i in range(GENERATION_DURATION_S // 10):
@@ -440,11 +440,9 @@ def run_phase1_generation_validation():
         elapsed = (i + 1) * 10
         print(f"  [{elapsed:2d}s] {stats['total_nonces']} nonces")
     
-    elapsed_time = time.time() - start_time
-    stop_generation()
-    
-    # Get final stats
+    elapsed_time = time.monotonic() - start_time
     final_stats = get_batch_receiver_stats()
+    stop_generation()
     print(f"\nGeneration completed:")
     print(f"  Total nonces: {final_stats['total_nonces']}")
     print(f"  Duration: {elapsed_time:.1f}s")
@@ -617,7 +615,7 @@ def run_phase3_autobatch_sizing():
         
         # Clear stats after warmup and start measuring
         clear_batch_receiver()
-        start_time = time.time()
+        start_time = time.monotonic()
         
         # Wait for generation duration (progress every 10s)
         for i in range(GENERATION_DURATION_S // 10):
@@ -626,7 +624,8 @@ def run_phase3_autobatch_sizing():
             elapsed = (i + 1) * 10
             print(f"    [{elapsed:2d}s] {stats['total_nonces']} nonces")
         
-        elapsed_time = time.time() - start_time
+        elapsed_time = time.monotonic() - start_time
+        boundary_stats = get_batch_receiver_stats()
         
         try:
             stop_generation()
@@ -636,9 +635,11 @@ def run_phase3_autobatch_sizing():
         # Wait for any in-flight batches to arrive before recording final stats
         time.sleep(1.0)
         
-        # Record results
-        final_stats = get_batch_receiver_stats()
-        nonces = final_stats['total_nonces']
+        # The timed result is the boundary snapshot. Keep callbacks that arrive
+        # during stop/drain only as diagnostics; they are outside the interval.
+        drained_stats = get_batch_receiver_stats()
+        nonces = boundary_stats['total_nonces']
+        drained_nonces = drained_stats['total_nonces']
         nonces_per_min = nonces / elapsed_time * 60 if elapsed_time > 0 else 0
         
         results.append({
@@ -646,9 +647,13 @@ def run_phase3_autobatch_sizing():
             "nonces": nonces,
             "duration": elapsed_time,
             "nonces_per_min": nonces_per_min,
+            "drained_nonces": drained_nonces,
+            "post_boundary_nonces": drained_nonces - nonces,
         })
         
         print(f"  Result: {nonces} nonces, {nonces_per_min:.0f}/min")
+        if drained_nonces > nonces:
+            print(f"  Excluded after boundary: {drained_nonces - nonces} nonces")
     
     # Print summary table
     print("\n" + "=" * 50)
@@ -670,6 +675,8 @@ def run_phase3_autobatch_sizing():
     
     if best_result and "error" not in best_result:
         print(f"  ★ Best batch size: {best_result['batch_size']} ({best_result['nonces_per_min']:.0f} nonces/min)")
+
+    return results
 
 
 # =============================================================================

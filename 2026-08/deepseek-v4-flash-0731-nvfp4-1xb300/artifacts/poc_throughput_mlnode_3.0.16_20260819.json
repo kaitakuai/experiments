@@ -1,0 +1,99 @@
+{
+  "date": "2026-08-19",
+  "hardware": {
+    "gpu": "NVIDIA B300 SXM6 AC",
+    "gpu_count": 1,
+    "gpu_memory_mib": 275040,
+    "driver": "595.84",
+    "tensor_parallel_size": 1
+  },
+  "runtime": {
+    "image": "ghcr.io/gonka-ai/mlnode:3.0.16",
+    "image_digest": "sha256:1b9b7ce55feecab837f1d7ce974fc5f377ae0a04a4fb403eeeb50130e7728ee1",
+    "vllm_version": "0.25.1",
+    "gonka_poc_version": "0.1.3"
+  },
+  "model": {
+    "checkpoint": "MJPansa/DeepSeek-V4-Flash-0731-NVFP4",
+    "revision": "64d64cd89bc63a66aa46506da89d7821f7491c62",
+    "served_as": "deepseek-ai/DeepSeek-V4-Flash-0731",
+    "seq_len": 1024,
+    "k_dim": 12,
+    "stronger_rng": false
+  },
+  "short_window": {
+    "warmup_seconds": 5,
+    "measurement_seconds": 30,
+    "runs": [
+      {
+        "batch_size": 8,
+        "elapsed_seconds": 30.001701152,
+        "boundary_nonces": 936,
+        "boundary_callback_nonce_per_min": 1871.8938541342086,
+        "worker_nonce_per_min": 1878.7147169379862,
+        "drained_nonces": 936,
+        "drained_callback_nonce_per_min": 1871.8938541342086,
+        "drain_inflation_percent": 0.0
+      },
+      {
+        "batch_size": 16,
+        "elapsed_seconds": 30.001726747,
+        "boundary_nonces": 1184,
+        "boundary_callback_nonce_per_min": 2367.8637099480816,
+        "worker_nonce_per_min": 2386.101588666123,
+        "drained_nonces": 1392,
+        "drained_callback_nonce_per_min": 2783.8397671011226,
+        "drain_inflation_percent": 17.567567567567544
+      },
+      {
+        "batch_size": 32,
+        "elapsed_seconds": 30.001742149,
+        "boundary_nonces": 1216,
+        "boundary_callback_nonce_per_min": 2431.8587779887266,
+        "worker_nonce_per_min": 2468.3730011682046,
+        "drained_nonces": 1440,
+        "drained_callback_nonce_per_min": 2879.8327634077023,
+        "drain_inflation_percent": 18.421052631578938
+      }
+    ]
+  },
+  "network_window": {
+    "batch_size": 32,
+    "mainnet_blocks": 35,
+    "runs": [
+      {
+        "repeat": 1,
+        "start_height": 5639205,
+        "end_height": 5639240,
+        "elapsed_seconds": 184.340793742,
+        "boundary_nonces": 7648,
+        "boundary_callback_nonce_per_min": 2489.302506976508,
+        "worker_nonce_per_min": 2475.3867798938218
+      },
+      {
+        "repeat": 2,
+        "start_height": 5639242,
+        "end_height": 5639277,
+        "elapsed_seconds": 183.424251735,
+        "boundary_nonces": 7456,
+        "boundary_callback_nonce_per_min": 2438.935940958985,
+        "worker_nonce_per_min": 2471.122120314872
+      },
+      {
+        "repeat": 3,
+        "start_height": 5639280,
+        "end_height": 5639315,
+        "elapsed_seconds": 186.273864016,
+        "boundary_nonces": 7872,
+        "boundary_callback_nonce_per_min": 2535.621422227168,
+        "worker_nonce_per_min": 2472.360266267585
+      }
+    ],
+    "summary": {
+      "boundary_callback_nonce_per_min_median": 2489.302506976508,
+      "boundary_callback_nonce_per_min_cv_percent": 1.9436401681680184,
+      "worker_nonce_per_min_median": 2472.360266267585,
+      "median_difference_percent": 0.6852658546604218
+    }
+  }
+}
