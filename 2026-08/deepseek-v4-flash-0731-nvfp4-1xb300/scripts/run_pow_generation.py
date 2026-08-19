@@ -440,8 +440,8 @@ def run_phase1_generation_validation():
         elapsed = (i + 1) * 10
         print(f"  [{elapsed:2d}s] {stats['total_nonces']} nonces")
     
-    elapsed_time = time.monotonic() - start_time
     final_stats = get_batch_receiver_stats()
+    elapsed_time = time.monotonic() - start_time
     stop_generation()
     print(f"\nGeneration completed:")
     print(f"  Total nonces: {final_stats['total_nonces']}")
@@ -624,8 +624,8 @@ def run_phase3_autobatch_sizing():
             elapsed = (i + 1) * 10
             print(f"    [{elapsed:2d}s] {stats['total_nonces']} nonces")
         
-        elapsed_time = time.monotonic() - start_time
         boundary_stats = get_batch_receiver_stats()
+        elapsed_time = time.monotonic() - start_time
         
         try:
             stop_generation()
