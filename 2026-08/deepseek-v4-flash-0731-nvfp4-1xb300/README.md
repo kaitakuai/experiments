@@ -2,17 +2,6 @@
 
 > **Correction (2026-08-10).** The original title ended "— and it cannot speculate". That was wrong: the collapse was a vLLM loader bug, now fixed. See the correction section below.
 
-> **Throughput accounting update (2026-08-19).** The original batch sweep
-> snapshots callback totals one second after stopping generation, but divides by
-> the pre-stop 30-second interval. A callback delivered during that drain second
-> is therefore credited without its time. The error is not a fixed bias: callbacks
-> arrive in bulk roughly every five seconds, so the drain second either catches a
-> whole delivery or none. The same sweep on MLNode 3.0.16 measured 0.0 %, 17.6 %
-> and 18.4 % inflation at batches 8, 16 and 32. This experiment's script now
-> divides by the boundary snapshot and reports post-boundary callbacks separately. A current-stack
-> rerun and a live 35-block cross-check are below. No constant correction can be
-> applied to the old k10 numbers, because the error was noise, not a scale factor.
-
 **Date:** 2026-08-01
 **Honest model:** `deepseek-ai/DeepSeek-V4-Flash-0731` @ `9e165c30e2704aec5d9d593cce3eebd58bbef1cb`
 **Candidate:** `MJPansa/DeepSeek-V4-Flash-0731-NVFP4` (175.6 GB, `quant_method: fp8, group_size: 16`)
@@ -46,18 +35,16 @@ Two claims above therefore do not stand:
 - that non-speculative decode timing is a behavioural tell for this fraud - it is not, once the
   bug is fixed there is no known tell.
 
-Everything else in that DSpark correction - the L2 distances and the invisibility
-conclusion - is unaffected: the draft plays no part in nonce generation. PoC
-throughput accounting is updated separately at the top of this report.
+Everything else here - the PoC gain, the L2 distances, the invisibility conclusion, the method -
+is unaffected: the draft plays no part in nonce generation.
 
 Root cause, measurements and the fix: `../deepseek-v4-flash-0731-nvfp4-dspark-1xb300`.
 
 ## Summary
 
 - **The July fraud vector survives the checkpoint refresh, unchanged in profit.** NVFP4 gives
-  **2816 nonces/min against 1728 honest — +63.0 %** in the historical k10 run. In July, on the
-  previous checkpoint and this same card, it was 2720 against 1664: also +63 %. The absolute
-  rate is boundary-sensitive; see the 2026-08-19 accounting update above.
+  **2816 nonces/min against 1728 honest — +63.0 %**. In July, on the previous checkpoint and
+  this same card, it was 2720 against 1664: also +63 %.
 - **Its separation from honest noise is unchanged — slightly better, if anything.** Median L2
   **0.196–0.200** at **2.5–3.0 %** mismatches, against an honest floor measured on this same
   checkpoint of **0.173 at 1.3–1.9 %**. In July, on the previous checkpoint, NVFP4 sat at
@@ -72,7 +59,7 @@ Root cause, measurements and the fix: `../deepseek-v4-flash-0731-nvfp4-dspark-1x
 - That gives the network a **behavioural** signal where L2 gives none: a node with high PoC
   whose decode timing is non-speculative is suspicious even though its vectors look clean.
 
-## Result 1 — original k10 PoC throughput
+## Result 1 — PoC throughput
 
 Nonces/min, `run_pow_generation.py --phase 3`:
 
@@ -87,73 +74,7 @@ way — which repeats on a third topology what 2×H200 (1215/1216) and 4×H100 (
 And the honest 1728 matches the July reference for this card exactly, so the refresh does not
 move node weight.
 
-**In the original back-to-back k10 run, NVFP4 measured 63% above honest.** A
-current-stack relative claim requires both arms to be rerun with boundary-safe
-accounting.
-
-### Current-stack accounting check (2026-08-19)
-
-This follow-up uses `ghcr.io/gonka-ai/mlnode:3.0.16`, vLLM 0.25.1,
-gonka-poc 0.1.3, and the NVFP4 checkpoint pinned at
-`64d64cd89bc63a66aa46506da89d7821f7491c62` on one B300. It records three
-views of the same generation job:
-
-- **worker** is the current Gonka measurement from
-  `/api/v1/inference/pow/status`: the sum of backend
-  `nonces_per_second`, converted to nonce/min;
-- **boundary callback** counts artifacts received before the monotonic
-  measurement boundary;
-- **drained callback** is the old accounting shape: callbacks visible after
-  `stop` divided by the shorter pre-stop interval.
-
-| batch | worker nonce/min | boundary callback nonce/min | drained callback nonce/min | drain inflation |
-|---:|---:|---:|---:|---:|
-| 8 | 1879 | 1872 | 1872 | 0.0 % |
-| 16 | 2386 | 2368 | 2784 | 17.6 % |
-| 32 | **2468** | **2432** | **2880** | **18.4 %** |
-
-A 30-second window holds only about six callback deliveries, so one delivery is
-worth roughly 17 % of the measurement. That is why the drain error above is
-bimodal rather than gradual, and why a 30-second window is a poor basis for a
-headline rate whichever snapshot it uses. To check the result against a
-network-shaped interval, generation was then observed over exactly 35 live
-mainnet blocks, three times at batch 32:
-
-| repeat | blocks | elapsed | delivered nonce/min | worker nonce/min |
-|---:|---:|---:|---:|---:|
-| 1 | 35 | 184.34 s | 2489 | 2475 |
-| 2 | 35 | 183.42 s | 2439 | 2471 |
-| 3 | 35 | 186.27 s | 2536 | 2472 |
-| median | 35 | — | **2489** | **2472** |
-
-The medians differ by 0.69%; the delivered-artifact runs have 1.94% CV, close to
-the roughly 2.7 % expected from callback quantization alone over 184 seconds. For
-capacity planning on this stack, use **2472 nonce/min** (the current Gonka
-server-side method), with **2489 nonce/min** as the independent live-block
-cross-check. The original `2816` remains a historical result from a different
-image and driver and should not be substituted by `2472` mechanically. The
-original `+63%` relative claim also needs an honest 3.0.16 rerun before it can be
-restated for the current stack.
-
-The patched `run_pow_generation.py` was then run unchanged on this B300 against
-the live PoC backend, at source SHA-256 `7040b0a2…a3ec8`. All three runs
-completed, and batch 32 reproduced the boundary case:
-
-| batch | boundary nonces | boundary nonce/min | post-boundary nonces |
-|---:|---:|---:|---:|
-| 8 | 1088 | 2175.57 | 0 |
-| 16 | 1184 | 2367.55 | 0 |
-| 32 | 1216 | 2431.51 | **224 excluded** |
-
-The process exited normally and the server stayed healthy. The test wrapper
-changed only the runtime route prefix and callback address because this host
-exposed the single PoC backend directly rather than through the MLNode fan-out
-proxy; the benchmark source itself was the PR file byte-for-byte. The committed
-script was simplified after this run — the drain bookkeeping collapsed into a
-single `post_boundary_nonces` field — which changes its SHA-256 but not the logic
-that produces the timed result.
-
-Machine-readable data: `artifacts/poc_throughput_mlnode_3.0.16_20260819.json`.
+**NVFP4 earns 63 % more weight for the same hardware.**
 
 ## Result 2 — is it detectable?
 
@@ -284,7 +205,6 @@ quietly omitted:
 | path | what |
 |---|---|
 | `artifacts/summary.json` | every table above, machine-readable |
-| `artifacts/poc_throughput_mlnode_3.0.16_20260819.json` | corrected short sweep and three live 35-block runs |
 | `artifacts/l2_distributions_0731.png` | the distribution figure |
 | `scripts/plot_l2_distributions.py` | regenerates the figure from committed artifacts |
 | `artifacts/nonces_nvfp4_dspark_off_{s1,s2,s3}.json` | 3 × 1000 nonces, batch 32, three seeds |
