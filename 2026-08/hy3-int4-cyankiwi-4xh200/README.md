@@ -177,6 +177,7 @@ scripts/
 ```
 
 Related: [honest FP8 on this host](../hy3-fp8-4xh200/) ·
+[same model at TP=2 — the economics](../hy3-int4-cyankiwi-2xh200/) ·
 [NVFP4 ModelOpt](../hy3-nvfp4-r0b0tlab-2xb300/) · [NVFP4 llm-compressor](../hy3-nvfp4-redhatai-4xb200/)
 
 ## Reproducibility checklist

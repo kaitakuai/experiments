@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hy3 PoC — L2-расстояния отпечатков</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font:14px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+     background:var(--page);color:var(--text-primary)}
+.viz-root{color-scheme:light;
+  --page:#f6f6f4; --surface-1:#fcfcfb; --border:#e2e1dc;
+  --text-primary:#0b0b0b; --text-secondary:#52514e; --text-muted:#7a7973;
+  --grid:#eceae5;
+  --s1:#2a78d6; --s2:#eb6834; --s3:#1baf7a; --s4:#4a3aa7;}
+@media (prefers-color-scheme:dark){:root:where(:not([data-theme="light"])) .viz-root{
+  color-scheme:dark;
+  --page:#111110; --surface-1:#1a1a19; --border:#33322e;
+  --text-primary:#ffffff; --text-secondary:#c3c2b7; --text-muted:#8f8e85;
+  --grid:#2a2a27;
+  --s1:#3987e5; --s2:#d95926; --s3:#199e70; --s4:#9085e9;}}
+:root[data-theme="dark"] .viz-root{color-scheme:dark;
+  --page:#111110; --surface-1:#1a1a19; --border:#33322e;
+  --text-primary:#ffffff; --text-secondary:#c3c2b7; --text-muted:#8f8e85;
+  --grid:#2a2a27;
+  --s1:#3987e5; --s2:#d95926; --s3:#199e70; --s4:#9085e9;}
+.wrap{max-width:1040px;margin:0 auto;padding:28px 20px 60px}
+h1{font-size:21px;margin:0 0 4px;letter-spacing:-.01em}
+.sub{color:var(--text-secondary);margin:0 0 22px;max-width:70ch}
+.card{background:var(--surface-1);border:1px solid var(--border);border-radius:10px;
+      padding:18px 18px 10px;margin-bottom:18px}
+.card h2{font-size:15px;margin:0 0 2px}
+.card .cap{color:var(--text-secondary);font-size:13px;margin:0 0 14px;max-width:78ch}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:18px}
+.stat{background:var(--surface-1);border:1px solid var(--border);border-radius:10px;padding:12px 14px}
+.stat .k{font-size:12px;color:var(--text-secondary);display:flex;align-items:center;gap:6px}
+.stat .v{font-size:23px;font-weight:600;letter-spacing:-.02em;margin-top:3px;font-variant-numeric:tabular-nums}
+.stat .n{font-size:12px;color:var(--text-muted)}
+.dot{width:9px;height:9px;border-radius:2px;display:inline-block;flex:none}
+.legend{display:flex;flex-wrap:wrap;gap:14px;margin:0 0 10px;font-size:13px;color:var(--text-secondary)}
+.legend span{display:flex;align-items:center;gap:6px}
+svg{display:block;width:100%;height:auto;overflow:visible}
+.scroll{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:13px;font-variant-numeric:tabular-nums}
+th,td{text-align:right;padding:7px 10px;border-bottom:1px solid var(--border);white-space:nowrap}
+th:first-child,td:first-child{text-align:left}
+th{color:var(--text-secondary);font-weight:600}
+.tt{position:fixed;pointer-events:none;opacity:0;transition:opacity .1s;
+    background:var(--surface-1);border:1px solid var(--border);border-radius:8px;
+    padding:9px 11px;font-size:12.5px;box-shadow:0 6px 22px rgba(0,0,0,.16);z-index:9;
+    font-variant-numeric:tabular-nums;min-width:210px}
+.tt b{display:block;margin-bottom:5px;font-size:12px;color:var(--text-secondary);font-weight:600}
+.tt .r{display:flex;align-items:center;gap:7px;justify-content:space-between}
+.tt .r em{font-style:normal;color:var(--text-secondary);display:flex;align-items:center;gap:6px}
+.note{color:var(--text-muted);font-size:12.5px;margin:10px 0 0;max-width:80ch}
+</style></head>
+<body><div class="viz-root"><div class="wrap">
+
+<h1>Hy3 · PoC v2 — распределение L2-расстояний между отпечатками нонсов</h1>
+<p class="sub">Каждое наблюдение — расстояние между 12-мерными векторами одного и того же нонса,
+посчитанными двумя прогонами. Честный пол объединяет повторы на одной машине и пары разных
+машин; фрод-плечи — каждый чекпоинт против честного FP8 на том же хосте, по три семени.</p>
+
+<div class="stats" id="stats"></div>
+
+<div class="card">
+  <h2>Плотность распределения</h2>
+  <p class="cap">Честное расхождение прижато к 0.20 и почти не выходит за 0.40. Фроды сдвинуты вправо,
+  но перекрытие с честным заметное — поэтому вердикт по одному нонсу невозможен, решает только набор.</p>
+  <div class="legend" id="leg1"></div>
+  <div class="scroll"><svg id="c1" viewBox="0 0 900 380" role="img"
+    aria-label="Кривые плотности L2-расстояний для честного пола и трёх фрод-чекпоинтов"></svg></div>
+  <p class="note">Пунктир — пороги: 0.40 унаследован от прежних кампаний, 0.28 даёт лучшее разделение по набору.</p>
+</div>
+
+<div class="card">
+  <h2>Доля нонсов выше порога</h2>
+  <p class="cap">Отсюда видно, почему поднимать порог вредно: справа кривые сходятся, и сигнал исчезает
+  вместе с ложными срабатываниями. Максимальный отрыв — внутри честного распределения, около 0.28.</p>
+  <div class="legend" id="leg2"></div>
+  <div class="scroll"><svg id="c2" viewBox="0 0 900 320" role="img"
+    aria-label="Доля нонсов выше порога как функция порога, для честного пола и фрод-чекпоинтов"></svg></div>
+</div>
+
+<div class="card">
+  <h2>Таблица</h2>
+  <div class="scroll"><table id="tbl"></table></div>
+  <p class="note">Отдельный случай, которого нет на графике: два прогона одной конфигурации на одной
+  машине Blackwell дают расстояние ровно 0 на всех 1000 нонсах. Там детекция точная, а не статистическая.</p>
+</div>
+
+</div></div>
+<div class="tt" id="tt"></div>
+<script>
+const DATA = {"groups": [{"name": "Честный пол (разные машины и повторы)", "n": 5000, "median": 0.2011, "p95": 0.3766, "density": [0.0, 0.0086, 0.1543, 0.8486, 2.2029, 4.2171, 4.98, 5.3829, 5.6229, 4.6629, 3.7286, 2.8371, 2.3057, 1.5514, 1.2, 0.8657, 0.6943, 0.4543, 0.2829, 0.1286, 0.2143, 0.1457, 0.0257, 0.06, 0.0429, 0.06, 0.0429, 0.0429, 0.0086, 0.0171, 0.0257, 0.0, 0.0086, 0.0, 0.0, 0.0086, 0.0086, 0.0, 0.0, 0.0, 0.0086, 0.0, 0.0, 0.0086, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "share040": 3.5}, {"name": "INT4 W4A16 · cyankiwi", "n": 3000, "median": 0.3745, "p95": 0.6427, "density": [0.0, 0.0, 0.0, 0.0, 0.0143, 0.2143, 0.2857, 0.6857, 1.0143, 1.5143, 1.8571, 2.7286, 2.6, 3.3857, 3.4857, 3.3857, 3.2429, 2.7143, 2.7857, 2.1857, 2.1143, 1.6, 1.2, 1.1286, 1.0857, 0.6286, 0.6143, 0.5143, 0.2429, 0.3143, 0.2571, 0.2286, 0.2, 0.1143, 0.0714, 0.0857, 0.0857, 0.0714, 0.0286, 0.0286, 0.0286, 0.0143, 0.0, 0.0429, 0.0286, 0.0, 0.0143, 0.0143, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "share040": 42.1}, {"name": "NVFP4 · RedHatAI", "n": 3000, "median": 0.3727, "p95": 0.6361, "density": [0.0, 0.0, 0.0, 0.0, 0.0571, 0.0857, 0.3, 0.5143, 0.9714, 1.5714, 2.0571, 2.5429, 3.1143, 3.5143, 3.3143, 3.4714, 2.9429, 2.8714, 2.4571, 2.4714, 1.7, 1.8714, 1.2, 1.2857, 0.9857, 0.6857, 0.6, 0.5857, 0.4286, 0.2429, 0.1571, 0.2429, 0.1857, 0.0429, 0.0857, 0.0429, 0.0429, 0.0143, 0.0429, 0.0143, 0.0143, 0.0143, 0.0571, 0.0, 0.0429, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0143, 0.0, 0.0, 0.0], "share040": 41.8}, {"name": "NVFP4 · r0b0tlab", "n": 3000, "median": 0.4934, "p95": 0.8842, "density": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0286, 0.0429, 0.1286, 0.2, 0.4143, 0.7571, 0.8, 1.1714, 1.4571, 1.7571, 2.0286, 2.4571, 2.3571, 2.6143, 2.4857, 2.3714, 2.2857, 2.1286, 2.0429, 1.7857, 1.7143, 1.5857, 1.3714, 1.0143, 1.1857, 0.8857, 0.7429, 0.7286, 0.4714, 0.5286, 0.3714, 0.4429, 0.4143, 0.3571, 0.1857, 0.2571, 0.2571, 0.1429, 0.1857, 0.0857, 0.1286, 0.0286, 0.0714, 0.0714, 0.0286, 0.1143, 0.0, 0.0, 0.0571, 0.0143, 0.0286, 0.0, 0.0143, 0.0143, 0.0429], "share040": 73.1}], "gates": [{"name": "Честный пол (разные машины и повторы)", "curve": [96.22, 91.0, 82.66, 72.94, 62.0, 50.62, 40.38, 31.9, 24.7, 19.16, 14.4, 11.0, 8.6, 6.16, 4.74, 3.48, 2.66, 2.1, 1.8, 1.38, 1.08, 0.84, 0.78, 0.66, 0.56, 0.44, 0.34, 0.3, 0.22, 0.2, 0.16, 0.12, 0.1, 0.08, 0.08, 0.08]}, {"name": "INT4 W4A16 · cyankiwi", "curve": [100.0, 99.87, 99.47, 98.97, 97.7, 95.83, 93.17, 90.27, 86.1, 80.6, 75.43, 68.97, 62.13, 55.23, 48.4, 42.07, 36.7, 31.3, 26.67, 22.17, 18.43, 15.47, 13.3, 11.0, 8.67, 7.27, 6.1, 5.13, 4.3, 3.67, 3.07, 2.5, 1.97, 1.77, 1.27, 1.13]}, {"name": "NVFP4 · RedHatAI", "curve": [99.9, 99.87, 99.67, 99.03, 98.1, 96.53, 93.8, 90.47, 86.2, 81.1, 75.33, 68.1, 61.4, 54.73, 47.77, 41.77, 36.23, 31.1, 26.2, 22.37, 18.87, 15.4, 13.13, 10.6, 8.67, 7.27, 5.8, 4.8, 3.67, 2.83, 2.37, 2.0, 1.53, 1.2, 0.97, 0.8]}, {"name": "NVFP4 · r0b0tlab", "curve": [100.0, 100.0, 99.93, 99.87, 99.67, 99.33, 98.67, 97.67, 96.17, 94.47, 92.1, 89.53, 86.07, 82.33, 77.8, 73.07, 68.27, 63.23, 58.03, 53.2, 48.53, 43.73, 39.93, 35.77, 32.03, 28.9, 25.27, 22.63, 20.0, 17.97, 15.57, 13.83, 12.37, 10.77, 9.6, 8.43]}], "bins": {"lo": 0.0, "hi": 1.4, "n": 60}, "thresholds": [0.1, 0.12, 0.14, 0.16, 0.18, 0.2, 0.22, 0.24, 0.26, 0.28, 0.3, 0.32, 0.34, 0.36, 0.38, 0.4, 0.42, 0.44, 0.46, 0.48, 0.5, 0.52, 0.54, 0.56, 0.58, 0.6, 0.62, 0.64, 0.66, 0.68, 0.7, 0.72, 0.74, 0.76, 0.78, 0.8]};
+const CSS = ['--s1','--s2','--s3','--s4'];
+const col = i => getComputedStyle(document.querySelector('.viz-root')).getPropertyValue(CSS[i]).trim();
+const G = DATA.groups, TH = DATA.thresholds, GT = DATA.gates;
+const BINS = DATA.bins, LO = BINS.lo, HI = BINS.hi, NB = BINS.n;
+const fmt = (x,d=2) => x.toFixed(d).replace('.',',');
+
+// ---- stat tiles
+document.getElementById('stats').innerHTML = G.map((g,i)=>`
+  <div class="stat"><div class="k"><i class="dot" style="background:${col(i)}"></i>${g.name}</div>
+  <div class="v">${fmt(g.median,3)}</div>
+  <div class="n">медиана · выше 0,40: ${fmt(g.share040,1)} % · n=${g.n}</div></div>`).join('');
+
+const legend = el => document.getElementById(el).innerHTML =
+  G.map((g,i)=>`<span><i class="dot" style="background:${col(i)}"></i>${g.name}</span>`).join('');
+legend('leg1'); legend('leg2');
+
+const NS='http://www.w3.org/2000/svg';
+const mk=(n,a={})=>{const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);return e;};
+const tt=document.getElementById('tt');
+
+// ---------- panel 1: density ----------
+(function(){
+  const svg=document.getElementById('c1');
+  const W=900,H=380,ml=52,mr=118,mt=14,mb=42;
+  const pw=W-ml-mr, ph=H-mt-mb;
+  const maxY=Math.max(...G.flatMap(g=>g.density))*1.06;
+  const X=v=>ml+(v-LO)/(HI-LO)*pw, Y=v=>mt+ph-v/maxY*ph;
+
+  for(let t=0;t<=1.4001;t+=0.2){
+    svg.appendChild(mk('line',{x1:X(t),x2:X(t),y1:mt,y2:mt+ph,stroke:'var(--grid)','stroke-width':1}));
+    svg.appendChild(mk('text',{x:X(t),y:mt+ph+18,'text-anchor':'middle',fill:'var(--text-muted)','font-size':12})).textContent=fmt(t,1);
+  }
+  for(let k=0;k<=4;k++){const y=mt+ph-k/4*ph;
+    svg.appendChild(mk('line',{x1:ml,x2:ml+pw,y1:y,y2:y,stroke:'var(--grid)','stroke-width':1}));}
+  svg.appendChild(mk('text',{x:ml+pw/2,y:H-6,'text-anchor':'middle',fill:'var(--text-secondary)','font-size':12.5})).textContent='L2-расстояние';
+  const yl=mk('text',{x:14,y:mt+ph/2,fill:'var(--text-secondary)','font-size':12.5,'text-anchor':'middle',transform:`rotate(-90 14 ${mt+ph/2})`});
+  yl.textContent='плотность'; svg.appendChild(yl);
+
+  [[0.28,'0,28'],[0.40,'0,40']].forEach(([g,lab])=>{
+    svg.appendChild(mk('line',{x1:X(g),x2:X(g),y1:mt,y2:mt+ph,stroke:'var(--text-muted)','stroke-width':1.5,'stroke-dasharray':'4 4'}));
+    svg.appendChild(mk('text',{x:X(g),y:mt-2,'text-anchor':'middle',fill:'var(--text-muted)','font-size':11.5})).textContent=lab;
+  });
+
+  const cx=i=>LO+(i+0.5)*(HI-LO)/NB;
+  G.forEach((g,i)=>{
+    const pts=g.density.map((d,j)=>[X(cx(j)),Y(d)]);
+    const line=pts.map((p,j)=>(j?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' ');
+    svg.appendChild(mk('path',{d:line+` L${X(cx(NB-1)).toFixed(1)} ${(mt+ph).toFixed(1)} L${X(cx(0)).toFixed(1)} ${(mt+ph).toFixed(1)} Z`,
+      fill:col(i),opacity:.10}));
+    svg.appendChild(mk('path',{d:line,fill:'none',stroke:col(i),'stroke-width':2,'stroke-linejoin':'round'}));
+    // direct label at peak
+    let bi=0; g.density.forEach((d,j)=>{if(d>g.density[bi])bi=j;});
+    const lx=Math.min(X(cx(bi))+8, ml+pw+4), ly=Y(g.density[bi])-8;
+    const t=mk('text',{x:lx,y:ly,fill:'var(--text-primary)','font-size':12,'font-weight':600});
+    t.textContent=g.name.split(' · ')[1]||'честный пол'; svg.appendChild(t);
+  });
+
+  const cross=mk('line',{x1:0,x2:0,y1:mt,y2:mt+ph,stroke:'var(--text-muted)','stroke-width':1,opacity:0});
+  svg.appendChild(cross);
+  const hit=mk('rect',{x:ml,y:mt,width:pw,height:ph,fill:'transparent'});
+  svg.appendChild(hit);
+  hit.addEventListener('mousemove',e=>{
+    const r=svg.getBoundingClientRect(), sx=(e.clientX-r.left)/r.width*W;
+    const val=LO+(sx-ml)/pw*(HI-LO); if(val<LO||val>HI)return;
+    cross.setAttribute('x1',sx);cross.setAttribute('x2',sx);cross.setAttribute('opacity',1);
+    tt.style.opacity=1; tt.style.left=Math.min(e.clientX+16,innerWidth-250)+'px'; tt.style.top=(e.clientY-10)+'px';
+    tt.innerHTML='<b>порог '+fmt(val,2)+' — доля нонсов выше</b>'+G.map((g,i)=>{
+      const above=g.density.reduce((s,d,j)=>s+(cx(j)>val?d:0),0)*(HI-LO)/NB*100;
+      return `<div class="r"><em><i class="dot" style="background:${col(i)}"></i>${g.name.split(' · ')[1]||'честный пол'}</em><span>${fmt(above,1)} %</span></div>`;
+    }).join('');
+  });
+  hit.addEventListener('mouseleave',()=>{tt.style.opacity=0;cross.setAttribute('opacity',0);});
+})();
+
+// ---------- panel 2: share above threshold ----------
+(function(){
+  const svg=document.getElementById('c2');
+  const W=900,H=320,ml=52,mr=118,mt=14,mb=42;
+  const pw=W-ml-mr, ph=H-mt-mb;
+  const X=v=>ml+(v-TH[0])/(TH[TH.length-1]-TH[0])*pw, Y=v=>mt+ph-v/100*ph;
+  for(let k=0;k<=5;k++){const y=mt+ph-k/5*ph;
+    svg.appendChild(mk('line',{x1:ml,x2:ml+pw,y1:y,y2:y,stroke:'var(--grid)','stroke-width':1}));
+    svg.appendChild(mk('text',{x:ml-8,y:y+4,'text-anchor':'end',fill:'var(--text-muted)','font-size':12})).textContent=(k*20)+' %';}
+  for(let t=0.1;t<=0.8001;t+=0.1){
+    svg.appendChild(mk('text',{x:X(t),y:mt+ph+18,'text-anchor':'middle',fill:'var(--text-muted)','font-size':12})).textContent=fmt(t,1);}
+  svg.appendChild(mk('text',{x:ml+pw/2,y:H-6,'text-anchor':'middle',fill:'var(--text-secondary)','font-size':12.5})).textContent='порог L2';
+  [[0.28,'0,28'],[0.40,'0,40']].forEach(([g,lab])=>{
+    svg.appendChild(mk('line',{x1:X(g),x2:X(g),y1:mt,y2:mt+ph,stroke:'var(--text-muted)','stroke-width':1.5,'stroke-dasharray':'4 4'}));
+    svg.appendChild(mk('text',{x:X(g),y:mt-2,'text-anchor':'middle',fill:'var(--text-muted)','font-size':11.5})).textContent=lab;});
+  GT.forEach((g,i)=>{
+    const d=g.curve.map((v,j)=>(j?'L':'M')+X(TH[j]).toFixed(1)+' '+Y(v).toFixed(1)).join(' ');
+    svg.appendChild(mk('path',{d,fill:'none',stroke:col(i),'stroke-width':2,'stroke-linejoin':'round'}));
+    const t=mk('text',{x:ml+pw+6,y:Y(g.curve[Math.round((0.42-TH[0])/0.02)])+4,fill:'var(--text-primary)','font-size':12,'font-weight':600});
+    t.textContent=g.name.split(' · ')[1]||'честный пол'; svg.appendChild(t);});
+  const cross=mk('line',{x1:0,x2:0,y1:mt,y2:mt+ph,stroke:'var(--text-muted)','stroke-width':1,opacity:0});
+  svg.appendChild(cross);
+  const hit=mk('rect',{x:ml,y:mt,width:pw,height:ph,fill:'transparent'}); svg.appendChild(hit);
+  hit.addEventListener('mousemove',e=>{
+    const r=svg.getBoundingClientRect(), sx=(e.clientX-r.left)/r.width*W;
+    let j=Math.round((( (sx-ml)/pw*(TH[TH.length-1]-TH[0]) )+TH[0]-TH[0])/0.02);
+    j=Math.max(0,Math.min(TH.length-1,j));
+    cross.setAttribute('x1',X(TH[j]));cross.setAttribute('x2',X(TH[j]));cross.setAttribute('opacity',1);
+    tt.style.opacity=1; tt.style.left=Math.min(e.clientX+16,innerWidth-250)+'px'; tt.style.top=(e.clientY-10)+'px';
+    tt.innerHTML='<b>порог '+fmt(TH[j],2)+'</b>'+GT.map((g,i)=>
+      `<div class="r"><em><i class="dot" style="background:${col(i)}"></i>${g.name.split(' · ')[1]||'честный пол'}</em><span>${fmt(g.curve[j],1)} %</span></div>`).join('');
+  });
+  hit.addEventListener('mouseleave',()=>{tt.style.opacity=0;cross.setAttribute('opacity',0);});
+})();
+
+// ---------- table ----------
+document.getElementById('tbl').innerHTML =
+ '<thead><tr><th>набор</th><th>n</th><th>медиана</th><th>p95</th><th>&gt;0,28</th><th>&gt;0,40</th><th>&gt;0,60</th></tr></thead><tbody>'
+ + G.map((g,i)=>{const gt=GT[i].curve;
+   const at=t=>gt[Math.round((t-TH[0])/0.02)];
+   return `<tr><td><i class="dot" style="background:${col(i)}"></i> ${g.name}</td><td>${g.n}</td>
+   <td>${fmt(g.median,4)}</td><td>${fmt(g.p95,4)}</td>
+   <td>${fmt(at(0.28),1)} %</td><td>${fmt(at(0.40),1)} %</td><td>${fmt(at(0.60),1)} %</td></tr>`;}).join('')
+ + '</tbody>';
+</script></body></html>

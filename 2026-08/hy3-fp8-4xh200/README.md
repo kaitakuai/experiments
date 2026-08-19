@@ -1,4 +1,4 @@
-# Hy3 FP8 — 4×H200 — honest baseline (PoC fingerprint is **not** bit-reproducible on Hopper)
+# Hy3 FP8 — 4×H200 — honest baseline, re-measured (1248 nonces/min; the fingerprint is **not** bit-reproducible on Hopper)
 
 **Date:** 2026-08-19
 **Model:** `tencent/Hy3-FP8` — 295B total / 21B active MoE, 192 experts × top-8, 80 layers
@@ -79,20 +79,34 @@ curl -X POST http://127.0.0.1:8081/api/v1/inference/up/async \
 
 ### Throughput
 
+The arm was measured twice. **Run 2 is the valid one** — run 1 predates the window-accounting
+fix (`kaitakuai/experiments` PR #7) and used a 30 s window.
+
+| batch | 16 | 32 | 64 |
+|---:|---:|---:|---:|
+| **run 2 — fixed script, 120 s window** | 1175 | 1232 | **1248** |
+
 | batch | 8 | 16 | 32 | 64 |
 |---:|---:|---:|---:|---:|
-| FP8 | 1248 | 1376 | **1408** | 1408 |
-| FP8 + MTP-2 | 1248 | 1376 | **1408** | 1408 |
+| run 1 ⚠️ invalid — FP8 | 1248 | 1376 | 1408 | 1408 |
+| run 1 ⚠️ invalid — FP8 + MTP-2 | 1248 | 1376 | 1408 | 1408 |
 
-> ⚠️ **These throughput numbers are invalid.** They were taken with a 30 s measurement
-> window *and* the pre-fix boundary-accounting bug (`kaitakuai/experiments` PR #7), which
-> inflates by an unknown 0–40 %. On top of that, callbacks arrive in ~5 s bulks, so a 30 s
-> window carries ±17 % noise on its own. They are published rather than deleted because the
-> relative comparisons on this host were taken identically. For valid numbers see the
-> Blackwell runs, which use the corrected script and a 120 s window.
+**The old figure overstated throughput by 12.8 %** (1408 against 1248). The two run-1 rows are
+kept because they still document the MTP comparison: identical to the nonce, at a resolution
+where the noise is ±17 %.
 
-The two rows being identical to the nonce is still informative: MTP cannot influence a
-prefill-only proof.
+Run 2 used a different host and driver (**590.48.01** against 610.57.04) but reproduced the
+engine parameters exactly — 69.28 GiB of weights per rank, KV 1 044 928 against 1 049 888
+(0.5 %). The throughput difference is therefore methodology, not hardware.
+
+Fleet context, all valid measurements:
+
+| topology | nonces/min | per card |
+|---|---:|---:|
+| 4×B200 | 1888 | 472 |
+| 2×B300 | 1599 | **800** |
+| 8×H100 | 1344 | 168 |
+| **4×H200** | **1248** | **312** |
 
 ### MTP speculative decoding (same model, same host)
 
@@ -122,6 +136,8 @@ python3 scripts/l2_matrix.py artifacts nonces_fp8_s1.json nonces_fp8_s1_r2.json
 | FP8 ↔ FP8 repeat (**honest floor**) | 0.0 % | 0.2025 | 0.3808 | 0.9540 | **4.1 %** |
 | FP8 ↔ FP8 + MTP-2 | 0.0 % | 0.1993 | 0.3765 | 0.9367 | 3.6 % |
 | FP8 + MTP ↔ its own repeat | 0.0 % | 0.2004 | 0.3744 | 0.7692 | 4.0 % |
+| run 2 ↔ run 2 repeat (honest floor, driver 590) | 0.0 % | 0.1996 | 0.3728 | — | 4.1 % |
+| **run 1 ↔ run 2** (driver 610 vs 590) | 0.0 % | **0.2027** | — | — | 3.8 % |
 | control: seed s1 ↔ seed s2 | 0.0 % | 1.4041 | 1.7055 | 1.8872 | 100 % |
 
 The cross-seed control lands on the expected ~1.4 asymptote. Divergence is spread over
@@ -162,12 +178,16 @@ irrelevant for a prefill proof (batch 64 × 1024 = 65 536 tokens).
    `sum(n_output) / (max(end_time) - min(start_time))`.
 6. **The mlnode API must run from `/app/packages/api/.venv`** — the system python cannot
    import `common`.
+7. **The driver version does not move the fingerprint.** Runs on 590.48.01 and 610.57.04
+   differ by 0.2027 — the same as a plain repeat on one machine (0.1996).
 
 ## Files
 
 ```
 artifacts/
-  nonces_fp8_{s1,s1_r2,s2,s3}.json      honest FP8 (s1_r2 = repeat of s1)
+  nonces_fp8_{s1,s1_r2,s2,s3}.json      honest FP8, run 1 (s1_r2 = repeat of s1)
+  redo_nonces_fp8_{s1,s1_r2,s2,s3}.json honest FP8, run 2 — the valid throughput run
+  redo_sweep_120s.log, redo_serving.sqlite
   nonces_fp8_mtp2_{s1,s1_r2}.json       MTP-2 variant
   sweep_30s_BUGGY.log, sweep_mtp2_30s_BUGGY.log
   serving.sqlite, serving_mtp2.sqlite    compressa-perf databases
