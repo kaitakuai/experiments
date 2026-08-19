@@ -1,4 +1,4 @@
-# Hy3 INT4 W4A16 (compressed-tensors) — 4×H200 — fraud arm, detectable only in aggregate
+# Hy3 INT4 W4A16 by `cyankiwi` (compressed-tensors) — 4×H200 — fraud arm, detectable only in aggregate
 
 **Date:** 2026-08-19
 **Model:** `cyankiwi/Hy3-AWQ-INT4` — 182 GB, 34 shards. **Despite the repo name this is not

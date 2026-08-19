@@ -1,4 +1,4 @@
-# Hy3 NVFP4+FP8 (llm-compressor) — 4×B200 — the quietest fraud measured (0.367 vs 0.491 for the same scheme)
+# Hy3 NVFP4+FP8 by `RedHatAI` (llm-compressor) — 4×B200 — the quietest fraud measured (0.367 vs 0.491 for the same scheme)
 
 **Date:** 2026-08-19
 **Model:** `RedHatAI/Hy3-NVFP4-FP8` — 178 GB, 5 shards, built with **llm-compressor**.
@@ -14,7 +14,7 @@
 other Hy3 fraud build measured. Weights in VRAM: **160 GiB** (39.99 GiB/rank).
 
 **Honest reference:** [`../hy3-fp8-4xb200/`](../hy3-fp8-4xb200/) — same host, same session;
-nonce sets duplicated here. A sample of the [ModelOpt build](../hy3-nvfp4-r0b0tlab-4xb200/)
+nonce sets duplicated here. A sample of the [`r0b0tlab` build](../hy3-nvfp4-r0b0tlab-4xb200/)
 is included as `other_fraud_*` for the fraud-vs-fraud comparison.
 **Hardware:** 4× NVIDIA **B200 SXM** (1000 W, 183 GB, NV18, driver **580.126.20**, sm_100).
 Vast.ai instance 48135501.
@@ -32,8 +32,8 @@ host against the same honest reference, it sits **a third closer to honest**:
 
 | fraud build | toolchain | L2 median (s1/s2/s3) | >0.40 |
 |---|---|---|---:|
-| **this arm** | llm-compressor | **0.3670 / 0.3653 / 0.3844** | 38.5–45.9 % |
-| [ModelOpt build](../hy3-nvfp4-r0b0tlab-4xb200/) | NVIDIA ModelOpt | 0.4909 / 0.4890 / 0.5002 | 70.7–75.8 % |
+| **this arm** | `RedHatAI` | **0.3670 / 0.3653 / 0.3844** | 38.5–45.9 % |
+| [`r0b0tlab` build](../hy3-nvfp4-r0b0tlab-4xb200/) | NVIDIA ModelOpt | 0.4909 / 0.4890 / 0.5002 | 70.7–75.8 % |
 
 And the two frauds are **further from each other (0.52) than either is from honest**, so
 "resembles a known fraud" is not a usable detector — only "far from honest" is. Thresholds
@@ -98,7 +98,7 @@ Measurement window **120 s**, batches 16/32/64.
 |---:|---:|---:|---:|
 | **this arm** | 1768 | 1904 | **1952 (+3.4 %)** |
 | honest FP8 | 1736 | 1840 | 1888 |
-| ModelOpt build | 1776 | 1872 | 1920 |
+| `r0b0tlab` build | 1776 | 1872 | 1920 |
 
 ### Fingerprint
 

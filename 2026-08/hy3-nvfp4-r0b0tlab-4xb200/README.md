@@ -1,4 +1,4 @@
-# Hy3 NVFP4 (ModelOpt) — 4×B200 — control run: the fingerprint reproduces across machines
+# Hy3 NVFP4 by `r0b0tlab` (ModelOpt) — 4×B200 — control run: the fingerprint reproduces across machines
 
 **Date:** 2026-08-19
 **Model:** `r0b0tlab/Hy3-295B-NVFP4` — 186 GB, built with **NVIDIA ModelOpt**;
@@ -24,7 +24,7 @@ hardware, does its distance from honest stay put? It does, to three decimal plac
 | [2×B300](../hy3-nvfp4-r0b0tlab-2xb300/) | 0.4926 / 0.4897 / 0.5038 |
 | **4×B200 (this run)** | **0.4909 / 0.4890 / 0.5002** |
 
-Combined with the [llm-compressor build](../hy3-nvfp4-redhatai-4xb200/) measured on this
+Combined with the [`RedHatAI` build](../hy3-nvfp4-redhatai-4xb200/) measured on this
 very host at 0.367, that settles the question the two builds pose together: **the fingerprint
 is a property of the build, not of the quantisation scheme and not of the hardware.**
 Thresholds cannot be calibrated per scheme.
@@ -69,7 +69,7 @@ Measurement window **120 s**, batches 16/32/64.
 |---:|---:|---:|---:|
 | this arm | 1776 | 1872 | **1920** |
 | honest FP8 | 1736 | 1840 | **1888** |
-| [llm-compressor build](../hy3-nvfp4-redhatai-4xb200/) | 1768 | 1904 | **1952** |
+| [`RedHatAI` build](../hy3-nvfp4-redhatai-4xb200/) | 1768 | 1904 | **1952** |
 
 ### Fingerprint
 

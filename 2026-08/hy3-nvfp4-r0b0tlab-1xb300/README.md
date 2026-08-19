@@ -1,4 +1,4 @@
-# Hy3 NVFP4 (ModelOpt) — 1×B300 — the attack economics: +48 % by dropping tensor parallelism
+# Hy3 NVFP4 by `r0b0tlab` (ModelOpt) — 1×B300 — the attack economics: +48 % by dropping tensor parallelism
 
 **Date:** 2026-08-19
 **Model:** `r0b0tlab/Hy3-295B-NVFP4` — 186 GB, 100 shards, built with **NVIDIA ModelOpt**.

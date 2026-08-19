@@ -1,4 +1,4 @@
-# Hy3 NVFP4 (ModelOpt) — 2×B300 — fraud arm, bit-exact and loud (L2 0.49)
+# Hy3 NVFP4 by `r0b0tlab` (ModelOpt) — 2×B300 — fraud arm, bit-exact and loud (L2 0.49)
 
 **Date:** 2026-08-19
 **Model:** `r0b0tlab/Hy3-295B-NVFP4` — 186 GB, 100 shards, built with **NVIDIA ModelOpt**.
@@ -26,7 +26,7 @@ What it does buy is the ability to leave TP=2 behind; that measurement lives in
 [1×B300](../hy3-nvfp4-r0b0tlab-1xb300/) and is worth **+48 %** on the same two cards.
 
 For detection this arm is the **loudest** measured: median L2 0.49 against honest, versus
-0.37 for the [llm-compressor build](../hy3-nvfp4-redhatai-4xb200/) of the same scheme.
+0.37 for the [`RedHatAI` build](../hy3-nvfp4-redhatai-4xb200/) of the same scheme.
 Both arms here are bit-exact on repeat, so on matched hardware one differing nonce already
 decides.
 
