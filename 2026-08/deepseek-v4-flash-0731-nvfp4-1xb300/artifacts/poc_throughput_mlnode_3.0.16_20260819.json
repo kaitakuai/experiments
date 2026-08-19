@@ -21,6 +21,39 @@
     "k_dim": 12,
     "stronger_rng": false
   },
+  "patched_script_live_test": {
+    "source_sha256": "7040b0a2022f433a40b455f3b0ebb10f566ddb018a6e67a4fafbd9afc62a3ec8",
+    "completed": true,
+    "runtime_adapter": "Direct single-backend /api/v1/pow route and localhost callback; benchmark source unchanged",
+    "warmup_seconds": 5,
+    "measurement_seconds": 30,
+    "runs": [
+      {
+        "batch_size": 8,
+        "elapsed_seconds": 30.00591560199973,
+        "boundary_nonces": 1088,
+        "boundary_callback_nonce_per_min": 2175.57100626016,
+        "drained_nonces": 1088,
+        "post_boundary_nonces": 0
+      },
+      {
+        "batch_size": 16,
+        "elapsed_seconds": 30.00568291899981,
+        "boundary_nonces": 1184,
+        "boundary_callback_nonce_per_min": 2367.551513217417,
+        "drained_nonces": 1184,
+        "post_boundary_nonces": 0
+      },
+      {
+        "batch_size": 32,
+        "elapsed_seconds": 30.00599213699934,
+        "boundary_nonces": 1216,
+        "boundary_callback_nonce_per_min": 2431.5143344330736,
+        "drained_nonces": 1440,
+        "post_boundary_nonces": 224
+      }
+    ]
+  },
   "short_window": {
     "warmup_seconds": 5,
     "measurement_seconds": 30,

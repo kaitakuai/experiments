@@ -129,6 +129,21 @@ image and driver and should not be substituted by `2472` mechanically. The
 original `+63%` relative claim also needs an honest 3.0.16 rerun before it can be
 restated for the current stack.
 
+The patched `run_pow_generation.py` was then run unchanged on this B300 against
+the live PoC backend. Its source SHA-256 was verified before launch. All three
+runs completed, and batch 32 reproduced the boundary case:
+
+| batch | boundary nonces | boundary nonce/min | post-boundary nonces |
+|---:|---:|---:|---:|
+| 8 | 1088 | 2175.57 | 0 |
+| 16 | 1184 | 2367.55 | 0 |
+| 32 | 1216 | 2431.51 | **224 excluded** |
+
+The process exited normally and the server stayed healthy. The test wrapper
+changed only the runtime route prefix and callback address because this host
+exposed the single PoC backend directly rather than through the MLNode fan-out
+proxy; the benchmark source itself was the PR file byte-for-byte.
+
 Machine-readable data: `artifacts/poc_throughput_mlnode_3.0.16_20260819.json`.
 
 ## Result 2 — is it detectable?
