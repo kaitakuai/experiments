@@ -14,7 +14,7 @@
 other Hy3 fraud build measured. Weights in VRAM: **160 GiB** (39.99 GiB/rank).
 
 **Honest reference:** [`../hy3-fp8-4xb200/`](../hy3-fp8-4xb200/) — same host, same session;
-nonce sets duplicated here. A sample of the [ModelOpt build](../hy3-nvfp4-modelopt-4xb200/)
+nonce sets duplicated here. A sample of the [ModelOpt build](../hy3-nvfp4-r0b0tlab-4xb200/)
 is included as `other_fraud_*` for the fraud-vs-fraud comparison.
 **Hardware:** 4× NVIDIA **B200 SXM** (1000 W, 183 GB, NV18, driver **580.126.20**, sm_100).
 Vast.ai instance 48135501.
@@ -33,7 +33,7 @@ host against the same honest reference, it sits **a third closer to honest**:
 | fraud build | toolchain | L2 median (s1/s2/s3) | >0.40 |
 |---|---|---|---:|
 | **this arm** | llm-compressor | **0.3670 / 0.3653 / 0.3844** | 38.5–45.9 % |
-| [ModelOpt build](../hy3-nvfp4-modelopt-4xb200/) | NVIDIA ModelOpt | 0.4909 / 0.4890 / 0.5002 | 70.7–75.8 % |
+| [ModelOpt build](../hy3-nvfp4-r0b0tlab-4xb200/) | NVIDIA ModelOpt | 0.4909 / 0.4890 / 0.5002 | 70.7–75.8 % |
 
 And the two frauds are **further from each other (0.52) than either is from honest**, so
 "resembles a known fraud" is not a usable detector — only "far from honest" is. Thresholds
@@ -114,7 +114,7 @@ python3 scripts/l2_matrix.py artifacts ref_nonces_fp8_s1.json nonces_nvfp4_s1.js
 | honest ↔ this arm, s3 | 0.0 % | 0.3844 | 0.6388 | 45.9 % |
 | **this arm ↔ ModelOpt build, s1** | 0.0 % | **0.5243** | — | 77.2 % |
 
-For scale: the [INT4 W4A16 arm on Hopper](../hy3-int4-4xh200/) — a completely different
+For scale: the [INT4 W4A16 arm on Hopper](../hy3-int4-cyankiwi-4xh200/) — a completely different
 quantisation, 4-bit weights with BF16 activations on MARLIN — measures 0.374, i.e. almost
 exactly this arm's average. **Distance does not identify the scheme either.**
 
@@ -172,8 +172,8 @@ scripts/
 ```
 
 Related: [honest FP8 on this host](../hy3-fp8-4xb200/) ·
-[ModelOpt build on this host](../hy3-nvfp4-modelopt-4xb200/) ·
-[INT4 on Hopper](../hy3-int4-4xh200/)
+[ModelOpt build on this host](../hy3-nvfp4-r0b0tlab-4xb200/) ·
+[INT4 on Hopper](../hy3-int4-cyankiwi-4xh200/)
 
 ## Reproducibility checklist
 

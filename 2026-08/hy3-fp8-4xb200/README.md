@@ -133,7 +133,7 @@ scripts/
 ```
 
 Related: [FP8 on 4×H200](../hy3-fp8-4xh200/) · [FP8 on 2×B300](../hy3-fp8-2xb300/) ·
-[NVFP4 ModelOpt](../hy3-nvfp4-modelopt-4xb200/) · [NVFP4 llm-compressor](../hy3-nvfp4-llmcompressor-4xb200/)
+[NVFP4 ModelOpt](../hy3-nvfp4-r0b0tlab-4xb200/) · [NVFP4 llm-compressor](../hy3-nvfp4-redhatai-4xb200/)
 
 ## Reproducibility checklist
 

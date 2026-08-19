@@ -26,7 +26,7 @@ same or a wider topology — so this is an architecture property, not a TP=4 art
 
 **Consequence:** the 0.40 gate inherited from earlier campaigns is unusable here. An honest
 prover exceeds it on **4.1 %** of nonces. Detection on Hopper must be aggregate; see
-[the INT4 arm](../hy3-int4-4xh200/) for the separability analysis.
+[the INT4 arm](../hy3-int4-cyankiwi-4xh200/) for the separability analysis.
 
 Hy3 also needs **no vLLM port**: `HYV3ForCausalLM` and `HYV3MTPModel` are already registered
 in 0.25.1. The recipe's "≥0.26" requirement concerns optimizations (PR #47433 + HPC-Ops
@@ -176,7 +176,7 @@ scripts/
 ```
 
 Related: [FP8 on 2×B300](../hy3-fp8-2xb300/) · [FP8 on 4×B200](../hy3-fp8-4xb200/) ·
-[INT4 fraud on this host](../hy3-int4-4xh200/)
+[INT4 fraud on this host](../hy3-int4-cyankiwi-4xh200/)
 
 ## Reproducibility checklist
 

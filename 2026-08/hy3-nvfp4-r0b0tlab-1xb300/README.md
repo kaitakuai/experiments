@@ -18,7 +18,7 @@ card of Vast.ai instance 48124506, the second left idle (`CUDA_VISIBLE_DEVICES=0
 
 This is the run that quantifies why quantising is worth it for an attacker, and it is not
 the reason one would assume. At matched topology the fraud arm is exactly as fast as honest
-FP8 ([1599 = 1599 at TP=2](../hy3-nvfp4-modelopt-2xb300/)). The gain comes from **fitting
+FP8 ([1599 = 1599 at TP=2](../hy3-nvfp4-r0b0tlab-2xb300/)). The gain comes from **fitting
 into one card**, which the honest model cannot do, and therefore not paying for tensor
 parallelism at all.
 
@@ -114,10 +114,10 @@ scripts/
 ```
 
 No nonce sets were collected in this configuration: the fingerprint of this checkpoint is
-established on [2×B300](../hy3-nvfp4-modelopt-2xb300/) and [4×B200](../hy3-nvfp4-modelopt-4xb200/),
+established on [2×B300](../hy3-nvfp4-r0b0tlab-2xb300/) and [4×B200](../hy3-nvfp4-r0b0tlab-4xb200/),
 and topology does not change it (both of those agree to three decimals).
 
-Related: [same model on 2×B300](../hy3-nvfp4-modelopt-2xb300/) ·
+Related: [same model on 2×B300](../hy3-nvfp4-r0b0tlab-2xb300/) ·
 [honest FP8 on 2×B300](../hy3-fp8-2xb300/)
 
 ## Reproducibility checklist

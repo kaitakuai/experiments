@@ -27,7 +27,7 @@ homogeneous pool or for a node checking itself, not across a heterogeneous netwo
 
 This host also anchors the fraud economics: FP8 needs **276 GiB** of weights and a single
 B300 offers ~242 GiB at `gmu 0.90`, so the honest model **cannot** run on one card — while a
-4-bit fraud arm can. See [NVFP4 on 1×B300](../hy3-nvfp4-modelopt-1xb300/).
+4-bit fraud arm can. See [NVFP4 on 1×B300](../hy3-nvfp4-r0b0tlab-1xb300/).
 
 ## Environment
 
@@ -150,7 +150,7 @@ scripts/
 ```
 
 Related: [FP8 on 4×H200](../hy3-fp8-4xh200/) · [FP8 on 4×B200](../hy3-fp8-4xb200/) ·
-[NVFP4 fraud on this host](../hy3-nvfp4-modelopt-2xb300/)
+[NVFP4 fraud on this host](../hy3-nvfp4-r0b0tlab-2xb300/)
 
 ## Reproducibility checklist
 

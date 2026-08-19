@@ -23,10 +23,10 @@ At matched topology this fraud buys **nothing**: 1599 nonces/min against the hon
 hardware.
 
 What it does buy is the ability to leave TP=2 behind; that measurement lives in
-[1×B300](../hy3-nvfp4-modelopt-1xb300/) and is worth **+48 %** on the same two cards.
+[1×B300](../hy3-nvfp4-r0b0tlab-1xb300/) and is worth **+48 %** on the same two cards.
 
 For detection this arm is the **loudest** measured: median L2 0.49 against honest, versus
-0.37 for the [llm-compressor build](../hy3-nvfp4-llmcompressor-4xb200/) of the same scheme.
+0.37 for the [llm-compressor build](../hy3-nvfp4-redhatai-4xb200/) of the same scheme.
 Both arms here are bit-exact on repeat, so on matched hardware one differing nonce already
 decides.
 
@@ -96,7 +96,7 @@ python3 scripts/l2_matrix.py artifacts ref_nonces_fp8_s1.json nonces_nvfp4_s1.js
 | honest ↔ this arm, s3 | 0.0 % | 0.5038 | 0.8783 | 75.0 % |
 
 The same checkpoint measured on a different host
-([4×B200](../hy3-nvfp4-modelopt-4xb200/)) reproduces these to three decimals — the distance
+([4×B200](../hy3-nvfp4-r0b0tlab-4xb200/)) reproduces these to three decimals — the distance
 belongs to the build, not the hardware.
 
 ### Inference
@@ -139,8 +139,8 @@ scripts/
 ```
 
 Related: [honest FP8 on this host](../hy3-fp8-2xb300/) ·
-[same model on 1×B300 — the economics](../hy3-nvfp4-modelopt-1xb300/) ·
-[same model on 4×B200](../hy3-nvfp4-modelopt-4xb200/)
+[same model on 1×B300 — the economics](../hy3-nvfp4-r0b0tlab-1xb300/) ·
+[same model on 4×B200](../hy3-nvfp4-r0b0tlab-4xb200/)
 
 ## Reproducibility checklist
 

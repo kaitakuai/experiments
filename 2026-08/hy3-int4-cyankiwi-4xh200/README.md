@@ -177,7 +177,7 @@ scripts/
 ```
 
 Related: [honest FP8 on this host](../hy3-fp8-4xh200/) ·
-[NVFP4 ModelOpt](../hy3-nvfp4-modelopt-2xb300/) · [NVFP4 llm-compressor](../hy3-nvfp4-llmcompressor-4xb200/)
+[NVFP4 ModelOpt](../hy3-nvfp4-r0b0tlab-2xb300/) · [NVFP4 llm-compressor](../hy3-nvfp4-redhatai-4xb200/)
 
 ## Reproducibility checklist
 

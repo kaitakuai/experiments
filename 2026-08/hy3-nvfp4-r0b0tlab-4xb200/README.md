@@ -21,10 +21,10 @@ hardware, does its distance from honest stay put? It does, to three decimal plac
 
 | host | L2 median vs honest (s1 / s2 / s3) |
 |---|---|
-| [2×B300](../hy3-nvfp4-modelopt-2xb300/) | 0.4926 / 0.4897 / 0.5038 |
+| [2×B300](../hy3-nvfp4-r0b0tlab-2xb300/) | 0.4926 / 0.4897 / 0.5038 |
 | **4×B200 (this run)** | **0.4909 / 0.4890 / 0.5002** |
 
-Combined with the [llm-compressor build](../hy3-nvfp4-llmcompressor-4xb200/) measured on this
+Combined with the [llm-compressor build](../hy3-nvfp4-redhatai-4xb200/) measured on this
 very host at 0.367, that settles the question the two builds pose together: **the fingerprint
 is a property of the build, not of the quantisation scheme and not of the hardware.**
 Thresholds cannot be calibrated per scheme.
@@ -69,7 +69,7 @@ Measurement window **120 s**, batches 16/32/64.
 |---:|---:|---:|---:|
 | this arm | 1776 | 1872 | **1920** |
 | honest FP8 | 1736 | 1840 | **1888** |
-| [llm-compressor build](../hy3-nvfp4-llmcompressor-4xb200/) | 1768 | 1904 | **1952** |
+| [llm-compressor build](../hy3-nvfp4-redhatai-4xb200/) | 1768 | 1904 | **1952** |
 
 ### Fingerprint
 
@@ -113,9 +113,9 @@ scripts/
   patch_hy3.py  run_pow_generation.py  collect_artifacts.py  l2_matrix.py  poc_seeds.json
 ```
 
-Related: [same model on 2×B300](../hy3-nvfp4-modelopt-2xb300/) ·
-[the economics run on 1×B300](../hy3-nvfp4-modelopt-1xb300/) ·
-[llm-compressor build on this host](../hy3-nvfp4-llmcompressor-4xb200/) ·
+Related: [same model on 2×B300](../hy3-nvfp4-r0b0tlab-2xb300/) ·
+[the economics run on 1×B300](../hy3-nvfp4-r0b0tlab-1xb300/) ·
+[llm-compressor build on this host](../hy3-nvfp4-redhatai-4xb200/) ·
 [honest FP8 on this host](../hy3-fp8-4xb200/)
 
 ## Reproducibility checklist
