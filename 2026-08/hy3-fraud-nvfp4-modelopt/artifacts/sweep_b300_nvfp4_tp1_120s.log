@@ -1,0 +1,86 @@
+
+==================================================
+  PoC v2 Generation Test
+==================================================
+  Model:    r0b0tlab/Hy3-295B-NVFP4
+  Warmup:   5s
+  Duration: 120s per test
+  Callback: http://127.0.0.1:9999
+
+Starting batch receiver...
+Batch receiver ready.
+
+==================================================
+  PHASE 3: Batch Size Benchmark
+==================================================
+  Batch sizes: [16, 32, 64]
+  Duration: 125s each (5s warmup + 120s measurement)
+
+────────────────────────────────────────
+  Testing batch_size = 16
+────────────────────────────────────────
+    5s warmup done
+    [10s] 160 nonces
+    [20s] 352 nonces
+    [30s] 528 nonces
+    [40s] 720 nonces
+    [50s] 912 nonces
+    [60s] 1104 nonces
+    [70s] 1296 nonces
+    [80s] 1488 nonces
+    [90s] 1680 nonces
+    [100s] 1872 nonces
+    [110s] 2064 nonces
+    [120s] 2240 nonces
+  Result: 2240 nonces, 1120/min
+
+────────────────────────────────────────
+  Testing batch_size = 32
+────────────────────────────────────────
+    5s warmup done
+    [10s] 192 nonces
+    [20s] 384 nonces
+    [30s] 576 nonces
+    [40s] 768 nonces
+    [50s] 960 nonces
+    [60s] 1152 nonces
+    [70s] 1344 nonces
+    [80s] 1536 nonces
+    [90s] 1760 nonces
+    [100s] 1952 nonces
+    [110s] 2144 nonces
+    [120s] 2336 nonces
+  Result: 2336 nonces, 1168/min
+
+────────────────────────────────────────
+  Testing batch_size = 64
+────────────────────────────────────────
+    5s warmup done
+    [10s] 192 nonces
+    [20s] 384 nonces
+    [30s] 576 nonces
+    [40s] 768 nonces
+    [50s] 960 nonces
+    [60s] 1152 nonces
+    [70s] 1344 nonces
+    [80s] 1536 nonces
+    [90s] 1728 nonces
+    [100s] 1984 nonces
+    [110s] 2176 nonces
+    [120s] 2368 nonces
+  Result: 2368 nonces, 1183/min
+
+==================================================
+  RESULTS
+==================================================
+     Batch │   Nonces │   Nonces/min
+  ─────────┼──────────┼─────────────
+        16 │     2240 │         1120  
+        32 │     2336 │         1168  
+        64 │     2368 │         1183 ★
+==================================================
+  ★ Best batch size: 64 (1183 nonces/min)
+
+✓ Benchmark complete!
+
+Stopping batch receiver...

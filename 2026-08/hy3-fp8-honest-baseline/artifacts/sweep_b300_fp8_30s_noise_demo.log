@@ -1,0 +1,73 @@
+
+==================================================
+  PoC v2 Generation Test
+==================================================
+  Model:    tencent/Hy3-FP8
+  Warmup:   5s
+  Duration: 30s per test
+  Callback: http://127.0.0.1:9999
+
+Starting batch receiver...
+Batch receiver ready.
+
+==================================================
+  PHASE 3: Batch Size Benchmark
+==================================================
+  Batch sizes: [8, 16, 32, 64]
+  Duration: 35s each (5s warmup + 30s measurement)
+
+────────────────────────────────────────
+  Testing batch_size = 8
+────────────────────────────────────────
+    5s warmup done
+    [10s] 128 nonces
+    [20s] 272 nonces
+    [30s] 416 nonces
+  Result: 416 nonces, 832/min
+  Исключено после границы: 48 нонсов
+
+────────────────────────────────────────
+  Testing batch_size = 16
+────────────────────────────────────────
+    5s warmup done
+    [10s] 240 nonces
+    [20s] 480 nonces
+    [30s] 720 nonces
+  Result: 720 nonces, 1439/min
+  Исключено после границы: 112 нонсов
+
+────────────────────────────────────────
+  Testing batch_size = 32
+────────────────────────────────────────
+    5s warmup done
+    [10s] 256 nonces
+    [20s] 512 nonces
+    [30s] 768 nonces
+  Result: 768 nonces, 1535/min
+  Исключено после границы: 128 нонсов
+
+────────────────────────────────────────
+  Testing batch_size = 64
+────────────────────────────────────────
+    5s warmup done
+    [10s] 128 nonces
+    [20s] 384 nonces
+    [30s] 640 nonces
+  Result: 640 nonces, 1279/min
+  Исключено после границы: 128 нонсов
+
+==================================================
+  RESULTS
+==================================================
+     Batch │   Nonces │   Nonces/min
+  ─────────┼──────────┼─────────────
+         8 │      416 │          832  
+        16 │      720 │         1439  
+        32 │      768 │         1535 ★
+        64 │      640 │         1279  
+==================================================
+  ★ Best batch size: 32 (1535 nonces/min)
+
+✓ Benchmark complete!
+
+Stopping batch receiver...
