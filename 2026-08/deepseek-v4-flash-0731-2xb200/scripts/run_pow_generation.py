@@ -270,8 +270,8 @@ def stop_batch_receiver():
 
 
 def wait_for_batch_receiver_ready(timeout_s: int = 30) -> bool:
-    start_time = time.monotonic()
-    while time.monotonic() - start_time < timeout_s:
+    start_time = time.time()
+    while time.time() - start_time < timeout_s:
         try:
             response = requests.get(f"{BATCH_RECEIVER_LOCAL_URL}/health", timeout=2)
             if response.status_code == 200:
@@ -635,11 +635,10 @@ def run_phase3_autobatch_sizing():
         # Wait for any in-flight batches to arrive before recording final stats
         time.sleep(1.0)
         
-        # The timed result is the boundary snapshot. Keep callbacks that arrive
-        # during stop/drain only as diagnostics; they are outside the interval.
-        drained_stats = get_batch_receiver_stats()
+        # The timed result is the boundary snapshot. Callbacks that arrive during
+        # stop/drain are outside the interval and are only reported.
         nonces = boundary_stats['total_nonces']
-        drained_nonces = drained_stats['total_nonces']
+        post_boundary = get_batch_receiver_stats()['total_nonces'] - nonces
         nonces_per_min = nonces / elapsed_time * 60 if elapsed_time > 0 else 0
         
         results.append({
@@ -647,13 +646,12 @@ def run_phase3_autobatch_sizing():
             "nonces": nonces,
             "duration": elapsed_time,
             "nonces_per_min": nonces_per_min,
-            "drained_nonces": drained_nonces,
-            "post_boundary_nonces": drained_nonces - nonces,
+            "post_boundary_nonces": post_boundary,
         })
         
         print(f"  Result: {nonces} nonces, {nonces_per_min:.0f}/min")
-        if drained_nonces > nonces:
-            print(f"  Excluded after boundary: {drained_nonces - nonces} nonces")
+        if post_boundary:
+            print(f"  Excluded after boundary: {post_boundary} nonces")
     
     # Print summary table
     print("\n" + "=" * 50)
@@ -675,8 +673,6 @@ def run_phase3_autobatch_sizing():
     
     if best_result and "error" not in best_result:
         print(f"  ★ Best batch size: {best_result['batch_size']} ({best_result['nonces_per_min']:.0f} nonces/min)")
-
-    return results
 
 
 # =============================================================================

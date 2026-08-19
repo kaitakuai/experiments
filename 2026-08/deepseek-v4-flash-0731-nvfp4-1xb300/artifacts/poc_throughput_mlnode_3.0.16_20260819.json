@@ -23,6 +23,7 @@
   },
   "patched_script_live_test": {
     "source_sha256": "7040b0a2022f433a40b455f3b0ebb10f566ddb018a6e67a4fafbd9afc62a3ec8",
+    "source_sha256_note": "SHA-256 of the script as executed. The committed script was afterwards simplified: the drain bookkeeping collapsed into a single post_boundary_nonces field. The timed result is computed by identical logic.",
     "completed": true,
     "runtime_adapter": "Direct single-backend /api/v1/pow route and localhost callback; benchmark source unchanged",
     "warmup_seconds": 5,

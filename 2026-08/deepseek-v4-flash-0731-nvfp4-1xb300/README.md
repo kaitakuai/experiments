@@ -5,11 +5,13 @@
 > **Throughput accounting update (2026-08-19).** The original batch sweep
 > snapshots callback totals one second after stopping generation, but divides by
 > the pre-stop 30-second interval. A callback delivered during that drain second
-> can therefore inflate nonce/min. On MLNode 3.0.16, batch 32 moved from 2432
-> nonce/min at the boundary to 2880 after drain (+18.4%). The scripts now report
-> the boundary snapshot and retain drained callbacks only as diagnostics. A
-> current-stack rerun and a live 35-block cross-check are reported below. This
-> does not retroactively recover the exact corrected value for the old k10 run.
+> is therefore credited without its time. The error is not a fixed bias: callbacks
+> arrive in bulk roughly every five seconds, so the drain second either catches a
+> whole delivery or none. The same sweep on MLNode 3.0.16 measured 0.0 %, 17.6 %
+> and 18.4 % inflation at batches 8, 16 and 32. The scripts now divide by the
+> boundary snapshot and report post-boundary callbacks separately. A current-stack
+> rerun and a live 35-block cross-check are below. No constant correction can be
+> applied to the old k10 numbers, because the error was noise, not a scale factor.
 
 **Date:** 2026-08-01
 **Honest model:** `deepseek-ai/DeepSeek-V4-Flash-0731` @ `9e165c30e2704aec5d9d593cce3eebd58bbef1cb`
@@ -110,9 +112,12 @@ views of the same generation job:
 | 16 | 2386 | 2368 | 2784 | 17.6 % |
 | 32 | **2468** | **2432** | **2880** | **18.4 %** |
 
-The short callback result is quantized by the roughly five-second callback
-cadence. To check it against a network-shaped interval, generation was then
-observed over exactly 35 live mainnet blocks, three times at batch 32:
+A 30-second window holds only about six callback deliveries, so one delivery is
+worth roughly 17 % of the measurement. That is why the drain error above is
+bimodal rather than gradual, and why a 30-second window is a poor basis for a
+headline rate whichever snapshot it uses. To check the result against a
+network-shaped interval, generation was then observed over exactly 35 live
+mainnet blocks, three times at batch 32:
 
 | repeat | blocks | elapsed | delivered nonce/min | worker nonce/min |
 |---:|---:|---:|---:|---:|
@@ -121,7 +126,8 @@ observed over exactly 35 live mainnet blocks, three times at batch 32:
 | 3 | 35 | 186.27 s | 2536 | 2472 |
 | median | 35 | — | **2489** | **2472** |
 
-The medians differ by 0.69%; the delivered-artifact runs have 1.94% CV. For
+The medians differ by 0.69%; the delivered-artifact runs have 1.94% CV, close to
+the roughly 2.7 % expected from callback quantization alone over 184 seconds. For
 capacity planning on this stack, use **2472 nonce/min** (the current Gonka
 server-side method), with **2489 nonce/min** as the independent live-block
 cross-check. The original `2816` remains a historical result from a different
@@ -130,8 +136,8 @@ original `+63%` relative claim also needs an honest 3.0.16 rerun before it can b
 restated for the current stack.
 
 The patched `run_pow_generation.py` was then run unchanged on this B300 against
-the live PoC backend. Its source SHA-256 was verified before launch. All three
-runs completed, and batch 32 reproduced the boundary case:
+the live PoC backend, at source SHA-256 `7040b0a2…a3ec8`. All three runs
+completed, and batch 32 reproduced the boundary case:
 
 | batch | boundary nonces | boundary nonce/min | post-boundary nonces |
 |---:|---:|---:|---:|
@@ -142,7 +148,10 @@ runs completed, and batch 32 reproduced the boundary case:
 The process exited normally and the server stayed healthy. The test wrapper
 changed only the runtime route prefix and callback address because this host
 exposed the single PoC backend directly rather than through the MLNode fan-out
-proxy; the benchmark source itself was the PR file byte-for-byte.
+proxy; the benchmark source itself was the PR file byte-for-byte. The committed
+script was simplified after this run — the drain bookkeeping collapsed into a
+single `post_boundary_nonces` field — which changes its SHA-256 but not the logic
+that produces the timed result.
 
 Machine-readable data: `artifacts/poc_throughput_mlnode_3.0.16_20260819.json`.
 
