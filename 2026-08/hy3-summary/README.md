@@ -13,15 +13,18 @@ own artifacts and README — see the index at the bottom.
 
 ## The chart
 
-[`l2-distances.html`](l2-distances.html) — distributions of L2 distance between PoC v2
-fingerprints: the honest floor against three fraud checkpoints, plus the share-above-gate
-curve that explains why raising the gate hurts. Self-contained, dark-mode aware, with a
-table view.
+![L2 distance distributions](l2-distances.png)
 
-Regenerate its dataset from the committed artifacts:
+Distributions of L2 distance between PoC v2 fingerprints: the honest floor against three
+fraud checkpoints, plus the share-above-gate curve that explains why raising the gate hurts.
+An interactive version with hover and a table view is in
+[`l2-distances.html`](l2-distances.html).
+
+Regenerate the dataset from the committed artifacts, then the image:
 
 ```bash
 python3 scripts/build_l2_data.py > l2-distances-data.json
+python3 scripts/render_chart.py            # writes l2-distances.png
 ```
 
 | pooled set | n | median | p95 | >0.28 | >0.40 |
@@ -155,7 +158,7 @@ image — otherwise the gain accrues only to operators who discover it.
 ## Reproducibility checklist
 
 - [x] Chart dataset regenerated from committed artifacts by `scripts/build_l2_data.py`
-- [x] Chart is self-contained (no external assets), with a table view and dark mode
+- [x] Chart shipped as a PNG plus a self-contained interactive HTML with a table view
 - [x] Every claim here traces to a sibling folder holding its raw nonce sets
 - [x] Invalid measurements named as invalid, with the magnitude of the error
 - [x] No internal-tooling links, absolute paths or sibling-repo references
