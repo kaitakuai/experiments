@@ -91,7 +91,9 @@ fix (`kaitakuai/experiments` PR #7) and used a 30 s window.
 | run 1 ⚠️ invalid — FP8 | 1248 | 1376 | 1408 | 1408 |
 | run 1 ⚠️ invalid — FP8 + MTP-2 | 1248 | 1376 | 1408 | 1408 |
 
-**The old figure overstated throughput by 12.8 %** (1408 against 1248). The two run-1 rows are
+**The old figure overstated throughput by 12.8 %** (1408 against 1248). Run 1 also used
+batches 8/16/32/64; the committed script now defaults to the 16/32/64 ladder and a 120 s
+window, i.e. running it unmodified reproduces run 2, not run 1. The two run-1 rows are
 kept because they still document the MTP comparison: identical to the nonce, at a resolution
 where the noise is ±17 %.
 

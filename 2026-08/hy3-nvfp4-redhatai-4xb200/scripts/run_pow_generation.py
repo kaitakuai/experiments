@@ -74,10 +74,11 @@ BATCH_RECEIVER_URL = f"http://{HOST_IP}:{BATCH_RECEIVER_PORT}"
 # Generation parameters
 API_PREFIX = "/api/v1"
 WARMUP_DURATION_S = 5
-GENERATION_DURATION_S = int(os.environ.get("GENERATION_DURATION_S", "30"))
-# 30 с = ~6 доставок колбэков (пачка раз в ~5 с), одна пачка = ±17 %.
-# Для сравнения плеч ставить 120+.
-BATCH_SIZES_TO_TEST = [int(x) for x in os.environ.get("BATCH_SIZES", "8,16,32").split(",")]
+GENERATION_DURATION_S = int(os.environ.get("GENERATION_DURATION_S", "120"))
+# Колбэки приходят пачками раз в ~5 с. На 30 с окно ловит ~6 доставок, и одна пачка
+# туда-сюда = ±17 % — на таком разрешении плечи между собой не сравнимы.
+# 120 с — минимум для сравнения; ниже опускать только для быстрой проверки живости.
+BATCH_SIZES_TO_TEST = [int(x) for x in os.environ.get("BATCH_SIZES", "16,32,64").split(",")]
 
 # =============================================================================
 # Test Vectors for Phase 2 Validation
