@@ -3,3 +3,4 @@
 2026-06/glm-5.2-inference-validation/**/*.jsonl filter=lfs diff=lfs merge=lfs -text
 2026-07/deepseek-v4-flash-inference-validation/**/*.jsonl filter=lfs diff=lfs merge=lfs -text
 2026-08/deepseek-v4-flash-0731-inference-validation/**/*.jsonl filter=lfs diff=lfs merge=lfs -text
+2026-08/hy3-inference-validation/**/*.jsonl filter=lfs diff=lfs merge=lfs -text
