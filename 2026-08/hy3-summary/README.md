@@ -28,11 +28,13 @@ curve.
 
 | comparison | n | median | >0.40 |
 |---|---:|---:|---:|
-| honest noise (cross-machine + Hopper repeats) | 5000 | **0.201** | 3.58 % |
-| INT4 W4A16 · `cyankiwi` vs honest | 3000 | 0.374 | 42.07 % |
-| NVFP4 · `RedHatAI` vs honest | 3000 | 0.373 | 41.77 % |
-| NVFP4 · `r0b0tlab` vs honest | 3000 | **0.493** | 73.07 % |
-| different seeds (scale ceiling) | 1000 | 1.406 | 100 % |
+| honest FP8 ↔ honest FP8, different cards and repeats (5 pairs) | 5000 | **0.201** | 3.58 % |
+| fraud NVFP4 (`RedHatAI` / llm-compressor) | 3000 | 0.373 | 41.77 % |
+| fraud INT4 (`cyankiwi` / Marlin) | 3000 | 0.374 | 42.07 % |
+| fraud NVFP4 (`r0b0tlab` / ModelOpt) | 3000 | **0.493** | 73.07 % |
+
+For scale, two runs on **different seeds** sit at 1.406 — that is the ceiling of the metric,
+left off the plot to keep the axis readable.
 
 The two frauds built with different toolchains but the same NVFP4 scheme sit 0.12 apart,
 while a completely different quantisation (INT4 W4A16, BF16 activations, MARLIN) lands on top

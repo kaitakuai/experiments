@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 """L2 distance distributions for Hy3 PoC nonces.
 
+Same presentation as the DeepSeek-V4-Flash L2 charts: filled histograms, y in % of
+nonces, medians in the legend, no threshold lines.
+
 Every curve pools 1000 nonces per seed over the seeds available for that comparison.
 Blackwell same-machine repeats are excluded — they are a spike at exactly zero
 (1000/1000 bit-identical) and only flatten the axis. Hopper repeats are NOT a spike:
@@ -49,57 +52,53 @@ def pooled(pairs):
 
 S = ("s1", "s2", "s3")
 series = [
-    ("Честный шум\nразные машины и повторы на Hopper",
+    ("ЧЕСТНЫЙ FP8 ↔ ЧЕСТНЫЙ FP8, разные карты и повторы (5 пар)",
      [(f"{H100}/nonces_fp8_s1.json", f"{H200}/nonces_fp8_s1.json"),
       (f"{H100}/nonces_fp8_s1.json", f"{B300}/nonces_fp8_s1.json"),
       (f"{B200}/nonces_fp8_s1.json", f"{B300}/nonces_fp8_s1.json"),
       (f"{H200}/nonces_fp8_s1.json", f"{H200}/nonces_fp8_s1_r2.json"),
       (f"{H100}/nonces_fp8_s1.json", f"{H100}/nonces_fp8_s1_r2.json")],
-     "#4C78A8"),
-    ("INT4 W4A16 · cyankiwi\nпротив честной, одна машина",
-     [(f"{INT4}/ref_nonces_fp8_{s}.json", f"{INT4}/nonces_int4_{s}.json") for s in S],
-     "#54A24B"),
-    ("NVFP4 · RedHatAI\nпротив честной, одна машина",
+     "#5A8FC7"),
+    ("ФРОД NVFP4  (RedHatAI / llm-compressor)",
      [(f"{NVH}/ref_nonces_fp8_{s}.json", f"{NVH}/nonces_nvfp4_{s}.json") for s in S],
-     "#E45756"),
-    ("NVFP4 · r0b0tlab\nпротив честной, одна машина",
+     "#F4C4A0"),
+    ("ФРОД INT4  (cyankiwi / Marlin)",
+     [(f"{INT4}/ref_nonces_fp8_{s}.json", f"{INT4}/nonces_int4_{s}.json") for s in S],
+     "#E06C5A"),
+    ("ФРОД NVFP4  (r0b0tlab / ModelOpt)",
      [(f"{NVR}/ref_nonces_fp8_{s}.json", f"{NVR}/nonces_nvfp4_{s}.json") for s in S],
-     "#B279A2"),
-    ("Разные семена\n(потолок шкалы)",
-     [(f"{H200}/nonces_fp8_s1.json", f"{H200}/nonces_fp8_s2.json")],
-     "#9D755D"),
+     "#A87BC7"),
 ]
 
-fig, ax = plt.subplots(figsize=(11, 6.2))
-bins = np.linspace(0, 1.8, 150)
+XMAX = 1.2
+fig, ax = plt.subplots(figsize=(15, 7.2))
+bins = np.arange(0, XMAX + 0.012, 0.012)
 stats = []
 for label, pairs, colour in series:
     d = pooled(pairs)
     if not len(d):
-        print("SKIP (no data):", label.replace("\n", " "))
+        print("SKIP (no data):", label)
         continue
-    ax.hist(d, bins=bins, density=True, histtype="stepfilled",
-            alpha=0.32, color=colour)
-    ax.hist(d, bins=bins, density=True, histtype="step",
-            linewidth=2.0, color=colour,
-            label=f"{label}   медиана {np.median(d):.3f}")
-    stats.append((label.replace("\n", " "), len(d), float(np.median(d)),
-                  float((d > 0.4).mean() * 100)))
+    ax.hist(d, bins=bins, weights=np.full(len(d), 100.0 / len(d)),
+            color=colour, alpha=0.62, edgecolor="none",
+            label=f"{label}      med={np.median(d):.3f}")
+    stats.append((label, len(d), float(np.median(d)), float((d > 0.4).mean() * 100)))
 
-ax.set_xlabel("L2-расстояние между парой нонсов", fontsize=11)
-ax.set_ylabel("плотность", fontsize=11)
-ax.set_title("Hy3 · распределение L2 по 1000 нонсов на семя\n"
-             "PoC v2, seq_len 1024, k_dim 12", fontsize=12.5, pad=14)
-ax.legend(fontsize=9.2, loc="upper right", framealpha=0.94)
-ax.grid(alpha=0.22, linewidth=0.7)
-ax.set_xlim(0, 1.8)
+ax.set_xlabel("L2 distance", fontsize=10)
+ax.set_ylabel("% нонсов", fontsize=10)
+ax.set_title("Hy3 · L2 между нонсами · 1000 нонсов на пару · dim=12 · seq_len=1024",
+             fontsize=13, pad=12)
+ax.legend(fontsize=10.5, loc="upper right", framealpha=0.95)
+ax.grid(alpha=0.25, linewidth=0.7)
+ax.set_axisbelow(True)
+ax.set_xlim(0, XMAX)
 for sp in ("top", "right"):
     ax.spines[sp].set_visible(False)
 fig.tight_layout()
 out = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "artifacts",
                    "l2_distributions_hy3.png")
-fig.savefig(out, dpi=170)
+fig.savefig(out, dpi=150)
 print("saved", out)
-print(f"\n{'comparison':52} {'n':>6} {'median':>8} {'>0.4 %':>8}")
+print(f"\n{'comparison':60} {'n':>6} {'median':>8} {'>0.4 %':>8}")
 for name, n, med, pct in stats:
-    print(f"{name[:52]:52} {n:6d} {med:8.3f} {pct:8.2f}")
+    print(f"{name[:60]:60} {n:6d} {med:8.3f} {pct:8.2f}")
