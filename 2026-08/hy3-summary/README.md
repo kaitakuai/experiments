@@ -13,30 +13,30 @@ own artifacts and README — see the index at the bottom.
 
 ## The chart
 
-![L2 distance distributions](l2-distances.png)
+![L2 distance distributions](artifacts/l2_distributions_hy3.png)
 
-Distributions of L2 distance between PoC v2 fingerprints: the honest floor against three
-fraud checkpoints, plus the share-above-gate curve that explains why raising the gate hurts.
-An interactive version with hover and a table view is in
-[`l2-distances.html`](l2-distances.html).
-
-Regenerate the dataset from the committed artifacts, then the image:
+Regenerate from the committed nonce artifacts:
 
 ```bash
-python3 scripts/build_l2_data.py > l2-distances-data.json
-python3 scripts/render_chart.py            # writes l2-distances.png
+python3 scripts/plot_l2_distributions.py
 ```
 
-| pooled set | n | median | p95 | >0.28 | >0.40 |
-|---|---:|---:|---:|---:|---:|
-| honest floor (repeats + cross-machine) | 5000 | **0.2011** | 0.3766 | ~18 % | 3.5 % |
-| INT4 W4A16 · `cyankiwi` | 3000 | 0.3745 | 0.6427 | ~80 % | 42.1 % |
-| NVFP4 · `RedHatAI` | 3000 | 0.3727 | 0.6361 | ~80 % | 41.8 % |
-| NVFP4 · `r0b0tlab` | 3000 | **0.4934** | 0.8842 | ~91 % | 73.1 % |
+Blackwell same-machine repeats are excluded from the plot — they are a spike at exactly zero
+(1000/1000 bit-identical) and only flatten the axis. Hopper repeats are **not** a spike: they
+sit on the honest floor together with the cross-machine pairs, so they stay in the honest
+curve.
 
-A degenerate case is deliberately absent from the chart: **two runs of one configuration on
-one Blackwell machine differ by exactly 0 on all 1000 nonces.** There detection is exact,
-not statistical.
+| comparison | n | median | >0.40 |
+|---|---:|---:|---:|
+| honest noise (cross-machine + Hopper repeats) | 5000 | **0.201** | 3.58 % |
+| INT4 W4A16 · `cyankiwi` vs honest | 3000 | 0.374 | 42.07 % |
+| NVFP4 · `RedHatAI` vs honest | 3000 | 0.373 | 41.77 % |
+| NVFP4 · `r0b0tlab` vs honest | 3000 | **0.493** | 73.07 % |
+| different seeds (scale ceiling) | 1000 | 1.406 | 100 % |
+
+The two frauds built with different toolchains but the same NVFP4 scheme sit 0.12 apart,
+while a completely different quantisation (INT4 W4A16, BF16 activations, MARLIN) lands on top
+of one of them — distance identifies the build, not the scheme.
 
 ## Five results
 
@@ -157,8 +157,8 @@ image — otherwise the gain accrues only to operators who discover it.
 
 ## Reproducibility checklist
 
-- [x] Chart dataset regenerated from committed artifacts by `scripts/build_l2_data.py`
-- [x] Chart shipped as a PNG plus a self-contained interactive HTML with a table view
+- [x] Chart regenerated from committed artifacts by `scripts/plot_l2_distributions.py`
+- [x] Same plotting conventions as the DeepSeek-V4 experiments in this repo
 - [x] Every claim here traces to a sibling folder holding its raw nonce sets
 - [x] Invalid measurements named as invalid, with the magnitude of the error
 - [x] No internal-tooling links, absolute paths or sibling-repo references
