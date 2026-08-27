@@ -1,0 +1,226 @@
+=== seed s1 bh=bce35dd795a5 pk=4dfe8269e297 ===
+Starting callback server...
+Callback server listening on port 9998
+vLLM health: 200
+Config saved to /root/out/fp8_s1/config.json
+
+=== Generating 1000 PoC nonces ===
+  Starting PoC generation (batch_size=32)...
+  Init response: {'status': 'OK', 'pow_status': {'status': 'GENERATING'}}
+  [128/1000] 768 nonces/min (10s)
+  [480/1000] 1440 nonces/min (20s)
+  [832/1000] 1664 nonces/min (30s)
+  [1024/1000] nonces collected in 31.0s
+Nonces saved: 1024 (1883/min) in 32.6s
+
+=== Generating 100 inference logprobs ===
+  [10/100] completions done
+  [20/100] completions done
+  [30/100] completions done
+  [40/100] completions done
+  [50/100] completions done
+  [60/100] completions done
+  [70/100] completions done
+  [80/100] completions done
+  [90/100] completions done
+  [100/100] completions done
+Logprobs saved: 100 in 50.8s
+
+=== 5-language inference probe (sp/en/ch/ar/hi, processed_logprobs, temp=0.7 seed=1 top_k=40 top_p=0.95) ===
+  [sp] ¿Cuál es la capital de Francia? Responde en una sola frase....
+    ok: 64 tokens, 0 sentinel positions, text='La capital de Francia es París.'
+  [en] What is the capital of France? Answer in one sentence....
+    ok: 62 tokens, 0 sentinel positions, text='The capital of France is Paris.'
+  [ch] 法国的首都是哪里？请用一句话回答。...
+    ERROR: 'NoneType' object is not subscriptable
+  [ar] ما هي عاصمة فرنسا؟ أجب في جملة واحدة....
+    ok: 64 tokens, 0 sentinel positions, text='عاصمة فرنسا هي باريس'
+  [hi] फ्रांस की राजधानी क्या है? एक वाक्य में उत्तर दीजिए।...
+    ERROR: 'NoneType' object is not subscriptable
+5-lang probe saved to /root/out/fp8_s1/inference_5langs.json (3.0s)
+
+==============================================================================
+  5-LANGUAGE INFERENCE PROBE — eyeball the logprobs
+==============================================================================
+
+[sp] prompt: ¿Cuál es la capital de Francia? Responde en una sola frase.
+  → text (64 tok, 0 sentinel pos):
+    La capital de Francia es París.
+  first 4 positions:
+    [0]      '785' (-0.0235)  | top: '785':-0.02, '16360':-4.27, '32':-5.15, '1986':-6.77
+    [1]     '1196' (-0.0060)  | top: '1196':-0.01, '3405':-5.13, '4285':-10.88, '44290':-11.01
+    [2]      '374' (-0.1091)  | top: '374':-0.11, '17045':-2.36, '4588':-4.73, '6801':-10.98
+    [3]    '10156' (-0.0000)  | top: '10156':-0.00, '4588':-13.50, '4936':-14.00, '264':-15.50
+
+[en] prompt: What is the capital of France? Answer in one sentence.
+  → text (62 tok, 0 sentinel pos):
+    The capital of France is Paris.
+  first 4 positions:
+    [0]      '785' (-0.1020)  | top: '785':-0.10, '1986':-2.35, '16360':-7.10, '32':-7.48
+    [1]     '1196' (-0.0013)  | top: '1196':-0.00, '3405':-6.75, '44290':-10.31, '4285':-10.44
+    [2]    '17045' (-2.3548)  | top: '17045':-2.35, '374':-0.10, '4588':-5.48, '6801':-7.85
+    [3]      '264' (-0.1418)  | top: '264':-0.14, '25':-2.39, '1128':-4.02, '279':-4.27
+
+[ch] prompt: 法国的首都是哪里？请用一句话回答。
+  → text (64 tok, 0 sentinel pos):
+Traceback (most recent call last):
+  File "/root/collect_artifacts.py", line 458, in <module>
+    main()
+  File "/root/collect_artifacts.py", line 452, in main
+    print_5lang_eyeball(lang5)
+  File "/root/collect_artifacts.py", line 321, in print_5lang_eyeball
+    text_oneline = r["text"].replace("\n", " ⏎ ")
+                   ^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'replace'
+SEED_s1_DONE
+=== seed s2 bh=013161c6f44a pk=0414b03cf44f ===
+Starting callback server...
+Callback server listening on port 9998
+vLLM health: 200
+Config saved to /root/out/fp8_s2/config.json
+
+=== Generating 1000 PoC nonces ===
+  Starting PoC generation (batch_size=32)...
+  Init response: {'status': 'OK', 'pow_status': {'status': 'GENERATING'}}
+  [160/1000] 960 nonces/min (10s)
+  [512/1000] 1536 nonces/min (20s)
+  [864/1000] 1728 nonces/min (30s)
+  [1056/1000] nonces collected in 31.0s
+Nonces saved: 1056 (1929/min) in 32.8s
+
+=== Generating 100 inference logprobs ===
+  [10/100] completions done
+  [20/100] completions done
+  [30/100] completions done
+  [40/100] completions done
+  [50/100] completions done
+  [60/100] completions done
+  [70/100] completions done
+  [80/100] completions done
+  [90/100] completions done
+  [100/100] completions done
+Logprobs saved: 100 in 50.6s
+
+=== 5-language inference probe (sp/en/ch/ar/hi, processed_logprobs, temp=0.7 seed=1 top_k=40 top_p=0.95) ===
+  [sp] ¿Cuál es la capital de Francia? Responde en una sola frase....
+    ok: 64 tokens, 0 sentinel positions, text='La capital de Francia es París.'
+  [en] What is the capital of France? Answer in one sentence....
+    ok: 61 tokens, 0 sentinel positions, text='The capital of France is Paris.'
+  [ch] 法国的首都是哪里？请用一句话回答。...
+    ERROR: 'NoneType' object is not subscriptable
+  [ar] ما هي عاصمة فرنسا؟ أجب في جملة واحدة....
+    ok: 64 tokens, 0 sentinel positions, text='عاصمة فرنسا هي باريس'
+  [hi] फ्रांस की राजधानी क्या है? एक वाक्य में उत्तर दीजिए।...
+    ERROR: 'NoneType' object is not subscriptable
+5-lang probe saved to /root/out/fp8_s2/inference_5langs.json (2.6s)
+
+==============================================================================
+  5-LANGUAGE INFERENCE PROBE — eyeball the logprobs
+==============================================================================
+
+[sp] prompt: ¿Cuál es la capital de Francia? Responde en una sola frase.
+  → text (64 tok, 0 sentinel pos):
+    La capital de Francia es París.
+  first 4 positions:
+    [0]      '785' (-0.0235)  | top: '785':-0.02, '16360':-4.27, '32':-5.15, '1986':-6.77
+    [1]     '1196' (-0.0060)  | top: '1196':-0.01, '3405':-5.13, '4285':-10.88, '44290':-11.01
+    [2]      '374' (-0.1091)  | top: '374':-0.11, '17045':-2.36, '4588':-4.73, '6801':-10.98
+    [3]    '10156' (-0.0000)  | top: '10156':-0.00, '4588':-13.50, '4936':-14.00, '264':-15.50
+
+[en] prompt: What is the capital of France? Answer in one sentence.
+  → text (61 tok, 0 sentinel pos):
+    The capital of France is Paris.
+  first 4 positions:
+    [0]      '785' (-0.1020)  | top: '785':-0.10, '1986':-2.35, '16360':-7.10, '32':-7.48
+    [1]     '1196' (-0.0013)  | top: '1196':-0.00, '3405':-6.75, '44290':-10.31, '4285':-10.44
+    [2]    '17045' (-2.3548)  | top: '17045':-2.35, '374':-0.10, '4588':-5.48, '6801':-7.85
+    [3]      '264' (-0.1418)  | top: '264':-0.14, '25':-2.39, '1128':-4.02, '279':-4.27
+
+[ch] prompt: 法国的首都是哪里？请用一句话回答。
+  → text (64 tok, 0 sentinel pos):
+Traceback (most recent call last):
+  File "/root/collect_artifacts.py", line 458, in <module>
+    main()
+  File "/root/collect_artifacts.py", line 452, in main
+    print_5lang_eyeball(lang5)
+  File "/root/collect_artifacts.py", line 321, in print_5lang_eyeball
+    text_oneline = r["text"].replace("\n", " ⏎ ")
+                   ^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'replace'
+SEED_s2_DONE
+=== seed s3 bh=ab21f3846ba6 pk=6090df4a07e6 ===
+Starting callback server...
+Callback server listening on port 9998
+vLLM health: 200
+Config saved to /root/out/fp8_s3/config.json
+
+=== Generating 1000 PoC nonces ===
+  Starting PoC generation (batch_size=32)...
+  Init response: {'status': 'OK', 'pow_status': {'status': 'GENERATING'}}
+  [160/1000] 960 nonces/min (10s)
+  [512/1000] 1536 nonces/min (20s)
+  [864/1000] 1728 nonces/min (30s)
+  [1056/1000] nonces collected in 31.0s
+Nonces saved: 1056 (1929/min) in 32.8s
+
+=== Generating 100 inference logprobs ===
+  [10/100] completions done
+  [20/100] completions done
+  [30/100] completions done
+  [40/100] completions done
+  [50/100] completions done
+  [60/100] completions done
+  [70/100] completions done
+  [80/100] completions done
+  [90/100] completions done
+  [100/100] completions done
+Logprobs saved: 100 in 50.5s
+
+=== 5-language inference probe (sp/en/ch/ar/hi, processed_logprobs, temp=0.7 seed=1 top_k=40 top_p=0.95) ===
+  [sp] ¿Cuál es la capital de Francia? Responde en una sola frase....
+    ok: 64 tokens, 0 sentinel positions, text='La capital de Francia es París.'
+  [en] What is the capital of France? Answer in one sentence....
+    ok: 62 tokens, 0 sentinel positions, text='The capital of France is Paris.'
+  [ch] 法国的首都是哪里？请用一句话回答。...
+    ERROR: 'NoneType' object is not subscriptable
+  [ar] ما هي عاصمة فرنسا؟ أجب في جملة واحدة....
+    ok: 64 tokens, 0 sentinel positions, text='عاصمة فرنسا هي باريس'
+  [hi] फ्रांस की राजधानी क्या है? एक वाक्य में उत्तर दीजिए।...
+    ERROR: 'NoneType' object is not subscriptable
+5-lang probe saved to /root/out/fp8_s3/inference_5langs.json (2.6s)
+
+==============================================================================
+  5-LANGUAGE INFERENCE PROBE — eyeball the logprobs
+==============================================================================
+
+[sp] prompt: ¿Cuál es la capital de Francia? Responde en una sola frase.
+  → text (64 tok, 0 sentinel pos):
+    La capital de Francia es París.
+  first 4 positions:
+    [0]      '785' (-0.0235)  | top: '785':-0.02, '16360':-4.27, '32':-5.15, '1986':-6.77
+    [1]     '1196' (-0.0060)  | top: '1196':-0.01, '3405':-5.13, '4285':-10.88, '44290':-11.01
+    [2]      '374' (-0.1091)  | top: '374':-0.11, '17045':-2.36, '4588':-4.73, '6801':-10.98
+    [3]    '10156' (-0.0000)  | top: '10156':-0.00, '4588':-13.50, '4936':-14.00, '264':-15.50
+
+[en] prompt: What is the capital of France? Answer in one sentence.
+  → text (62 tok, 0 sentinel pos):
+    The capital of France is Paris.
+  first 4 positions:
+    [0]      '785' (-0.1020)  | top: '785':-0.10, '1986':-2.35, '16360':-7.10, '32':-7.48
+    [1]     '1196' (-0.0013)  | top: '1196':-0.00, '3405':-6.75, '44290':-10.31, '4285':-10.44
+    [2]    '17045' (-2.3548)  | top: '17045':-2.35, '374':-0.10, '4588':-5.48, '6801':-7.85
+    [3]      '264' (-0.1418)  | top: '264':-0.14, '25':-2.39, '1128':-4.02, '279':-4.27
+
+[ch] prompt: 法国的首都是哪里？请用一句话回答。
+  → text (64 tok, 0 sentinel pos):
+Traceback (most recent call last):
+  File "/root/collect_artifacts.py", line 458, in <module>
+    main()
+  File "/root/collect_artifacts.py", line 452, in main
+    print_5lang_eyeball(lang5)
+  File "/root/collect_artifacts.py", line 321, in print_5lang_eyeball
+    text_oneline = r["text"].replace("\n", " ⏎ ")
+                   ^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'replace'
+SEED_s3_DONE
+COLLECT_DONE

@@ -1,0 +1,56 @@
+ENGINE_READY
+
+==================================================
+  PoC v2 Generation Test
+==================================================
+  Model:    glm53
+  Warmup:   5s
+  Duration: 120s per test
+  Callback: http://127.0.0.1:9999
+
+Starting batch receiver...
+Batch receiver ready.
+
+==================================================
+  PHASE 3: Batch Size Benchmark
+==================================================
+  Batch sizes: [16, 32]
+  Duration: 125s each (5s warmup + 120s measurement)
+
+────────────────────────────────────────
+  Testing batch_size = 16
+────────────────────────────────────────
+    5s warmup done
+    [10s] 272 nonces
+    [20s] 432 nonces
+    [30s] 432 nonces
+    [40s] 432 nonces
+    [50s] 432 nonces
+    [60s] 432 nonces
+    [70s] 432 nonces
+    [80s] 432 nonces
+    [90s] 432 nonces
+    [100s] 432 nonces
+    [110s] 432 nonces
+    [120s] 432 nonces
+  Result: 432 nonces, 216/min
+
+────────────────────────────────────────
+  Testing batch_size = 32
+────────────────────────────────────────
+  Failed to start: HTTPConnectionPool(host='127.0.0.1', port=8081): Max retries exceeded with url: /api/v1/pow/init/generate (Caused by NewConnectionError("HTTPConnection(host='127.0.0.1', port=8081): Failed to establish a new connection: [Errno 111] Connection refused"))
+
+==================================================
+  RESULTS
+==================================================
+     Batch │   Nonces │   Nonces/min
+  ─────────┼──────────┼─────────────
+        16 │      432 │          216 ★
+        32 │    ERROR │            -  
+==================================================
+  ★ Best batch size: 16 (216 nonces/min)
+
+✓ Benchmark complete!
+
+Stopping batch receiver...
+SWEEP_TP1_DONE

@@ -1,0 +1,11 @@
+{
+  "gpu": "2xB300-SXM6",
+  "vllm_version": "0.28.0.dev0+glm53.gonka.sampler1",
+  "model": "glm53",
+  "url": "http://127.0.0.1:8081",
+  "batch_size": 32,
+  "seq_len": 1024,
+  "k_dim": 12,
+  "startup_command": "",
+  "timestamp": "2026-08-26T22:12:12"
+}

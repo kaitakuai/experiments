@@ -1,0 +1,347 @@
+ENGINE_READY after 24 polls
+
+==================================================
+  PoC v2 Generation Test
+==================================================
+  Model:    glm53
+  Warmup:   5s
+  Duration: 120s per test
+  Callback: http://127.0.0.1:9999
+
+Starting batch receiver...
+Batch receiver ready.
+
+==================================================
+  PHASE 3: Batch Size Benchmark
+==================================================
+  Batch sizes: [16, 32]
+  Duration: 125s each (5s warmup + 120s measurement)
+
+────────────────────────────────────────
+  Testing batch_size = 16
+────────────────────────────────────────
+    5s warmup done
+    [10s] 400 nonces
+    [20s] 832 nonces
+    [30s] 1280 nonces
+    [40s] 1728 nonces
+    [50s] 2160 nonces
+    [60s] 2608 nonces
+    [70s] 3040 nonces
+    [80s] 3488 nonces
+    [90s] 3920 nonces
+    [100s] 4368 nonces
+    [110s] 4816 nonces
+    [120s] 5248 nonces
+  Result: 5248 nonces, 2623/min
+
+────────────────────────────────────────
+  Testing batch_size = 32
+────────────────────────────────────────
+    5s warmup done
+    [10s] 448 nonces
+    [20s] 928 nonces
+    [30s] 1376 nonces
+    [40s] 1824 nonces
+    [50s] 2304 nonces
+    [60s] 2752 nonces
+    [70s] 3232 nonces
+    [80s] 3680 nonces
+    [90s] 4128 nonces
+    [100s] 4608 nonces
+    [110s] 5056 nonces
+    [120s] 5536 nonces
+  Result: 5536 nonces, 2767/min
+
+==================================================
+  RESULTS
+==================================================
+     Batch │   Nonces │   Nonces/min
+  ─────────┼──────────┼─────────────
+        16 │     5248 │         2623  
+        32 │     5536 │         2767 ★
+==================================================
+  ★ Best batch size: 32 (2767 nonces/min)
+
+✓ Benchmark complete!
+
+Stopping batch receiver...
+SWEEP_DONE
+=== seed s1 bh=bce35dd795a5 pk=4dfe8269e297 ===
+Starting callback server...
+Callback server listening on port 9998
+vLLM health: 200
+Config saved to /root/out/nvfp4_s1/config.json
+
+=== Generating 1000 PoC nonces ===
+  Starting PoC generation (batch_size=32)...
+  Init response: {'status': 'OK', 'pow_status': {'status': 'GENERATING'}}
+  [224/1000] 1344 nonces/min (10s)
+  [672/1000] 2016 nonces/min (20s)
+  [1152/1000] nonces collected in 26.0s
+Nonces saved: 1152 (2521/min) in 27.4s
+
+=== Generating 100 inference logprobs ===
+  [10/100] completions done
+  [20/100] completions done
+  [30/100] completions done
+  [40/100] completions done
+  [50/100] completions done
+  [60/100] completions done
+  [70/100] completions done
+  [80/100] completions done
+  [90/100] completions done
+  [100/100] completions done
+Logprobs saved: 100 in 21.5s
+
+=== 5-language inference probe (sp/en/ch/ar/hi, processed_logprobs, temp=0.7 seed=1 top_k=40 top_p=0.95) ===
+  [sp] ¿Cuál es la capital de Francia? Responde en una sola frase....
+    ok: 64 tokens, 0 sentinel positions, text='Responsen en in a singular -f-1-0-f2-00-f3-01-f4-02-00-f3-08-f3-04-f3-03-f8-f9-0'
+  [en] What is the capital of France? Answer in one sentence....
+    ok: 64 tokens, 0 sentinel positions, text='What is the capitalcapital of FrenchFrenchFranceFrenchFancfancffcffccffccffccffc'
+  [ch] 法国的首都是哪里？请用一句话回答。...
+    ok: 64 tokens, 0 sentinel positions, text=' 法国首：请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请'
+  [ar] ما هي عاصمة فرنسا؟ أجب في جملة واحدة....
+    ok: 64 tokens, 0 sentinel positions, text='EffoL8129A2336B12424E0042F5220S566D8577G19660680811T55DD5778-3494460000000000882'
+  [hi] फ्रांस की राजधानी क्या है? एक वाक्य में उत्तर दीजिए।...
+    ERROR: 'NoneType' object is not subscriptable
+5-lang probe saved to /root/out/nvfp4_s1/inference_5langs.json (3.0s)
+
+==============================================================================
+  5-LANGUAGE INFERENCE PROBE — eyeball the logprobs
+==============================================================================
+
+[sp] prompt: ¿Cuál es la capital de Francia? Responde en una sola frase.
+  → text (64 tok, 0 sentinel pos):
+    Responsen en in a singular -f-1-0-f2-00-f3-01-f4-02-00-f3-08-f3-04-f3-03-f8-f9-05-f9-10-f98-f8-f7-f0-f3-07-fF
+  first 4 positions:
+    [0]   '154842' (-1.6931)  | top: '154842':-1.69, '154827':-2.88, '154850':-3.76, '1061':-4.63
+    [1]     '1061' (-3.8961)  | top: '1061':-3.90, '30065':-1.08, '28189':-3.46, '154850':-4.90
+    [2]     '2737' (-6.1500)  | top: '2737':-6.15, '74459':-3.15, '1025':-4.15, '68':-4.40
+    [3]      '268' (-2.8680)  | top: '268':-2.87, '64':-3.12, '84':-4.74, '662':-4.87
+
+[en] prompt: What is the capital of France? Answer in one sentence.
+  → text (64 tok, 0 sentinel pos):
+    What is the capitalcapital of FrenchFrenchFranceFrenchFancfancffcffccffccffccffccffccffccfffcfffccfffccfffcffcfffcfffcfffcfffcfffcfffcfffcfffcfffcfffcfffcfffcff
+  first 4 positions:
+    [0]   '154842' (-1.2461)  | top: '154842':-1.25, '3838':-2.87, '154827':-2.93, '785':-4.18
+    [1]     '3838' (-0.7086)  | top: '3838':-0.71, '16127':-3.40, '785':-3.40, '4340':-4.21
+    [2]      '374' (-0.0536)  | top: '374':-0.05, '304':-4.93, '1128':-5.43, '6722':-5.49
+    [3]      '279' (-0.1194)  | top: '279':-0.12, '6722':-2.74, '264':-4.49, '1128':-5.81
+
+[ch] prompt: 法国的首都是哪里？请用一句话回答。
+  → text (64 tok, 0 sentinel pos):
+     法国首：请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请
+  first 4 positions:
+    [0]   '154842' (-1.6257)  | top: '154842':-1.63, '154827':-4.38, '101733':-4.81, '16':-4.88
+    [1]   '118932' (-4.3676)  | top: '118932':-4.37, '98964':-1.87, '101733':-2.62, '108538':-3.99
+    [2]    '98861' (-1.3936)  | top: '98861':-1.39, '106088':-2.83, '154827':-4.14, '1773':-4.52
+    [3]     '5122' (-5.5299)  | top: '5122':-5.53, '98861':-2.44, '106088':-2.81, '154827':-3.81
+
+[ar] prompt: ما هي عاصمة فرنسا؟ أجب في جملة واحدة.
+  → text (64 tok, 0 sentinel pos):
+    EffoL8129A2336B12424E0042F5220S566D8577G19660680811T55DD5778-3494460000000000882T56858683833R448
+  first 4 positions:
+    [0]   '154842' (-1.1379)  | top: '154842':-1.14, '154827':-2.39, '154850':-3.08, '10171':-5.89
+    [1]    '46301' (-5.3934)  | top: '46301':-5.39, '1728':-3.61, '154827':-4.30, '154850':-4.49
+    [2]       '78' (-4.5583)  | top: '78':-4.56, '13':-2.50, '25':-3.75, '287':-3.93
+    [3]       '43' (-6.2614)  | top: '43':-6.26, '25':-2.86, '13':-3.29, '20':-4.73
+
+[hi] prompt: फ्रांस की राजधानी क्या है? एक वाक्य में उत्तर दीजिए।
+  → text (64 tok, 0 sentinel pos):
+Traceback (most recent call last):
+  File "/root/collect_artifacts.py", line 458, in <module>
+    main()
+  File "/root/collect_artifacts.py", line 452, in main
+    print_5lang_eyeball(lang5)
+  File "/root/collect_artifacts.py", line 321, in print_5lang_eyeball
+    text_oneline = r["text"].replace("\n", " ⏎ ")
+                   ^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'replace'
+SEED_s1_DONE
+=== seed s2 bh=013161c6f44a pk=0414b03cf44f ===
+Starting callback server...
+Callback server listening on port 9998
+vLLM health: 200
+Config saved to /root/out/nvfp4_s2/config.json
+
+=== Generating 1000 PoC nonces ===
+  Starting PoC generation (batch_size=32)...
+  Init response: {'status': 'OK', 'pow_status': {'status': 'GENERATING'}}
+  [224/1000] 1344 nonces/min (10s)
+  [672/1000] 2016 nonces/min (20s)
+  [1152/1000] nonces collected in 26.0s
+Nonces saved: 1152 (2521/min) in 27.4s
+
+=== Generating 100 inference logprobs ===
+  [10/100] completions done
+  [20/100] completions done
+  [30/100] completions done
+  [40/100] completions done
+  [50/100] completions done
+  [60/100] completions done
+  [70/100] completions done
+  [80/100] completions done
+  [90/100] completions done
+  [100/100] completions done
+Logprobs saved: 100 in 20.5s
+
+=== 5-language inference probe (sp/en/ch/ar/hi, processed_logprobs, temp=0.7 seed=1 top_k=40 top_p=0.95) ===
+  [sp] ¿Cuál es la capital de Francia? Responde en una sola frase....
+    ok: 64 tokens, 0 sentinel positions, text='Responsen en in a singular -f-1-0-f2-00-f3-01-f4-02-00-f8-08-f3-04-f2-03-f6-f7-0'
+  [en] What is the capital of France? Answer in one sentence....
+    ok: 64 tokens, 0 sentinel positions, text='What is the capitalcapital of FrenchFrenchFranceFrenchFancfancfaccapccaccaacacca'
+  [ch] 法国的首都是哪里？请用一句话回答。...
+    ok: 64 tokens, 0 sentinel positions, text=' 法国首：请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请'
+  [ar] ما هي عاصمة فرنسا؟ أجب في جملة واحدة....
+    ok: 64 tokens, 0 sentinel positions, text='EffoL8129A2336B12424E0042F52734528838383970999660042G527345288888989W01000000000'
+  [hi] फ्रांस की राजधानी क्या है? एक वाक्य में उत्तर दीजिए।...
+    ERROR: 'NoneType' object is not subscriptable
+5-lang probe saved to /root/out/nvfp4_s2/inference_5langs.json (2.5s)
+
+==============================================================================
+  5-LANGUAGE INFERENCE PROBE — eyeball the logprobs
+==============================================================================
+
+[sp] prompt: ¿Cuál es la capital de Francia? Responde en una sola frase.
+  → text (64 tok, 0 sentinel pos):
+    Responsen en in a singular -f-1-0-f2-00-f3-01-f4-02-00-f8-08-f3-04-f2-03-f6-f7-05-f9-10-f5-f8-09-f3-30-f6-fF
+  first 4 positions:
+    [0]   '154842' (-1.6931)  | top: '154842':-1.69, '154827':-2.88, '154850':-3.76, '1061':-4.63
+    [1]     '1061' (-3.8961)  | top: '1061':-3.90, '30065':-1.08, '28189':-3.46, '154850':-4.90
+    [2]     '2737' (-6.1500)  | top: '2737':-6.15, '74459':-3.15, '1025':-4.15, '68':-4.40
+    [3]      '268' (-2.8680)  | top: '268':-2.87, '64':-3.12, '84':-4.74, '662':-4.87
+
+[en] prompt: What is the capital of France? Answer in one sentence.
+  → text (64 tok, 0 sentinel pos):
+    What is the capitalcapital of FrenchFrenchFranceFrenchFancfancfaccapccaccaacaccaccccacccaacaccaccccaccccccaaccccccccccccccaaaccabcabbbbabcabbbebbebbebbbebbebbbebfcb
+  first 4 positions:
+    [0]   '154842' (-1.2461)  | top: '154842':-1.25, '3838':-2.87, '154827':-2.93, '785':-4.18
+    [1]     '3838' (-0.7086)  | top: '3838':-0.71, '16127':-3.40, '785':-3.40, '4340':-4.21
+    [2]      '374' (-0.0536)  | top: '374':-0.05, '304':-4.93, '1128':-5.43, '6722':-5.49
+    [3]      '279' (-0.1194)  | top: '279':-0.12, '6722':-2.74, '264':-4.49, '1128':-5.81
+
+[ch] prompt: 法国的首都是哪里？请用一句话回答。
+  → text (64 tok, 0 sentinel pos):
+     法国首：请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请
+  first 4 positions:
+    [0]   '154842' (-1.6257)  | top: '154842':-1.63, '154827':-4.38, '101733':-4.81, '16':-4.88
+    [1]   '118932' (-4.3676)  | top: '118932':-4.37, '98964':-1.87, '101733':-2.62, '108538':-3.99
+    [2]    '98861' (-1.3936)  | top: '98861':-1.39, '106088':-2.83, '154827':-4.14, '1773':-4.52
+    [3]     '5122' (-5.5299)  | top: '5122':-5.53, '98861':-2.44, '106088':-2.81, '154827':-3.81
+
+[ar] prompt: ما هي عاصمة فرنسا؟ أجب في جملة واحدة.
+  → text (64 tok, 0 sentinel pos):
+    EffoL8129A2336B12424E0042F52734528838383970999660042G527345288888989W01000000000008989597099909910000000000
+  first 4 positions:
+    [0]   '154842' (-1.1379)  | top: '154842':-1.14, '154827':-2.39, '154850':-3.08, '10171':-5.89
+    [1]    '46301' (-5.3934)  | top: '46301':-5.39, '1728':-3.61, '154827':-4.30, '154850':-4.49
+    [2]       '78' (-4.5583)  | top: '78':-4.56, '13':-2.50, '25':-3.75, '287':-3.93
+    [3]       '43' (-6.2614)  | top: '43':-6.26, '25':-2.86, '13':-3.29, '20':-4.73
+
+[hi] prompt: फ्रांस की राजधानी क्या है? एक वाक्य में उत्तर दीजिए।
+  → text (64 tok, 0 sentinel pos):
+Traceback (most recent call last):
+  File "/root/collect_artifacts.py", line 458, in <module>
+    main()
+  File "/root/collect_artifacts.py", line 452, in main
+    print_5lang_eyeball(lang5)
+  File "/root/collect_artifacts.py", line 321, in print_5lang_eyeball
+    text_oneline = r["text"].replace("\n", " ⏎ ")
+                   ^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'replace'
+SEED_s2_DONE
+=== seed s3 bh=ab21f3846ba6 pk=6090df4a07e6 ===
+Starting callback server...
+Callback server listening on port 9998
+vLLM health: 200
+Config saved to /root/out/nvfp4_s3/config.json
+
+=== Generating 1000 PoC nonces ===
+  Starting PoC generation (batch_size=32)...
+  Init response: {'status': 'OK', 'pow_status': {'status': 'GENERATING'}}
+  [224/1000] 1344 nonces/min (10s)
+  [672/1000] 2016 nonces/min (20s)
+  [1152/1000] nonces collected in 26.0s
+Nonces saved: 1152 (2521/min) in 27.4s
+
+=== Generating 100 inference logprobs ===
+  [10/100] completions done
+  [20/100] completions done
+  [30/100] completions done
+  [40/100] completions done
+  [50/100] completions done
+  [60/100] completions done
+  [70/100] completions done
+  [80/100] completions done
+  [90/100] completions done
+  [100/100] completions done
+Logprobs saved: 100 in 20.5s
+
+=== 5-language inference probe (sp/en/ch/ar/hi, processed_logprobs, temp=0.7 seed=1 top_k=40 top_p=0.95) ===
+  [sp] ¿Cuál es la capital de Francia? Responde en una sola frase....
+    ok: 64 tokens, 0 sentinel positions, text='Responsen en in a singular -f-1-0-f2-00-f3-01-f4-02-00-f3-08-f3-04-f3-03-f8-f9-0'
+  [en] What is the capital of France? Answer in one sentence....
+    ok: 64 tokens, 0 sentinel positions, text='What is the capitalcapital of FrenchFrenchFranceFrenchFancfancfaccapccacca-CvCvC'
+  [ch] 法国的首都是哪里？请用一句话回答。...
+    ok: 64 tokens, 0 sentinel positions, text=' 法国首：请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请'
+  [ar] ما هي عاصمة فرنسا؟ أجب في جملة واحدة....
+    ok: 64 tokens, 0 sentinel positions, text='EffoL8129A2336B124AM28219E24AM2715AM317AM25AM29AM21AM25AM26AM274AM282AM282AMAMAM'
+  [hi] फ्रांस की राजधानी क्या है? एक वाक्य में उत्तर दीजिए।...
+    ERROR: 'NoneType' object is not subscriptable
+5-lang probe saved to /root/out/nvfp4_s3/inference_5langs.json (2.5s)
+
+==============================================================================
+  5-LANGUAGE INFERENCE PROBE — eyeball the logprobs
+==============================================================================
+
+[sp] prompt: ¿Cuál es la capital de Francia? Responde en una sola frase.
+  → text (64 tok, 0 sentinel pos):
+    Responsen en in a singular -f-1-0-f2-00-f3-01-f4-02-00-f3-08-f3-04-f3-03-f8-f9-05-f9-10-f98-f8-f7-f0-f3-07-fF
+  first 4 positions:
+    [0]   '154842' (-1.6931)  | top: '154842':-1.69, '154827':-2.88, '154850':-3.76, '1061':-4.63
+    [1]     '1061' (-3.8961)  | top: '1061':-3.90, '30065':-1.08, '28189':-3.46, '154850':-4.90
+    [2]     '2737' (-6.1500)  | top: '2737':-6.15, '74459':-3.15, '1025':-4.15, '68':-4.40
+    [3]      '268' (-2.8680)  | top: '268':-2.87, '64':-3.12, '84':-4.74, '662':-4.87
+
+[en] prompt: What is the capital of France? Answer in one sentence.
+  → text (64 tok, 0 sentinel pos):
+    What is the capitalcapital of FrenchFrenchFranceFrenchFancfancfaccapccacca-CvCvCvCvCvCvCvCvvCvCvvCvC-vv-CC-CC4-CC5-(CcCcCapaPPaOoo
+  first 4 positions:
+    [0]   '154842' (-1.2461)  | top: '154842':-1.25, '3838':-2.87, '154827':-2.93, '785':-4.18
+    [1]     '3838' (-0.7086)  | top: '3838':-0.71, '16127':-3.40, '785':-3.40, '4340':-4.21
+    [2]      '374' (-0.0536)  | top: '374':-0.05, '304':-4.93, '1128':-5.43, '6722':-5.49
+    [3]      '279' (-0.1194)  | top: '279':-0.12, '6722':-2.74, '264':-4.49, '1128':-5.81
+
+[ch] prompt: 法国的首都是哪里？请用一句话回答。
+  → text (64 tok, 0 sentinel pos):
+     法国首：请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请请
+  first 4 positions:
+    [0]   '154842' (-1.6257)  | top: '154842':-1.63, '154827':-4.38, '101733':-4.81, '16':-4.88
+    [1]   '118932' (-4.3676)  | top: '118932':-4.37, '98964':-1.87, '101733':-2.62, '108538':-3.99
+    [2]    '98861' (-1.3936)  | top: '98861':-1.39, '106088':-2.83, '154827':-4.14, '1773':-4.52
+    [3]     '5122' (-5.5299)  | top: '5122':-5.53, '98861':-2.44, '106088':-2.81, '154827':-3.81
+
+[ar] prompt: ما هي عاصمة فرنسا؟ أجب في جملة واحدة.
+  → text (64 tok, 0 sentinel pos):
+    EffoL8129A2336B124AM28219E24AM2715AM317AM25AM29AM21AM25AM26AM274AM282AM282AMAMAMAMAMAMAMAMAMAMAMAMAMAMAMAMAMAMAM
+  first 4 positions:
+    [0]   '154842' (-1.1379)  | top: '154842':-1.14, '154827':-2.39, '154850':-3.08, '10171':-5.89
+    [1]    '46301' (-5.3934)  | top: '46301':-5.39, '1728':-3.61, '154827':-4.30, '154850':-4.49
+    [2]       '78' (-4.5583)  | top: '78':-4.56, '13':-2.50, '25':-3.75, '287':-3.93
+    [3]       '43' (-6.2614)  | top: '43':-6.26, '25':-2.86, '13':-3.29, '20':-4.73
+
+[hi] prompt: फ्रांस की राजधानी क्या है? एक वाक्य में उत्तर दीजिए।
+  → text (64 tok, 0 sentinel pos):
+Traceback (most recent call last):
+  File "/root/collect_artifacts.py", line 458, in <module>
+    main()
+  File "/root/collect_artifacts.py", line 452, in main
+    print_5lang_eyeball(lang5)
+  File "/root/collect_artifacts.py", line 321, in print_5lang_eyeball
+    text_oneline = r["text"].replace("\n", " ⏎ ")
+                   ^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'replace'
+SEED_s3_DONE
+COLLECT_DONE
+CHAIN_DONE
