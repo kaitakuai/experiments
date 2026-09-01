@@ -70,7 +70,7 @@ gonka-vllm-serve \
 
 ## Validation
 
-### Honest floor — same box, same seed, two consecutive runs
+### L2
 
 | metric | value |
 |---|---:|
@@ -83,7 +83,7 @@ gonka-vllm-serve \
 
 Cleaner than Hopper, where one nonce crossed the gate.
 
-### Cross-generation, nothing confounded
+### Cross-hardware L2
 
 Against [`../glm53-flash-fp8-4xh200/`](../glm53-flash-fp8-4xh200/): same image, same FlashInfer
 0.6.18, same TP=4, same seeds. Gate defaults: `threshold = 0.40`, `p_mis = 0.001`.

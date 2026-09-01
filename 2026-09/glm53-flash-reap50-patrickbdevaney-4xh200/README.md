@@ -73,7 +73,7 @@ gonka-vllm-serve \
 
 ## Validation
 
-### L2 against the honest arm
+### L2
 
 Gate thresholds quoted from the chain default: `threshold = 0.40`, `p_mis = 0.001`.
 
@@ -88,7 +88,21 @@ floor is median 0.0000 with 1 nonce past 0.40, and an unrelated seed pair satura
 One nonce settles a verdict; the three-seed agreement (0.600 / 0.605 / 0.625) shows the
 fingerprint is a property of the build, not of a seed.
 
-### Excluding the batch-boundary artifact
+### Cross-hardware L2
+
+The fraud signal barely moves when the reference sits on another GPU generation — the mark of
+structural fraud, as opposed to quantisation:
+
+| pair | median L2 | past 0.40 | what differs |
+|---|---:|---:|---|
+| this arm ↔ its own honest baseline (4×H200) | 0.6047 | 90.6 % | checkpoint only |
+| this arm ↔ honest 4×B200 (`k3`) | 0.5953 | 90.6 % | hardware, checkpoint |
+| this arm ↔ honest 2×B300 (Aug image) | 0.6064 | 90.3 % | hardware, image, TP, checkpoint |
+
+Compare quantisation fraud, whose distance halves between platforms
+([`../glm53-flash-nvfp4-libertai-4xb200/`](../glm53-flash-nvfp4-libertai-4xb200/)).
+
+### The batch-boundary artifact
 
 The honest arm has a defect — nonces at `index % 16 == 0` are unreliable, see
 [`../glm53-flash-fp8-4xh200/`](../glm53-flash-fp8-4xh200/). They are broken out here so the
@@ -103,6 +117,17 @@ fraud signal cannot be accused of resting on them:
 Removing the artifact changes the verdict by less than two points. The detection does not
 depend on it.
 
+### Throughput
+
+| arm | s1 | s2 | s3 |
+|---|---:|---:|---:|
+| honest | 1414 | 1422 | 1423 |
+| REAP50 | 1427 | 1425 | 1423 |
+
+Within 1 % — pruning the expert pool does not change PoC cost, because `top_k` is unchanged.
+The first run after an engine start is reproducibly ~11 % low and is discarded;
+`scripts/floor_then_fraud.sh` collects a throwaway seed before each series.
+
 ### Serving
 
 Same box, same instrument, 800 max tokens, one prompt, single pass per concurrency level:
@@ -115,17 +140,6 @@ Same box, same instrument, 800 max tokens, one prompt, single pass per concurren
 
 The gain appears only under batching, where the doubled KV cache and halved weights matter, and
 it is modest and inconsistent. Zero failed requests in all six runs.
-
-### PoC throughput
-
-| arm | s1 | s2 | s3 |
-|---|---:|---:|---:|
-| honest | 1414 | 1422 | 1423 |
-| REAP50 | 1427 | 1425 | 1423 |
-
-Within 1 % — pruning the expert pool does not change PoC cost, because `top_k` is unchanged.
-The first run after an engine start is reproducibly ~11 % low and is discarded;
-`scripts/floor_then_fraud.sh` collects a throwaway seed before each series.
 
 ### Integrity checks
 

@@ -89,7 +89,7 @@ from a production node is the GPU count.
 
 ## Validation
 
-### Honest floor — same box, same seed, two consecutive runs
+### L2
 
 | metric | value |
 |---|---:|
@@ -102,6 +102,31 @@ from a production node is the GPU count.
 
 937 of 1000 vectors are identical to the bit. The previous finding "0 % bit-identical on
 Hopper" belonged to the FlashInfer 0.6.17 image and is superseded.
+
+### Cross-hardware L2
+
+Against the published 2×B300 set, [`../../2026-08/glm53-flash-fp8-2xb300/`](../../2026-08/glm53-flash-fp8-2xb300/),
+same three seeds. Gate thresholds quoted from the chain default: `threshold = 0.40`,
+`p_mis = 0.001`.
+
+| seed | median L2 | p95 | past 0.40 | past 0.40, excluding first-in-batch |
+|---|---:|---:|---:|---:|
+| s1 | 0.2559 | 0.8971 | 16.8 % | 11.2 % |
+| s2 | 0.2674 | 0.8606 | 17.0 % | 11.4 % |
+| s3 | 0.2658 | 0.8916 | 16.3 % | 10.7 % |
+
+Both sides are honest, so **at `p_mis = 0.001` the chain would call a healthy mixed fleet
+fraudulent**. Distinguishing power is intact — 17 % honest against 90 % for the fraud arm is a
+5× gap — but the mismatch tolerance has to be calibrated to roughly 0.20 for cross-generation
+validation, not 0.001.
+
+Three levels measured across this folder and its fraud counterpart:
+
+| comparison | past 0.40 |
+|---|---:|
+| honest vs itself, same box | 0.1 % |
+| honest 2×B300 vs honest 4×H200 | 17 % |
+| REAP50 fraud vs honest, same box | 90 % |
 
 ### The batch-boundary artifact
 
@@ -127,31 +152,6 @@ carrying Mamba state, 11 sparse-MLA layers. DeepSeek-V4 is pure MLA with no carr
 one structural difference between the two models is exactly what would make the first sequence
 of a batch depend on what ran before it. Nobody has yet checked whether that state is reset
 before each PoC batch.
-
-### Cross-generation floor (honest vs honest, different GPU generations)
-
-Against the published 2×B300 set, [`../../2026-08/glm53-flash-fp8-2xb300/`](../../2026-08/glm53-flash-fp8-2xb300/),
-same three seeds. Gate thresholds quoted from the chain default: `threshold = 0.40`,
-`p_mis = 0.001`.
-
-| seed | median L2 | p95 | past 0.40 | past 0.40, excluding first-in-batch |
-|---|---:|---:|---:|---:|
-| s1 | 0.2559 | 0.8971 | 16.8 % | 11.2 % |
-| s2 | 0.2674 | 0.8606 | 17.0 % | 11.4 % |
-| s3 | 0.2658 | 0.8916 | 16.3 % | 10.7 % |
-
-Both sides are honest, so **at `p_mis = 0.001` the chain would call a healthy mixed fleet
-fraudulent**. Distinguishing power is intact — 17 % honest against 90 % for the fraud arm is a
-5× gap — but the mismatch tolerance has to be calibrated to roughly 0.20 for cross-generation
-validation, not 0.001.
-
-Three levels measured across this folder and its fraud counterpart:
-
-| comparison | past 0.40 |
-|---|---:|
-| honest vs itself, same box | 0.1 % |
-| honest 2×B300 vs honest 4×H200 | 17 % |
-| REAP50 fraud vs honest, same box | 90 % |
 
 ### Throughput
 
@@ -223,7 +223,7 @@ the GPU generation. See [`../glm53-flash-fp8-4xb200/`](../glm53-flash-fp8-4xb200
 
 **Serving is a single pass** per concurrency level, not a compressa-perf run.
 
-## Corrections
+### Corrections to the first version of this report
 
 Two claims in the first version of this report were wrong and are corrected above:
 

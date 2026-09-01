@@ -69,7 +69,7 @@ gonka-vllm-serve \
 
 ## Validation
 
-### L2 against the honest arm
+### L2
 
 Gate defaults: `threshold = 0.40`, `p_mis = 0.001`.
 
@@ -83,7 +83,7 @@ Note the median sits **below** the 0.40 gate: unlike expert pruning, where the l
 was already past it, here fewer than half the nonces cross. The verdict comes from the
 mismatch *rate* against a `p_mis` of 0.001, not from any single nonce.
 
-### The fingerprint does not transfer between platforms
+### Cross-hardware L2
 
 Same checkpoint, same seeds, different platform and image:
 
@@ -103,7 +103,7 @@ numerics are far more sensitive to which kernels execute them than FP8 numerics 
 so the split between them is unknown. For calibration it does not matter: the quantity is not
 stable, and that is enough to disqualify it as a signature.
 
-### The batch-boundary artifact does not drive this verdict
+### The batch-boundary artifact
 
 The honest arm has a defect at `index % 16 == 0`
 (see [`../glm53-flash-fp8-4xb200/`](../glm53-flash-fp8-4xb200/)). Broken out:
