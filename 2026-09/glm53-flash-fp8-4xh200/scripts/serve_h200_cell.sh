@@ -9,10 +9,6 @@
 # P2P/IPC и на Blackwell из-за этого вставал намертво (см. B300-CONTAINER.md). На Hopper
 # каналов меньше, но лимит всё равно тесный — дешевле поднять, чем ловить.
 #
-# --limit-mm-per-prompt: зрительная башня убивала воркера на профилировании памяти на B300.
-# На Hopper этого не наблюдалось, но картинки и видео нам не нужны ни в PoC, ни в текстовом
-# нагрузочном тесте, а профилирование без них короче и предсказуемее.
-#
 # Всё остальное — проверенная fp8-конфигурация из RUNBOOK.md.
 ulimit -n 524288
 export VLLM_ENGINE_READY_TIMEOUT_S=3600
@@ -34,7 +30,6 @@ exec gonka-vllm-serve \
   --kv-cache-dtype fp8 \
   --block-size 2304 \
   --max-num-seqs 256 \
-  --limit-mm-per-prompt '{"image":0,"video":0}' \
   --no-enable-flashinfer-autotune \
   --logprobs-mode processed_logprobs \
   --worker-extension-cls gonka_poc.worker.PoCWorkerExtension \

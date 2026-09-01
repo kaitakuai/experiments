@@ -3,14 +3,17 @@
 
 Usage:  python3 scripts/summarize.py artifacts > artifacts/summary.json
 
-Computes three things:
+The honest reference sets are committed alongside the fraud sets (`ref_nonces_honest_*.json`)
+so this folder is self-contained; they are byte-identical copies of the ones in
+`../glm53-flash-fp8-4xh200/artifacts/`.
 
-1. **Honest floor** — the same box, same seed, two consecutive runs. This is the bar below
-   which nothing is distinguishable; without it a fraud distance means nothing.
-2. **Fraud distance** — REAP50 (144 of 288 experts) against honest, per seed.
-3. **The batch-boundary artifact** — nonces whose index is a multiple of the collection batch
-   size behave differently from the rest. Reported separately because it dominates the
-   cross-architecture tail and would otherwise be mistaken for hardware noise.
+Reported per seed:
+
+1. **Fraud distance** — REAP50 (144 of 288 experts) against the honest arm on the same box.
+2. **The batch-boundary split** — nonces at `index % 16 == 0` behave differently from the rest
+   and are broken out, because they fail cross-hardware comparison even for honest nodes and
+   would otherwise inflate the fraud signal.
+3. **Control** — two different seeds, which must be incomparable (~1.41).
 
 L2 arithmetic follows the chain (`vllm/poc/data.py`): fp16 little-endian -> fp32, fp64 norm,
 strict `>` against the threshold.
@@ -40,8 +43,7 @@ def load(path):
 
 
 def l2_map(a, b):
-    common = sorted(set(a) & set(b))
-    return {n: math.dist(a[n], b[n]) for n in common}
+    return {n: math.dist(a[n], b[n]) for n in sorted(set(a) & set(b))}
 
 
 def median(xs):
@@ -54,9 +56,9 @@ def pct(xs, p):
     return xs[min(len(xs) - 1, int(len(xs) * p / 100))] if xs else 0.0
 
 
-def stats(dists):
-    vals = list(dists.values())
-    over = [n for n, v in dists.items() if v > THRESHOLD]
+def stats(d):
+    vals = list(d.values())
+    over = [n for n, v in d.items() if v > THRESHOLD]
     return {
         "n": len(vals),
         "mean": round(sum(vals) / len(vals), 4),
@@ -69,12 +71,10 @@ def stats(dists):
     }
 
 
-def batch_split(dists, batch=BATCH):
-    """Split by 'first nonce in a collection batch' vs the rest."""
-    first = {n: v for n, v in dists.items() if n % batch == 0}
-    rest = {n: v for n, v in dists.items() if n % batch != 0}
+def batch_split(d, batch=BATCH):
     out = {"batch_size": batch}
-    for name, grp in (("first_in_batch", first), ("rest", rest)):
+    for name, grp in (("first_in_batch", {n: v for n, v in d.items() if n % batch == 0}),
+                      ("rest", {n: v for n, v in d.items() if n % batch != 0})):
         if not grp:
             continue
         over = sum(1 for v in grp.values() if v > THRESHOLD)
@@ -87,39 +87,29 @@ def batch_split(dists, batch=BATCH):
     return out
 
 
-def integrity(doc, vecs):
-    arts = doc["artifacts"]
-    return {
-        "nonces": len(arts),
-        "non_empty": sum(1 for a in arts if a.get("vector_b64")),
-        "unique": len({a["vector_b64"] for a in arts}),
-        "block_hash_prefix": (doc.get("block_hash") or "")[:12],
-    }
-
-
 def main(art_dir):
     out = {"threshold": THRESHOLD, "batch_size": BATCH, "integrity": {}, "pairs": {}}
-
     sets = {}
-    for path in sorted(glob.glob(os.path.join(art_dir, "nonces_*.json"))):
-        name = os.path.basename(path)[len("nonces_"):-len(".json")]
+    for path in sorted(glob.glob(os.path.join(art_dir, "*nonces_*.json"))):
+        name = os.path.basename(path)[:-len(".json")].replace("nonces_", "")
         doc, vecs = load(path)
         sets[name] = vecs
-        out["integrity"][name] = integrity(doc, vecs)
+        arts = doc["artifacts"]
+        out["integrity"][name] = {
+            "nonces": len(arts),
+            "non_empty": sum(1 for a in arts if a.get("vector_b64")),
+            "unique": len({a["vector_b64"] for a in arts}),
+            "block_hash_prefix": (doc.get("block_hash") or "")[:12],
+        }
 
     def pair(label, a, b):
-        if a not in sets or b not in sets:
-            return
-        d = l2_map(sets[a], sets[b])
-        out["pairs"][label] = {"a": a, "b": b, **stats(d), "by_batch_position": batch_split(d)}
+        if a in sets and b in sets:
+            d = l2_map(sets[a], sets[b])
+            out["pairs"][label] = {"a": a, "b": b, **stats(d), "by_batch_position": batch_split(d)}
 
-    # honest floor: same box, same seed, two runs
-    pair("honest_floor_s1", "honest_s1", "honest_repeat_s1")
-    # fraud: expert-pruned build against honest, per seed
     for s in ("s1", "s2", "s3"):
-        pair("fraud_reap50_%s" % s, "honest_%s" % s, "fraud_reap50_%s" % s)
-    # control: different seeds must be incomparable (~1.41 for uncorrelated 12-dim vectors)
-    pair("control_different_seeds", "honest_s1", "honest_s2")
+        pair("reap50_vs_honest_%s" % s, "ref_honest_%s" % s, "reap50_%s" % s)
+    pair("control_different_seeds", "ref_honest_s1", "ref_honest_s2")
 
     json.dump(out, sys.stdout, indent=2, ensure_ascii=False)
     sys.stdout.write("\n")
