@@ -146,6 +146,11 @@ The first run after an engine start is reproducibly ~11 % low and is discarded;
   cross-generation floor is in the honest folder and is the constraint that actually limits
   the threshold in production.
 
+For contrast, quantisation fraud on the same model measures **0.37 / 42 %** on 4×B200
+([`../glm53-flash-nvfp4-libertai-4xb200/`](../glm53-flash-nvfp4-libertai-4xb200/)) — half the
+distance of expert pruning, and with a fingerprint that does not transfer between platforms.
+Structural fraud is the loud, stable case; quantisation is the awkward one.
+
 ## Files
 
 | path | what |
@@ -191,6 +196,7 @@ the pruned arm against ≈ 6.2 M honest; 100 % non-empty and unique nonces; medi
 - honest arm, same box: [`../glm53-flash-fp8-4xh200/README.md`](../glm53-flash-fp8-4xh200/README.md)
 - quantisation fraud on the same model (NVFP4, 2×B300): [`../../2026-08/glm53-flash-nvfp4-libertai-2xb300/README.md`](../../2026-08/glm53-flash-nvfp4-libertai-2xb300/README.md)
 - honest 2×B300 on the previous image: [`../../2026-08/glm53-flash-fp8-2xb300/README.md`](../../2026-08/glm53-flash-fp8-2xb300/README.md)
+- quantisation fraud on 4×B200, same image: [`../glm53-flash-nvfp4-libertai-4xb200/README.md`](../glm53-flash-nvfp4-libertai-4xb200/README.md)
 
 ## Reproducibility checklist
 

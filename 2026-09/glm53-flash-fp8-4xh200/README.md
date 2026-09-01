@@ -28,8 +28,10 @@ The honest baseline for GLM-5.3-Flash on Hopper, and the reference set for the f
 - **Cross-generation honest-vs-honest is 17 % past the gate**, so at the chain's `p_mis = 0.001`
   a healthy mixed fleet would be called fraudulent. The mismatch tolerance, not the distance
   threshold, is what needs calibrating.
-- **PoC saturates at batch 8** (1439 nonces/min at both 8 and 16); batch 24 kills the engine
-  with XID 31 out of **DeepGEMM** — not the FlashInfer MLA kernel, as previously assumed.
+- **PoC saturates at batch 8** (1439 nonces/min at both 8 and 16). Batch 24 kills the engine
+  with XID 31 out of DeepGEMM — but that is **almost certainly self-inflicted**: this run capped
+  `--max-num-batched-tokens` at 16384 and batch 24 needs 24576. On B200 the identical overrun
+  produces a clean shape error, and raising the budget makes batch 32 work. See *Corrections*.
 
 ## Environment
 
@@ -168,8 +170,16 @@ buys nothing even where it survives.
 
 Batch 24 raises `CUDA_ERROR_ILLEGAL_ADDRESS` on all four GPUs from
 `deepgemm-src/csrc/.../jit_kernels/impls/runtime_utils.hpp:145`, called out of
-`gonka_poc/poc/poc_model_runner.py`. The failing component is **DeepGEMM**; the tokens-per-pass
-ceiling lies between 16 384 and 24 576.
+`gonka_poc/poc/poc_model_runner.py`.
+
+**This is a configuration limit, not a hardware ceiling.** The PoC forward builds
+batch × 1024 tokens, and this run ran with `--max-num-batched-tokens 16384`; batch 24 needs
+24576. The same overrun on B200 surfaces as
+`RuntimeError: The size of tensor a (16384) must match the size of tensor b (49152)` and, with
+the budget raised to 65536, batch 32 runs at 2727 nonces/min. The real kernel limit is higher —
+batch 48 dies in the Triton sparse-MLA indexer. Hopper was not re-tested with a raised budget,
+so the DeepGEMM crash above is attributed, not proven; treat batch 16 as the verified figure for
+this configuration.
 
 Per-seed collection runs (1000 nonces, ~42 s windows) agree with the 120 s sweep to within 1 %:
 1414 / 1422 / 1423.
@@ -202,18 +212,26 @@ Zero failed requests.
 
 ## What this does not settle
 
-**Architecture and image are confounded in the cross-generation section.** The B300 reference
-was collected on the previous image (FlashInfer 0.6.17), this run on `test-k3` (0.6.18). The
-17 % therefore mixes "different silicon" with "different build", and the split is unknown.
-Given that changing FlashInfer turned "0 % bit-identical on Hopper" into 94 %, the build share
-could be large. Settling it needs a B300 run on `test-k3` at both TP=4 (isolating architecture)
-and TP=2 (isolating the build).
+**~~Architecture and image are confounded in the cross-generation section.~~ Settled.**
+A 4×B200 run on this same image, same TP=4 and same seeds gives 16.4 / 17.0 / 16.2 % — matching
+the confounded B300 pairing within noise. The build contributes nothing measurable; the 17 % is
+the GPU generation. See [`../glm53-flash-fp8-4xb200/`](../glm53-flash-fp8-4xb200/).
 
 **The batch-boundary artifact has no root cause yet.** The hybrid-state hypothesis is untested.
 
 **8×H200 is unmeasured**, and that is the topology the image is actually built for (`TP=8`).
 
 **Serving is a single pass** per concurrency level, not a compressa-perf run.
+
+## Corrections
+
+Two claims in the first version of this report were wrong and are corrected above:
+
+1. **"The tokens-per-pass ceiling lies between 16 384 and 24 576, and DeepGEMM is the failing
+   component."** The binding constraint was `--max-num-batched-tokens 16384`, a flag this run
+   set. Batch 32 works once the budget allows it (verified on B200).
+2. **"Architecture and image are confounded."** Resolved by the B200 run: the gap is
+   architectural.
 
 ## Files
 
@@ -284,6 +302,7 @@ reports `poc_validation_inference: true`; 100 % non-empty and unique nonces; flo
 ## Related
 
 - fraud arm on this same box: [`../glm53-flash-reap50-patrickbdevaney-4xh200/README.md`](../glm53-flash-reap50-patrickbdevaney-4xh200/README.md)
+- Blackwell counterpart, same image and TP: [`../glm53-flash-fp8-4xb200/README.md`](../glm53-flash-fp8-4xb200/README.md)
 - honest 2×B300 on the previous image: [`../../2026-08/glm53-flash-fp8-2xb300/README.md`](../../2026-08/glm53-flash-fp8-2xb300/README.md)
 - NVFP4 fraud arm on B300: [`../../2026-08/glm53-flash-nvfp4-libertai-2xb300/README.md`](../../2026-08/glm53-flash-nvfp4-libertai-2xb300/README.md)
 

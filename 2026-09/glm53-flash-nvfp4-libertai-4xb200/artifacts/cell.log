@@ -1,0 +1,58 @@
+=== СТАРТ 13:16:09 ===
+0, NVIDIA B200, 183359 MiB, 1000.00 W, 595.71.05
+1, NVIDIA B200, 183359 MiB, 1000.00 W, 595.71.05
+2, NVIDIA B200, 183359 MiB, 1000.00 W, 595.71.05
+3, NVIDIA B200, 183359 MiB, 1000.00 W, 595.71.05
+	[4mGPU0	GPU1	GPU2	GPU3	CPU Affinity	NUMA Affinity	GPU NUMA ID[0m
+GPU0	 X 	NV18	NV18	NV18	0-47,96-143	0		N/A
+GPU1	NV18	 X 	NV18	NV18	0-47,96-143	0		N/A
+GPU2	NV18	NV18	 X 	NV18	0-47,96-143	0		N/A
+GPU3	NV18	NV18	NV18	 X 	0-47,96-143	0		N/A
+
+vllm 0.28.0.dev0+glm53.gonka.sampler1 flashinfer 0.6.18
+gonka_poc 0.1.4
+патч индексера (ожидается >=2): 3
+мягкий лимит дескрипторов: 1024
+overlay         900G  1.4M  900G   1% /
+таймаут сборщика настраивается
+DOWNLOAD zai-org/GLM-5.3-Flash START 13:16:16
+DOWNLOAD zai-org/GLM-5.3-Flash END 13:19:23
+DOWNLOAD LibertAIDAI/GLM-5.3-Flash-NVFP4 START 13:19:23
+DOWNLOAD LibertAIDAI/GLM-5.3-Flash-NVFP4 END 13:21:11
+zai-org--GLM-5.3-Flash: 62/62 OK
+LibertAIDAI--GLM-5.3-Flash-NVFP4: 121/121 OK
+недокачанных файлов: 0
+### честное плечо FP8, TP=4 — сравнение с H200 TP=4 на том же образе ###
+движок models--zai-org--GLM-5.3-Flash готов=yes 13:45:07
+(Worker_TP0 pid=4781) INFO 09-01 13:22:52 [cuda.py:526] Using FLASHINFER_MLA_SPARSE attention backend out of potential backends: ['FLASHINFER_MLA_SPARSE', 'FLASHMLA_SPARS
+(EngineCore pid=4353) INFO 09-01 13:42:46 [kv_cache_utils.py:2116] GPU KV cache size: 13,076,757 tokens, Maximum concurrency for 1,048,576 tokens per request: 12.47x
+ПУСТОЕ СЕМЯ s0warm — прерываю
+/root/cell_b200_k3.sh: line 119: 13330 Killed                  nohup python3 -u /root/collect_artifacts.py --url http://127.0.0.1:8081 --model glm53 --output-dir "$OUT" --block-hash "$BH" --public-key "$PK" --nonces 1000 --batch-size 16 > "$OUT/c.log" 2>&1
+honest/s1: 1000 нонсов за 27.1 c = 2217 нонсов/мин | IMA=0
+/root/cell_b200_k3.sh: line 119: 13426 Killed                  nohup python3 -u /root/collect_artifacts.py --url http://127.0.0.1:8081 --model glm53 --output-dir "$OUT" --block-hash "$BH" --public-key "$PK" --nonces 1000 --batch-size 16 > "$OUT/c.log" 2>&1
+honest/s2: 1000 нонсов за 27.3 c = 2196 нонсов/мин | IMA=0
+/root/cell_b200_k3.sh: line 119: 13484 Killed                  nohup python3 -u /root/collect_artifacts.py --url http://127.0.0.1:8081 --model glm53 --output-dir "$OUT" --block-hash "$BH" --public-key "$PK" --nonces 1000 --batch-size 16 > "$OUT/c.log" 2>&1
+honest/s3: 1000 нонсов за 27.1 c = 2213 нонсов/мин | IMA=0
+/root/cell_b200_k3.sh: line 119: 13543 Killed                  nohup python3 -u /root/collect_artifacts.py --url http://127.0.0.1:8081 --model glm53 --output-dir "$OUT" --block-hash "$BH" --public-key "$PK" --nonces 1000 --batch-size 16 > "$OUT/c.log" 2>&1
+honestrep/s1: 1000 нонсов за 27.1 c = 2215 нонсов/мин | IMA=0
+--- инференс под нагрузкой (honest) ---
+параллельно  1: 61.3 c, 800 токенов, 13.1 ток/с, задержка med 61.3 c
+параллельно  8: 8.4 c, 6400 токенов, 762.8 ток/с, задержка med 8.4 c
+параллельно 20: 10.4 c, 16000 токенов, 1543.1 ток/с, задержка med 10.3 c
+### фрод NVFP4, TP=4 ###
+движок models--LibertAIDAI--GLM-5.3-Flash-NVFP4 готов=yes 13:54:40
+(Worker_TP0 pid=14714) INFO 09-01 13:49:47 [cuda.py:526] Using FLASHINFER_MLA_SPARSE attention backend out of potential backends: ['FLASHINFER_MLA_SPARSE', 'FLASHMLA_SPAR
+(EngineCore pid=14296) INFO 09-01 13:53:40 [kv_cache_utils.py:2116] GPU KV cache size: 18,434,642 tokens, Maximum concurrency for 1,048,576 tokens per request: 17.58x
+ПУСТОЕ СЕМЯ s0warm — прерываю
+/root/cell_b200_k3.sh: line 119: 17251 Killed                  nohup python3 -u /root/collect_artifacts.py --url http://127.0.0.1:8081 --model glm53 --output-dir "$OUT" --block-hash "$BH" --public-key "$PK" --nonces 1000 --batch-size 16 > "$OUT/c.log" 2>&1
+fraud/s1: 1000 нонсов за 22.0 c = 2725 нонсов/мин | IMA=0
+/root/cell_b200_k3.sh: line 119: 17335 Killed                  nohup python3 -u /root/collect_artifacts.py --url http://127.0.0.1:8081 --model glm53 --output-dir "$OUT" --block-hash "$BH" --public-key "$PK" --nonces 1000 --batch-size 16 > "$OUT/c.log" 2>&1
+fraud/s2: 1000 нонсов за 22.2 c = 2702 нонсов/мин | IMA=0
+/root/cell_b200_k3.sh: line 119: 17398 Killed                  nohup python3 -u /root/collect_artifacts.py --url http://127.0.0.1:8081 --model glm53 --output-dir "$OUT" --block-hash "$BH" --public-key "$PK" --nonces 1000 --batch-size 16 > "$OUT/c.log" 2>&1
+fraud/s3: 1000 нонсов за 22.3 c = 2693 нонсов/мин | IMA=0
+--- инференс под нагрузкой (fraud) ---
+параллельно  1: 5.7 c, 800 токенов, 141.4 ток/с, задержка med 5.7 c
+параллельно  8: 7.6 c, 6400 токенов, 844.3 ток/с, задержка med 7.6 c
+параллельно 20: 9.2 c, 16000 токенов, 1734.3 ток/с, задержка med 9.2 c
+ИТОГ IMA=0 13:56:42
+CELL_DONE
