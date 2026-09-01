@@ -1,0 +1,185 @@
+{
+  "threshold": 0.4,
+  "batch_size": 16,
+  "integrity": {
+    "fraud_reap50_s1": {
+      "nonces": 1000,
+      "non_empty": 1000,
+      "unique": 1000,
+      "block_hash_prefix": "bce35dd795a5"
+    },
+    "fraud_reap50_s2": {
+      "nonces": 1000,
+      "non_empty": 1000,
+      "unique": 1000,
+      "block_hash_prefix": "013161c6f44a"
+    },
+    "fraud_reap50_s3": {
+      "nonces": 1000,
+      "non_empty": 1000,
+      "unique": 1000,
+      "block_hash_prefix": "ab21f3846ba6"
+    },
+    "honest_repeat_s1": {
+      "nonces": 1000,
+      "non_empty": 1000,
+      "unique": 1000,
+      "block_hash_prefix": "bce35dd795a5"
+    },
+    "honest_s1": {
+      "nonces": 1000,
+      "non_empty": 1000,
+      "unique": 1000,
+      "block_hash_prefix": "bce35dd795a5"
+    },
+    "honest_s2": {
+      "nonces": 1000,
+      "non_empty": 1000,
+      "unique": 1000,
+      "block_hash_prefix": "013161c6f44a"
+    },
+    "honest_s3": {
+      "nonces": 1000,
+      "non_empty": 1000,
+      "unique": 1000,
+      "block_hash_prefix": "ab21f3846ba6"
+    }
+  },
+  "pairs": {
+    "honest_floor_s1": {
+      "a": "honest_s1",
+      "b": "honest_repeat_s1",
+      "n": 1000,
+      "mean": 0.0101,
+      "median": 0.0,
+      "p25": 0.0,
+      "p95": 0.1169,
+      "max": 0.5737,
+      "over_threshold": 1,
+      "over_threshold_pct": 0.1,
+      "by_batch_position": {
+        "batch_size": 16,
+        "first_in_batch": {
+          "count": 63,
+          "median": 0.1453,
+          "over_threshold": 1,
+          "over_threshold_pct": 1.6
+        },
+        "rest": {
+          "count": 937,
+          "median": 0.0,
+          "over_threshold": 0,
+          "over_threshold_pct": 0.0
+        }
+      }
+    },
+    "fraud_reap50_s1": {
+      "a": "honest_s1",
+      "b": "fraud_reap50_s1",
+      "n": 1000,
+      "mean": 0.653,
+      "median": 0.6003,
+      "p25": 0.4881,
+      "p95": 1.2278,
+      "max": 1.8186,
+      "over_threshold": 913,
+      "over_threshold_pct": 91.3,
+      "by_batch_position": {
+        "batch_size": 16,
+        "first_in_batch": {
+          "count": 63,
+          "median": 1.3103,
+          "over_threshold": 63,
+          "over_threshold_pct": 100.0
+        },
+        "rest": {
+          "count": 937,
+          "median": 0.582,
+          "over_threshold": 850,
+          "over_threshold_pct": 90.7
+        }
+      }
+    },
+    "fraud_reap50_s2": {
+      "a": "honest_s2",
+      "b": "fraud_reap50_s2",
+      "n": 1000,
+      "mean": 0.6532,
+      "median": 0.6047,
+      "p25": 0.4908,
+      "p95": 1.207,
+      "max": 1.6915,
+      "over_threshold": 900,
+      "over_threshold_pct": 90.0,
+      "by_batch_position": {
+        "batch_size": 16,
+        "first_in_batch": {
+          "count": 63,
+          "median": 1.2801,
+          "over_threshold": 63,
+          "over_threshold_pct": 100.0
+        },
+        "rest": {
+          "count": 937,
+          "median": 0.5904,
+          "over_threshold": 837,
+          "over_threshold_pct": 89.3
+        }
+      }
+    },
+    "fraud_reap50_s3": {
+      "a": "honest_s3",
+      "b": "fraud_reap50_s3",
+      "n": 1000,
+      "mean": 0.6603,
+      "median": 0.6247,
+      "p25": 0.4977,
+      "p95": 1.127,
+      "max": 1.6286,
+      "over_threshold": 904,
+      "over_threshold_pct": 90.4,
+      "by_batch_position": {
+        "batch_size": 16,
+        "first_in_batch": {
+          "count": 63,
+          "median": 1.2749,
+          "over_threshold": 63,
+          "over_threshold_pct": 100.0
+        },
+        "rest": {
+          "count": 937,
+          "median": 0.6017,
+          "over_threshold": 841,
+          "over_threshold_pct": 89.8
+        }
+      }
+    },
+    "control_different_seeds": {
+      "a": "honest_s1",
+      "b": "honest_s2",
+      "n": 1000,
+      "mean": 1.3946,
+      "median": 1.4116,
+      "p25": 1.2535,
+      "p95": 1.7093,
+      "max": 1.8738,
+      "over_threshold": 1000,
+      "over_threshold_pct": 100.0,
+      "by_batch_position": {
+        "batch_size": 16,
+        "first_in_batch": {
+          "count": 63,
+          "median": 1.4009,
+          "over_threshold": 63,
+          "over_threshold_pct": 100.0
+        },
+        "rest": {
+          "count": 937,
+          "median": 1.4119,
+          "over_threshold": 937,
+          "over_threshold_pct": 100.0
+        }
+      }
+    }
+  }
+}
