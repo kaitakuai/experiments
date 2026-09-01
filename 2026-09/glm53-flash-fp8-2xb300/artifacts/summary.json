@@ -1,0 +1,53 @@
+{
+  "threshold": 0.4,
+  "batch_size": 16,
+  "integrity": {
+    "honest_s1": {
+      "nonces": 1000,
+      "non_empty": 1000,
+      "unique": 1000,
+      "block_hash_prefix": "bce35dd795a5"
+    },
+    "honest_s2": {
+      "nonces": 1000,
+      "non_empty": 1000,
+      "unique": 1000,
+      "block_hash_prefix": "013161c6f44a"
+    },
+    "honest_s3": {
+      "nonces": 1000,
+      "non_empty": 1000,
+      "unique": 1000,
+      "block_hash_prefix": "ab21f3846ba6"
+    }
+  },
+  "pairs": {
+    "control_different_seeds": {
+      "a": "honest_s1",
+      "b": "honest_s2",
+      "n": 1000,
+      "mean": 1.3978,
+      "median": 1.421,
+      "p25": 1.2506,
+      "p95": 1.7204,
+      "max": 1.9251,
+      "over_threshold": 1000,
+      "over_threshold_pct": 100.0,
+      "by_batch_position": {
+        "batch_size": 16,
+        "first_in_batch": {
+          "count": 63,
+          "median": 1.4218,
+          "over_threshold": 63,
+          "over_threshold_pct": 100.0
+        },
+        "rest": {
+          "count": 937,
+          "median": 1.4205,
+          "over_threshold": 937,
+          "over_threshold_pct": 100.0
+        }
+      }
+    }
+  }
+}
