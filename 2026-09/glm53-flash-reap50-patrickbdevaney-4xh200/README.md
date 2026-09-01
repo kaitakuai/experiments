@@ -90,16 +90,30 @@ fingerprint is a property of the build, not of a seed.
 
 ### Cross-hardware L2
 
-The fraud signal barely moves when the reference sits on another GPU generation — the mark of
-structural fraud, as opposed to quantisation:
+The fraud signal barely moves when the honest reference sits on another GPU generation — the
+mark of structural fraud, as opposed to quantisation.
 
-| pair | median L2 | past 0.40 | what differs |
-|---|---:|---:|---|
-| this arm ↔ its own honest baseline (4×H200) | 0.6047 | 90.6 % | checkpoint only |
-| this arm ↔ honest 4×B200 (`k3`) | 0.5953 | 90.6 % | hardware, checkpoint |
-| this arm ↔ honest 2×B300 (Aug image) | 0.6064 | 90.3 % | hardware, image, TP, checkpoint |
+**vs honest 4×B200 (`k3`)** — varies: hardware, checkpoint
 
-Compare quantisation fraud, whose distance halves between platforms
+| seed | mean | median | p25 | p75 | p95 | max | past 0.40 |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| s1 | 0.6154 | 0.5931 | 0.4962 | 0.7140 | 0.9442 | 1.3317 | 905 (90.5 %) |
+| s2 | 0.6180 | 0.5953 | 0.4883 | 0.7198 | 0.9583 | 1.5201 | 901 (90.1 %) |
+| s3 | 0.6294 | 0.6089 | 0.4998 | 0.7393 | 0.9432 | 1.4745 | 913 (91.3 %) |
+| **all three, 3000 nonces** | **0.6209** | **0.5985** | | | | | **2719 (90.6 %)** |
+
+**vs honest 2×B300 (August image)** — varies: hardware, image, TP, checkpoint
+
+| seed | mean | median | p25 | p75 | p95 | max | past 0.40 |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| s1 | 0.6467 | 0.6008 | 0.4893 | 0.7482 | 1.1248 | 1.6332 | 906 (90.6 %) |
+| s2 | 0.6488 | 0.6064 | 0.4885 | 0.7571 | 1.1229 | 1.6160 | 900 (90.0 %) |
+| s3 | 0.6587 | 0.6193 | 0.5025 | 0.7578 | 1.1271 | 1.5921 | 903 (90.3 %) |
+| **all three, 3000 nonces** | **0.6514** | **0.6090** | | | | | **2709 (90.3 %)** |
+
+Against its own honest baseline this arm reads 90.6 %; against two different-generation honest
+arms, 90.6 % and 90.3 %. Changing the validator's hardware moves the verdict by 0.3 points.
+Quantisation fraud does not behave this way — its distance halves between platforms
 ([`../glm53-flash-nvfp4-libertai-4xb200/`](../glm53-flash-nvfp4-libertai-4xb200/)).
 
 ### The batch-boundary artifact

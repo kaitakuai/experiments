@@ -75,17 +75,31 @@ thing at once and must not be read as clean comparisons.
 
 ### Cross-hardware L2
 
-**The cross-generation gap is architecture, not build.** The one pair varying *only* hardware
-(h200 ↔ b200, both `k3`, both TP=4) gives 16.5 % — indistinguishable from the confounded
-pairings that also change image and TP (16.5–16.7 %).
+The one pair in the matrix that varies **only** hardware — 4×H200 ↔ 4×B200, both on `k3`, both
+TP=4, same seeds. This is the honest cross-generation floor, and the number the chain has to be
+calibrated against.
 
-**A fraud fingerprint is not portable.** The last row is two runs of the *same* NVFP4 checkpoint
-on different platforms: 0.737, 98 % past the gate — further apart than fraud is from honest on
-either box (0.379 and 0.713).
+| seed | mean | median | p25 | p75 | p95 | max | past 0.40 |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| s1 | 0.3338 | 0.2604 | 0.2003 | 0.3490 | 1.0850 | 1.8511 | 164 (16.4 %) |
+| s2 | 0.3359 | 0.2606 | 0.2024 | 0.3480 | 1.1310 | 1.7987 | 170 (17.0 %) |
+| s3 | 0.3297 | 0.2626 | 0.2012 | 0.3484 | 1.0883 | 1.6494 | 162 (16.2 %) |
+| **all three, 3000 nonces** | **0.3331** | **0.2609** | | | | | **496 (16.5 %)** |
 
-**Structural fraud is the stable case.** REAP50 reads 0.60 / 90 % against honest on its own box
-*and* against a different-generation honest arm — the signal barely moves with hardware, because
-the model computes a different function rather than the same one less precisely.
+What the matrix settles, given that number:
+
+**The cross-generation gap is architecture, not build.** The confounded pairings against the
+August 2×B300 arm — which also change image and TP — land on 16.5–16.7 %, indistinguishable
+from the 16.5 % above. Image and TP contribute nothing measurable.
+
+**A fraud fingerprint is not portable.** Two runs of the *same* NVFP4 checkpoint on different
+platforms sit at 0.741 / 98.0 % — further apart than fraud is from honest on either box (0.379
+and 0.713). Detection must be framed as *far from honest*, never as *close to a known
+signature*.
+
+**Structural fraud is the stable case.** REAP50 reads 0.60 / 90.6 % against its own honest
+baseline, 0.60 / 90.6 % against honest B200 and 0.61 / 90.3 % against honest B300 — changing
+the validator's hardware moves the verdict by 0.3 points.
 
 ### The batch-boundary artifact
 

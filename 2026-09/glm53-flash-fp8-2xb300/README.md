@@ -63,13 +63,33 @@ The comparison this arm does support is cross-hardware, below.
 
 ### Cross-hardware L2
 
-| pair | median L2 | past 0.40 | what differs |
-|---|---:|---:|---|
-| this arm ↔ 4×H200 honest (`k3`) | 0.2658 | 16.7 % | hardware, image, TP |
-| this arm ↔ 4×B200 honest (`k3`) | 0.2666 | 16.5 % | hardware, image, TP |
-| *reference:* 4×B200 ↔ 4×H200, both `k3`, both TP=4 | 0.2606 | 16.5 % | **hardware only** |
+Per seed, 1000 nonces each. Gate defaults: `threshold = 0.40`, `p_mis = 0.001`.
 
-All three agree within 0.2 points, so image and TP contribute nothing measurable.
+**vs honest 4×H200 (`k3`)** — varies: hardware, image, TP
+
+| seed | mean | median | p25 | p75 | p95 | max | past 0.40 |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| s1 | 0.3207 | 0.2559 | 0.1997 | 0.3454 | 0.8971 | 1.6033 | 168 (16.8 %) |
+| s2 | 0.3216 | 0.2674 | 0.2044 | 0.3477 | 0.8606 | 1.4988 | 170 (17.0 %) |
+| s3 | 0.3220 | 0.2658 | 0.2046 | 0.3501 | 0.8916 | 1.6686 | 163 (16.3 %) |
+| **all three, 3000 nonces** | **0.3214** | **0.2627** | | | | | **501 (16.7 %)** |
+
+**vs honest 4×B200 (`k3`)** — varies: hardware, image, TP
+
+| seed | mean | median | p25 | p75 | p95 | max | past 0.40 |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| s1 | 0.3263 | 0.2604 | 0.1968 | 0.3460 | 1.0249 | 1.6435 | 166 (16.6 %) |
+| s2 | 0.3308 | 0.2666 | 0.2032 | 0.3526 | 0.9924 | 1.6025 | 158 (15.8 %) |
+| s3 | 0.3345 | 0.2705 | 0.2077 | 0.3533 | 1.0097 | 1.6942 | 171 (17.1 %) |
+| **all three, 3000 nonces** | **0.3306** | **0.2647** | | | | | **495 (16.5 %)** |
+
+**Reference — the pair that varies hardware only** (4×B200 ↔ 4×H200, both `k3`, both TP=4):
+median **0.2609**, **496 / 3000 (16.5 %)** past the gate. The two confounded pairings above land
+on the same number, so image and TP contribute nothing measurable and the whole gap is the GPU
+generation.
+
+The distribution is bimodal, not a long tail: p75 is 0.35 while p95 is already ~0.9–1.0. The
+second population is the batch-boundary artifact, split out below.
 
 ### The batch-boundary artifact
 

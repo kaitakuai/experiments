@@ -85,23 +85,35 @@ mismatch *rate* against a `p_mis` of 0.001, not from any single nonce.
 
 ### Cross-hardware L2
 
-Same checkpoint, same seeds, different platform and image:
+**The same checkpoint on the other platform** (Aug 2×B300 / FlashInfer 0.6.17 ↔ Sep 4×B200 /
+`k3`) — varies: hardware, image, TP.
 
-| pair | median L2 | past 0.40 |
-|---|---:|---:|
-| NVFP4 (Aug, 2×B300, FlashInfer 0.6.17) ↔ NVFP4 (Sep, 4×B200, 0.6.18), s1 | 0.7356 | 97.8 % |
-| same, s2 | 0.7368 | 97.8 % |
-| same, s3 | 0.7507 | 98.4 % |
+| seed | mean | median | p25 | p75 | p95 | max | past 0.40 |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| s1 | 0.7726 | 0.7360 | 0.6047 | 0.9165 | 1.2166 | 1.6484 | 978 (97.8 %) |
+| s2 | 0.7704 | 0.7368 | 0.6045 | 0.8917 | 1.2105 | 1.7965 | 978 (97.8 %) |
+| s3 | 0.7764 | 0.7510 | 0.6080 | 0.8988 | 1.2215 | 1.8090 | 984 (98.4 %) |
+| **all three, 3000 nonces** | **0.7731** | **0.7410** | | | | | **2940 (98.0 %)** |
 
-Two runs of one quantised checkpoint disagree **twice as much** as this arm disagrees with the
-honest baseline. The August figure of 0.711 describes "B300 + the old image", not NVFP4.
+Two runs of one quantised checkpoint disagree **more** (0.741) than this arm disagrees with its
+own honest baseline (0.379). The August figure of 0.711 describes "B300 + the old image", not
+NVFP4 as an attack.
 
-Contrast the honest side, where the same cross-platform move costs only 0.26 — quantised
+**Against a different-generation honest arm** (4×H200, `k3`) — varies: hardware, checkpoint:
+
+| seed | mean | median | p25 | p75 | p95 | max | past 0.40 |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| s1 | 0.4393 | 0.3814 | 0.2931 | 0.4833 | 1.0604 | 1.8049 | 444 (44.4 %) |
+| s2 | 0.4408 | 0.3789 | 0.3062 | 0.4833 | 1.1403 | 1.7063 | 441 (44.1 %) |
+| s3 | 0.4468 | 0.3890 | 0.3044 | 0.4935 | 1.0991 | 1.5989 | 466 (46.6 %) |
+| **all three, 3000 nonces** | **0.4423** | **0.3828** | | | | | **1351 (45.0 %)** |
+
+For contrast the honest arms move only 0.26 across the same platform change — quantised
 numerics are far more sensitive to which kernels execute them than FP8 numerics are.
 
-*Caveat:* architecture (B300 vs B200) and image (0.6.17 vs 0.6.18) both differ in that pairing,
-so the split between them is unknown. For calibration it does not matter: the quantity is not
-stable, and that is enough to disqualify it as a signature.
+*Caveat:* architecture, image and TP all differ in the cross-platform pairing, so the split
+between them is unknown. For calibration it does not matter: the quantity is not stable, and
+that is enough to disqualify it as a signature.
 
 ### The batch-boundary artifact
 

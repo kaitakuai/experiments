@@ -61,16 +61,22 @@ Gate defaults: `threshold = 0.40`, `p_mis = 0.001`.
 
 ### Cross-hardware L2
 
-| pair | median L2 | past 0.40 | what differs |
-|---|---:|---:|---|
-| this NVFP4 ↔ its own honest arm | 0.7132 | 97.3 % | checkpoint |
-| **this NVFP4 ↔ September NVFP4 on 4×B200** | **0.7368** | **98.0 %** | hardware, image, TP |
-| September NVFP4 ↔ its own honest arm | 0.3791 | 43.2 % | checkpoint |
-| *reference:* honest ↔ honest across the same platform move | 0.2666 | 16.5 % | hardware, image, TP |
+**The same checkpoint on the other platform** (this arm ↔ Sep 4×B200 / `k3`) — varies:
+hardware, image, TP.
 
-Two runs of one quantised checkpoint sit further apart (0.737) than fraud sits from honest on
-either box. Quantised numerics depend on which kernels execute them far more than FP8 numerics
-do — the honest arms move only 0.267 across the same platform change.
+| seed | mean | median | p25 | p75 | p95 | max | past 0.40 |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| s1 | 0.7726 | 0.7360 | 0.6047 | 0.9165 | 1.2166 | 1.6484 | 978 (97.8 %) |
+| s2 | 0.7704 | 0.7368 | 0.6045 | 0.8917 | 1.2105 | 1.7965 | 978 (97.8 %) |
+| s3 | 0.7764 | 0.7510 | 0.6080 | 0.8988 | 1.2215 | 1.8090 | 984 (98.4 %) |
+| **all three, 3000 nonces** | **0.7731** | **0.7410** | | | | | **2940 (98.0 %)** |
+
+Two runs of one quantised checkpoint sit further apart (0.741) than fraud sits from honest on
+either box — 0.713 here, 0.379 on B200. A published NVFP4 signature is therefore a property of
+the platform it was measured on.
+
+For scale, the honest arms across the same platform change move only **0.265**. Quantised
+numerics depend on which kernels execute them far more than FP8 numerics do.
 
 ### The batch-boundary artifact
 

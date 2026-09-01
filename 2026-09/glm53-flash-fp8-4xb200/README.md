@@ -85,21 +85,25 @@ Cleaner than Hopper, where one nonce crossed the gate.
 
 ### Cross-hardware L2
 
-Against [`../glm53-flash-fp8-4xh200/`](../glm53-flash-fp8-4xh200/): same image, same FlashInfer
-0.6.18, same TP=4, same seeds. Gate defaults: `threshold = 0.40`, `p_mis = 0.001`.
+Against honest 4×H200 on the same image, per seed, 1000 nonces each.
+Gate defaults: `threshold = 0.40`, `p_mis = 0.001`.
 
-| seed | median L2 | p95 | past 0.40 | past 0.40, excluding first-in-batch |
-|---|---:|---:|---:|---:|
-| s1 | 0.2604 | 1.0710 | 16.4 % | 10.8 % |
-| s2 | 0.2606 | 1.1176 | 17.0 % | 11.4 % |
-| s3 | 0.2626 | 1.0879 | 16.2 % | 10.6 % |
+| seed | mean | median | p25 | p75 | p95 | max | past 0.40 |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| s1 | 0.3338 | 0.2604 | 0.2003 | 0.3490 | 1.0850 | 1.8511 | 164 (16.4 %) |
+| s2 | 0.3359 | 0.2606 | 0.2024 | 0.3480 | 1.1310 | 1.7987 | 170 (17.0 %) |
+| s3 | 0.3297 | 0.2626 | 0.2012 | 0.3484 | 1.0883 | 1.6494 | 162 (16.2 %) |
+| **all three, 3000 nonces** | **0.3331** | **0.2609** | | | | | **496 (16.5 %)** |
 
-Compare the earlier, confounded pairing (B300 on FlashInfer 0.6.17 against H200 on 0.6.18):
-16.8 / 17.0 / 16.3 %. Identical within noise, so **the build contributes nothing measurable**
-and the whole gap is the GPU generation.
+Nothing is confounded: same image, same FlashInfer 0.6.18, same TP=4, same seeds — only the GPU
+generation differs. The confounded pairings against the August 2×B300 arm (which also change
+image and TP) land on 16.5–16.7 %, so image and TP contribute nothing measurable.
 
 Both sides are honest, so at `p_mis = 0.001` the chain would call a healthy mixed fleet
-fraudulent. The mismatch tolerance needs to be ≈ 0.20 for cross-generation validation.
+fraudulent. The mismatch tolerance has to be ≈ 0.20 for cross-generation validation.
+
+The distribution is bimodal, not a long tail: p75 is 0.35 while p95 is already ~1.1. The second
+population is the batch-boundary artifact, split out below — excluding it leaves **10.9 %**.
 
 ### The batch-boundary artifact
 
