@@ -84,8 +84,10 @@ before patching anything (`scripts/setup_mlnode.sh` prints it):
 
 Launching through mlnode (`scripts/start_mlnode_api.sh`) and reading the engine's own config
 line confirms the chain does **not** override these: `tensor_parallel_size=4`,
-`kv_cache_dtype=fp8`, `quantization=fp8`, `enforce_eager=False`. The only deviation of this run
-from a production node is the GPU count.
+`kv_cache_dtype=fp8`, `quantization=fp8`, `enforce_eager=False`. The one value this run changes
+is the GPU count, and on 141 GB cards that is a legitimate production topology rather than a
+reduction: the weights fit at TP=4 with room for KV. The image's `TP=8` default is sized for
+80 GB cards.
 
 ## Validation
 
@@ -219,7 +221,10 @@ the GPU generation. See [`../glm53-flash-fp8-4xb200/`](../glm53-flash-fp8-4xb200
 
 **The batch-boundary artifact has no root cause yet.** The hybrid-state hypothesis is untested.
 
-**8×H200 is unmeasured**, and that is the topology the image is actually built for (`TP=8`).
+**8×H100 is unmeasured, and it is the only topology that still matters.** H200 carries 141 GB
+per card and the weights fit at TP=4 with room to spare, so this run is a full production
+topology rather than a reduced one; the image's baked `TP=8` targets 80 GB cards, where TP=4
+would leave 76 GB of weights on an 80 GB card. No H100 arm of any width has been measured.
 
 **Serving is a single pass** per concurrency level, not a compressa-perf run.
 

@@ -175,7 +175,9 @@ number):
   `--max-num-batched-tokens 16384` died with XID 31 out of DeepGEMM. 24 × 1024 = 24576 exceeds
   that budget, so the cause is almost certainly the same as here, but it manifested as a hard
   crash rather than a shape error and has not been re-run.
-- **8-GPU topologies are unmeasured**, and `TP=8` is what the image ships.
+- **8-GPU topologies are not applicable here.** B200 carries 183 GB per card, so TP=4 leaves
+  ample room for KV; the image's `TP=8` default targets 80 GB cards. The unmeasured case is
+  **8×H100**, which is a different architecture, not a wider version of this one.
 
 ## Files
 

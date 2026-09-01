@@ -67,7 +67,7 @@ gonka-vllm-serve \
 
 | Parameter | Image as shipped | This run |
 |---|---|---|
-| `--tensor-parallel-size` | 8 | 4 (the box has 4 GPUs) |
+| `--tensor-parallel-size` | 8 | 4 — the weights fit on 141 GB cards at TP=4; the image's default is sized for 80 GB cards |
 | checkpoint | `zai-org/GLM-5.3-Flash` | `patrickbdevaney/GLM-5.3-Flash-REAP50-FP8` |
 | everything else | — | unchanged |
 

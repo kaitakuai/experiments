@@ -124,7 +124,11 @@ a mismatched-seed comparison cannot silently produce the ~1.41 asymptote. It key
 
 ## What this does not settle
 
-- **8-GPU topologies.** The image ships `TP=8`; every arm here is TP=2 or TP=4.
+- **8-GPU topologies.** Only relevant to 80 GB cards. On H200 (141 GB) and B200 (183 GB) the
+  weights fit at TP=4 with room for KV, so a 4-card node is a full production topology, not a
+  reduced one — the image's baked `TP=8` targets H100-class boxes, where TP=4 leaves 76 GB of
+  weights on an 80 GB card and no room for cache. **8×H100 is therefore the one unmeasured
+  topology**, and no H100 arm of any width exists in this matrix.
 - **The B300 ↔ B200 NVFP4 disagreement is not decomposed** into architecture, image and TP.
 - **Only two fraud classes**: expert pruning at 50 % and one NVFP4 producer.
 - **No honest floor for the B300 arm** — the August run collected one pass per seed.
