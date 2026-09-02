@@ -1,0 +1,21 @@
+=== СБОР honest батч=16 05:03:13 ===
+(Worker_TP0 pid=21383) INFO 09-02 04:36:21 [cuda.py:526] Using FLASHINFER_MLA_SPARSE_SM90 attention backend out of potential backends: ['FLASHINFER_MLA_SPARSE_SM90', 'FLA
+(EngineCore pid=20911) INFO 09-02 04:37:57 [kv_cache_utils.py:2116] GPU KV cache size: 2,482,757 tokens, Maximum concurrency for 1,048,576 tokens per request: 2.37x
+маршрут: {"vllm_version":"0.28.0.dev0+glm53.gonka.sampler1","gonka_poc_version":"0.1.4","poc_validation_inference":true}
+/root/seeds_only.sh: line 36: 32152 Killed                  nohup python3 -u /root/collect_artifacts.py --url http://127.0.0.1:8081 --model glm53 --output-dir "$OUT" --block-hash "$BH" --public-key "$PK" --nonces 1000 --batch-size "$BATCH" > "$OUT/c.log" 2>&1
+honest/s4: 1000 нонсов за 42.4 c = 1416 нонсов/мин | IMA=0
+/root/seeds_only.sh: line 36: 32308 Killed                  nohup python3 -u /root/collect_artifacts.py --url http://127.0.0.1:8081 --model glm53 --output-dir "$OUT" --block-hash "$BH" --public-key "$PK" --nonces 1000 --batch-size "$BATCH" > "$OUT/c.log" 2>&1
+honest/s1: 1000 нонсов за 37.3 c = 1610 нонсов/мин | IMA=0
+/root/seeds_only.sh: line 36: 32417 Killed                  nohup python3 -u /root/collect_artifacts.py --url http://127.0.0.1:8081 --model glm53 --output-dir "$OUT" --block-hash "$BH" --public-key "$PK" --nonces 1000 --batch-size "$BATCH" > "$OUT/c.log" 2>&1
+honest/s2: 1000 нонсов за 37.2 c = 1612 нонсов/мин | IMA=0
+/root/seeds_only.sh: line 36: 32530 Killed                  nohup python3 -u /root/collect_artifacts.py --url http://127.0.0.1:8081 --model glm53 --output-dir "$OUT" --block-hash "$BH" --public-key "$PK" --nonces 1000 --batch-size "$BATCH" > "$OUT/c.log" 2>&1
+honest/s3: 1000 нонсов за 37.2 c = 1612 нонсов/мин | IMA=0
+/root/seeds_only.sh: line 36: 32643 Killed                  nohup python3 -u /root/collect_artifacts.py --url http://127.0.0.1:8081 --model glm53 --output-dir "$OUT" --block-hash "$BH" --public-key "$PK" --nonces 1000 --batch-size "$BATCH" > "$OUT/c.log" 2>&1
+honestrep/s1: 1000 нонсов за 37.2 c = 1613 нонсов/мин | IMA=0
+--- инференс под нагрузкой ---
+прогрев: параллельно  1: 7.0 c, 800 токенов, 114.7 ток/с, задержка med 7.0 c
+параллельно  1: 6.9 c, 800 токенов, 115.5 ток/с, задержка med 6.9 c
+параллельно  8: 9.7 c, 6400 токенов, 662.5 ток/с, задержка med 9.6 c
+параллельно 20: 12.2 c, 16000 токенов, 1309.3 ток/с, задержка med 12.2 c
+ИТОГ IMA=0 05:07:55
+SEEDS_DONE

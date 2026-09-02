@@ -16,7 +16,7 @@ from the six arm folders, so the matrix cannot drift from the reports it summari
 
 | comparison | past the 0.40 gate |
 |---|---:|
-| honest vs itself, same box | **0 %** (B200) · 0.1 % (H200) |
+| honest vs itself, same box | **0 %** (B200, H100) · 0.1 % (H200) |
 | **honest vs honest, different GPU generation** | **16–17 %** |
 | fraud NVFP4 vs honest, same box | 43 % (B200) · 97 % (B300) |
 | fraud REAP50 vs honest, same box | **90 %** |
@@ -35,6 +35,7 @@ for reading the matrix is which dimensions differ per pair:
 | b300 honest / nvfp4 (Aug) | 2×B300 | 0.6.17 | 2 | 32 |
 | h200 honest / reap50 | 4×H200 | `k3` / 0.6.18 | 4 | 16 |
 | b200 honest / nvfp4 | 4×B200 | `k3` / 0.6.18 | 4 | 16 |
+| h100 honest | 8×H100 | `k3` / 0.6.18 | **8** | 16 |
 
 ## Config
 
@@ -72,6 +73,12 @@ thing at once and must not be read as clean comparisons.
 | b300 nvfp4 (aug) | h200 honest | 0.7164 | 97.2 % | hardware, image, TP, checkpoint |
 | b300 nvfp4 (aug) | b200 honest | 0.7188 | 97.1 % | hardware, image, TP, checkpoint |
 | **b300 nvfp4 (aug)** | **b200 nvfp4** | **0.7368** | **98.0 %** | hardware, image, TP |
+| h200 honest | **h100 honest** | 0.2522 | **15.1 %** | hardware, TP — *both Hopper* |
+| b200 honest | h100 honest | 0.2667 | 16.3 % | hardware, TP |
+| b300 honest (aug) | h100 honest | 0.2635 | 16.5 % | hardware, image, TP |
+| b200 nvfp4 | h100 honest | 0.3819 | 44.8 % | hardware, TP, checkpoint |
+| h200 reap50 | h100 honest | 0.6058 | 91.3 % | hardware, TP, checkpoint |
+| b300 nvfp4 (aug) | h100 honest | 0.7215 | 97.2 % | hardware, image, TP, checkpoint |
 
 ### Cross-hardware L2
 
@@ -88,9 +95,13 @@ calibrated against.
 
 What the matrix settles, given that number:
 
-**The cross-generation gap is architecture, not build.** The confounded pairings against the
-August 2×B300 arm — which also change image and TP — land on 16.5–16.7 %, indistinguishable
-from the 16.5 % above. Image and TP contribute nothing measurable.
+**The gap is hardware, not build — and not specifically the architecture boundary.** The
+confounded pairings against the August 2×B300 arm, which also change image and TP, land on
+16.5–16.7 %, indistinguishable from the hardware-only 16.5 %. Image contributes nothing
+measurable. But 8×H100 against 4×H200 — both Hopper, both `FLASHINFER_MLA_SPARSE_SM90`, same
+image — still reads **15.1 %**. Staying inside one architecture buys about one point, so what
+the mismatch tracks is differing hardware and topology in general, not the generation
+boundary.
 
 **A fraud fingerprint is not portable.** Two runs of the *same* NVFP4 checkpoint on different
 platforms sit at 0.741 / 98.0 % — further apart than fraud is from honest on either box (0.379
@@ -104,9 +115,12 @@ the validator's hardware moves the verdict by 0.3 points.
 ### The batch-boundary artifact
 
 Nonces at `index % batch == 0` are 100 % past the gate in every cross-hardware pair in this
-matrix — on all three architectures, both images, at batch 16 and at batch 32. They contribute
-about 6 of the 17 points in the honest cross-generation row. Cause unknown; a candidate is
-documented in [`../glm53-flash-fp8-4xh200/`](../glm53-flash-fp8-4xh200/).
+matrix, contributing about 6 of the 17 points in the honest cross-hardware rows.
+
+**It is not universal, though.** Repeating one seed on the same box leaves 63 differing nonces
+on 4×H200 and 4×B200 (both TP=4) but only **1** on 8×H100 (TP=8) — see
+[`../glm53-flash-fp8-8xh100/`](../glm53-flash-fp8-8xh100/). Some configuration largely avoids
+the defect; whether that is TP=8 or the H100 itself is not separable from the data here.
 
 ### Throughput
 
@@ -138,11 +152,11 @@ a mismatched-seed comparison cannot silently produce the ~1.41 asymptote. It key
 
 ## What this does not settle
 
-- **8-GPU topologies.** Only relevant to 80 GB cards. On H200 (141 GB) and B200 (183 GB) the
+- ~~**8-GPU topologies.**~~ Now covered by [`../glm53-flash-fp8-8xh100/`](../glm53-flash-fp8-8xh100/);
+  what remains missing is a **fraud arm on H100**. Only relevant to 80 GB cards. On H200 (141 GB) and B200 (183 GB) the
   weights fit at TP=4 with room for KV, so a 4-card node is a full production topology, not a
   reduced one — the image's baked `TP=8` targets H100-class boxes, where TP=4 leaves 76 GB of
-  weights on an 80 GB card and no room for cache. **8×H100 is therefore the one unmeasured
-  topology**, and no H100 arm of any width exists in this matrix.
+  weights on an 80 GB card and no room for cache.
 - **The B300 ↔ B200 NVFP4 disagreement is not decomposed** into architecture, image and TP.
 - **Only two fraud classes**: expert pruning at 50 % and one NVFP4 producer.
 - **No honest floor for the B300 arm** — the August run collected one pass per seed.
@@ -192,6 +206,7 @@ cross-platform pair at ≈ 0.737 / 98 %; the script exiting without a seed-misma
 | 2×B300 honest / NVFP4 (Aug data) | [`../glm53-flash-fp8-2xb300/`](../glm53-flash-fp8-2xb300/) · [`../glm53-flash-nvfp4-libertai-2xb300/`](../glm53-flash-nvfp4-libertai-2xb300/) |
 | 4×H200 honest / REAP50 | [`../glm53-flash-fp8-4xh200/`](../glm53-flash-fp8-4xh200/) · [`../glm53-flash-reap50-patrickbdevaney-4xh200/`](../glm53-flash-reap50-patrickbdevaney-4xh200/) |
 | 4×B200 honest / NVFP4 | [`../glm53-flash-fp8-4xb200/`](../glm53-flash-fp8-4xb200/) · [`../glm53-flash-nvfp4-libertai-4xb200/`](../glm53-flash-nvfp4-libertai-4xb200/) |
+| 8×H100 honest, TP=8 | [`../glm53-flash-fp8-8xh100/`](../glm53-flash-fp8-8xh100/) |
 
 ## Reproducibility checklist
 

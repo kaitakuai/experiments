@@ -1,4 +1,4 @@
-# GLM-5.3-Flash — 4×B200 — honest FP8 baseline (floor 0.0000; the Hopper↔Blackwell gap is architectural)
+# GLM-5.3-Flash — 4×B200 — honest FP8 baseline (floor 0.0000; the cross-hardware gap is not the build)
 
 **Date:** 2026-09-01
 **Model:** [`zai-org/GLM-5.3-Flash`](https://huggingface.co/zai-org/GLM-5.3-Flash) @
@@ -16,7 +16,7 @@ driver 595.71.05, CUDA 13.
 The Blackwell counterpart of [`../glm53-flash-fp8-4xh200/`](../glm53-flash-fp8-4xh200/), run on
 the **same image, same TP, same seeds** specifically so that the two can be differenced.
 
-- **The 17 % cross-generation mismatch is architectural, not a build artifact.** B200 against
+- **The 17 % cross-hardware mismatch is not a build artifact.** B200 against
   H200 on identical software gives **16.4 / 17.0 / 16.2 %** past the 0.40 gate — the same as the
   earlier B300-on-0.6.17 against H200-on-0.6.18 comparison (16.8 / 17.0 / 16.3 %). The confound
   flagged as unresolved in the H200 report is now resolved: FlashInfer version is not the cause.
@@ -114,8 +114,12 @@ population is the batch-boundary artifact, split out below — excluding it leav
 | B200 vs H200, s2 | median 1.2530, **100 % past** | median 0.2516, 11.4 % past |
 | B200 vs H200, s3 | median 1.2275, **100 % past** | median 0.2549, 10.6 % past |
 
-Identical structure to Hopper. These 63 nonces are 6.3 % of the set and account for ~6 points
+Identical structure to 4×H200. These 63 nonces are 6.3 % of the set and account for ~6 points
 of the 17 %.
+
+**Not universal, though:** 8×H100 at TP=8 shows only 1 differing nonce out of 1000
+([`../glm53-flash-fp8-8xh100/`](../glm53-flash-fp8-8xh100/)), so some configurations largely
+avoid it.
 
 ### Throughput
 

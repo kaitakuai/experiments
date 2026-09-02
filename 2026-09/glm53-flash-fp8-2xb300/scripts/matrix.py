@@ -44,6 +44,8 @@ ARMS = {
                     "4xB200", "k3 (FlashInfer 0.6.18)", 4, "honest"),
     "b200_nvfp4": ("2026-09/glm53-flash-nvfp4-libertai-4xb200/artifacts/nonces_nvfp4_%s.json",
                    "4xB200", "k3 (FlashInfer 0.6.18)", 4, "fraud/nvfp4"),
+    "h100_honest": ("2026-09/glm53-flash-fp8-8xh100/artifacts/nonces_honest_%s.json",
+                    "8xH100", "k3 (FlashInfer 0.6.18)", 8, "honest"),
 }
 
 SEEDS = ("s1", "s2", "s3")

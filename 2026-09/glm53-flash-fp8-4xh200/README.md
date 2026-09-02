@@ -138,8 +138,11 @@ Nonces are indexed 0…999 and collected in batches of 16. Splitting every compa
 | honest 2×B300 vs honest 4×H200 | median **1.07**, **100 % past 0.40** | median 0.25, 11 % past |
 
 All three seeds give exactly 63 first-in-batch nonces and exactly 63 flagged — no near misses.
-Every nonce whose index is a multiple of the collection batch size fails cross-hardware
-comparison **unconditionally**, regardless of whether the node is honest.
+
+**The defect is configuration-dependent, not universal.** On 8×H100 at TP=8 the same test
+leaves **1 differing nonce out of 1000** instead of 63 — see
+[`../glm53-flash-fp8-8xh100/`](../glm53-flash-fp8-8xh100/). In cross-hardware pairs against
+that arm, the 63 positions still fail, but the instability is on *this* side.
 
 The same split applied to DeepSeek-V4 (honest H100 vs honest B300, committed sets under
 [`../../2026-07/`](../../2026-07/)) shows **nothing**: first-in-batch median 0.168–0.178 against
