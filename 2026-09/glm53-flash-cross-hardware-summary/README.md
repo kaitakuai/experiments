@@ -80,6 +80,17 @@ thing at once and must not be read as clean comparisons.
 | h200 reap50 | h100 honest | 0.6058 | 91.3 % | hardware, TP, checkpoint |
 | b300 nvfp4 (aug) | h100 honest | 0.7215 | 97.2 % | hardware, image, TP, checkpoint |
 
+![Распределения L2](artifacts/l2_distributions.png)
+
+Two things the histogram shows that the table does not. The two honest curves — inside one
+architecture (8×H100 ↔ 4×H200, both Hopper) and across generations — sit almost on top of each
+other, medians 0.252 against 0.263. And the NVFP4 arm on 4×B200 overlaps the honest curves
+almost entirely, separating only to the right of the gate; the pruning and the B300 NVFP4 arms
+separate cleanly.
+
+The same-box floor is not plotted: 93 % of its nonces are bit-identical, so it is a spike at
+zero rather than a distribution.
+
 ### Cross-hardware L2
 
 The one pair in the matrix that varies **only** hardware — 4×H200 ↔ 4×B200, both on `k3`, both
@@ -166,7 +177,9 @@ a mismatched-seed comparison cannot silently produce the ~1.41 asymptote. It key
 | path | what |
 |---|---|
 | [`artifacts/matrix.json`](artifacts/matrix.json) | the matrix above, machine-readable, with `varies` per pair |
+| [`artifacts/l2_distributions.png`](artifacts/l2_distributions.png) | the histogram above, 27 000 pairwise distances |
 | [`scripts/matrix.py`](scripts/matrix.py) | builds it from the other folders' committed sets |
+| [`scripts/plot_l2.py`](scripts/plot_l2.py) | redraws the histogram from the same sets (matplotlib, Okabe–Ito palette) |
 | [`scripts/poc_seeds.json`](scripts/poc_seeds.json) | the fixed seed set |
 
 No nonce sets are duplicated into this folder by design.
@@ -175,6 +188,7 @@ No nonce sets are duplicated into this folder by design.
 
 ```bash
 python3 scripts/matrix.py > artifacts/matrix.json
+python3 scripts/plot_l2.py          # writes artifacts/l2_distributions.png
 ```
 
 Success criteria: the hardware-only pair (h200 ↔ b200) at ≈ 0.26 / 16.5 %; the NVFP4 ↔ NVFP4
