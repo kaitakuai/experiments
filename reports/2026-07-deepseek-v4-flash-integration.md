@@ -5,7 +5,7 @@
 The [kaitaku.ai](https://github.com/kaitakuai) team (Mykola [@baychak](https://github.com/baychak), Pavlo [@clanster](https://github.com/clanster)) brought `deepseek-ai/DeepSeek-V4-Flash` to a governance-approved PoC model at the request of the Gonka core team (2026-07-17 … 07-31). The work covers:
 
 - PoC support for the DeepSeek-V4 model family (per-group KV metadata, positions, pseudo ids)
-- Port of the PoC sampler to vLLM 0.25.1 as a thin residual plus the out-of-tree `gonka-poc` plugin ([gonka-ai/vllm#78](https://github.com/gonka-ai/vllm/pull/78)); repository transfer to [gonka-ai/gonka-vllm-plugins](https://github.com/gonka-ai/gonka-vllm-plugins)
+- First model shipped on the residual + `gonka-poc` plugin stack for vLLM 0.25.1 (the port itself is covered in the [plugin report](https://github.com/kaitakuai/experiments/blob/main/reports/2026-07-gonka-poc-plugin-and-residual.md))
 - Two experiment campaigns: 12 directories on the original checkpoint, 10 on `DeepSeek-V4-Flash-0731` — four GPU topologies, fraud arms, inference validation, seed stability, DSpark
 - Replay hooks for the V2 model runner, needed for DSpark ([gonka-ai/vllm#92](https://github.com/gonka-ai/vllm/pull/92)), and follow-up fixes
 - Release candidates and verification of the core team's rc1 / rc3 images on Kaitaku hardware
@@ -29,23 +29,11 @@ Earlier runs of DeepSeek-V4-Flash produced no PoC. Pavlo extended the PoC runner
 
 **Conclusion.** PoC generation and validation on DeepSeek-V4 agree with the in-tree fork and the `qd` port within the cross-validation gate; the fix is generic, not per model.
 
-### Port to vLLM 0.25.1: fat fork vs residual + plugin (2026-07-21 … 2026-07-31)
+### Port to vLLM 0.25.1 (2026-07-21 … 2026-07-31)
 
-Two variants were submitted against `release/v0.25.1` (created 2026-07-23); the core team chose the residual and asked for the fixes as separate PRs.
+Two variants were submitted against `release/v0.25.1`: a full in-tree port with DeepSeek-V4 support ([gonka-ai/vllm#65](https://github.com/gonka-ai/vllm/pull/65), Pavlo, 45 files) and a thin residual plus the out-of-tree `gonka-poc` plugin ([#66](https://github.com/gonka-ai/vllm/pull/66) → [#78](https://github.com/gonka-ai/vllm/pull/78), Mykola). The core team chose the residual; DeepSeek-V4 support lives in the plugin (`kaitakuai/gonka-poc#14`, Pavlo) and shipped with plugin `v0.1.1`. The port, the fix stack and the plugin transfer are described in the [plugin report](https://github.com/kaitakuai/experiments/blob/main/reports/2026-07-gonka-poc-plugin-and-residual.md) and are not repeated here.
 
-| PR | Title | Author | Outcome |
-|----|-------|--------|---------|
-| [gonka-ai/vllm#65](https://github.com/gonka-ai/vllm/pull/65) | feat(poc): port Gonka PoC-v2 + DeepSeek-V4 support to v0.25.1 | [@clanster](https://github.com/clanster) | closed — full in-tree port (45 files); the residual was chosen instead |
-| [gonka-ai/vllm#66](https://github.com/gonka-ai/vllm/pull/66) | feat(poc): Gonka PoC-v2 thin residual for v0.25.1 | [@baychak](https://github.com/baychak) | closed — re-split into #78 |
-| [gonka-ai/vllm#78](https://github.com/gonka-ai/vllm/pull/78) | Port PoC sampler residual to vLLM 0.25.1 (no behaviour change) | [@baychak](https://github.com/baychak) | **merged 2026-07-29** |
-| [gonka-ai/vllm#79](https://github.com/gonka-ai/vllm/pull/79) | fix(poc): stop a disabled grammar from leaking another request's mask | [@baychak](https://github.com/baychak) | merged 2026-07-30 |
-| [gonka-ai/vllm#80](https://github.com/gonka-ai/vllm/pull/80) | fix(poc): range-check and bound replay ids before the engine sees them | [@baychak](https://github.com/baychak) | merged 2026-07-30 |
-| [gonka-ai/vllm#82](https://github.com/gonka-ai/vllm/pull/82) | fix(poc): make the shm ring size a knob instead of a hardcoded 64 | [@baychak](https://github.com/baychak) | merged 2026-07-30 |
-| #81, #83 … #88 | remaining fixes from the same stack | [@baychak](https://github.com/baychak) | closed by review (core) |
-
-The `gonka-poc` plugin (written in `kaitakuai/gonka-poc`, 30 commits) was transferred to `gonka-ai/gonka-vllm-plugins` on 2026-07-28 (proposed 2026-07-24) and released as v0.1.1 after review fixes [#1](https://github.com/gonka-ai/gonka-vllm-plugins/pull/1) … [#3](https://github.com/gonka-ai/gonka-vllm-plugins/pull/3). [@qdanik](https://github.com/qdanik)'s `qd/combine-poc-and-inference` branch (PoC validation does not interrupt inference) was folded into the plugin during the transfer (plugin PR #18: reservation, block borrow, KV reuse).
-
-**Conclusion.** The 0.25.1 release runs stock vLLM plus a residual of under 900 lines and a pip-installable plugin; for the models already on the network the release behaves as before (core team verification, 2026-07-29).
+**Conclusion.** DeepSeek-V4 was the first model to ship on the residual + plugin stack; the model-specific code is confined to the plugin.
 
 ---
 
@@ -128,11 +116,10 @@ Gonka core team ([@gmorgachev](https://github.com/gmorgachev), [@vbgd0](https://
 
 | Participant | GitHub | Role | Contribution |
 |-------------|--------|------|--------------|
-| Pavlo | [@clanster](https://github.com/clanster) | kaitakuai | PoC fix for DeepSeek-V4, #65, both experiment campaigns, DSpark, [kaitakuai/vllm#18](https://github.com/kaitakuai/vllm/pull/18) / [#19](https://github.com/kaitakuai/vllm/pull/19) / [#20](https://github.com/kaitakuai/vllm/pull/20), rc review, proposal #94 submission |
-| Mykola | [@baychak](https://github.com/baychak) | kaitakuai | Residual port #78 and fix stack, plugin transfer, #92, threshold normalization, release-candidate images, [#1560](https://github.com/gonka-ai/gonka/pull/1560), [#1640](https://github.com/gonka-ai/gonka/pull/1640), proposals #97 / #98 |
+| Pavlo | [@clanster](https://github.com/clanster) | kaitakuai | PoC fix for DeepSeek-V4, in-tree port #65, both experiment campaigns, DSpark, [kaitakuai/vllm#18](https://github.com/kaitakuai/vllm/pull/18) / [#19](https://github.com/kaitakuai/vllm/pull/19) / [#20](https://github.com/kaitakuai/vllm/pull/20), rc review, proposal #94 submission |
+| Mykola | [@baychak](https://github.com/baychak) | kaitakuai | #92, threshold normalization, release-candidate images, [#1560](https://github.com/gonka-ai/gonka/pull/1560), [#1640](https://github.com/gonka-ai/gonka/pull/1640), proposals #97 / #98 |
 | Gleb Morgachev | [@gmorgachev](https://github.com/gmorgachev) | Gonka core team | Scope, `release/v0.25.1` branch, review of experiment results |
-| Vladislav Bogdanov | [@vbgd0](https://github.com/vbgd0) | Gonka core team | Review and merge of #78 … #92 and plugin PRs, rc1 / rc3 images, 0731 rerun request, throughput accounting fix ([experiments#7](https://github.com/kaitakuai/experiments/pull/7)), coefficient recomputation |
+| Vladislav Bogdanov | [@vbgd0](https://github.com/vbgd0) | Gonka core team | Review and merge of #92, rc1 / rc3 images, 0731 rerun request, throughput accounting fix ([experiments#7](https://github.com/kaitakuai/experiments/pull/7)), coefficient recomputation |
 | Anastasia Matveeva | [@mtvnastya](https://github.com/mtvnastya) | Gonka core team | Proposal #94 draft, coefficient recomputation for #97 / #98 |
 | Tania Charchian | [@tcharchian](https://github.com/tcharchian) | Gonka core team | Issue tracking (#1408), status follow-up |
-| Daniil Yankouski | [@qdanik](https://github.com/qdanik) | | `qd/combine-poc-and-inference` (PoC validation without interrupting inference), folded into the plugin |
 

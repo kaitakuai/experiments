@@ -9,6 +9,8 @@ The [kaitaku.ai](https://github.com/kaitakuai) team (Mykola [@baychak](https://g
 - the review round with the core team — [gonka-vllm-plugins#1](https://github.com/gonka-ai/gonka-vllm-plugins/pull/1), [#2](https://github.com/gonka-ai/gonka-vllm-plugins/pull/2), [#3](https://github.com/gonka-ai/gonka-vllm-plugins/pull/3) and release `v0.1.1`;
 - three model and version additions carried by the plugin without touching the residual: DeepSeek-V4 support, decode-PoC ([#6](https://github.com/gonka-ai/gonka-vllm-plugins/pull/6), [#8](https://github.com/gonka-ai/gonka-vllm-plugins/pull/8)) and vLLM 0.28 for GLM-5.3-Flash ([#9](https://github.com/gonka-ai/gonka-vllm-plugins/pull/9)).
 
+The model and scheme work that rides on the plugin is reported separately: [DeepSeek-V4-Flash](https://github.com/kaitakuai/experiments/blob/main/reports/2026-07-deepseek-v4-flash-integration.md), [decode-PoC](https://github.com/kaitakuai/experiments/blob/main/reports/2026-06-decode-poc-research-and-integration.md), [GLM-5.3-Flash](https://github.com/kaitakuai/experiments/blob/main/reports/2026-09-glm-5-3-flash-integration.md), [GLM-5.2](https://github.com/kaitakuai/experiments/blob/main/reports/2026-06-glm-5-2-bring-up.md); this report covers the plugin and the residual only.
+
 The MLNode release images `3.0.14-post2-vllm0.25.1-rc1` and `3.0.16` are built on `release/v0.25.1` + `gonka-poc v0.1.1`; on 2026-07-29 the core team verified that, for the models already on the network, the resulting release behaves as the previous one.
 
 ---

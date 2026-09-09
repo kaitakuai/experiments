@@ -151,7 +151,7 @@ Gonka core team ([@gmorgachev](https://github.com/gmorgachev), [@vbgd0](https://
 | Participant | GitHub | Role | Contribution |
 | --- | --- | --- | --- |
 | Mykola | [@baychak](https://github.com/baychak) | kaitakuai | Experiments and write-ups, cross-hardware validation, vector channel and margin-gate calibration, 76-cell matrix, performance and fairness measurements, expert-window sweep, documentation, migration to the 0.25.1 plugin stack (#6, #100, #8), DeepSeek extension, `poc-as-chat` (#22, #4) |
-| Pavlo | [@clanster](https://github.com/clanster) | kaitakuai | Data collection on rented hardware, DeepSeek-V4 PoC support in the plugin, reruns for the coefficient pass |
+| Pavlo | [@clanster](https://github.com/clanster) | kaitakuai | Data collection on rented hardware, reruns for the coefficient pass |
 | Ilia Slavutin | [@axeltec-gonka](https://github.com/axeltec-gonka) | independent | Author of the decode-PoC scheme (#1135); seeded routing, margin-gate, MoE gate fix; joint experiments and review |
 | Gleb Morgachev | [@gmorgachev](https://github.com/gmorgachev) | Gonka core team | Scope, methodology requirements, artifact format decision |
 | Vladislav Bogdanov | [@vbgd0](https://github.com/vbgd0) | Gonka core team | Integration branches, review and testing of #100 / #8, prefill/decode compatibility (#1, #2, #5, #23), nonces/min requirements |

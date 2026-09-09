@@ -15,7 +15,7 @@ GLM-5.2 entered governance through proposal #79 «Add Kimi K2.6 and GLM 5.2 mode
 
 ## Image chain on vLLM 0.23.0 with the `gonka-poc` plugin (2026-06-21 … 2026-06-24)
 
-The 0.23.0 migration was done so that everything vLLM lets a plugin own left the fork; what remains in-tree is the `residual/vllm-poc` branch of [kaitakuai/vllm](https://github.com/kaitakuai/vllm/tree/residual/vllm-poc). The dedicated GLM image bakes the GLM profile into `runner.py`; earlier runs used the Kimi image with a runner patch ([`glm-5.2-poc-backend-sweep/scripts/runner_patch_glm.py`](https://github.com/kaitakuai/experiments/tree/main/2026-06/glm-5.2-poc-backend-sweep)).
+The plugin itself (scaffold, reviews, later transfer to `gonka-ai`) is described in the [plugin report](https://github.com/kaitakuai/experiments/blob/main/reports/2026-07-gonka-poc-plugin-and-residual.md). The 0.23.0 migration was done so that everything vLLM lets a plugin own left the fork; what remains in-tree is the `residual/vllm-poc` branch of [kaitakuai/vllm](https://github.com/kaitakuai/vllm/tree/residual/vllm-poc). The dedicated GLM image bakes the GLM profile into `runner.py`; earlier runs used the Kimi image with a runner patch ([`glm-5.2-poc-backend-sweep/scripts/runner_patch_glm.py`](https://github.com/kaitakuai/experiments/tree/main/2026-06/glm-5.2-poc-backend-sweep)).
 
 | Resource | Link |
 |----------|------|
