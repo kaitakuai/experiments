@@ -148,9 +148,11 @@ The decode validation is one trial per nonce: a nonce diverges if the largest ma
 
 *Share of nonces flagged as τ grows, log scale (100% at τ = 0; zero on the axis floor). Solid: means over validators B300, H200, H100; dashed: A100. Bands: 0.04–0.05 proposed in gonka#1743; 0.02–0.025, the same ratio on rates a binomial test resolves with fewer nonces.*
 
-> **estimate — needs confirmation: a full ten-hash fraud corpus on H200, H100 and A100**
-
 ### Room for one threshold per model
+
+> **Estimate, needs confirmation.** The fraud minimum on the H200, H100 and A100 validators rests
+> on the four block hashes without NaN chains; a fraud corpus complete on all ten would confirm
+> these margins.
 
 The chain sets one threshold per model. By points at τ = 0 it has to pass between the highest honest hash mean and the lowest fraud hash mean on every validator:
 
