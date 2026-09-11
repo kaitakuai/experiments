@@ -1,0 +1,40 @@
+{
+ "cfg": "h100",
+ "quant": "fp8",
+ "tp": 4,
+ "model_dir": "/root/models/hf/hub/models--deepseek-ai--DeepSeek-V4-Flash-0731/snapshots/7872f01b1d1fe23eabc4c98b48bffcef5a386062",
+ "model_repo": "deepseek-ai/DeepSeek-V4-Flash-0731",
+ "ckpt_revision": "7872f01b1d1fe23eabc4c98b48bffcef5a386062",
+ "ckpt_sha": "1c1320a8d3313e00",
+ "ckpt_config_sha256": "6c8f3d2d3b487075",
+ "boot_utc": "2026-09-09T15:59:11.809519+00:00",
+ "kv_tokens": 1066737,
+ "max_num_seqs": 1024,
+ "speculation": "off",
+ "wall_from_kv": 179,
+ "kv_per_nonce": 5938,
+ "wall_nonces_predicted": 179,
+ "wall_nonces": null,
+ "wall_source": "predicted-only",
+ "gpu": "NVIDIA H100 80GB HBM3",
+ "attention_backend": null,
+ "moe_actual": "'MARLIN' Mxfp4",
+ "moe_actual_all": [
+  "Using 'MARLIN' Mxfp4 MoE backend"
+ ],
+ "dispatch": null,
+ "attach": "PoC native attach: 43 layers, embed=True, snap=True, 40 MoE routers seeded (n_exp=256 top_k=6)",
+ "cpu_model": "Intel(R) Xeon(R) Platinum 8480C",
+ "cpu_count": 96,
+ "loadavg": [
+  5.37,
+  5.25,
+  4.69
+ ],
+ "autotuner_lines": 0,
+ "autotune_mode": "on",
+ "linear_backend": "auto",
+ "max_num_batched_tokens": 16384,
+ "moe_backend_forced": "auto",
+ "kit_version": "f900535b5fc3"
+}

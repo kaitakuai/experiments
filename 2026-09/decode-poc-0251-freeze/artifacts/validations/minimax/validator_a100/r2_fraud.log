@@ -1,0 +1,43 @@
+--- прогрев (первый вызов после бута численно иной)
+корпусов найдено: 10 | партиция 250 | стена валидатора 900
+--- fraud_h01: 250 нонсов, хэш h01
+     {"points": 63074, "diff": 6260, "rate_pct": 9.9249, "step0_pct": 8.4, "nonces": 250, "part": 0, "size": 250, "sec": 21.5, "tail": false}
+    npz -> /root/mchk/xval/cross/npz_fraud_h01_v250.npz | выгрузка: None
+    {"rate_pct": 9.9249, "step0_pct": 8.4, "total_diff": 6260} | выгрузка: None
+--- fraud_h02: 250 нонсов, хэш h02
+     {"points": 58099, "diff": 6276, "rate_pct": 10.8023, "step0_pct": 8.0, "nonces": 250, "part": 0, "size": 250, "sec": 21.4, "tail": false}
+    npz -> /root/mchk/xval/cross/npz_fraud_h02_v250.npz | выгрузка: None
+    {"rate_pct": 10.8023, "step0_pct": 8.0, "total_diff": 6276} | выгрузка: None
+--- fraud_h03: 250 нонсов, хэш h03
+     {"points": 57318, "diff": 5406, "rate_pct": 9.4316, "step0_pct": 12.4, "nonces": 250, "part": 0, "size": 250, "sec": 21.4, "tail": false}
+    npz -> /root/mchk/xval/cross/npz_fraud_h03_v250.npz | выгрузка: None
+    {"rate_pct": 9.4316, "step0_pct": 12.4, "total_diff": 5406} | выгрузка: None
+--- fraud_h04: 250 нонсов, хэш h04
+     {"points": 44724, "diff": 4569, "rate_pct": 10.216, "step0_pct": 12.4, "nonces": 250, "part": 0, "size": 250, "sec": 21.4, "tail": false}
+    npz -> /root/mchk/xval/cross/npz_fraud_h04_v250.npz | выгрузка: None
+    {"rate_pct": 10.216, "step0_pct": 12.4, "total_diff": 4569} | выгрузка: None
+--- fraud_h05: 250 нонсов, хэш h05
+     {"points": 22461, "diff": 2326, "rate_pct": 10.3557, "step0_pct": 8.0, "nonces": 250, "part": 0, "size": 250, "sec": 21.4, "tail": false}
+    npz -> /root/mchk/xval/cross/npz_fraud_h05_v250.npz | выгрузка: None
+    {"rate_pct": 10.3557, "step0_pct": 8.0, "total_diff": 2326} | выгрузка: None
+--- fraud_h06: 250 нонсов, хэш h06
+     {"points": 9369, "diff": 855, "rate_pct": 9.1258, "step0_pct": 10.0, "nonces": 250, "part": 0, "size": 250, "sec": 21.4, "tail": false}
+    npz -> /root/mchk/xval/cross/npz_fraud_h06_v250.npz | выгрузка: None
+    {"rate_pct": 9.1258, "step0_pct": 10.0, "total_diff": 855} | выгрузка: None
+--- fraud_h07: 250 нонсов, хэш h07
+     {"points": 5000, "diff": 481, "rate_pct": 9.62, "step0_pct": 10.4, "nonces": 250, "part": 0, "size": 250, "sec": 21.5, "tail": false}
+    npz -> /root/mchk/xval/cross/npz_fraud_h07_v250.npz | выгрузка: None
+    {"rate_pct": 9.62, "step0_pct": 10.4, "total_diff": 481} | выгрузка: None
+--- fraud_h08: 250 нонсов, хэш h08
+     {"points": 4042, "diff": 353, "rate_pct": 8.7333, "step0_pct": 7.2, "nonces": 250, "part": 0, "size": 250, "sec": 21.4, "tail": false}
+    npz -> /root/mchk/xval/cross/npz_fraud_h08_v250.npz | выгрузка: None
+    {"rate_pct": 8.7333, "step0_pct": 7.2, "total_diff": 353} | выгрузка: None
+--- fraud_h09: 250 нонсов, хэш h09
+     {"points": 3689, "diff": 338, "rate_pct": 9.1624, "step0_pct": 8.4, "nonces": 250, "part": 0, "size": 250, "sec": 21.4, "tail": false}
+    npz -> /root/mchk/xval/cross/npz_fraud_h09_v250.npz | выгрузка: None
+    {"rate_pct": 9.1624, "step0_pct": 8.4, "total_diff": 338} | выгрузка: None
+--- fraud_h10: 250 нонсов, хэш h10
+     {"points": 3801, "diff": 341, "rate_pct": 8.9713, "step0_pct": 9.6, "nonces": 250, "part": 0, "size": 250, "sec": 21.5, "tail": false}
+    npz -> /root/mchk/xval/cross/npz_fraud_h10_v250.npz | выгрузка: None
+    {"rate_pct": 8.9713, "step0_pct": 9.6, "total_diff": 341} | выгрузка: None
+=== итог -> /root/mchk/xval/cross/r2_validate_summary_xv_fraud_to_a100_v250.json | выгрузка: None

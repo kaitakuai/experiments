@@ -1,0 +1,223 @@
+{
+ "partition": 250,
+ "validator_boot": {
+  "cfg": "h100",
+  "model_dir": "/root/models/hf/hub/models--MiniMaxAI--MiniMax-M2.7/snapshots/d494266a4affc0d2995ba1fa35c8481cbd84294b",
+  "wall_nonces": 900,
+  "tag": "xval_h100",
+  "synth": "xval validator"
+ },
+ "cells": [
+  {
+   "corpus": "b300_honest_h01",
+   "partition": 250,
+   "parts": [
+    {
+     "points": 64250,
+     "diff": 4873,
+     "rate_pct": 7.5844,
+     "step0_pct": 6.0,
+     "nonces": 250,
+     "part": 0,
+     "size": 250,
+     "sec": 11.2,
+     "tail": false
+    }
+   ],
+   "total_points": 64250,
+   "total_diff": 4873,
+   "rate_pct": 7.5844,
+   "step0_pct": 6.0
+  },
+  {
+   "corpus": "b300_honest_h02",
+   "partition": 250,
+   "parts": [
+    {
+     "points": 64250,
+     "diff": 5408,
+     "rate_pct": 8.4171,
+     "step0_pct": 4.8,
+     "nonces": 250,
+     "part": 0,
+     "size": 250,
+     "sec": 11.1,
+     "tail": false
+    }
+   ],
+   "total_points": 64250,
+   "total_diff": 5408,
+   "rate_pct": 8.4171,
+   "step0_pct": 4.8
+  },
+  {
+   "corpus": "b300_honest_h03",
+   "partition": 250,
+   "parts": [
+    {
+     "points": 64250,
+     "diff": 5090,
+     "rate_pct": 7.9222,
+     "step0_pct": 8.0,
+     "nonces": 250,
+     "part": 0,
+     "size": 250,
+     "sec": 11.1,
+     "tail": false
+    }
+   ],
+   "total_points": 64250,
+   "total_diff": 5090,
+   "rate_pct": 7.9222,
+   "step0_pct": 8.0
+  },
+  {
+   "corpus": "b300_honest_h04",
+   "partition": 250,
+   "parts": [
+    {
+     "points": 64250,
+     "diff": 5330,
+     "rate_pct": 8.2957,
+     "step0_pct": 8.4,
+     "nonces": 250,
+     "part": 0,
+     "size": 250,
+     "sec": 11.0,
+     "tail": false
+    }
+   ],
+   "total_points": 64250,
+   "total_diff": 5330,
+   "rate_pct": 8.2957,
+   "step0_pct": 8.4
+  },
+  {
+   "corpus": "b300_honest_h05",
+   "partition": 250,
+   "parts": [
+    {
+     "points": 64250,
+     "diff": 5299,
+     "rate_pct": 8.2475,
+     "step0_pct": 7.6,
+     "nonces": 250,
+     "part": 0,
+     "size": 250,
+     "sec": 11.1,
+     "tail": false
+    }
+   ],
+   "total_points": 64250,
+   "total_diff": 5299,
+   "rate_pct": 8.2475,
+   "step0_pct": 7.6
+  },
+  {
+   "corpus": "b300_honest_h06",
+   "partition": 250,
+   "parts": [
+    {
+     "points": 64250,
+     "diff": 4853,
+     "rate_pct": 7.5533,
+     "step0_pct": 3.6,
+     "nonces": 250,
+     "part": 0,
+     "size": 250,
+     "sec": 11.1,
+     "tail": false
+    }
+   ],
+   "total_points": 64250,
+   "total_diff": 4853,
+   "rate_pct": 7.5533,
+   "step0_pct": 3.6
+  },
+  {
+   "corpus": "b300_honest_h07",
+   "partition": 250,
+   "parts": [
+    {
+     "points": 64250,
+     "diff": 5339,
+     "rate_pct": 8.3097,
+     "step0_pct": 6.4,
+     "nonces": 250,
+     "part": 0,
+     "size": 250,
+     "sec": 11.1,
+     "tail": false
+    }
+   ],
+   "total_points": 64250,
+   "total_diff": 5339,
+   "rate_pct": 8.3097,
+   "step0_pct": 6.4
+  },
+  {
+   "corpus": "b300_honest_h08",
+   "partition": 250,
+   "parts": [
+    {
+     "points": 64250,
+     "diff": 4490,
+     "rate_pct": 6.9883,
+     "step0_pct": 4.4,
+     "nonces": 250,
+     "part": 0,
+     "size": 250,
+     "sec": 11.1,
+     "tail": false
+    }
+   ],
+   "total_points": 64250,
+   "total_diff": 4490,
+   "rate_pct": 6.9883,
+   "step0_pct": 4.4
+  },
+  {
+   "corpus": "b300_honest_h09",
+   "partition": 250,
+   "parts": [
+    {
+     "points": 64250,
+     "diff": 5124,
+     "rate_pct": 7.9751,
+     "step0_pct": 6.4,
+     "nonces": 250,
+     "part": 0,
+     "size": 250,
+     "sec": 11.1,
+     "tail": false
+    }
+   ],
+   "total_points": 64250,
+   "total_diff": 5124,
+   "rate_pct": 7.9751,
+   "step0_pct": 6.4
+  },
+  {
+   "corpus": "b300_honest_h10",
+   "partition": 250,
+   "parts": [
+    {
+     "points": 64250,
+     "diff": 5048,
+     "rate_pct": 7.8568,
+     "step0_pct": 4.8,
+     "nonces": 250,
+     "part": 0,
+     "size": 250,
+     "sec": 11.1,
+     "tail": false
+    }
+   ],
+   "total_points": 64250,
+   "total_diff": 5048,
+   "rate_pct": 7.8568,
+   "step0_pct": 4.8
+  }
+ ],
+ "kit_version": "14fe97dec7e2"
+}

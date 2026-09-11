@@ -1,0 +1,43 @@
+--- прогрев (первый вызов после бута численно иной)
+корпусов найдено: 10 | партиция 250 | стена валидатора 700
+--- fraud_h01: 250 нонсов, хэш h01
+     {"points": 63085, "diff": 7629, "rate_pct": 12.0932, "step0_pct": 6.4, "nonces": 250, "part": 0, "size": 250, "sec": 15.3, "tail": false}
+    npz -> /root/mchk/fraudgen2/perboot/cross/npz_fraud_h01_v250.npz | выгрузка: None
+    {"rate_pct": 12.0932, "step0_pct": 6.4, "total_diff": 7629} | выгрузка: None
+--- fraud_h02: 250 нонсов, хэш h02
+     {"points": 64003, "diff": 8268, "rate_pct": 12.9181, "step0_pct": 8.0, "nonces": 250, "part": 0, "size": 250, "sec": 15.2, "tail": false}
+    npz -> /root/mchk/fraudgen2/perboot/cross/npz_fraud_h02_v250.npz | выгрузка: None
+    {"rate_pct": 12.9181, "step0_pct": 8.0, "total_diff": 8268} | выгрузка: None
+--- fraud_h03: 250 нонсов, хэш h03
+     {"points": 64078, "diff": 7356, "rate_pct": 11.4798, "step0_pct": 13.2, "nonces": 250, "part": 0, "size": 250, "sec": 15.2, "tail": false}
+    npz -> /root/mchk/fraudgen2/perboot/cross/npz_fraud_h03_v250.npz | выгрузка: None
+    {"rate_pct": 11.4798, "step0_pct": 13.2, "total_diff": 7356} | выгрузка: None
+--- fraud_h04: 250 нонсов, хэш h04
+     {"points": 63922, "diff": 8180, "rate_pct": 12.7968, "step0_pct": 15.2, "nonces": 250, "part": 0, "size": 250, "sec": 15.2, "tail": false}
+    npz -> /root/mchk/fraudgen2/perboot/cross/npz_fraud_h04_v250.npz | выгрузка: None
+    {"rate_pct": 12.7968, "step0_pct": 15.2, "total_diff": 8180} | выгрузка: None
+--- fraud_h05: 250 нонсов, хэш h05
+     {"points": 63484, "diff": 7800, "rate_pct": 12.2866, "step0_pct": 10.8, "nonces": 250, "part": 0, "size": 250, "sec": 15.2, "tail": false}
+    npz -> /root/mchk/fraudgen2/perboot/cross/npz_fraud_h05_v250.npz | выгрузка: None
+    {"rate_pct": 12.2866, "step0_pct": 10.8, "total_diff": 7800} | выгрузка: None
+--- fraud_h06: 250 нонсов, хэш h06
+     {"points": 63863, "diff": 7274, "rate_pct": 11.39, "step0_pct": 9.6, "nonces": 250, "part": 0, "size": 250, "sec": 15.1, "tail": false}
+    npz -> /root/mchk/fraudgen2/perboot/cross/npz_fraud_h06_v250.npz | выгрузка: None
+    {"rate_pct": 11.39, "step0_pct": 9.6, "total_diff": 7274} | выгрузка: None
+--- fraud_h07: 250 нонсов, хэш h07
+     {"points": 63736, "diff": 8240, "rate_pct": 12.9283, "step0_pct": 12.8, "nonces": 250, "part": 0, "size": 250, "sec": 15.2, "tail": false}
+    npz -> /root/mchk/fraudgen2/perboot/cross/npz_fraud_h07_v250.npz | выгрузка: None
+    {"rate_pct": 12.9283, "step0_pct": 12.8, "total_diff": 8240} | выгрузка: None
+--- fraud_h08: 250 нонсов, хэш h08
+     {"points": 64098, "diff": 7204, "rate_pct": 11.239, "step0_pct": 7.2, "nonces": 250, "part": 0, "size": 250, "sec": 15.2, "tail": false}
+    npz -> /root/mchk/fraudgen2/perboot/cross/npz_fraud_h08_v250.npz | выгрузка: None
+    {"rate_pct": 11.239, "step0_pct": 7.2, "total_diff": 7204} | выгрузка: None
+--- fraud_h09: 250 нонсов, хэш h09
+     {"points": 63904, "diff": 7641, "rate_pct": 11.957, "step0_pct": 8.8, "nonces": 250, "part": 0, "size": 250, "sec": 15.2, "tail": false}
+    npz -> /root/mchk/fraudgen2/perboot/cross/npz_fraud_h09_v250.npz | выгрузка: None
+    {"rate_pct": 11.957, "step0_pct": 8.8, "total_diff": 7641} | выгрузка: None
+--- fraud_h10: 250 нонсов, хэш h10
+     {"points": 63920, "diff": 7617, "rate_pct": 11.9165, "step0_pct": 11.6, "nonces": 250, "part": 0, "size": 250, "sec": 15.2, "tail": false}
+    npz -> /root/mchk/fraudgen2/perboot/cross/npz_fraud_h10_v250.npz | выгрузка: None
+    {"rate_pct": 11.9165, "step0_pct": 11.6, "total_diff": 7617} | выгрузка: None
+=== итог -> /root/mchk/fraudgen2/perboot/cross/r2_validate_summary_fg2_fraud_to_b300_v250.json | выгрузка: None

@@ -1,4 +1,4 @@
-# decode-PoC — research, cross-hardware validation and integration into the vLLM 0.25.1 plugin stack (2026-06-09 … 2026-09-08, work in progress)
+# decode-PoC — research, cross-hardware validation and integration into the vLLM 0.25.1 plugin stack (2026-06-09 … 2026-09-10, work in progress)
 
 ## Summary
 
@@ -11,6 +11,7 @@ The [kaitaku.ai](https://github.com/kaitakuai) team (Mykola [@baychak](https://g
 - Expert-seeding-window sweep with Ilia that reduced the PoC/inference ratio spread across GPU types from 1.7 to 1.19, plus two bugs found and fixed in the scheme.
 - Migration of decode-PoC from the in-tree vLLM 0.20 branch to the plugin architecture on vLLM 0.25.1 with artifacts unchanged from the 0.20 branch: [gonka-ai/vllm#100](https://github.com/gonka-ai/vllm/pull/100) and [gonka-ai/gonka-vllm-plugins#8](https://github.com/gonka-ai/gonka-vllm-plugins/pull/8), tested by [@vbgd0](https://github.com/vbgd0) on 2026-09-02.
 - Extension of the scheme to DeepSeek-V4-Flash and the `poc-as-chat` scheduling variant that [@vbgd0](https://github.com/vbgd0) took as the integration base on 2026-09-08.
+- The frozen point on that base: both models on five hardware configurations, throughput, the PoC/chat ratio R, the separability matrix and the nonce-level view of the chain statistic ([2026-09/decode-poc-0251-freeze](https://github.com/kaitakuai/experiments/tree/main/2026-09/decode-poc-0251-freeze)).
 
 This is an interim report: the track is not finished. Integration into the network release continues on the `poc-as-chat` base; the open items are listed in the Status section below and tracked in [gonka-ai/gonka#1688](https://github.com/gonka-ai/gonka/issues/1688), [#1689](https://github.com/gonka-ai/gonka/issues/1689) and [#1690](https://github.com/gonka-ai/gonka/issues/1690).
 
@@ -131,12 +132,35 @@ Plan agreed with the core team on 2026-08-17: migration by 16.08, thresholds for
 
 ---
 
-## Status (2026-09-08)
+## Frozen point on the `poc-as-chat` base (2026-09-09 … 2026-09-10)
+
+The reruns listed as in progress in the previous status. One code revision, the same code on both
+sides of every validation, eleven measured configurations. Report and data:
+[2026-09/decode-poc-0251-freeze](https://github.com/kaitakuai/experiments/tree/main/2026-09/decode-poc-0251-freeze).
+
+| Item | Content |
+| --- | --- |
+| Throughput | MiniMax-M2.7 on 4×H100, 2×B200, 1×B300, 2×H200, 4×A100; DeepSeek-V4-Flash-0731 FP8 and NVFP4 on 1×B300 and 2×B200, FP8 on 2×H200 and 4×H100. PoC nonces/s, nonces/min per 8 GPUs, chat at its peak concurrency |
+| Fairness | R = PoC ÷ chat per configuration: spread ×1.107 across the MiniMax fleet, ×1.17 across the DeepSeek one |
+| Separability | Every MiniMax prover against every validator, ten block hashes, 250 nonces per corpus; the same by nonces on a τ grid; the DeepSeek matrix on three validators |
+| Launch profiles | One number N per configuration (`--max-num-seqs` = `max_cudagraph_capture_size`), the KV capacity rule behind it, and `max-num-batched-tokens` per card |
+| Reproducibility | Per-nonce counters committed with the report; the τ tables rebuild from them without a GPU |
+
+Open items carried from this point: 2×B200 has throughput only, the DeepSeek validations kept no
+per-nonce counters, and the only fraud arms are one quantisation (MiniMax) and one pruned model
+(DeepSeek).
+
+**Conclusion.** The reruns the release coefficients were waiting for are done and published; the
+remaining work is the coefficient decision itself and the reference artifacts for the release.
+
+---
+
+## Status (2026-09-10)
 
 | State | Item |
 | --- | --- |
 | Done | Research findings adopted into the scheme (per-nonce reflection seed, precomputed codebook, expert-seeding window 256); cross-hardware matrix and unified calibration delivered to the core team; decode-PoC ported to the vLLM 0.25.1 plugin stack ([gonka-ai/vllm#100](https://github.com/gonka-ai/vllm/pull/100), [gonka-ai/gonka-vllm-plugins#8](https://github.com/gonka-ai/gonka-vllm-plugins/pull/8)) and tested by [@vbgd0](https://github.com/vbgd0); `poc-as-chat` base accepted for integration |
-| In progress | DeepSeek-V4-Flash and MiniMax-M2.7 reruns on the merged `poc-as-chat` branches; coefficient re-selection; reference artifacts for the release — [#1688](https://github.com/gonka-ai/gonka/issues/1688), [#1689](https://github.com/gonka-ai/gonka/issues/1689), [#1690](https://github.com/gonka-ai/gonka/issues/1690) |
+| In progress | Coefficient re-selection and reference artifacts for the release; the reruns on the merged `poc-as-chat` branches are done ([2026-09/decode-poc-0251-freeze](https://github.com/kaitakuai/experiments/tree/main/2026-09/decode-poc-0251-freeze)) — [#1688](https://github.com/gonka-ai/gonka/issues/1688), [#1689](https://github.com/gonka-ai/gonka/issues/1689), [#1690](https://github.com/gonka-ai/gonka/issues/1690) |
 | Next | First full MLNode image on decode-PoC for MiniMax (testing), then DeepSeek with coefficients; merge of #100 / #8 after the reruns; network transition sequence agreed with the core team on 2026-08-29 … 08-31 (two-mode image → vote → activation) |
 
 **Conclusion.** The research and the migration are delivered; the release integration is the remaining work.

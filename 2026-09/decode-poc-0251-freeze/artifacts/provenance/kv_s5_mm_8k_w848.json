@@ -1,0 +1,1 @@
+{"cfg": "a100_honest", "model_dir": "/root/models/hf/hub/models--MiniMaxAI--MiniMax-M2.7/snapshots/d494266a4affc0d2995ba1fa35c8481cbd84294b", "wall_nonces": 900, "tag": "s5_mm_8k_w848", "synth": "s4: GEN_BATCH=250"}

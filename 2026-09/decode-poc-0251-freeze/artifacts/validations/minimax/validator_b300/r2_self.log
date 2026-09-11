@@ -1,0 +1,43 @@
+--- прогрев (первый вызов после бута численно иной)
+корпусов найдено: 10 | партиция 250 | стена валидатора 700
+--- honest_h01: 250 нонсов, хэш h01
+     {"points": 64250, "diff": 36, "rate_pct": 0.056, "step0_pct": 0.0, "nonces": 250, "part": 0, "size": 250, "sec": 15.3, "tail": false}
+    npz -> /root/mchk/mm/npz_honest_h01_v250.npz | выгрузка: None
+    {"rate_pct": 0.056, "step0_pct": 0.0, "total_diff": 36} | выгрузка: None
+--- honest_h02: 250 нонсов, хэш h02
+     {"points": 64250, "diff": 69, "rate_pct": 0.1074, "step0_pct": 0.0, "nonces": 250, "part": 0, "size": 250, "sec": 15.3, "tail": false}
+    npz -> /root/mchk/mm/npz_honest_h02_v250.npz | выгрузка: None
+    {"rate_pct": 0.1074, "step0_pct": 0.0, "total_diff": 69} | выгрузка: None
+--- honest_h03: 250 нонсов, хэш h03
+     {"points": 64250, "diff": 22, "rate_pct": 0.0342, "step0_pct": 0.0, "nonces": 250, "part": 0, "size": 250, "sec": 15.3, "tail": false}
+    npz -> /root/mchk/mm/npz_honest_h03_v250.npz | выгрузка: None
+    {"rate_pct": 0.0342, "step0_pct": 0.0, "total_diff": 22} | выгрузка: None
+--- honest_h04: 250 нонсов, хэш h04
+     {"points": 64250, "diff": 286, "rate_pct": 0.4451, "step0_pct": 0.0, "nonces": 250, "part": 0, "size": 250, "sec": 15.3, "tail": false}
+    npz -> /root/mchk/mm/npz_honest_h04_v250.npz | выгрузка: None
+    {"rate_pct": 0.4451, "step0_pct": 0.0, "total_diff": 286} | выгрузка: None
+--- honest_h05: 250 нонсов, хэш h05
+     {"points": 64250, "diff": 216, "rate_pct": 0.3362, "step0_pct": 0.0, "nonces": 250, "part": 0, "size": 250, "sec": 15.2, "tail": false}
+    npz -> /root/mchk/mm/npz_honest_h05_v250.npz | выгрузка: None
+    {"rate_pct": 0.3362, "step0_pct": 0.0, "total_diff": 216} | выгрузка: None
+--- honest_h06: 250 нонсов, хэш h06
+     {"points": 64250, "diff": 0, "rate_pct": 0.0, "step0_pct": 0.0, "nonces": 250, "part": 0, "size": 250, "sec": 15.3, "tail": false}
+    npz -> /root/mchk/mm/npz_honest_h06_v250.npz | выгрузка: None
+    {"rate_pct": 0.0, "step0_pct": 0.0, "total_diff": 0} | выгрузка: None
+--- honest_h07: 250 нонсов, хэш h07
+     {"points": 64250, "diff": 0, "rate_pct": 0.0, "step0_pct": 0.0, "nonces": 250, "part": 0, "size": 250, "sec": 15.2, "tail": false}
+    npz -> /root/mchk/mm/npz_honest_h07_v250.npz | выгрузка: None
+    {"rate_pct": 0.0, "step0_pct": 0.0, "total_diff": 0} | выгрузка: None
+--- honest_h08: 250 нонсов, хэш h08
+     {"points": 64250, "diff": 13, "rate_pct": 0.0202, "step0_pct": 0.0, "nonces": 250, "part": 0, "size": 250, "sec": 15.3, "tail": false}
+    npz -> /root/mchk/mm/npz_honest_h08_v250.npz | выгрузка: None
+    {"rate_pct": 0.0202, "step0_pct": 0.0, "total_diff": 13} | выгрузка: None
+--- honest_h09: 250 нонсов, хэш h09
+     {"points": 64250, "diff": 0, "rate_pct": 0.0, "step0_pct": 0.0, "nonces": 250, "part": 0, "size": 250, "sec": 15.4, "tail": false}
+    npz -> /root/mchk/mm/npz_honest_h09_v250.npz | выгрузка: None
+    {"rate_pct": 0.0, "step0_pct": 0.0, "total_diff": 0} | выгрузка: None
+--- honest_h10: 250 нонсов, хэш h10
+     {"points": 64250, "diff": 57, "rate_pct": 0.0887, "step0_pct": 0.0, "nonces": 250, "part": 0, "size": 250, "sec": 15.3, "tail": false}
+    npz -> /root/mchk/mm/npz_honest_h10_v250.npz | выгрузка: None
+    {"rate_pct": 0.0887, "step0_pct": 0.0, "total_diff": 57} | выгрузка: None
+=== итог -> /root/mchk/mm/r2_validate_summary_mc_self_b300_v250.json | выгрузка: None

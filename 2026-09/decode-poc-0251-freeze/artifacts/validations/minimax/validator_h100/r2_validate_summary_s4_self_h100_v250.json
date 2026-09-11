@@ -1,0 +1,223 @@
+{
+ "partition": 250,
+ "validator_boot": {
+  "cfg": "h100",
+  "model_dir": "/root/models/hf/hub/models--MiniMaxAI--MiniMax-M2.7/snapshots/d494266a4affc0d2995ba1fa35c8481cbd84294b",
+  "wall_nonces": 900,
+  "tag": "s4_mm_8k_w752",
+  "synth": "s4: GEN_BATCH=250"
+ },
+ "cells": [
+  {
+   "corpus": "honest_h01",
+   "partition": 250,
+   "parts": [
+    {
+     "points": 64250,
+     "diff": 4094,
+     "rate_pct": 6.372,
+     "step0_pct": 4.8,
+     "nonces": 250,
+     "part": 0,
+     "size": 250,
+     "sec": 11.2,
+     "tail": false
+    }
+   ],
+   "total_points": 64250,
+   "total_diff": 4094,
+   "rate_pct": 6.372,
+   "step0_pct": 4.8
+  },
+  {
+   "corpus": "honest_h02",
+   "partition": 250,
+   "parts": [
+    {
+     "points": 64250,
+     "diff": 4548,
+     "rate_pct": 7.0786,
+     "step0_pct": 5.2,
+     "nonces": 250,
+     "part": 0,
+     "size": 250,
+     "sec": 11.1,
+     "tail": false
+    }
+   ],
+   "total_points": 64250,
+   "total_diff": 4548,
+   "rate_pct": 7.0786,
+   "step0_pct": 5.2
+  },
+  {
+   "corpus": "honest_h03",
+   "partition": 250,
+   "parts": [
+    {
+     "points": 64250,
+     "diff": 4088,
+     "rate_pct": 6.3626,
+     "step0_pct": 7.6,
+     "nonces": 250,
+     "part": 0,
+     "size": 250,
+     "sec": 11.2,
+     "tail": false
+    }
+   ],
+   "total_points": 64250,
+   "total_diff": 4088,
+   "rate_pct": 6.3626,
+   "step0_pct": 7.6
+  },
+  {
+   "corpus": "honest_h04",
+   "partition": 250,
+   "parts": [
+    {
+     "points": 64250,
+     "diff": 4562,
+     "rate_pct": 7.1004,
+     "step0_pct": 6.4,
+     "nonces": 250,
+     "part": 0,
+     "size": 250,
+     "sec": 11.1,
+     "tail": false
+    }
+   ],
+   "total_points": 64250,
+   "total_diff": 4562,
+   "rate_pct": 7.1004,
+   "step0_pct": 6.4
+  },
+  {
+   "corpus": "honest_h05",
+   "partition": 250,
+   "parts": [
+    {
+     "points": 64250,
+     "diff": 4403,
+     "rate_pct": 6.8529,
+     "step0_pct": 6.0,
+     "nonces": 250,
+     "part": 0,
+     "size": 250,
+     "sec": 11.1,
+     "tail": false
+    }
+   ],
+   "total_points": 64250,
+   "total_diff": 4403,
+   "rate_pct": 6.8529,
+   "step0_pct": 6.0
+  },
+  {
+   "corpus": "honest_h06",
+   "partition": 250,
+   "parts": [
+    {
+     "points": 64250,
+     "diff": 4113,
+     "rate_pct": 6.4016,
+     "step0_pct": 6.4,
+     "nonces": 250,
+     "part": 0,
+     "size": 250,
+     "sec": 11.1,
+     "tail": false
+    }
+   ],
+   "total_points": 64250,
+   "total_diff": 4113,
+   "rate_pct": 6.4016,
+   "step0_pct": 6.4
+  },
+  {
+   "corpus": "honest_h07",
+   "partition": 250,
+   "parts": [
+    {
+     "points": 64250,
+     "diff": 4473,
+     "rate_pct": 6.9619,
+     "step0_pct": 7.2,
+     "nonces": 250,
+     "part": 0,
+     "size": 250,
+     "sec": 11.1,
+     "tail": false
+    }
+   ],
+   "total_points": 64250,
+   "total_diff": 4473,
+   "rate_pct": 6.9619,
+   "step0_pct": 7.2
+  },
+  {
+   "corpus": "honest_h08",
+   "partition": 250,
+   "parts": [
+    {
+     "points": 64250,
+     "diff": 3623,
+     "rate_pct": 5.6389,
+     "step0_pct": 3.2,
+     "nonces": 250,
+     "part": 0,
+     "size": 250,
+     "sec": 11.1,
+     "tail": false
+    }
+   ],
+   "total_points": 64250,
+   "total_diff": 3623,
+   "rate_pct": 5.6389,
+   "step0_pct": 3.2
+  },
+  {
+   "corpus": "honest_h09",
+   "partition": 250,
+   "parts": [
+    {
+     "points": 64250,
+     "diff": 4207,
+     "rate_pct": 6.5479,
+     "step0_pct": 7.2,
+     "nonces": 250,
+     "part": 0,
+     "size": 250,
+     "sec": 11.1,
+     "tail": false
+    }
+   ],
+   "total_points": 64250,
+   "total_diff": 4207,
+   "rate_pct": 6.5479,
+   "step0_pct": 7.2
+  },
+  {
+   "corpus": "honest_h10",
+   "partition": 250,
+   "parts": [
+    {
+     "points": 64250,
+     "diff": 4075,
+     "rate_pct": 6.3424,
+     "step0_pct": 5.2,
+     "nonces": 250,
+     "part": 0,
+     "size": 250,
+     "sec": 11.0,
+     "tail": false
+    }
+   ],
+   "total_points": 64250,
+   "total_diff": 4075,
+   "rate_pct": 6.3424,
+   "step0_pct": 5.2
+  }
+ ],
+ "kit_version": "14fe97dec7e2"
+}

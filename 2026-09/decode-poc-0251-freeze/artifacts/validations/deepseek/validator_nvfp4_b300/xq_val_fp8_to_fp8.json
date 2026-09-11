@@ -1,0 +1,183 @@
+{
+ "corpus_quant": "fp8",
+ "validator_quant": "fp8",
+ "corpus_boot": {
+  "cfg": "b300_fp8",
+  "quant": "fp8",
+  "tp": 1,
+  "model_dir": "/root/models/hf/hub/models--ludo-tech--DeepSeek-V4-Flash-REAP-145B-A13B/snapshots/8d022f2cc49bf6ebd57b1ffeccf70bfe31ac1d40",
+  "model_repo": "ludo-tech/DeepSeek-V4-Flash-REAP-145B-A13B",
+  "ckpt_revision": "8d022f2cc49bf6ebd57b1ffeccf70bfe31ac1d40",
+  "ckpt_sha": "3f4b49ab325d2119",
+  "ckpt_config_sha256": "fdaf47fd4391c445",
+  "boot_utc": "2026-09-07T22:43:09.914948+00:00",
+  "kv_tokens": 4364473,
+  "max_num_seqs": 1024,
+  "speculation": "off",
+  "wall_from_kv": 1138,
+  "kv_per_nonce": 3833,
+  "wall_nonces_predicted": 1024,
+  "wall_nonces": null,
+  "wall_source": "predicted-only",
+  "gpu": "NVIDIA B300 SXM6 AC",
+  "attention_backend": null,
+  "moe_actual": "'FLASHINFER_TRTLLM_MXFP4_MXFP8' Mxfp4",
+  "moe_actual_all": [
+   "Using 'FLASHINFER_TRTLLM_MXFP4_MXFP8' Mxfp4 MoE backend"
+  ],
+  "dispatch": null,
+  "attach": "PoC native attach: 43 layers, embed=True, snap=True, 40 MoE routers seeded (n_exp=128 top_k=6)",
+  "cpu_model": "Intel(R) Xeon(R) 6776P",
+  "cpu_count": 24,
+  "loadavg": [
+   1.03,
+   1.79,
+   1.53
+  ],
+  "autotuner_lines": 12,
+  "autotune_mode": "on",
+  "linear_backend": "auto",
+  "max_num_batched_tokens": 32768,
+  "moe_backend_forced": "auto",
+  "kit_version": "f900535b5fc3"
+ },
+ "validator_boot": {
+  "cfg": "b300_fp8",
+  "quant": "fp8",
+  "tp": 1,
+  "model_dir": "/root/models/hf/hub/models--ludo-tech--DeepSeek-V4-Flash-REAP-145B-A13B/snapshots/8d022f2cc49bf6ebd57b1ffeccf70bfe31ac1d40",
+  "model_repo": "ludo-tech/DeepSeek-V4-Flash-REAP-145B-A13B",
+  "ckpt_revision": "8d022f2cc49bf6ebd57b1ffeccf70bfe31ac1d40",
+  "ckpt_sha": "3f4b49ab325d2119",
+  "ckpt_config_sha256": "fdaf47fd4391c445",
+  "boot_utc": "2026-09-07T22:43:09.914948+00:00",
+  "kv_tokens": 4364473,
+  "max_num_seqs": 1024,
+  "speculation": "off",
+  "wall_from_kv": 1138,
+  "kv_per_nonce": 3833,
+  "wall_nonces_predicted": 1024,
+  "wall_nonces": null,
+  "wall_source": "predicted-only",
+  "gpu": "NVIDIA B300 SXM6 AC",
+  "attention_backend": null,
+  "moe_actual": "'FLASHINFER_TRTLLM_MXFP4_MXFP8' Mxfp4",
+  "moe_actual_all": [
+   "Using 'FLASHINFER_TRTLLM_MXFP4_MXFP8' Mxfp4 MoE backend"
+  ],
+  "dispatch": null,
+  "attach": "PoC native attach: 43 layers, embed=True, snap=True, 40 MoE routers seeded (n_exp=128 top_k=6)",
+  "cpu_model": "Intel(R) Xeon(R) 6776P",
+  "cpu_count": 24,
+  "loadavg": [
+   1.03,
+   1.79,
+   1.53
+  ],
+  "autotuner_lines": 12,
+  "autotune_mode": "on",
+  "linear_backend": "auto",
+  "max_num_batched_tokens": 32768,
+  "moe_backend_forced": "auto",
+  "kit_version": "f900535b5fc3"
+ },
+ "per_hash": [
+  {
+   "hash": "h01",
+   "points": 64250,
+   "diff": 1920,
+   "rate_pct": 2.9883,
+   "step0_pct": 0.4,
+   "nonces": 250
+  },
+  {
+   "hash": "h02",
+   "points": 64250,
+   "diff": 0,
+   "rate_pct": 0.0,
+   "step0_pct": 0.0,
+   "nonces": 250
+  },
+  {
+   "hash": "h03",
+   "points": 64250,
+   "diff": 478,
+   "rate_pct": 0.744,
+   "step0_pct": 0.4,
+   "nonces": 250
+  },
+  {
+   "hash": "h04",
+   "points": 64250,
+   "diff": 307,
+   "rate_pct": 0.4778,
+   "step0_pct": 0.0,
+   "nonces": 250
+  },
+  {
+   "hash": "h05",
+   "points": 64250,
+   "diff": 2195,
+   "rate_pct": 3.4163,
+   "step0_pct": 0.0,
+   "nonces": 250
+  },
+  {
+   "hash": "h06",
+   "points": 64250,
+   "diff": 496,
+   "rate_pct": 0.772,
+   "step0_pct": 0.4,
+   "nonces": 250
+  },
+  {
+   "hash": "h07",
+   "points": 64250,
+   "diff": 538,
+   "rate_pct": 0.8374,
+   "step0_pct": 0.4,
+   "nonces": 250
+  },
+  {
+   "hash": "h08",
+   "points": 64250,
+   "diff": 395,
+   "rate_pct": 0.6148,
+   "step0_pct": 0.0,
+   "nonces": 250
+  },
+  {
+   "hash": "h09",
+   "points": 64250,
+   "diff": 2115,
+   "rate_pct": 3.2918,
+   "step0_pct": 0.0,
+   "nonces": 250
+  },
+  {
+   "hash": "h10",
+   "points": 64250,
+   "diff": 2020,
+   "rate_pct": 3.144,
+   "step0_pct": 0.8,
+   "nonces": 250
+  }
+ ],
+ "total_points": 642500,
+ "total_diff": 10464,
+ "rate_pct": 1.6286,
+ "tau_grid_pct": {
+  "0.0": 1.6263,
+  "0.01": 0.1272,
+  "0.02": 0.0058,
+  "0.05": 0.0,
+  "0.1": 0.0,
+  "0.2": 0.0
+ },
+ "margins": {
+  "n": 10464,
+  "max": 0.039906117572925726,
+  "median": 0.0030254220578718183
+ },
+ "kit_version": "f900535b5fc3"
+}

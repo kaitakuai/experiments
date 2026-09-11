@@ -1,0 +1,223 @@
+{
+ "partition": 250,
+ "validator_boot": {
+  "cfg": "b300",
+  "model_dir": "/root/models/hf/hub/models--MiniMaxAI--MiniMax-M2.7/snapshots/d494266a4affc0d2995ba1fa35c8481cbd84294b",
+  "wall_nonces": 700,
+  "tag": "mc_b300",
+  "synth": "merge-check: GEN_BATCH=250"
+ },
+ "cells": [
+  {
+   "corpus": "fraud_h01",
+   "partition": 250,
+   "parts": [
+    {
+     "points": 63074,
+     "diff": 7445,
+     "rate_pct": 11.8036,
+     "step0_pct": 7.6,
+     "nonces": 250,
+     "part": 0,
+     "size": 250,
+     "sec": 15.5,
+     "tail": false
+    }
+   ],
+   "total_points": 63074,
+   "total_diff": 7445,
+   "rate_pct": 11.8036,
+   "step0_pct": 7.6
+  },
+  {
+   "corpus": "fraud_h02",
+   "partition": 250,
+   "parts": [
+    {
+     "points": 58099,
+     "diff": 7703,
+     "rate_pct": 13.2584,
+     "step0_pct": 8.8,
+     "nonces": 250,
+     "part": 0,
+     "size": 250,
+     "sec": 15.5,
+     "tail": false
+    }
+   ],
+   "total_points": 58099,
+   "total_diff": 7703,
+   "rate_pct": 13.2584,
+   "step0_pct": 8.8
+  },
+  {
+   "corpus": "fraud_h03",
+   "partition": 250,
+   "parts": [
+    {
+     "points": 57318,
+     "diff": 6616,
+     "rate_pct": 11.5426,
+     "step0_pct": 12.4,
+     "nonces": 250,
+     "part": 0,
+     "size": 250,
+     "sec": 15.5,
+     "tail": false
+    }
+   ],
+   "total_points": 57318,
+   "total_diff": 6616,
+   "rate_pct": 11.5426,
+   "step0_pct": 12.4
+  },
+  {
+   "corpus": "fraud_h04",
+   "partition": 250,
+   "parts": [
+    {
+     "points": 44724,
+     "diff": 5544,
+     "rate_pct": 12.396,
+     "step0_pct": 17.2,
+     "nonces": 250,
+     "part": 0,
+     "size": 250,
+     "sec": 15.4,
+     "tail": false
+    }
+   ],
+   "total_points": 44724,
+   "total_diff": 5544,
+   "rate_pct": 12.396,
+   "step0_pct": 17.2
+  },
+  {
+   "corpus": "fraud_h05",
+   "partition": 250,
+   "parts": [
+    {
+     "points": 22461,
+     "diff": 2759,
+     "rate_pct": 12.2835,
+     "step0_pct": 9.6,
+     "nonces": 250,
+     "part": 0,
+     "size": 250,
+     "sec": 15.6,
+     "tail": false
+    }
+   ],
+   "total_points": 22461,
+   "total_diff": 2759,
+   "rate_pct": 12.2835,
+   "step0_pct": 9.6
+  },
+  {
+   "corpus": "fraud_h06",
+   "partition": 250,
+   "parts": [
+    {
+     "points": 9369,
+     "diff": 1049,
+     "rate_pct": 11.1965,
+     "step0_pct": 12.0,
+     "nonces": 250,
+     "part": 0,
+     "size": 250,
+     "sec": 15.6,
+     "tail": false
+    }
+   ],
+   "total_points": 9369,
+   "total_diff": 1049,
+   "rate_pct": 11.1965,
+   "step0_pct": 12.0
+  },
+  {
+   "corpus": "fraud_h07",
+   "partition": 250,
+   "parts": [
+    {
+     "points": 5000,
+     "diff": 602,
+     "rate_pct": 12.04,
+     "step0_pct": 11.2,
+     "nonces": 250,
+     "part": 0,
+     "size": 250,
+     "sec": 15.3,
+     "tail": false
+    }
+   ],
+   "total_points": 5000,
+   "total_diff": 602,
+   "rate_pct": 12.04,
+   "step0_pct": 11.2
+  },
+  {
+   "corpus": "fraud_h08",
+   "partition": 250,
+   "parts": [
+    {
+     "points": 4042,
+     "diff": 422,
+     "rate_pct": 10.4404,
+     "step0_pct": 9.2,
+     "nonces": 250,
+     "part": 0,
+     "size": 250,
+     "sec": 15.3,
+     "tail": false
+    }
+   ],
+   "total_points": 4042,
+   "total_diff": 422,
+   "rate_pct": 10.4404,
+   "step0_pct": 9.2
+  },
+  {
+   "corpus": "fraud_h09",
+   "partition": 250,
+   "parts": [
+    {
+     "points": 3689,
+     "diff": 408,
+     "rate_pct": 11.0599,
+     "step0_pct": 9.6,
+     "nonces": 250,
+     "part": 0,
+     "size": 250,
+     "sec": 15.3,
+     "tail": false
+    }
+   ],
+   "total_points": 3689,
+   "total_diff": 408,
+   "rate_pct": 11.0599,
+   "step0_pct": 9.6
+  },
+  {
+   "corpus": "fraud_h10",
+   "partition": 250,
+   "parts": [
+    {
+     "points": 3801,
+     "diff": 407,
+     "rate_pct": 10.7077,
+     "step0_pct": 12.0,
+     "nonces": 250,
+     "part": 0,
+     "size": 250,
+     "sec": 15.4,
+     "tail": false
+    }
+   ],
+   "total_points": 3801,
+   "total_diff": 407,
+   "rate_pct": 10.7077,
+   "step0_pct": 12.0
+  }
+ ],
+ "kit_version": "14fe97dec7e2"
+}
