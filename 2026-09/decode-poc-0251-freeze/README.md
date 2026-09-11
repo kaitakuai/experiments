@@ -20,6 +20,18 @@ Requested by [@vbgd0](https://github.com/vbgd0) for the release coefficients
 
 ---
 
+## Contents
+
+- [Code](#code) — plugin, engine, checkpoints, seeding
+- [Launch settings](#launch-settings) — the eleven measured configurations and the rule behind N
+- [Throughput](#throughput) — PoC and chat per configuration, nonces/min per 8 GPUs, the ratio R
+- [Separability](#separability) — honest and fraud arms, every prover against every validator, the chain statistic on a τ grid, the room a single threshold has, DeepSeek on three validators
+- [When these numbers apply](#when-these-numbers-apply) — conditions and what the numbers do not cover
+- [Reproduce](#reproduce) — rebuilding the τ tables from the committed counters
+- [Data not in this repository](#data-not-in-this-repository) — corpora and raw runs on Drive
+
+---
+
 ## Code
 
 | item | value |
