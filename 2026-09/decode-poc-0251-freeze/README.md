@@ -1,10 +1,10 @@
 # decode-PoC on vLLM 0.25.1: frozen point for MiniMax-M2.7 and DeepSeek-V4-Flash
 
-**Dates:** 2026-09-09 … 2026-09-10
-**Models:** `MiniMaxAI/MiniMax-M2.7` @ `d494266a`; `deepseek-ai/DeepSeek-V4-Flash-0731` @ `7872f01b` and `MJPansa/DeepSeek-V4-Flash-0731-NVFP4` @ `64d64cd8`
-**Fraud arms:** `QuantTrio/MiniMax-M2.7-AWQ` @ `c9f2192c`; `ludo-tech/DeepSeek-V4-Flash-REAP-145B-A13B` @ `8d022f2c`
-**Hardware:** 1×B300 SXM6, 2×B200, 2×H200, 4×H100 80GB, 4×A100 SXM4
-**Stack:** `kaitakuai/vllm` @ `2ff7edd1e` (stock vLLM 0.25.1 plus 34 files) with `kaitakuai/gonka-vllm-plugins` @ `ea11ef6`, branch `poc-as-chat-vllm-0.25.1-dev`
+- **Dates:** 2026-09-09 … 2026-09-10
+- **Models:** `MiniMaxAI/MiniMax-M2.7` @ `d494266a`; `deepseek-ai/DeepSeek-V4-Flash-0731` @ `7872f01b` and `MJPansa/DeepSeek-V4-Flash-0731-NVFP4` @ `64d64cd8`
+- **Fraud arms:** `QuantTrio/MiniMax-M2.7-AWQ` @ `c9f2192c`; `ludo-tech/DeepSeek-V4-Flash-REAP-145B-A13B` @ `8d022f2c`
+- **Hardware:** 1×B300 SXM6, 2×B200, 2×H200, 4×H100 80GB, 4×A100 SXM4
+- **Stack:** `kaitakuai/vllm` @ `2ff7edd1e` (stock vLLM 0.25.1 plus 34 files) with `kaitakuai/gonka-vllm-plugins` @ `ea11ef6`, branch `poc-as-chat-vllm-0.25.1-dev`
 
 The reruns the decode-PoC track was waiting for
 ([reports/2026-06-decode-poc-research-and-integration.md](../../reports/2026-06-decode-poc-research-and-integration.md),
@@ -22,7 +22,7 @@ Requested by [@vbgd0](https://github.com/vbgd0) for the release coefficients
 
 ## Code
 
-|  |  |
+| item | value |
 | --- | --- |
 | plugin | [kaitakuai/gonka-vllm-plugins · poc-as-chat-vllm-0.25.1-dev](https://github.com/kaitakuai/gonka-vllm-plugins/tree/poc-as-chat-vllm-0.25.1-dev) @ ea11ef6 |
 | engine | [kaitakuai/vllm · poc-as-chat-vllm-0.25.1-dev](https://github.com/kaitakuai/vllm/tree/poc-as-chat-vllm-0.25.1-dev) @ 2ff7edd1e (stock 0.25.1 plus 34 files) |
