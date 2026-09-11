@@ -1,0 +1,601 @@
+<meta charset=utf-8><style>
+body{font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;color:#1f2328;background:#fff;margin:0;padding:32px 40px;max-width:1012px}
+h1,h2,h3{margin:24px 0 16px;font-weight:600;line-height:1.25;border-bottom:1px solid #d1d9e0;padding-bottom:.3em}
+h1{font-size:2em}h2{font-size:1.5em}h3{font-size:1.25em;border-bottom:0}
+p,ul,ol{margin:0 0 16px}li{margin:.25em 0}
+table{border-collapse:collapse;display:block;overflow:auto;max-width:100%;margin:0 0 16px;font-size:14px}
+th,td{border:1px solid #d1d9e0;padding:6px 13px}th{background:#f6f8fa;font-weight:600}
+tr:nth-child(2n) td{background:#f6f8fa}
+blockquote{margin:0 0 16px;padding:0 1em;border-left:.25em solid #d1d9e0;color:#59636e}
+code{background:#eff1f3;padding:.2em .4em;border-radius:6px;font-size:85%;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+pre{background:#f6f8fa;padding:16px;border-radius:6px;overflow:auto}pre code{background:none;padding:0}
+img{max-width:100%;box-sizing:border-box}hr{height:1px;background:#d1d9e0;border:0;margin:24px 0}
+a{color:#0969da;text-decoration:none}em{color:#59636e}
+</style><div class="markdown-heading"><h1 class="heading-element">decode-PoC on vLLM 0.25.1: frozen point for MiniMax-M2.7 and DeepSeek-V4-Flash</h1><a id="user-content-decode-poc-on-vllm-0251-frozen-point-for-minimax-m27-and-deepseek-v4-flash" class="anchor" aria-label="Permalink: decode-PoC on vLLM 0.25.1: frozen point for MiniMax-M2.7 and DeepSeek-V4-Flash" href="#decode-poc-on-vllm-0251-frozen-point-for-minimax-m27-and-deepseek-v4-flash"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
+<ul>
+<li>
+<strong>Dates:</strong> 2026-09-09 … 2026-09-10</li>
+<li>
+<strong>Models:</strong> <code>MiniMaxAI/MiniMax-M2.7</code> @ <code>d494266a</code>; <code>deepseek-ai/DeepSeek-V4-Flash-0731</code> @ <code>7872f01b</code> and <code>MJPansa/DeepSeek-V4-Flash-0731-NVFP4</code> @ <code>64d64cd8</code>
+</li>
+<li>
+<strong>Fraud arms:</strong> <code>QuantTrio/MiniMax-M2.7-AWQ</code> @ <code>c9f2192c</code>; <code>ludo-tech/DeepSeek-V4-Flash-REAP-145B-A13B</code> @ <code>8d022f2c</code>
+</li>
+<li>
+<strong>Hardware:</strong> 1×B300 SXM6, 2×B200, 2×H200, 4×H100 80GB, 4×A100 SXM4</li>
+<li>
+<strong>Stack:</strong> <code>kaitakuai/vllm</code> @ <code>2ff7edd1e</code> (stock vLLM 0.25.1 plus 34 files) with <code>kaitakuai/gonka-vllm-plugins</code> @ <code>ea11ef6</code>, branch <code>poc-as-chat-vllm-0.25.1-dev</code>
+</li>
+</ul>
+<p>The reruns the decode-PoC track was waiting for
+(<a href="../../reports/2026-06-decode-poc-research-and-integration.md">reports/2026-06-decode-poc-research-and-integration.md</a>,
+status of 2026-09-08): both models measured on the merged <code>poc-as-chat</code> base, on one code
+revision, with the same code on both sides of every validation. Throughput and the PoC/chat
+ratio R per configuration, the prover × validator separability matrix, the nonce-level view of
+the chain statistic, and the room a single threshold has.</p>
+<p>Requested by <a href="https://github.com/vbgd0">@vbgd0</a> for the release coefficients
+(<a href="https://github.com/gonka-ai/gonka/issues/1688">gonka-ai/gonka#1688</a>,
+<a href="https://github.com/gonka-ai/gonka/issues/1689">#1689</a>,
+<a href="https://github.com/gonka-ai/gonka/issues/1690">#1690</a>).</p>
+<hr>
+<div class="markdown-heading"><h2 class="heading-element">Contents</h2><a id="user-content-contents" class="anchor" aria-label="Permalink: Contents" href="#contents"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
+<ul>
+<li>
+<a href="#code">Code</a> — plugin, engine, checkpoints, seeding</li>
+<li>
+<a href="#launch-settings">Launch settings</a> — the eleven measured configurations and the rule behind N</li>
+<li>
+<a href="#throughput">Throughput</a> — PoC and chat per configuration, nonces/min per 8 GPUs, the ratio R</li>
+<li>
+<a href="#separability">Separability</a> — honest and fraud arms, every prover against every validator, the chain statistic on a τ grid, the room a single threshold has, DeepSeek on three validators</li>
+<li>
+<a href="#when-these-numbers-apply">When these numbers apply</a> — conditions and what the numbers do not cover</li>
+<li>
+<a href="#reproduce">Reproduce</a> — rebuilding the τ tables from the committed counters</li>
+<li>
+<a href="#data-not-in-this-repository">Data not in this repository</a> — corpora and raw runs on Drive</li>
+</ul>
+<hr>
+<div class="markdown-heading"><h2 class="heading-element">Code</h2><a id="user-content-code" class="anchor" aria-label="Permalink: Code" href="#code"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
+<table>
+<thead>
+<tr>
+<th>item</th>
+<th>value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>plugin</td>
+<td>
+<a href="https://github.com/kaitakuai/gonka-vllm-plugins/tree/poc-as-chat-vllm-0.25.1-dev">kaitakuai/gonka-vllm-plugins · poc-as-chat-vllm-0.25.1-dev</a> @ ea11ef6</td>
+</tr>
+<tr>
+<td>engine</td>
+<td>
+<a href="https://github.com/kaitakuai/vllm/tree/poc-as-chat-vllm-0.25.1-dev">kaitakuai/vllm · poc-as-chat-vllm-0.25.1-dev</a> @ 2ff7edd1e (stock 0.25.1 plus 34 files)</td>
+</tr>
+<tr>
+<td>upstream</td>
+<td>
+<a href="https://github.com/gonka-ai/gonka-vllm-plugins/pull/8">gonka-ai/gonka-vllm-plugins#8</a> · <a href="https://github.com/gonka-ai/vllm/pull/100">gonka-ai/vllm#100</a> (same trees) · chain <a href="https://github.com/gonka-ai/gonka/pull/1743">gonka-ai/gonka#1743</a>
+</td>
+</tr>
+<tr>
+<td>MiniMax</td>
+<td>MiniMaxAI/MiniMax-M2.7 · d494266a (FP8 weights)</td>
+</tr>
+<tr>
+<td>DeepSeek, FP8</td>
+<td>deepseek-ai/DeepSeek-V4-Flash-0731 · 7872f01b (FP8 weights with FP4 experts; "0731 FP8" in the tables)</td>
+</tr>
+<tr>
+<td>DeepSeek, NVFP4</td>
+<td>MJPansa/DeepSeek-V4-Flash-0731-NVFP4 · 64d64cd8 ("0731 NVFP4" in the tables)</td>
+</tr>
+<tr>
+<td>fraud, MiniMax</td>
+<td>QuantTrio/MiniMax-M2.7-AWQ · c9f2192c</td>
+</tr>
+<tr>
+<td>fraud, DeepSeek</td>
+<td>ludo-tech/DeepSeek-V4-Flash-REAP-145B-A13B · 8d022f2c</td>
+</tr>
+<tr>
+<td>reflection seeding</td>
+<td>per block hash · 256 prompt tokens + 256 decode steps · 12 reflection vectors, each step stores the index of the nearest one</td>
+</tr>
+<tr>
+<td>data and scripts</td>
+<td>
+<a href="https://drive.google.com/drive/folders/1BT9c4PL2g7AnJ5zWOTK5D-9UNepZ_aFT" rel="nofollow">poc-devkit-2026-09-09 on Google Drive</a> (4.4 GB, sha256 manifest); inventory in README.md</td>
+</tr>
+</tbody>
+</table>
+<div class="markdown-heading"><h2 class="heading-element">Launch settings</h2><a id="user-content-launch-settings" class="anchor" aria-label="Permalink: Launch settings" href="#launch-settings"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
+<p>The eleven measured configurations. Full recipes, the sweeps behind every N and what not to do: <code>PROFILES.md</code> in the devkit.</p>
+<table>
+<thead>
+<tr>
+<th>cards</th>
+<th>model</th>
+<th align="right">TP</th>
+<th>MoE</th>
+<th align="right">gpu-memory-utilization</th>
+<th align="right">N = max-num-seqs = capture size</th>
+<th align="right">max-num-batched-tokens</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1×B300 SXM6</td>
+<td>MiniMax</td>
+<td align="right">1</td>
+<td><code>flashinfer_trtllm</code></td>
+<td align="right">0.97</td>
+<td align="right">608</td>
+<td align="right">32768</td>
+</tr>
+<tr>
+<td>2×H200</td>
+<td>MiniMax</td>
+<td align="right">2</td>
+<td>
+<code>triton</code> *</td>
+<td align="right">0.95</td>
+<td align="right">608</td>
+<td align="right">8192</td>
+</tr>
+<tr>
+<td>4×H100 80GB</td>
+<td>MiniMax</td>
+<td align="right">4</td>
+<td><code>triton</code></td>
+<td align="right">0.94</td>
+<td align="right">752</td>
+<td align="right">32768</td>
+</tr>
+<tr>
+<td>4×A100 SXM4</td>
+<td>MiniMax</td>
+<td align="right">4</td>
+<td><code>marlin</code></td>
+<td align="right">0.94</td>
+<td align="right">848</td>
+<td align="right">8192</td>
+</tr>
+<tr>
+<td>2×B200</td>
+<td>MiniMax</td>
+<td align="right">2</td>
+<td><code>flashinfer_trtllm</code></td>
+<td align="right">0.95</td>
+<td align="right">1536</td>
+<td align="right">32768</td>
+</tr>
+<tr>
+<td>1×B300 SXM6</td>
+<td>DeepSeek 0731 NVFP4</td>
+<td align="right">1</td>
+<td>auto</td>
+<td align="right">0.90</td>
+<td align="right">2048</td>
+<td align="right">32768</td>
+</tr>
+<tr>
+<td>1×B300 SXM6</td>
+<td>DeepSeek 0731 FP8</td>
+<td align="right">1</td>
+<td>auto</td>
+<td align="right">0.90</td>
+<td align="right">2048</td>
+<td align="right">32768</td>
+</tr>
+<tr>
+<td>2×H200</td>
+<td>DeepSeek 0731 FP8</td>
+<td align="right">2</td>
+<td>auto</td>
+<td align="right">0.90</td>
+<td align="right">1024</td>
+<td align="right">32768</td>
+</tr>
+<tr>
+<td>4×H100 80GB</td>
+<td>DeepSeek 0731 FP8 **</td>
+<td align="right">4</td>
+<td>auto</td>
+<td align="right">0.90</td>
+<td align="right">640</td>
+<td align="right">16384</td>
+</tr>
+<tr>
+<td>2×B200</td>
+<td>DeepSeek 0731 FP8</td>
+<td align="right">2</td>
+<td>auto</td>
+<td align="right">0.90</td>
+<td align="right">2048</td>
+<td align="right">32768</td>
+</tr>
+<tr>
+<td>2×B200</td>
+<td>DeepSeek 0731 NVFP4</td>
+<td align="right">2</td>
+<td>auto</td>
+<td align="right">0.90</td>
+<td align="right">2048</td>
+<td align="right">32768</td>
+</tr>
+</tbody>
+</table>
+<p>N is passed twice, as <code>--max-num-seqs N</code> and <code>max_cudagraph_capture_size N</code>: the largest multiple of 16 not above min(KV capacity in nonces, the throughput peak), where the KV capacity is the KV size printed at boot ÷ 512 tokens per nonce (MiniMax; about 800 for DeepSeek-V4, whose N is the throughput peak). PoC peaks at the capture size; a batch above it loses 20–45%. <code>max-num-batched-tokens</code> 32768 where the KV capacity at 32768 stays above N, 8192 where it does not.</p>
+<p>* MiniMax on H200 also needs <code>fuse_allreduce_rms:false</code>: with the allreduce+RMSNorm fusion of 0.25 on, the boot reports about 15,000 fewer KV tokens and PoC runs 3% slower.</p>
+<p>** DeepSeek on H100 was measured as max-num-seqs 640 under capture size 768; gpu-memory-utilization 0.95 livelocks the engine under PoC load.</p>
+<div class="markdown-heading"><h2 class="heading-element">Throughput</h2><a id="user-content-throughput" class="anchor" aria-label="Permalink: Throughput" href="#throughput"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
+<p>All rows below were measured on the previous plugin revision; the frozen revision was re-measured on B300 with MiniMax only (When these numbers apply).</p>
+<table>
+<thead>
+<tr>
+<th>cards · MiniMax-M2.7</th>
+<th align="right">PoC, nonces/s</th>
+<th align="right">nonces/min per 8 GPUs</th>
+<th align="right">at N</th>
+<th align="right">chat, requests/s</th>
+<th align="right">at concurrency</th>
+<th align="right">R</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4×H100</td>
+<td align="right">43.23</td>
+<td align="right">5,188</td>
+<td align="right">752</td>
+<td align="right">48.88</td>
+<td align="right">768</td>
+<td align="right">0.884</td>
+</tr>
+<tr>
+<td>1×B300</td>
+<td align="right">29.93</td>
+<td align="right">14,366</td>
+<td align="right">608</td>
+<td align="right">31.64</td>
+<td align="right">608</td>
+<td align="right">0.946</td>
+</tr>
+<tr>
+<td>2×H200</td>
+<td align="right">28.47</td>
+<td align="right">6,833</td>
+<td align="right">608</td>
+<td align="right">30.64</td>
+<td align="right">608</td>
+<td align="right">0.929</td>
+</tr>
+<tr>
+<td>2×B200</td>
+<td align="right">57.13</td>
+<td align="right">13,711</td>
+<td align="right">1536</td>
+<td align="right">62.86</td>
+<td align="right">1536</td>
+<td align="right">0.909</td>
+</tr>
+<tr>
+<td>4×A100</td>
+<td align="right">19.54</td>
+<td align="right">2,345</td>
+<td align="right">848</td>
+<td align="right">19.96</td>
+<td align="right">896</td>
+<td align="right">0.979</td>
+</tr>
+</tbody>
+</table>
+<p><strong>nonces/min per 8 GPUs = nonces/s × 60 × 8 ÷ GPUs in the configuration</strong> (8 ÷ TP instances per node, as MLNode starts them). <strong>R = nonces/s ÷ requests/s</strong>; the units are comparable: a nonce is 256 prompt tokens plus 256 decode steps, a chat request 256 prompt plus 256 generated. PoC runs are 3,000 nonces (9,000 for DeepSeek on B300) with ramp-up and drain included, which biases the figures down, most on 2×B200; chat is three repetitions at the peak concurrency.</p>
+<p><strong>Fairness is equal R across configurations</strong>; the absolute value depends on the work unit. The spread is <strong>×1.107</strong> (4×H100 to 4×A100); the chain defines no tolerance for it.</p>
+<p><a target="_blank" rel="noopener noreferrer" href="artifacts/figures/park_0909.png"><img src="artifacts/figures/park_0909.png" alt="Throughput and fairness by configuration, MiniMax" style="max-width: 100%;"></a></p>
+<p><em>Left: PoC and chat on the frozen settings. Right: R as a deviation from the fleet mean; fair means every point at zero.</em></p>
+<table>
+<thead>
+<tr>
+<th>cards · DeepSeek-V4-Flash</th>
+<th align="right">PoC, nonces/s</th>
+<th align="right">nonces/min per 8 GPUs</th>
+<th align="right">at N</th>
+<th align="right">chat, requests/s at peak concurrency</th>
+<th align="right">R</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1×B300, 0731 NVFP4, TP = 1</td>
+<td align="right">42.4</td>
+<td align="right">20,352</td>
+<td align="right">2048</td>
+<td align="right">37.2 at c1024</td>
+<td align="right">1.14</td>
+</tr>
+<tr>
+<td>1×B300, 0731 FP8, TP = 1</td>
+<td align="right">41.1</td>
+<td align="right">19,728</td>
+<td align="right">2048</td>
+<td align="right">35.4 at c1024</td>
+<td align="right">1.16</td>
+</tr>
+<tr>
+<td>2×H200, 0731 FP8, TP = 2</td>
+<td align="right">22.7</td>
+<td align="right">5,448</td>
+<td align="right">1024</td>
+<td align="right">20.7 at c1024</td>
+<td align="right">1.10</td>
+</tr>
+<tr>
+<td>4×H100, 0731 FP8, TP = 4</td>
+<td align="right">22.5</td>
+<td align="right">2,700</td>
+<td align="right">640</td>
+<td align="right">22.7 at c768</td>
+<td align="right">0.99</td>
+</tr>
+<tr>
+<td>2×B200, 0731 FP8, TP = 2</td>
+<td align="right">46.2</td>
+<td align="right">11,088</td>
+<td align="right">2048</td>
+<td align="right">41.3 at c1024</td>
+<td align="right">1.12</td>
+</tr>
+<tr>
+<td>2×B200, 0731 NVFP4, TP = 2</td>
+<td align="right">47.3</td>
+<td align="right">11,352</td>
+<td align="right">2048</td>
+<td align="right">43.2 at c1024</td>
+<td align="right">1.10</td>
+</tr>
+</tbody>
+</table>
+<p><strong>DeepSeek PoC varies about 10% between boots</strong> on the same card and code, chat more (H200 chat at c1024: 21.5 on three boots, 18.4 on the fourth); the figures are means over boots (per-boot values: FREEZE.md in the devkit). R spread ×1.17 over six configurations (4×H100 0.99 to 1×B300 on 0731 FP8 1.16). NVFP4 leads DeepSeek-V4-Flash-0731 FP8 by 3% on PoC and 5% on chat on B300, and by 2% and 5% on 2×B200; either checkpoint validates the other's artifacts (Separability).</p>
+<p><a target="_blank" rel="noopener noreferrer" href="artifacts/figures/ds_park_0909.png"><img src="artifacts/figures/ds_park_0909.png" alt="Throughput by configuration, DeepSeek" style="max-width: 100%;"></a></p>
+<p><em>Left: PoC and chat on the frozen DeepSeek settings, chat at its peak concurrency. Right: R as a deviation from the DeepSeek mean; spread ×1.17.</em></p>
+<div class="markdown-heading"><h2 class="heading-element">Separability</h2><a id="user-content-separability" class="anchor" aria-label="Permalink: Separability" href="#separability"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
+<div class="markdown-heading"><h3 class="heading-element">Both arms across block hashes, validator B300</h3><a id="user-content-both-arms-across-block-hashes-validator-b300" class="anchor" aria-label="Permalink: Both arms across block hashes, validator B300" href="#both-arms-across-block-hashes-validator-b300"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
+<p>Ten block hashes, h01–h10. Boots are not bit-identical (the FlashInfer autotuner selects kernels per boot), so every number is a validation cell. A corpus is 250 nonces of one block hash from one prover; a cell is one prover's ten corpora validated on one validator, given as the mean over hashes and, in brackets, the range across hashes. By points: the share of decode steps whose reflection index differs between prover and validator, counting at τ &gt; 0 only steps whose margin (the gap between the scores of the nearest and second-nearest reflection vector) exceeds τ. By nonces: the share of nonces flagged by the chain rule below. The honest arm is MiniMax-M2.7 on each card; the fraud arm is the AWQ checkpoint (QuantTrio) generated on a B300 prover.</p>
+<p><a target="_blank" rel="noopener noreferrer" href="artifacts/figures/sep_0909.png"><img src="artifacts/figures/sep_0909.png" alt="Separability across ten block hashes on validator B300" style="max-width: 100%;"></a></p>
+<p><em>Left: both arms across ten hashes on the B300 validator and the worst-case gap for one threshold. Right: the gap inside each hash for H200, the honest prover closest to the fraud arm.</em></p>
+<div class="markdown-heading"><h3 class="heading-element">Every prover against every validator</h3><a id="user-content-every-prover-against-every-validator" class="anchor" aria-label="Permalink: Every prover against every validator" href="#every-prover-against-every-validator"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
+<p>Mean over ten hashes at τ = 0, range across hashes in brackets. Validators in columns; the diagonal is the same boot validating its own corpora; the three starred fraud cells rest on four hashes.</p>
+<table>
+<thead>
+<tr>
+<th>prover → validator</th>
+<th align="right">B300</th>
+<th align="right">H200</th>
+<th align="right">H100</th>
+<th align="right">A100</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>honest B300</td>
+<td align="right">0.11 [0.00–0.45]</td>
+<td align="right">7.36 [6.37–7.89]</td>
+<td align="right">7.92 [6.99–8.42]</td>
+<td align="right">8.14 [7.15–8.74]</td>
+</tr>
+<tr>
+<td>honest H200</td>
+<td align="right">7.32 [6.51–8.10]</td>
+<td align="right">0.28 [0.03–0.61]</td>
+<td align="right">7.44 [6.65–8.15]</td>
+<td align="right">7.70 [6.91–8.45]</td>
+</tr>
+<tr>
+<td>honest H100</td>
+<td align="right">8.03 [7.19–8.67]</td>
+<td align="right">7.60 [6.68–8.30]</td>
+<td align="right">6.57 [5.64–7.10]</td>
+<td align="right">8.00 [6.96–8.49]</td>
+</tr>
+<tr>
+<td>honest A100</td>
+<td align="right">8.11 [7.12–8.92]</td>
+<td align="right">7.82 [6.80–8.65]</td>
+<td align="right">7.80 [6.83–8.62]</td>
+<td align="right">2.52 [1.96–2.89]</td>
+</tr>
+<tr>
+<td>fraud QuantTrio</td>
+<td align="right">12.10 [11.24–12.93]</td>
+<td align="right">12.23 [11.27–13.05] *</td>
+<td align="right">12.11 [11.17–12.77] *</td>
+<td align="right">10.16 [9.51–10.77] *</td>
+</tr>
+</tbody>
+</table>
+<p>* On H200, H100 and A100 the fraud cell uses the nonces without NaN steps (hashes h01–h04, 616 nonces) of a fraud corpus whose later hashes decayed into NaN chains (FREEZE.md in the devkit); the B300 cell uses the corpus generated with one boot per hash. Where both exist they agree (B300: 12.10 against 12.26).</p>
+<p><strong>The fraud level is set by the validator</strong> (12.1–12.2% on B300, H200 and H100, same-card or not; 10.2% on A100); the honest other-card level is 6.4–8.9% everywhere, A100 as a prover included, and a same card after a reboot on a different plugin build sits at 6.31%. Rates drift 15–25% across block hashes but the arms drift together (correlation +0.90 … +0.93), so the gap inside a hash holds at 4.0–4.8 pp ± 0.3 on the B300 validator. The MiniMax same-boot cell on 4×H100 (6.57%) sits at the other-card level and is not explained. On the A100 validator the margin is 0.8 pp by points and zero by nonces at τ ≥ 0.04: sm80 nodes should not validate at the proposed thresholds.</p>
+<div class="markdown-heading"><h3 class="heading-element">What the chain statistic sees</h3><a id="user-content-what-the-chain-statistic-sees" class="anchor" aria-label="Permalink: What the chain statistic sees" href="#what-the-chain-statistic-sees"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
+<p>The decode validation is one trial per nonce: a nonce diverges if the largest margin among its disagreeing steps exceeds τ (<code>stat_test.dist_threshold</code>), then the binomial test with <code>p_mismatch</code> decides. The table gives the share of nonces with at least one disagreement, mean over hashes.</p>
+<table>
+<thead>
+<tr>
+<th>validator</th>
+<th>prover set</th>
+<th align="right">τ = 0.02</th>
+<th align="right">0.025</th>
+<th align="right">0.04</th>
+<th align="right">0.05</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>B300</td>
+<td>honest, same card, other boot</td>
+<td align="right">7%</td>
+<td align="right">2%</td>
+<td align="right">0%</td>
+<td align="right">0%</td>
+</tr>
+<tr>
+<td>B300 · H200 · H100</td>
+<td>honest, other card</td>
+<td align="right">14–27%</td>
+<td align="right">5–16%</td>
+<td align="right">1–5%</td>
+<td align="right">0–2%</td>
+</tr>
+<tr>
+<td>B300 · H200 · H100</td>
+<td>fraud QuantTrio</td>
+<td align="right">63–66%</td>
+<td align="right">37–41%</td>
+<td align="right">9–11%</td>
+<td align="right">3.5–3.7%</td>
+</tr>
+<tr>
+<td>A100</td>
+<td>honest, other card</td>
+<td align="right">22–27%</td>
+<td align="right">12–16%</td>
+<td align="right">2–5%</td>
+<td align="right">1–3%</td>
+</tr>
+<tr>
+<td>A100</td>
+<td>fraud QuantTrio</td>
+<td align="right">42%</td>
+<td align="right">21%</td>
+<td align="right">3%</td>
+<td align="right">1%</td>
+</tr>
+</tbody>
+</table>
+<p><a target="_blank" rel="noopener noreferrer" href="artifacts/figures/tau_0909.png"><img src="artifacts/figures/tau_0909.png" alt="Share of nonces flagged against tau, MiniMax" style="max-width: 100%;"></a></p>
+<p><em>Share of nonces flagged as τ grows, log scale (100% at τ = 0; zero on the axis floor). Solid: means over validators B300, H200, H100; dashed: A100. Bands: 0.04–0.05 proposed in gonka#1743; 0.02–0.025, the same ratio on rates a binomial test resolves with fewer nonces.</em></p>
+<blockquote>
+<p><strong>estimate — needs confirmation: a full ten-hash fraud corpus on H200, H100 and A100</strong></p>
+</blockquote>
+<div class="markdown-heading"><h3 class="heading-element">Room for one threshold per model</h3><a id="user-content-room-for-one-threshold-per-model" class="anchor" aria-label="Permalink: Room for one threshold per model" href="#room-for-one-threshold-per-model"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
+<p>The chain sets one threshold per model. By points at τ = 0 it has to pass between the highest honest hash mean and the lowest fraud hash mean on every validator:</p>
+<table>
+<thead>
+<tr>
+<th>validator</th>
+<th align="right">highest honest</th>
+<th align="right">lowest fraud</th>
+<th align="right">worst-case gap</th>
+<th align="right">ratio</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>B300</td>
+<td align="right">8.92% (prover A100, h02)</td>
+<td align="right">11.24% (h08)</td>
+<td align="right">2.32 pp</td>
+<td align="right">1.260</td>
+</tr>
+<tr>
+<td>H200</td>
+<td align="right">8.65% (prover A100, h02)</td>
+<td align="right">11.27% (h03) *</td>
+<td align="right">2.61 pp</td>
+<td align="right">1.302</td>
+</tr>
+<tr>
+<td>H100</td>
+<td align="right">8.62% (prover A100, h02)</td>
+<td align="right">11.17% (h03) *</td>
+<td align="right">2.55 pp</td>
+<td align="right">1.296</td>
+</tr>
+<tr>
+<td>A100</td>
+<td align="right">8.74% (prover B300, h07)</td>
+<td align="right">9.51% (h03) *</td>
+<td align="right">0.77 pp</td>
+<td align="right">1.088</td>
+</tr>
+</tbody>
+</table>
+<p>* Lowest fraud hash among the four hashes without NaN chains (h01–h04) on this validator; the gap is an upper bound.</p>
+<p>Across the four validators the threshold has to sit between 8.92% and 9.51%, 0.6 pp; without sm80 validators, between 8.92% and 11.17%, 2.25 pp, an upper bound where the fraud minimum rests on four hashes. By nonces the fraud flags three to five times as many nonces as honest other-card provers at every τ from 0.02 to 0.05 (means over provers; per validator: tau_matrix.md in the devkit). Against the worst single honest cell the ratio is 2.4 at 0.02, 2.7 at 0.025, 3.1 at 0.04 and 1.8 at 0.05 (fraud 3.5% against 2% for H100 corpora on the B300 validator). The 0.04–0.05 proposed on the chain (gonka#1743) separates this fraud on rates of a few per cent, where p_mismatch and the number of nonces per validation set the power of the binomial test; 0.02–0.025 gives the same ratio on rates the test resolves with fewer nonces.</p>
+<div class="markdown-heading"><h3 class="heading-element">DeepSeek-V4-Flash, three validators</h3><a id="user-content-deepseek-v4-flash-three-validators" class="anchor" aria-label="Permalink: DeepSeek-V4-Flash, three validators" href="#deepseek-v4-flash-three-validators"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
+<p>FP8 is <code>deepseek-ai/DeepSeek-V4-Flash-0731</code>, NVFP4 is <code>MJPansa/DeepSeek-V4-Flash-0731-NVFP4</code>. Corpora of 250 nonces × 10 hashes; rates are per cent of points at τ = 0 / 0.02 / 0.05 / 0.1.</p>
+<table>
+<thead>
+<tr>
+<th>prover → validator</th>
+<th align="right">NVFP4 @ B300</th>
+<th align="right">FP8 @ H200</th>
+<th align="right">FP8 @ H100</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NVFP4 B300</td>
+<td align="right">1.49 / 0.018 / 0 / 0 (same boot)</td>
+<td align="right">8.08 / 0.087 / 0 / 0</td>
+<td align="right">8.08 / 0.089 / 0 / 0</td>
+</tr>
+<tr>
+<td>FP8 H200</td>
+<td align="right">8.02 / 0.082 / 0.0002 / 0</td>
+<td align="right">6.74 / 0.027 / 0 / 0 (same boot)</td>
+<td align="right">7.04 / 0.032 / 0 / 0</td>
+</tr>
+<tr>
+<td>FP8 H100</td>
+<td align="right">8.02 / 0.078 / 0 / 0</td>
+<td align="right">7.05 / 0.033 / 0 / 0</td>
+<td align="right">6.74 / 0.025 / 0 / 0 (same boot, 600 nonces)</td>
+</tr>
+<tr>
+<td>fraud REAP-145B</td>
+<td align="right">42.00 / 16.62 / 3.38 / 0.149</td>
+<td align="right">42.02 / 16.64 / 3.38 / 0.149</td>
+<td align="right">42.02 / 16.60 / 3.38 / 0.149</td>
+</tr>
+</tbody>
+</table>
+<p>The two Hopper FP8 arms are indistinguishable (within 0.3 pp of a same-boot cell). NVFP4 against FP8: 8.0–8.1% at τ = 0, 0 at 0.05 on every pair. REAP: 3.4% at τ = 0.05 and 0.15% at 0.1, identical to 0.02 pp across validators. By points at τ = 0.05 every honest pair is at zero and REAP at 3.4%, so any threshold between them separates this fraud; the chain's nonce-level rule was not evaluated for DeepSeek (per-nonce counts were not kept). REAP, a pruned model, is a cruder fraud than QuantTrio, a quantisation of the same model: the 3–5× ratio of the MiniMax section is against the harder kind, and no quantisation fraud was measured for DeepSeek.</p>
+<p><a target="_blank" rel="noopener noreferrer" href="artifacts/figures/mm_points_0909.png"><img src="artifacts/figures/mm_points_0909.png" alt="MiniMax honest pairs and QuantTrio across tau, by points" style="max-width: 100%;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer" href="artifacts/figures/ds_sep_0909.png"><img src="artifacts/figures/ds_sep_0909.png" alt="DeepSeek honest pairs and REAP across tau" style="max-width: 100%;"></a></p>
+<p><em>Mismatch rate by points, log scale; zero sits on the axis floor. MiniMax: the full τ grid; DeepSeek: the six stored points, joined. Honest pairs coincide across models (8% at τ = 0, 1% at 0.01, near zero at 0.05). REAP falls ten times slower than the honest pairs; QuantTrio falls at the honest rate, a constant ratio of 3–4.</em></p>
+<div class="markdown-heading"><h2 class="heading-element">When these numbers apply</h2><a id="user-content-when-these-numbers-apply" class="anchor" aria-label="Permalink: When these numbers apply" href="#when-these-numbers-apply"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
+<ul>
+<li>
+<p><strong>Same code on both sides, autotuner on, prefix caching off, speculative decoding off, the profiles above.</strong> The throughput tables (2×B200 included) are from the previous plugin revision. The frozen revision was re-measured on B300 with MiniMax only: PoC 29.0 nonces/s against 30.2 for the previous revision in the same session, one run each (the table row, 29.9, is another run of the previous revision); chat 31.6–31.9 requests/s at c608, unchanged, so R holds. No other card or model.</p>
+</li>
+<li>
+<p><strong>Same-boot self-validation cells are not network quantities.</strong> Two honest nodes see the other-card level: 6.4–8.9% at τ = 0 for MiniMax, 7.0–8.1% for DeepSeek (2.0% on the same card after a reboot, NVFP4 on B300).</p>
+</li>
+<li>
+<p><strong>2×B200 has throughput only.</strong> No validation cell was taken on it, as prover or validator.</p>
+</li>
+</ul>
+<hr>
+<div class="markdown-heading"><h2 class="heading-element">Reproduce</h2><a id="user-content-reproduce" class="anchor" aria-label="Permalink: Reproduce" href="#reproduce"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
+<p>Every separability and τ table in this report is rebuilt from the counters in <code>artifacts/</code>,
+without a GPU:</p>
+<div class="highlight highlight-source-shell"><pre>python3 scripts/tau_table.py <span class="pl-k">&gt;</span> artifacts/tau_matrix.md</pre></div>
+<p><code>artifacts/validations/minimax/validator_&lt;card&gt;/*.npz</code> holds, per cell and block hash, the
+number of disagreeing steps of each of the 250 nonces on a τ grid of 0 … 0.2 in steps of 0.005,
+plus the compared-step count. <code>artifacts/validations/deepseek/</code> holds the τ-grid summaries and
+margins of the twelve DeepSeek cells. <code>artifacts/fig_data_matrix.json</code> and
+<code>artifacts/fig_data_tau.json</code> are the per-hash arrays behind the figures;
+<code>artifacts/provenance/</code> holds the boot records (KV size, checkpoint revision, MoE backend, GPU,
+driver) of every generation and validation run.</p>
+<div class="markdown-heading"><h2 class="heading-element">Data not in this repository</h2><a id="user-content-data-not-in-this-repository" class="anchor" aria-label="Permalink: Data not in this repository" href="#data-not-in-this-repository"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
+<p>Corpora with per-step vectors (4.2 GB) and the raw throughput runs (182 MB) are too large for
+the tree. They are in the <code>poc-devkit-2026-09-09</code> bundle on Google Drive together with the
+generation and validation kits, the run scripts, the launch profiles (<code>PROFILES.md</code>) and the
+full freeze description (<code>FREEZE.md</code>):
+<a href="https://drive.google.com/drive/folders/1BT9c4PL2g7AnJ5zWOTK5D-9UNepZ_aFT" rel="nofollow">https://drive.google.com/drive/folders/1BT9c4PL2g7AnJ5zWOTK5D-9UNepZ_aFT</a></p>
+<p>The bundle carries a sha256 manifest; the same report is in it as <code>docs/decode-poc-freeze-0909.md</code>.</p>
