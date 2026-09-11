@@ -1,0 +1,223 @@
+{
+ "partition": 250,
+ "validator_boot": {
+  "cfg": "h200",
+  "model_dir": "/root/models/hf/hub/models--MiniMaxAI--MiniMax-M2.7/snapshots/d494266a4affc0d2995ba1fa35c8481cbd84294b",
+  "wall_nonces": 700,
+  "tag": "s3_mm_8k_w608",
+  "synth": "s3: GEN_BATCH=250"
+ },
+ "cells": [
+  {
+   "corpus": "honest_h01",
+   "partition": 250,
+   "parts": [
+    {
+     "points": 64250,
+     "diff": 83,
+     "rate_pct": 0.1292,
+     "step0_pct": 0.0,
+     "nonces": 250,
+     "part": 0,
+     "size": 250,
+     "sec": 15.2,
+     "tail": false
+    }
+   ],
+   "total_points": 64250,
+   "total_diff": 83,
+   "rate_pct": 0.1292,
+   "step0_pct": 0.0
+  },
+  {
+   "corpus": "honest_h02",
+   "partition": 250,
+   "parts": [
+    {
+     "points": 64250,
+     "diff": 392,
+     "rate_pct": 0.6101,
+     "step0_pct": 0.0,
+     "nonces": 250,
+     "part": 0,
+     "size": 250,
+     "sec": 15.1,
+     "tail": false
+    }
+   ],
+   "total_points": 64250,
+   "total_diff": 392,
+   "rate_pct": 0.6101,
+   "step0_pct": 0.0
+  },
+  {
+   "corpus": "honest_h03",
+   "partition": 250,
+   "parts": [
+    {
+     "points": 64250,
+     "diff": 355,
+     "rate_pct": 0.5525,
+     "step0_pct": 0.0,
+     "nonces": 250,
+     "part": 0,
+     "size": 250,
+     "sec": 15.2,
+     "tail": false
+    }
+   ],
+   "total_points": 64250,
+   "total_diff": 355,
+   "rate_pct": 0.5525,
+   "step0_pct": 0.0
+  },
+  {
+   "corpus": "honest_h04",
+   "partition": 250,
+   "parts": [
+    {
+     "points": 64250,
+     "diff": 156,
+     "rate_pct": 0.2428,
+     "step0_pct": 0.0,
+     "nonces": 250,
+     "part": 0,
+     "size": 250,
+     "sec": 15.2,
+     "tail": false
+    }
+   ],
+   "total_points": 64250,
+   "total_diff": 156,
+   "rate_pct": 0.2428,
+   "step0_pct": 0.0
+  },
+  {
+   "corpus": "honest_h05",
+   "partition": 250,
+   "parts": [
+    {
+     "points": 64250,
+     "diff": 109,
+     "rate_pct": 0.1696,
+     "step0_pct": 0.0,
+     "nonces": 250,
+     "part": 0,
+     "size": 250,
+     "sec": 15.2,
+     "tail": false
+    }
+   ],
+   "total_points": 64250,
+   "total_diff": 109,
+   "rate_pct": 0.1696,
+   "step0_pct": 0.0
+  },
+  {
+   "corpus": "honest_h06",
+   "partition": 250,
+   "parts": [
+    {
+     "points": 64250,
+     "diff": 18,
+     "rate_pct": 0.028,
+     "step0_pct": 0.0,
+     "nonces": 250,
+     "part": 0,
+     "size": 250,
+     "sec": 15.1,
+     "tail": false
+    }
+   ],
+   "total_points": 64250,
+   "total_diff": 18,
+   "rate_pct": 0.028,
+   "step0_pct": 0.0
+  },
+  {
+   "corpus": "honest_h07",
+   "partition": 250,
+   "parts": [
+    {
+     "points": 64250,
+     "diff": 105,
+     "rate_pct": 0.1634,
+     "step0_pct": 0.0,
+     "nonces": 250,
+     "part": 0,
+     "size": 250,
+     "sec": 15.1,
+     "tail": false
+    }
+   ],
+   "total_points": 64250,
+   "total_diff": 105,
+   "rate_pct": 0.1634,
+   "step0_pct": 0.0
+  },
+  {
+   "corpus": "honest_h08",
+   "partition": 250,
+   "parts": [
+    {
+     "points": 64250,
+     "diff": 241,
+     "rate_pct": 0.3751,
+     "step0_pct": 0.0,
+     "nonces": 250,
+     "part": 0,
+     "size": 250,
+     "sec": 15.1,
+     "tail": false
+    }
+   ],
+   "total_points": 64250,
+   "total_diff": 241,
+   "rate_pct": 0.3751,
+   "step0_pct": 0.0
+  },
+  {
+   "corpus": "honest_h09",
+   "partition": 250,
+   "parts": [
+    {
+     "points": 64250,
+     "diff": 211,
+     "rate_pct": 0.3284,
+     "step0_pct": 0.0,
+     "nonces": 250,
+     "part": 0,
+     "size": 250,
+     "sec": 15.2,
+     "tail": false
+    }
+   ],
+   "total_points": 64250,
+   "total_diff": 211,
+   "rate_pct": 0.3284,
+   "step0_pct": 0.0
+  },
+  {
+   "corpus": "honest_h10",
+   "partition": 250,
+   "parts": [
+    {
+     "points": 64250,
+     "diff": 159,
+     "rate_pct": 0.2475,
+     "step0_pct": 0.0,
+     "nonces": 250,
+     "part": 0,
+     "size": 250,
+     "sec": 15.2,
+     "tail": false
+    }
+   ],
+   "total_points": 64250,
+   "total_diff": 159,
+   "rate_pct": 0.2475,
+   "step0_pct": 0.0
+  }
+ ],
+ "kit_version": "14fe97dec7e2"
+}

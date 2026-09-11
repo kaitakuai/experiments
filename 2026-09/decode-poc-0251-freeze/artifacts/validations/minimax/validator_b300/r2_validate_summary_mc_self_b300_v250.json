@@ -1,0 +1,223 @@
+{
+ "partition": 250,
+ "validator_boot": {
+  "cfg": "b300",
+  "model_dir": "/root/models/hf/hub/models--MiniMaxAI--MiniMax-M2.7/snapshots/d494266a4affc0d2995ba1fa35c8481cbd84294b",
+  "wall_nonces": 700,
+  "tag": "mc_b300",
+  "synth": "merge-check: GEN_BATCH=250"
+ },
+ "cells": [
+  {
+   "corpus": "honest_h01",
+   "partition": 250,
+   "parts": [
+    {
+     "points": 64250,
+     "diff": 36,
+     "rate_pct": 0.056,
+     "step0_pct": 0.0,
+     "nonces": 250,
+     "part": 0,
+     "size": 250,
+     "sec": 15.3,
+     "tail": false
+    }
+   ],
+   "total_points": 64250,
+   "total_diff": 36,
+   "rate_pct": 0.056,
+   "step0_pct": 0.0
+  },
+  {
+   "corpus": "honest_h02",
+   "partition": 250,
+   "parts": [
+    {
+     "points": 64250,
+     "diff": 69,
+     "rate_pct": 0.1074,
+     "step0_pct": 0.0,
+     "nonces": 250,
+     "part": 0,
+     "size": 250,
+     "sec": 15.3,
+     "tail": false
+    }
+   ],
+   "total_points": 64250,
+   "total_diff": 69,
+   "rate_pct": 0.1074,
+   "step0_pct": 0.0
+  },
+  {
+   "corpus": "honest_h03",
+   "partition": 250,
+   "parts": [
+    {
+     "points": 64250,
+     "diff": 22,
+     "rate_pct": 0.0342,
+     "step0_pct": 0.0,
+     "nonces": 250,
+     "part": 0,
+     "size": 250,
+     "sec": 15.3,
+     "tail": false
+    }
+   ],
+   "total_points": 64250,
+   "total_diff": 22,
+   "rate_pct": 0.0342,
+   "step0_pct": 0.0
+  },
+  {
+   "corpus": "honest_h04",
+   "partition": 250,
+   "parts": [
+    {
+     "points": 64250,
+     "diff": 286,
+     "rate_pct": 0.4451,
+     "step0_pct": 0.0,
+     "nonces": 250,
+     "part": 0,
+     "size": 250,
+     "sec": 15.3,
+     "tail": false
+    }
+   ],
+   "total_points": 64250,
+   "total_diff": 286,
+   "rate_pct": 0.4451,
+   "step0_pct": 0.0
+  },
+  {
+   "corpus": "honest_h05",
+   "partition": 250,
+   "parts": [
+    {
+     "points": 64250,
+     "diff": 216,
+     "rate_pct": 0.3362,
+     "step0_pct": 0.0,
+     "nonces": 250,
+     "part": 0,
+     "size": 250,
+     "sec": 15.2,
+     "tail": false
+    }
+   ],
+   "total_points": 64250,
+   "total_diff": 216,
+   "rate_pct": 0.3362,
+   "step0_pct": 0.0
+  },
+  {
+   "corpus": "honest_h06",
+   "partition": 250,
+   "parts": [
+    {
+     "points": 64250,
+     "diff": 0,
+     "rate_pct": 0.0,
+     "step0_pct": 0.0,
+     "nonces": 250,
+     "part": 0,
+     "size": 250,
+     "sec": 15.3,
+     "tail": false
+    }
+   ],
+   "total_points": 64250,
+   "total_diff": 0,
+   "rate_pct": 0.0,
+   "step0_pct": 0.0
+  },
+  {
+   "corpus": "honest_h07",
+   "partition": 250,
+   "parts": [
+    {
+     "points": 64250,
+     "diff": 0,
+     "rate_pct": 0.0,
+     "step0_pct": 0.0,
+     "nonces": 250,
+     "part": 0,
+     "size": 250,
+     "sec": 15.2,
+     "tail": false
+    }
+   ],
+   "total_points": 64250,
+   "total_diff": 0,
+   "rate_pct": 0.0,
+   "step0_pct": 0.0
+  },
+  {
+   "corpus": "honest_h08",
+   "partition": 250,
+   "parts": [
+    {
+     "points": 64250,
+     "diff": 13,
+     "rate_pct": 0.0202,
+     "step0_pct": 0.0,
+     "nonces": 250,
+     "part": 0,
+     "size": 250,
+     "sec": 15.3,
+     "tail": false
+    }
+   ],
+   "total_points": 64250,
+   "total_diff": 13,
+   "rate_pct": 0.0202,
+   "step0_pct": 0.0
+  },
+  {
+   "corpus": "honest_h09",
+   "partition": 250,
+   "parts": [
+    {
+     "points": 64250,
+     "diff": 0,
+     "rate_pct": 0.0,
+     "step0_pct": 0.0,
+     "nonces": 250,
+     "part": 0,
+     "size": 250,
+     "sec": 15.4,
+     "tail": false
+    }
+   ],
+   "total_points": 64250,
+   "total_diff": 0,
+   "rate_pct": 0.0,
+   "step0_pct": 0.0
+  },
+  {
+   "corpus": "honest_h10",
+   "partition": 250,
+   "parts": [
+    {
+     "points": 64250,
+     "diff": 57,
+     "rate_pct": 0.0887,
+     "step0_pct": 0.0,
+     "nonces": 250,
+     "part": 0,
+     "size": 250,
+     "sec": 15.3,
+     "tail": false
+    }
+   ],
+   "total_points": 64250,
+   "total_diff": 57,
+   "rate_pct": 0.0887,
+   "step0_pct": 0.0
+  }
+ ],
+ "kit_version": "14fe97dec7e2"
+}

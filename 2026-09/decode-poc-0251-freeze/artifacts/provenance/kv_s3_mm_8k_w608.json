@@ -1,0 +1,1 @@
+{"cfg": "h200", "model_dir": "/root/models/hf/hub/models--MiniMaxAI--MiniMax-M2.7/snapshots/d494266a4affc0d2995ba1fa35c8481cbd84294b", "wall_nonces": 700, "tag": "s3_mm_8k_w608", "synth": "s3: GEN_BATCH=250"}

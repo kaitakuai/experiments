@@ -1,0 +1,183 @@
+{
+ "corpus_quant": "fp8",
+ "validator_quant": "fp8",
+ "corpus_boot": {
+  "cfg": "h100",
+  "quant": "fp8",
+  "tp": 4,
+  "model_dir": "/root/models/hf/hub/models--deepseek-ai--DeepSeek-V4-Flash-0731/snapshots/7872f01b1d1fe23eabc4c98b48bffcef5a386062",
+  "model_repo": "deepseek-ai/DeepSeek-V4-Flash-0731",
+  "ckpt_revision": "7872f01b1d1fe23eabc4c98b48bffcef5a386062",
+  "ckpt_sha": "1c1320a8d3313e00",
+  "ckpt_config_sha256": "6c8f3d2d3b487075",
+  "boot_utc": "2026-09-09T17:13:55.821600+00:00",
+  "kv_tokens": 1066737,
+  "max_num_seqs": 1024,
+  "speculation": "off",
+  "wall_from_kv": 179,
+  "kv_per_nonce": 5938,
+  "wall_nonces_predicted": 179,
+  "wall_nonces": null,
+  "wall_source": "predicted-only",
+  "gpu": "NVIDIA H100 80GB HBM3",
+  "attention_backend": null,
+  "moe_actual": "'MARLIN' Mxfp4",
+  "moe_actual_all": [
+   "Using 'MARLIN' Mxfp4 MoE backend"
+  ],
+  "dispatch": null,
+  "attach": "PoC native attach: 43 layers, embed=True, snap=True, 40 MoE routers seeded (n_exp=256 top_k=6)",
+  "cpu_model": "Intel(R) Xeon(R) Platinum 8480C",
+  "cpu_count": 96,
+  "loadavg": [
+   2.88,
+   3.89,
+   2.7
+  ],
+  "autotuner_lines": 0,
+  "autotune_mode": "on",
+  "linear_backend": "auto",
+  "max_num_batched_tokens": 16384,
+  "moe_backend_forced": "auto",
+  "kit_version": "f900535b5fc3"
+ },
+ "validator_boot": {
+  "cfg": "h200",
+  "quant": "fp8",
+  "tp": 2,
+  "model_dir": "/root/models/hf/hub/models--deepseek-ai--DeepSeek-V4-Flash-0731/snapshots/7872f01b1d1fe23eabc4c98b48bffcef5a386062",
+  "model_repo": "deepseek-ai/DeepSeek-V4-Flash-0731",
+  "ckpt_revision": "7872f01b1d1fe23eabc4c98b48bffcef5a386062",
+  "ckpt_sha": "1c1320a8d3313e00",
+  "ckpt_config_sha256": "6c8f3d2d3b487075",
+  "boot_utc": "2026-09-09T17:07:04.628338+00:00",
+  "kv_tokens": 1090430,
+  "max_num_seqs": 1024,
+  "speculation": "off",
+  "wall_from_kv": 183,
+  "kv_per_nonce": 5938,
+  "wall_nonces_predicted": 183,
+  "wall_nonces": null,
+  "wall_source": "predicted-only",
+  "gpu": "NVIDIA H200",
+  "attention_backend": null,
+  "moe_actual": "'MARLIN' Mxfp4",
+  "moe_actual_all": [
+   "Using 'MARLIN' Mxfp4 MoE backend"
+  ],
+  "dispatch": null,
+  "attach": "PoC native attach: 43 layers, embed=True, snap=True, 40 MoE routers seeded (n_exp=256 top_k=6)",
+  "cpu_model": "INTEL(R) XEON(R) PLATINUM 8580",
+  "cpu_count": 56,
+  "loadavg": [
+   1.83,
+   1.66,
+   1.74
+  ],
+  "autotuner_lines": 0,
+  "autotune_mode": "on",
+  "linear_backend": "auto",
+  "max_num_batched_tokens": 32768,
+  "moe_backend_forced": "auto",
+  "kit_version": "f900535b5fc3"
+ },
+ "per_hash": [
+  {
+   "hash": "h01",
+   "points": 64250,
+   "diff": 4544,
+   "rate_pct": 7.0724,
+   "step0_pct": 10.8,
+   "nonces": 250
+  },
+  {
+   "hash": "h02",
+   "points": 64250,
+   "diff": 4558,
+   "rate_pct": 7.0942,
+   "step0_pct": 6.8,
+   "nonces": 250
+  },
+  {
+   "hash": "h03",
+   "points": 64250,
+   "diff": 4543,
+   "rate_pct": 7.0708,
+   "step0_pct": 9.2,
+   "nonces": 250
+  },
+  {
+   "hash": "h04",
+   "points": 64250,
+   "diff": 4587,
+   "rate_pct": 7.1393,
+   "step0_pct": 6.0,
+   "nonces": 250
+  },
+  {
+   "hash": "h05",
+   "points": 64250,
+   "diff": 4611,
+   "rate_pct": 7.1767,
+   "step0_pct": 10.0,
+   "nonces": 250
+  },
+  {
+   "hash": "h06",
+   "points": 64250,
+   "diff": 4459,
+   "rate_pct": 6.9401,
+   "step0_pct": 6.0,
+   "nonces": 250
+  },
+  {
+   "hash": "h07",
+   "points": 64250,
+   "diff": 4671,
+   "rate_pct": 7.27,
+   "step0_pct": 8.8,
+   "nonces": 250
+  },
+  {
+   "hash": "h08",
+   "points": 64250,
+   "diff": 4460,
+   "rate_pct": 6.9416,
+   "step0_pct": 6.4,
+   "nonces": 250
+  },
+  {
+   "hash": "h09",
+   "points": 64250,
+   "diff": 4541,
+   "rate_pct": 7.0677,
+   "step0_pct": 11.2,
+   "nonces": 250
+  },
+  {
+   "hash": "h10",
+   "points": 64250,
+   "diff": 4401,
+   "rate_pct": 6.8498,
+   "step0_pct": 2.8,
+   "nonces": 250
+  }
+ ],
+ "total_points": 642500,
+ "total_diff": 45375,
+ "rate_pct": 7.0623,
+ "tau_grid_pct": {
+  "0.0": 7.0535,
+  "0.01": 0.6602,
+  "0.02": 0.0332,
+  "0.05": 0.0,
+  "0.1": 0.0,
+  "0.2": 0.0
+ },
+ "margins": {
+  "n": 45375,
+  "max": 0.03625925289705911,
+  "median": 0.00323193961331647
+ },
+ "kit_version": "f900535b5fc3"
+}

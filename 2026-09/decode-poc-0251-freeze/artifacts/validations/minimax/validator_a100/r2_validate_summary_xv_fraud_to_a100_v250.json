@@ -1,0 +1,223 @@
+{
+ "partition": 250,
+ "validator_boot": {
+  "cfg": "a100_honest",
+  "model_dir": "/root/models/hf/hub/models--MiniMaxAI--MiniMax-M2.7/snapshots/d494266a4affc0d2995ba1fa35c8481cbd84294b",
+  "wall_nonces": 900,
+  "tag": "xval_a100",
+  "synth": "xval validator"
+ },
+ "cells": [
+  {
+   "corpus": "fraud_h01",
+   "partition": 250,
+   "parts": [
+    {
+     "points": 63074,
+     "diff": 6260,
+     "rate_pct": 9.9249,
+     "step0_pct": 8.4,
+     "nonces": 250,
+     "part": 0,
+     "size": 250,
+     "sec": 21.5,
+     "tail": false
+    }
+   ],
+   "total_points": 63074,
+   "total_diff": 6260,
+   "rate_pct": 9.9249,
+   "step0_pct": 8.4
+  },
+  {
+   "corpus": "fraud_h02",
+   "partition": 250,
+   "parts": [
+    {
+     "points": 58099,
+     "diff": 6276,
+     "rate_pct": 10.8023,
+     "step0_pct": 8.0,
+     "nonces": 250,
+     "part": 0,
+     "size": 250,
+     "sec": 21.4,
+     "tail": false
+    }
+   ],
+   "total_points": 58099,
+   "total_diff": 6276,
+   "rate_pct": 10.8023,
+   "step0_pct": 8.0
+  },
+  {
+   "corpus": "fraud_h03",
+   "partition": 250,
+   "parts": [
+    {
+     "points": 57318,
+     "diff": 5406,
+     "rate_pct": 9.4316,
+     "step0_pct": 12.4,
+     "nonces": 250,
+     "part": 0,
+     "size": 250,
+     "sec": 21.4,
+     "tail": false
+    }
+   ],
+   "total_points": 57318,
+   "total_diff": 5406,
+   "rate_pct": 9.4316,
+   "step0_pct": 12.4
+  },
+  {
+   "corpus": "fraud_h04",
+   "partition": 250,
+   "parts": [
+    {
+     "points": 44724,
+     "diff": 4569,
+     "rate_pct": 10.216,
+     "step0_pct": 12.4,
+     "nonces": 250,
+     "part": 0,
+     "size": 250,
+     "sec": 21.4,
+     "tail": false
+    }
+   ],
+   "total_points": 44724,
+   "total_diff": 4569,
+   "rate_pct": 10.216,
+   "step0_pct": 12.4
+  },
+  {
+   "corpus": "fraud_h05",
+   "partition": 250,
+   "parts": [
+    {
+     "points": 22461,
+     "diff": 2326,
+     "rate_pct": 10.3557,
+     "step0_pct": 8.0,
+     "nonces": 250,
+     "part": 0,
+     "size": 250,
+     "sec": 21.4,
+     "tail": false
+    }
+   ],
+   "total_points": 22461,
+   "total_diff": 2326,
+   "rate_pct": 10.3557,
+   "step0_pct": 8.0
+  },
+  {
+   "corpus": "fraud_h06",
+   "partition": 250,
+   "parts": [
+    {
+     "points": 9369,
+     "diff": 855,
+     "rate_pct": 9.1258,
+     "step0_pct": 10.0,
+     "nonces": 250,
+     "part": 0,
+     "size": 250,
+     "sec": 21.4,
+     "tail": false
+    }
+   ],
+   "total_points": 9369,
+   "total_diff": 855,
+   "rate_pct": 9.1258,
+   "step0_pct": 10.0
+  },
+  {
+   "corpus": "fraud_h07",
+   "partition": 250,
+   "parts": [
+    {
+     "points": 5000,
+     "diff": 481,
+     "rate_pct": 9.62,
+     "step0_pct": 10.4,
+     "nonces": 250,
+     "part": 0,
+     "size": 250,
+     "sec": 21.5,
+     "tail": false
+    }
+   ],
+   "total_points": 5000,
+   "total_diff": 481,
+   "rate_pct": 9.62,
+   "step0_pct": 10.4
+  },
+  {
+   "corpus": "fraud_h08",
+   "partition": 250,
+   "parts": [
+    {
+     "points": 4042,
+     "diff": 353,
+     "rate_pct": 8.7333,
+     "step0_pct": 7.2,
+     "nonces": 250,
+     "part": 0,
+     "size": 250,
+     "sec": 21.4,
+     "tail": false
+    }
+   ],
+   "total_points": 4042,
+   "total_diff": 353,
+   "rate_pct": 8.7333,
+   "step0_pct": 7.2
+  },
+  {
+   "corpus": "fraud_h09",
+   "partition": 250,
+   "parts": [
+    {
+     "points": 3689,
+     "diff": 338,
+     "rate_pct": 9.1624,
+     "step0_pct": 8.4,
+     "nonces": 250,
+     "part": 0,
+     "size": 250,
+     "sec": 21.4,
+     "tail": false
+    }
+   ],
+   "total_points": 3689,
+   "total_diff": 338,
+   "rate_pct": 9.1624,
+   "step0_pct": 8.4
+  },
+  {
+   "corpus": "fraud_h10",
+   "partition": 250,
+   "parts": [
+    {
+     "points": 3801,
+     "diff": 341,
+     "rate_pct": 8.9713,
+     "step0_pct": 9.6,
+     "nonces": 250,
+     "part": 0,
+     "size": 250,
+     "sec": 21.5,
+     "tail": false
+    }
+   ],
+   "total_points": 3801,
+   "total_diff": 341,
+   "rate_pct": 8.9713,
+   "step0_pct": 9.6
+  }
+ ],
+ "kit_version": "14fe97dec7e2"
+}

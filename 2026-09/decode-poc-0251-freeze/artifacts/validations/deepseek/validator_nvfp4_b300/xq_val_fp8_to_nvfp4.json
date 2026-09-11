@@ -1,0 +1,183 @@
+{
+ "corpus_quant": "fp8",
+ "validator_quant": "nvfp4",
+ "corpus_boot": {
+  "cfg": "h200",
+  "quant": "fp8",
+  "tp": 2,
+  "model_dir": "/root/models/hf/hub/models--deepseek-ai--DeepSeek-V4-Flash-0731/snapshots/7872f01b1d1fe23eabc4c98b48bffcef5a386062",
+  "model_repo": "deepseek-ai/DeepSeek-V4-Flash-0731",
+  "ckpt_revision": "7872f01b1d1fe23eabc4c98b48bffcef5a386062",
+  "ckpt_sha": "1c1320a8d3313e00",
+  "ckpt_config_sha256": "6c8f3d2d3b487075",
+  "boot_utc": "2026-09-07T22:15:36.327888+00:00",
+  "kv_tokens": 771949,
+  "max_num_seqs": 1024,
+  "speculation": "off",
+  "wall_from_kv": 130,
+  "kv_per_nonce": 5938,
+  "wall_nonces_predicted": 130,
+  "wall_nonces": null,
+  "wall_source": "predicted-only",
+  "gpu": "NVIDIA H200",
+  "attention_backend": null,
+  "moe_actual": "'MARLIN' Mxfp4",
+  "moe_actual_all": [
+   "Using 'MARLIN' Mxfp4 MoE backend"
+  ],
+  "dispatch": null,
+  "attach": "PoC native attach: 43 layers, embed=True, snap=True, 40 MoE routers seeded (n_exp=256 top_k=6)",
+  "cpu_model": "AMD EPYC 9654 96-Core Processor",
+  "cpu_count": 88,
+  "loadavg": [
+   1.7,
+   1.58,
+   1.27
+  ],
+  "autotuner_lines": 0,
+  "autotune_mode": "on",
+  "linear_backend": "auto",
+  "max_num_batched_tokens": 32768,
+  "moe_backend_forced": "auto",
+  "kit_version": "f900535b5fc3"
+ },
+ "validator_boot": {
+  "cfg": "b300",
+  "quant": "nvfp4",
+  "tp": 1,
+  "model_dir": "/root/models/hf/hub/models--MJPansa--DeepSeek-V4-Flash-0731-NVFP4/snapshots/64d64cd89bc63a66aa46506da89d7821f7491c62",
+  "model_repo": "MJPansa/DeepSeek-V4-Flash-0731-NVFP4",
+  "ckpt_revision": "64d64cd89bc63a66aa46506da89d7821f7491c62",
+  "ckpt_sha": "ebc08e4a45baee83",
+  "ckpt_config_sha256": "bb0d2286d6761439",
+  "boot_utc": "2026-09-07T22:51:20.373249+00:00",
+  "kv_tokens": 1997188,
+  "max_num_seqs": 1024,
+  "speculation": "off",
+  "wall_from_kv": 521,
+  "kv_per_nonce": 3833,
+  "wall_nonces_predicted": 521,
+  "wall_nonces": null,
+  "wall_source": "predicted-only",
+  "gpu": "NVIDIA B300 SXM6 AC",
+  "attention_backend": null,
+  "moe_actual": "'FLASHINFER_TRTLLM' NvFp4",
+  "moe_actual_all": [
+   "Using 'FLASHINFER_TRTLLM' NvFp4 MoE backend"
+  ],
+  "dispatch": null,
+  "attach": "PoC native attach: 43 layers, embed=True, snap=True, 40 MoE routers seeded (n_exp=256 top_k=6)",
+  "cpu_model": "Intel(R) Xeon(R) 6776P",
+  "cpu_count": 24,
+  "loadavg": [
+   0.99,
+   1.0,
+   1.19
+  ],
+  "autotuner_lines": 0,
+  "autotune_mode": "on",
+  "linear_backend": "auto",
+  "max_num_batched_tokens": 32768,
+  "moe_backend_forced": "auto",
+  "kit_version": "f900535b5fc3"
+ },
+ "per_hash": [
+  {
+   "hash": "h01",
+   "points": 64250,
+   "diff": 5052,
+   "rate_pct": 7.863,
+   "step0_pct": 10.4,
+   "nonces": 250
+  },
+  {
+   "hash": "h02",
+   "points": 64250,
+   "diff": 5100,
+   "rate_pct": 7.9377,
+   "step0_pct": 9.6,
+   "nonces": 250
+  },
+  {
+   "hash": "h03",
+   "points": 64250,
+   "diff": 5147,
+   "rate_pct": 8.0109,
+   "step0_pct": 8.4,
+   "nonces": 250
+  },
+  {
+   "hash": "h04",
+   "points": 64250,
+   "diff": 5271,
+   "rate_pct": 8.2039,
+   "step0_pct": 12.0,
+   "nonces": 250
+  },
+  {
+   "hash": "h05",
+   "points": 64250,
+   "diff": 5185,
+   "rate_pct": 8.07,
+   "step0_pct": 6.8,
+   "nonces": 250
+  },
+  {
+   "hash": "h06",
+   "points": 64250,
+   "diff": 5237,
+   "rate_pct": 8.151,
+   "step0_pct": 7.2,
+   "nonces": 250
+  },
+  {
+   "hash": "h07",
+   "points": 64250,
+   "diff": 5437,
+   "rate_pct": 8.4623,
+   "step0_pct": 7.2,
+   "nonces": 250
+  },
+  {
+   "hash": "h08",
+   "points": 64250,
+   "diff": 5011,
+   "rate_pct": 7.7992,
+   "step0_pct": 6.4,
+   "nonces": 250
+  },
+  {
+   "hash": "h09",
+   "points": 64250,
+   "diff": 5082,
+   "rate_pct": 7.9097,
+   "step0_pct": 10.8,
+   "nonces": 250
+  },
+  {
+   "hash": "h10",
+   "points": 64250,
+   "diff": 5076,
+   "rate_pct": 7.9004,
+   "step0_pct": 8.8,
+   "nonces": 250
+  }
+ ],
+ "total_points": 642500,
+ "total_diff": 51598,
+ "rate_pct": 8.0308,
+ "tau_grid_pct": {
+  "0.0": 8.0224,
+  "0.01": 1.0193,
+  "0.02": 0.0817,
+  "0.05": 0.0002,
+  "0.1": 0.0,
+  "0.2": 0.0
+ },
+ "margins": {
+  "n": 51598,
+  "max": 0.05311883681680296,
+  "median": 0.003676474049314926
+ },
+ "kit_version": "f900535b5fc3"
+}

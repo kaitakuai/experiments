@@ -1,0 +1,43 @@
+--- прогрев (первый вызов после бута численно иной)
+корпусов найдено: 10 | партиция 250 | стена валидатора 700
+--- h100_honest_h01: 250 нонсов, хэш h01
+     {"points": 64250, "diff": 5087, "rate_pct": 7.9175, "step0_pct": 7.2, "nonces": 250, "part": 0, "size": 250, "sec": 15.3, "tail": false}
+    npz -> /root/mchk/mm6/cross/npz_h100_honest_h01_v250.npz | выгрузка: None
+    {"rate_pct": 7.9175, "step0_pct": 7.2, "total_diff": 5087} | выгрузка: None
+--- h100_honest_h02: 250 нонсов, хэш h02
+     {"points": 64250, "diff": 5573, "rate_pct": 8.6739, "step0_pct": 4.8, "nonces": 250, "part": 0, "size": 250, "sec": 15.3, "tail": false}
+    npz -> /root/mchk/mm6/cross/npz_h100_honest_h02_v250.npz | выгрузка: None
+    {"rate_pct": 8.6739, "step0_pct": 4.8, "total_diff": 5573} | выгрузка: None
+--- h100_honest_h03: 250 нонсов, хэш h03
+     {"points": 64250, "diff": 4946, "rate_pct": 7.6981, "step0_pct": 6.0, "nonces": 250, "part": 0, "size": 250, "sec": 15.2, "tail": false}
+    npz -> /root/mchk/mm6/cross/npz_h100_honest_h03_v250.npz | выгрузка: None
+    {"rate_pct": 7.6981, "step0_pct": 6.0, "total_diff": 4946} | выгрузка: None
+--- h100_honest_h04: 250 нонсов, хэш h04
+     {"points": 64250, "diff": 5491, "rate_pct": 8.5463, "step0_pct": 6.8, "nonces": 250, "part": 0, "size": 250, "sec": 15.2, "tail": false}
+    npz -> /root/mchk/mm6/cross/npz_h100_honest_h04_v250.npz | выгрузка: None
+    {"rate_pct": 8.5463, "step0_pct": 6.8, "total_diff": 5491} | выгрузка: None
+--- h100_honest_h05: 250 нонсов, хэш h05
+     {"points": 64250, "diff": 5423, "rate_pct": 8.4405, "step0_pct": 7.2, "nonces": 250, "part": 0, "size": 250, "sec": 15.1, "tail": false}
+    npz -> /root/mchk/mm6/cross/npz_h100_honest_h05_v250.npz | выгрузка: None
+    {"rate_pct": 8.4405, "step0_pct": 7.2, "total_diff": 5423} | выгрузка: None
+--- h100_honest_h06: 250 нонсов, хэш h06
+     {"points": 64250, "diff": 4970, "rate_pct": 7.7354, "step0_pct": 5.2, "nonces": 250, "part": 0, "size": 250, "sec": 15.1, "tail": false}
+    npz -> /root/mchk/mm6/cross/npz_h100_honest_h06_v250.npz | выгрузка: None
+    {"rate_pct": 7.7354, "step0_pct": 5.2, "total_diff": 4970} | выгрузка: None
+--- h100_honest_h07: 250 нонсов, хэш h07
+     {"points": 64250, "diff": 5442, "rate_pct": 8.47, "step0_pct": 7.2, "nonces": 250, "part": 0, "size": 250, "sec": 15.2, "tail": false}
+    npz -> /root/mchk/mm6/cross/npz_h100_honest_h07_v250.npz | выгрузка: None
+    {"rate_pct": 8.47, "step0_pct": 7.2, "total_diff": 5442} | выгрузка: None
+--- h100_honest_h08: 250 нонсов, хэш h08
+     {"points": 64250, "diff": 4621, "rate_pct": 7.1922, "step0_pct": 4.8, "nonces": 250, "part": 0, "size": 250, "sec": 15.2, "tail": false}
+    npz -> /root/mchk/mm6/cross/npz_h100_honest_h08_v250.npz | выгрузка: None
+    {"rate_pct": 7.1922, "step0_pct": 4.8, "total_diff": 4621} | выгрузка: None
+--- h100_honest_h09: 250 нонсов, хэш h09
+     {"points": 64250, "diff": 5106, "rate_pct": 7.9471, "step0_pct": 5.6, "nonces": 250, "part": 0, "size": 250, "sec": 15.2, "tail": false}
+    npz -> /root/mchk/mm6/cross/npz_h100_honest_h09_v250.npz | выгрузка: None
+    {"rate_pct": 7.9471, "step0_pct": 5.6, "total_diff": 5106} | выгрузка: None
+--- h100_honest_h10: 250 нонсов, хэш h10
+     {"points": 64250, "diff": 4930, "rate_pct": 7.6732, "step0_pct": 5.2, "nonces": 250, "part": 0, "size": 250, "sec": 15.2, "tail": false}
+    npz -> /root/mchk/mm6/cross/npz_h100_honest_h10_v250.npz | выгрузка: None
+    {"rate_pct": 7.6732, "step0_pct": 5.2, "total_diff": 4930} | выгрузка: None
+=== итог -> /root/mchk/mm6/cross/r2_validate_summary_s6_h100_to_b300_v250.json | выгрузка: None
