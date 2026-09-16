@@ -1,0 +1,3 @@
+tag	kvdt	moe	N	gmu	mnbt	poc_nonce_s	full	kv_tokens	moe_backend_log	cuda_errors
+a_bf16	auto	-	256			13.78	1280/1280	3509658	TRITON	0
+a_fp8	fp8	-	256			14.17	1280/1280	6805508	TRITON	0

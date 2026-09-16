@@ -1,0 +1,39 @@
+{
+ "cfg": "h100",
+ "arm": "fp8",
+ "tp": 8,
+ "model_dir": "/models/hf/hub/models--zai-org--GLM-5.3-Flash/snapshots/eb9eb208eb0d988989d07a6a12d0fdeb5f52574a",
+ "model_repo": "zai-org/GLM-5.3-Flash",
+ "ckpt_revision": "eb9eb208eb0d988989d07a6a12d0fdeb5f52574a",
+ "ckpt_sha": "c123f5c42a129bbe",
+ "ckpt_config_sha256": "bb8f01c42cb92a52",
+ "boot_utc": "2026-09-15T00:02:05.719532+00:00",
+ "kv_tokens": 4380818,
+ "max_num_seqs": 256,
+ "capture_size": 256,
+ "poc_batch_default": 16,
+ "ceiling_by_kv_naive_512": 8556,
+ "ceiling_by_kv_block_granularity": 1901,
+ "ceiling_hard_engine": 512,
+ "wall_measured": 256,
+ "wall_nonces": 256,
+ "wall_source": "hw.json poc_batch_cap — бисекция g_wall.py; арифметикой не выводится",
+ "block_size_tokens": 2304,
+ "gpu": "NVIDIA H100 80GB HBM3",
+ "attention_backend": "FLASHINFER_MLA_SPARSE_SM90",
+ "moe_actual_all": [
+  "Using MARLIN Fp8 MoE backend"
+ ],
+ "dispatch": null,
+ "attach": "PoC native attach: 45 layers, embed=True, snap=True, 42 MoE routers seeded (n_exp=288 top_k=8)",
+ "cpu_model": "AMD EPYC 9654 96-Core Processor",
+ "cpu_count": 176,
+ "loadavg": [
+  20.64,
+  14.96,
+  14.38
+ ],
+ "autotune": "off (флаг прода --no-enable-flashinfer-autotune)",
+ "block_size": 2304,
+ "kit_version": "g0912a"
+}

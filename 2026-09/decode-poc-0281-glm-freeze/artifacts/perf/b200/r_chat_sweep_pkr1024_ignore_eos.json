@@ -1,0 +1,100 @@
+{
+ "boot": {
+  "cfg": "b200",
+  "arm": "fp8",
+  "tp": 4,
+  "model_dir": "/models/hf/hub/models--zai-org--GLM-5.3-Flash/snapshots/eb9eb208eb0d988989d07a6a12d0fdeb5f52574a",
+  "model_repo": "zai-org/GLM-5.3-Flash",
+  "ckpt_revision": "eb9eb208eb0d988989d07a6a12d0fdeb5f52574a",
+  "ckpt_sha": "c123f5c42a129bbe",
+  "ckpt_config_sha256": "bb8f01c42cb92a52",
+  "boot_utc": "2026-09-15T02:16:30.062607+00:00",
+  "kv_tokens": 10262852,
+  "max_num_seqs": 1024,
+  "capture_size": 1024,
+  "poc_batch_default": 32,
+  "ceiling_by_kv_naive_512": 20044,
+  "ceiling_by_kv_block_granularity": 4454,
+  "ceiling_hard_engine": 512,
+  "wall_measured": 256,
+  "wall_nonces": 256,
+  "wall_source": "hw.json poc_batch_cap — бисекция g_wall.py; арифметикой не выводится",
+  "block_size_tokens": 2304,
+  "gpu": "NVIDIA B200",
+  "attention_backend": "FLASHINFER_MLA_SPARSE",
+  "moe_actual_all": [
+   "Using FLASHINFER_TRTLLM Fp8 MoE backend"
+  ],
+  "dispatch": null,
+  "attach": "PoC native attach: 45 layers, embed=True, snap=True, 42 MoE routers seeded (n_exp=288 top_k=8)",
+  "cpu_model": "INTEL(R) XEON(R) PLATINUM 8592+",
+  "cpu_count": 208,
+  "loadavg": [
+   8.71,
+   10.93,
+   9.56
+  ],
+  "autotune": "off (флаг прода --no-enable-flashinfer-autotune)",
+  "block_size": 2304,
+  "kit_version": "g0912a"
+ },
+ "waves": 3,
+ "ignore_eos_flag": true,
+ "max_num_seqs": 1024,
+ "points": [
+  {
+   "concurrency": 512,
+   "num_prompts": 1536,
+   "waves": 3,
+   "ignore_eos_flag": true,
+   "source": "vllm bench serve",
+   "output_tok_s": 7809.06,
+   "req_s": 30.5,
+   "ttft_p50_ms": 2897.43,
+   "ttft_p95_ms": 6331.34,
+   "tpot_p50_ms": 53.78,
+   "tpot_p95_ms": 57.61,
+   "duration_s": 50.35,
+   "tok_per_req": 256.03
+  },
+  {
+   "concurrency": 768,
+   "num_prompts": 2304,
+   "waves": 3,
+   "ignore_eos_flag": true,
+   "source": "vllm bench serve",
+   "output_tok_s": 8960.04,
+   "req_s": 35.0,
+   "ttft_p50_ms": 2953.54,
+   "ttft_p95_ms": 6450.85,
+   "tpot_p50_ms": 66.5,
+   "tpot_p95_ms": 72.64,
+   "duration_s": 65.83,
+   "tok_per_req": 256.0
+  },
+  {
+   "concurrency": 1024,
+   "num_prompts": 3072,
+   "waves": 3,
+   "ignore_eos_flag": true,
+   "source": "vllm bench serve",
+   "output_tok_s": 9130.93,
+   "req_s": 35.67,
+   "ttft_p50_ms": 4005.64,
+   "ttft_p95_ms": 21726.97,
+   "tpot_p50_ms": 69.29,
+   "tpot_p95_ms": 72.59,
+   "duration_s": 86.13,
+   "tok_per_req": 255.98
+  }
+ ],
+ "peak_req_s": {
+  "concurrency": 1024,
+  "req_s": 35.67,
+  "output_tok_s": 9130.93,
+  "ttft_p50_ms": 4005.64,
+  "tpot_p50_ms": 69.29
+ },
+ "peak_output_tok_s": 9130.93,
+ "kit_version": "g0912a"
+}

@@ -1,0 +1,19 @@
+tag	kvdt	moe	N	gmu	mnbt	poc_nonce_s	full	kv_tokens	moe_backend_log	cuda_errors
+a_bf16	auto	-	256			11.23	1280/1280	2315510	TRITON	0
+a_fp8	fp8	-	256			15.08	1280/1280	4489997	TRITON	0
+b_flashinfer_trtllm	fp8	flashinfer_trtllm	256			БУТ			
+b_flashinfer_cutlass	fp8	flashinfer_cutlass	256			14.03	1280/1280	4426309	FLASHINFER_CUTLASS	0
+b_deep_gemm	fp8	deep_gemm	256			14.08	1280/1280	4487723	DEEPGEMM	0
+b_cutlass	fp8	cutlass	256			БУТ			
+b_marlin	fp8	marlin	256			16.51	1280/1280	4380818	MARLIN	0
+c_n128	fp8	marlin	128			10.15	1280/1280	4690159	MARLIN	0
+c_n192	fp8	marlin	192			13.37	1280/1280	4535489	MARLIN	0
+c_n320	fp8	marlin	320			15.78	1280/1280	4264815	MARLIN	0
+c_n384	fp8	marlin	384			16.06	1280/1280	4137439	MARLIN	0
+c_n512	fp8	marlin	512			15.09	1280/1280	3873589	MARLIN	0
+d_gmu95	fp8	marlin	256	0.95		15.32	1280/1280	4380818	MARLIN	0
+d_mnbt16k	fp8	marlin	256		16384	16.17	1280/1280	4057829	MARLIN	0
+d_mnbt64k	fp8	marlin	256		65536	ОТКАЗ сервер умер (0 артефактов)	0/0	1564903	MARLIN	0
+d_nomnbt	fp8	marlin	256		0	15.49	1280/1280	4380818	MARLIN	0
+e_r	fp8	marlin	256			15.06	1280/1280	4380818	MARLIN	0
+e_chat512	fp8	marlin	512			15.35	1280/1280	3873589	MARLIN	0
