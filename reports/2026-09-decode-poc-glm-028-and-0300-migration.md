@@ -1,4 +1,4 @@
-# decode-PoC — GLM-5.3-Flash on vLLM 0.28 and the migration to vLLM 0.30.0 (2026-09-10 … 2026-09-25, work in progress)
+# decode-PoC — GLM-5.3-Flash on vLLM 0.28 and the migration to vLLM 0.30.0 (2026-09-10 … 2026-09-25)
 
 ## Summary
 
@@ -10,7 +10,7 @@ The [kaitaku.ai](https://github.com/kaitakuai) team (Mykola [@baychak](https://g
 - MiniMax-M2.7 and DeepSeek-V4-Flash measured on the 0.28.1 base, which fixed the release plan of 2026-09-16 (DeepSeek and MiniMax on 0.25.1, GLM on 0.28);
 - the migration to vLLM 0.30.0 after the core team moved the release to that version on 2026-09-23: residual and plugin ported, seven cells measured on B300 and H100, the old reference artifacts validated by the 0.30 stack, one validator regression on GLM located and closed by two launch flags — [2026-09/decode-poc-0300-migration](https://github.com/kaitakuai/experiments/tree/main/2026-09/decode-poc-0300-migration); PRs [gonka-ai/vllm#114](https://github.com/gonka-ai/vllm/pull/114) and [gonka-ai/gonka-vllm-plugins#19](https://github.com/gonka-ai/gonka-vllm-plugins/pull/19).
 
-This is an interim report: the release on 0.30.0 is being assembled by the core team. Open items are in the Status section.
+This report closes on 2026-09-25, with the release on 0.30.0 being assembled by the core team; the items open on this date are in the Status section.
 
 ---
 

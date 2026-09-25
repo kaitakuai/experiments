@@ -1,4 +1,4 @@
-# decode-PoC — research, cross-hardware validation and integration into the vLLM 0.25.1 plugin stack (2026-06-09 … 2026-09-10, work in progress)
+# decode-PoC — research, cross-hardware validation and integration into the vLLM 0.25.1 plugin stack (2026-06-09 … 2026-09-10)
 
 ## Summary
 
@@ -13,7 +13,7 @@ The [kaitaku.ai](https://github.com/kaitakuai) team (Mykola [@baychak](https://g
 - Extension of the scheme to DeepSeek-V4-Flash and the `poc-as-chat` scheduling variant that [@vbgd0](https://github.com/vbgd0) took as the integration base on 2026-09-08.
 - The frozen point on that base: both models on five hardware configurations, throughput, the PoC/chat ratio R, the separability matrix and the nonce-level view of the chain statistic ([2026-09/decode-poc-0251-freeze](https://github.com/kaitakuai/experiments/tree/main/2026-09/decode-poc-0251-freeze)).
 
-This is an interim report: the track is not finished. Integration into the network release continues on the `poc-as-chat` base; the open items are listed in the Status section below and tracked in [gonka-ai/gonka#1688](https://github.com/gonka-ai/gonka/issues/1688), [#1689](https://github.com/gonka-ai/gonka/issues/1689) and [#1690](https://github.com/gonka-ai/gonka/issues/1690).
+This report closes on 2026-09-10. The track continues in [decode-PoC — GLM-5.3-Flash on vLLM 0.28 and the migration to vLLM 0.30.0](https://github.com/kaitakuai/experiments/blob/main/reports/2026-09-decode-poc-glm-028-and-0300-migration.md); the items open on this date are listed in the Status section below and tracked in [gonka-ai/gonka#1688](https://github.com/gonka-ai/gonka/issues/1688), [#1689](https://github.com/gonka-ai/gonka/issues/1689) and [#1690](https://github.com/gonka-ai/gonka/issues/1690).
 
 ---
 
