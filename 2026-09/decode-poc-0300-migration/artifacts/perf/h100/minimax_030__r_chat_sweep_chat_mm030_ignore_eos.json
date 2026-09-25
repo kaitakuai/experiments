@@ -1,0 +1,63 @@
+{
+ "boot": {
+  "cfg": "h100",
+  "model_dir": "/root/models/MiniMax-M2.7",
+  "model_repo": null,
+  "ckpt_sha": "0e360ceafdac502a",
+  "ckpt_config_sha256": "697c30492781d55a",
+  "boot_utc": "2026-09-24T14:35:10.679428",
+  "moe_requested": "triton",
+  "tp": 4,
+  "moe_actual": "Using TRITON Fp8 MoE backend",
+  "moe_actual_all": [
+   "Using TRITON Fp8 MoE backend"
+  ],
+  "dispatch": null,
+  "attach": "PoC native attach: 62 layers, embed=True, snap=True, 62 MoE routers seeded (n_exp=256 top_k=8)",
+  "kv_tokens": 309856,
+  "wall_nonces": 605,
+  "wall_from_kv": 605,
+  "max_num_seqs": 752,
+  "work_batch": 575,
+  "cpu_model": "AMD EPYC 9654 96-Core Processor",
+  "cpu_count": 176,
+  "loadavg": [
+   8.51,
+   6.51,
+   4.9
+  ],
+  "autotuner_lines": 0,
+  "autotune_mode": "on",
+  "compile_cache_key": null,
+  "compile_cache_mode": "unknown"
+ },
+ "waves": 3,
+ "ignore_eos_flag": true,
+ "max_num_seqs": 752,
+ "points": [
+  {
+   "concurrency": 768,
+   "num_prompts": 2304,
+   "waves": 3,
+   "ignore_eos_flag": true,
+   "source": "vllm bench serve",
+   "output_tok_s": 9409.06,
+   "req_s": 36.75,
+   "ttft_p50_ms": 2537.65,
+   "ttft_p95_ms": 5017.93,
+   "tpot_p50_ms": 61.0,
+   "tpot_p95_ms": 83.15,
+   "duration_s": 62.69,
+   "tok_per_req": 256.03
+  }
+ ],
+ "peak_req_s": {
+  "concurrency": 768,
+  "req_s": 36.75,
+  "output_tok_s": 9409.06,
+  "ttft_p50_ms": 2537.65,
+  "tpot_p50_ms": 61.0
+ },
+ "peak_output_tok_s": 9409.06,
+ "kit_version": "14fe97dec7e2"
+}

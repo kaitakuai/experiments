@@ -1,0 +1,16 @@
+  
+.  
+..  
+python -> /usr/bin/python3
+vllm -> /usr/local/bin/vllm
+[22:35:57] === A2. default 0.30 boot: chat c=256 + PoC 1000 (2nd sample)
+vllm serve pid 13551 ; log /root/rout/glm_a2/server.log ; extra: none
+[22:38:38] A2 healthy: KV cache size: 6,389,262 tokens
+[22:39:34] PoC: 1000 nonces in 56.6 s = 17.66 nonce/s; complete 1000/1000; nan steps 0
+[22:40:39] chat (conc, req/s, tpot_p50_ms): [(256, 16.39, 48.26)]
+[22:40:59] === B2. both prefill flags: chat c=256 + PoC 1000 (2nd sample)
+vllm serve pid 16195 ; log /root/rout/glm_b2/server.log ; extra: --kda-prefill-backend triton --attention-config '{"sparse_mla_force_mqa": true}'
+[22:43:59] B2 healthy: sparse_mla_force_mqa=True
+[22:44:58] PoC: 1000 nonces in 58.2 s = 17.19 nonce/s; complete 1000/1000; nan steps 0
+[22:45:57] chat (conc, req/s, tpot_p50_ms): [(256, 17.29, 46.18)]
+[22:46:17] CHAIN2 DONE

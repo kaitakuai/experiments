@@ -1,0 +1,46 @@
+{
+ "gate_artifacts": {
+  "n": 8,
+  "lens": [
+   257
+  ],
+  "k_min": 0,
+  "k_max": 15,
+  "n_nan": 0,
+  "unique_prologues": 8,
+  "sec": 13.5,
+  "pass": true
+ },
+ "gate_selfval": {
+  "points": 16448,
+  "diff": 973,
+  "rate_pct": 5.9156,
+  "step0_pct": 0.0,
+  "nonces": 64,
+  "tp": 1,
+  "pass": false,
+  "rule": "TP=1 -> строгий 0"
+ },
+ "verdict": "FAIL",
+ "gate_determinism": {
+  "points": 2056,
+  "diff": 872,
+  "rate_pct": 42.4125,
+  "step0_pct": 0.0,
+  "nonces": 8,
+  "autotuner_lines_in_boot": 0,
+  "pass": false,
+  "free_gen_reproducible": false,
+  "rule": "TP=1, автотюн выкл -> повтор обязан быть бит-идентичен"
+ },
+ "boot": {
+  "cfg": "h100",
+  "model_dir": "/root/models/GLM-5.3-Flash",
+  "wall_nonces": 256,
+  "kv_tokens": 4387642,
+  "tag": "glm030",
+  "synth": "0.30 tier A: wall derived from the server log",
+  "vllm": "0.30.0",
+  "plugin": "0.2.0"
+ }
+}

@@ -1,0 +1,103 @@
+{
+ "partition": 200,
+ "validator_boot": {},
+ "cells": [
+  {
+   "corpus": "honest_h04",
+   "partition": 200,
+   "parts": [
+    {
+     "points": 51400,
+     "diff": 9376,
+     "rate_pct": 18.2412,
+     "step0_pct": 21.5,
+     "nonces": 200,
+     "part": 0,
+     "size": 200,
+     "sec": 14.8,
+     "tail": false
+    },
+    {
+     "points": 12850,
+     "diff": 2014,
+     "rate_pct": 15.6732,
+     "step0_pct": 16.0,
+     "nonces": 50,
+     "part": 1,
+     "size": 50,
+     "sec": 8.7,
+     "tail": true
+    }
+   ],
+   "total_points": 64250,
+   "total_diff": 11390,
+   "rate_pct": 17.7276,
+   "step0_pct": 18.75
+  },
+  {
+   "corpus": "honest_h08",
+   "partition": 200,
+   "parts": [
+    {
+     "points": 51400,
+     "diff": 8446,
+     "rate_pct": 16.4319,
+     "step0_pct": 15.0,
+     "nonces": 200,
+     "part": 0,
+     "size": 200,
+     "sec": 28.0,
+     "tail": false
+    },
+    {
+     "points": 12850,
+     "diff": 1953,
+     "rate_pct": 15.1984,
+     "step0_pct": 18.0,
+     "nonces": 50,
+     "part": 1,
+     "size": 50,
+     "sec": 8.5,
+     "tail": true
+    }
+   ],
+   "total_points": 64250,
+   "total_diff": 10399,
+   "rate_pct": 16.1852,
+   "step0_pct": 16.5
+  },
+  {
+   "corpus": "honest_h09",
+   "partition": 200,
+   "parts": [
+    {
+     "points": 51400,
+     "diff": 8553,
+     "rate_pct": 16.6401,
+     "step0_pct": 13.0,
+     "nonces": 200,
+     "part": 0,
+     "size": 200,
+     "sec": 14.9,
+     "tail": false
+    },
+    {
+     "points": 12850,
+     "diff": 1970,
+     "rate_pct": 15.3307,
+     "step0_pct": 14.0,
+     "nonces": 50,
+     "part": 1,
+     "size": 50,
+     "sec": 8.7,
+     "tail": true
+    }
+   ],
+   "total_points": 64250,
+   "total_diff": 10523,
+   "rate_pct": 16.3782,
+   "step0_pct": 13.5
+  }
+ ],
+ "kit_version": "g0912a"
+}

@@ -1,0 +1,1 @@
+{"cfg": "h100", "tag": "glmkda", "wall_nonces": 256, "model_dir": "/root/models/GLM-5.3-Flash", "synth": "0.30 kda_prefill_backend=triton check"}

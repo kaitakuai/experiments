@@ -1,0 +1,65 @@
+[22:13:45] stage start tag=glm030 hashes=h01,h02,h03 ref=/root/ref/glm/b300
+[22:13:45] --- 1. gates
+    {"points": 16448, "diff": 1156, "rate_pct": 7.0282, "step0_pct": 3.125, "nonces": 64, "tp": 1, "pass": false, "rule": "TP=1 -> строгий 0"}
+--- прогрев: первый вызов после бута идёт другим численным путём
+--- ворота 3: детерминизм генерации (два ТЁПЛЫХ прогона)
+    {"points": 2056, "diff": 1235, "rate_pct": 60.0681, "step0_pct": 12.5, "nonces": 8, "autotuner_lines_in_boot": 0, "pass": false, "free_gen_reproducible": false, "rule": "TP=1, автотюн выкл -> повтор обязан быть бит-идентичен"}
+=== ВОРОТА: FAIL -> /root/rout/glm/r1_gates.json
+   выгрузка: None
+[22:14:44] --- 2. corpora (GEN_BATCH=250)
+    {"tag": "honest_h02", "n": 250, "lens": [257], "full_sph": 250, "sec": 18.8, "nonces_per_s": 13.33}
+   выгрузка: None | цепочки: None
+--- honest_h03
+    {"tag": "honest_h03", "n": 250, "lens": [257], "full_sph": 250, "sec": 21.1, "nonces_per_s": 11.86}
+   выгрузка: None | цепочки: None
+=== корпуса: 3 -> /root/rout/glm/r_corpora_honest.json | выгрузка: None
+    44464960 /root/rout/glm/corp_honest_h01_gen.json
+    44464934 /root/rout/glm/corp_honest_h02_gen.json
+    44465092 /root/rout/glm/corp_honest_h03_gen.json
+[22:15:51] --- 3. validate the OLD reference corpora with this server (partition 200)
+     {"points": 12850, "diff": 2361, "rate_pct": 18.3735, "step0_pct": 30.0, "nonces": 50, "part": 1, "size": 50, "sec": 8.5, "tail": true}
+    npz -> /root/rout/glm/vs_old/npz_honest_h08_v200.npz | выгрузка: None
+    {"rate_pct": 17.5066, "step0_pct": 24.75, "total_diff": 11248} | выгрузка: None
+--- honest_h09: 250 нонсов, хэш h09
+     {"points": 51400, "diff": 9390, "rate_pct": 18.2685, "step0_pct": 14.5, "nonces": 200, "part": 0, "size": 200, "sec": 13.7, "tail": false}
+     {"points": 12850, "diff": 2262, "rate_pct": 17.6031, "step0_pct": 16.0, "nonces": 50, "part": 1, "size": 50, "sec": 8.5, "tail": true}
+    npz -> /root/rout/glm/vs_old/npz_honest_h09_v200.npz | выгрузка: None
+    {"rate_pct": 18.1354, "step0_pct": 15.25, "total_diff": 11652} | выгрузка: None
+--- honest_h10: 250 нонсов, хэш h10
+     {"points": 51400, "diff": 5504, "rate_pct": 10.7082, "step0_pct": 11.5, "nonces": 200, "part": 0, "size": 200, "sec": 13.7, "tail": false}
+     {"points": 12850, "diff": 1329, "rate_pct": 10.3424, "step0_pct": 10.0, "nonces": 50, "part": 1, "size": 50, "sec": 8.6, "tail": true}
+    npz -> /root/rout/glm/vs_old/npz_honest_h10_v200.npz | выгрузка: None
+    {"rate_pct": 10.635, "step0_pct": 10.75, "total_diff": 6833} | выгрузка: None
+=== итог -> /root/rout/glm/vs_old/r2_validate_summary_old_v200.json | выгрузка: None
+[22:19:58] --- 4. validate this server's own corpora (same boot)
+     {"points": 12850, "diff": 827, "rate_pct": 6.4358, "step0_pct": 8.0, "nonces": 50, "part": 1, "size": 50, "sec": 12.3, "tail": true}
+    npz -> /root/rout/glm/vs_self/npz_honest_h01_v200.npz | выгрузка: None
+    {"rate_pct": 5.7743, "step0_pct": 4.75, "total_diff": 3710} | выгрузка: None
+--- honest_h02: 250 нонсов, хэш h02
+     {"points": 51400, "diff": 2821, "rate_pct": 5.4883, "step0_pct": 1.5, "nonces": 200, "part": 0, "size": 200, "sec": 13.7, "tail": false}
+     {"points": 12850, "diff": 1236, "rate_pct": 9.6187, "step0_pct": 8.0, "nonces": 50, "part": 1, "size": 50, "sec": 8.7, "tail": true}
+    npz -> /root/rout/glm/vs_self/npz_honest_h02_v200.npz | выгрузка: None
+    {"rate_pct": 6.3144, "step0_pct": 4.75, "total_diff": 4057} | выгрузка: None
+--- honest_h03: 250 нонсов, хэш h03
+     {"points": 51400, "diff": 2284, "rate_pct": 4.4436, "step0_pct": 0.0, "nonces": 200, "part": 0, "size": 200, "sec": 13.9, "tail": false}
+     {"points": 12850, "diff": 942, "rate_pct": 7.3307, "step0_pct": 2.0, "nonces": 50, "part": 1, "size": 50, "sec": 8.6, "tail": true}
+    npz -> /root/rout/glm/vs_self/npz_honest_h03_v200.npz | выгрузка: None
+    {"rate_pct": 5.021, "step0_pct": 1.0, "total_diff": 3226} | выгрузка: None
+=== итог -> /root/rout/glm/vs_self/r2_validate_summary_self_v200.json | выгрузка: None
+[22:21:21] --- 5. mining round through /init/generate + gate
+[22:21:22]    chat before round: HTTP 200
+[22:21:22]    init/generate: {"status":"OK","pow_status":{"status":"GENERATING"}}
+[22:21:43]    status: {"status":"GENERATING","config":{"block_hash":"deadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef","block_height":1,"public_key":"cafebabecafebabecafebabecafebabe","node_id":0,"node_coun
+[22:21:43]    chat during round: HTTP 503  (503 expected)
+[22:21:43]    stop: {"status":"OK","pow_status":{"status":"STOPPED"}}
+[22:21:48]    chat after stop: HTTP 200  (200 expected)
+[22:21:48] --- 6. replay equivalence (24 originals, replay on the same server)
+022 eos       finish=length tokens=96 logprob_positions=96
+023 long-cap  finish=length tokens=200 logprob_positions=200
+replay_022.json http=200 finish=length tokens=96 positions=96
+replay_023.json http=200 finish=length tokens=200 positions=200
+replay_022.json  eos       PASS                                     0.97770  96    96    length  length
+replay_023.json  long-cap  PASS                                     0.98966  200   200   length  length
+
+24 replays, PASS 24, similarity min 0.971389675361407 median 0.9851958819765192
+[22:23:31] stage done

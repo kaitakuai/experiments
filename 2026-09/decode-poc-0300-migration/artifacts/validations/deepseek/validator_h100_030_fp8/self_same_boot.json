@@ -1,0 +1,49 @@
+{
+ "corpus_quant": "?",
+ "validator_quant": "?",
+ "corpus_boot": {},
+ "validator_boot": {},
+ "per_hash": [
+  {
+   "hash": "h01",
+   "points": 64250,
+   "diff": 4888,
+   "rate_pct": 7.6078,
+   "step0_pct": 9.6,
+   "nonces": 250
+  },
+  {
+   "hash": "h02",
+   "points": 64250,
+   "diff": 4873,
+   "rate_pct": 7.5844,
+   "step0_pct": 6.4,
+   "nonces": 250
+  },
+  {
+   "hash": "h03",
+   "points": 64250,
+   "diff": 4821,
+   "rate_pct": 7.5035,
+   "step0_pct": 9.6,
+   "nonces": 250
+  }
+ ],
+ "total_points": 192750,
+ "total_diff": 14582,
+ "rate_pct": 7.5652,
+ "tau_grid_pct": {
+  "0.0": 7.5538,
+  "0.01": 0.9198,
+  "0.02": 0.1655,
+  "0.05": 0.0166,
+  "0.1": 0.0,
+  "0.2": 0.0
+ },
+ "margins": {
+  "n": 14582,
+  "max": 0.09455841617435023,
+  "median": 0.0034442326643440158
+ },
+ "kit_version": "f900535b5fc3"
+}

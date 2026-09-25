@@ -1,0 +1,41 @@
+{
+ "boot": {
+  "cfg": "h100",
+  "model_dir": "/root/models/GLM-5.3-Flash",
+  "wall_nonces": 256,
+  "kv_tokens": 4387642,
+  "tag": "glm030",
+  "synth": "0.30 tier A: wall derived from the server log",
+  "vllm": "0.30.0",
+  "plugin": "0.2.0"
+ },
+ "waves": 3,
+ "ignore_eos_flag": true,
+ "max_num_seqs": 0,
+ "points": [
+  {
+   "concurrency": 256,
+   "num_prompts": 768,
+   "waves": 3,
+   "ignore_eos_flag": true,
+   "source": "vllm bench serve",
+   "output_tok_s": 5234.37,
+   "req_s": 20.45,
+   "ttft_p50_ms": 1104.13,
+   "ttft_p95_ms": 2705.45,
+   "tpot_p50_ms": 44.9,
+   "tpot_p95_ms": 47.17,
+   "duration_s": 37.56,
+   "tok_per_req": 255.96
+  }
+ ],
+ "peak_req_s": {
+  "concurrency": 256,
+  "req_s": 20.45,
+  "output_tok_s": 5234.37,
+  "ttft_p50_ms": 1104.13,
+  "tpot_p50_ms": 44.9
+ },
+ "peak_output_tok_s": 5234.37,
+ "kit_version": "g0912a"
+}

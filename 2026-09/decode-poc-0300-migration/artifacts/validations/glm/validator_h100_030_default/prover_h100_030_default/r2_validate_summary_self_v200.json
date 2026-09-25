@@ -1,0 +1,103 @@
+{
+ "partition": 200,
+ "validator_boot": {},
+ "cells": [
+  {
+   "corpus": "honest_h01",
+   "partition": 200,
+   "parts": [
+    {
+     "points": 51400,
+     "diff": 3089,
+     "rate_pct": 6.0097,
+     "step0_pct": 1.5,
+     "nonces": 200,
+     "part": 0,
+     "size": 200,
+     "sec": 13.5,
+     "tail": false
+    },
+    {
+     "points": 12850,
+     "diff": 892,
+     "rate_pct": 6.9416,
+     "step0_pct": 8.0,
+     "nonces": 50,
+     "part": 1,
+     "size": 50,
+     "sec": 7.7,
+     "tail": true
+    }
+   ],
+   "total_points": 64250,
+   "total_diff": 3981,
+   "rate_pct": 6.1961,
+   "step0_pct": 4.75
+  },
+  {
+   "corpus": "honest_h02",
+   "partition": 200,
+   "parts": [
+    {
+     "points": 51400,
+     "diff": 3224,
+     "rate_pct": 6.2724,
+     "step0_pct": 0.0,
+     "nonces": 200,
+     "part": 0,
+     "size": 200,
+     "sec": 13.5,
+     "tail": false
+    },
+    {
+     "points": 12850,
+     "diff": 1001,
+     "rate_pct": 7.7899,
+     "step0_pct": 6.0,
+     "nonces": 50,
+     "part": 1,
+     "size": 50,
+     "sec": 10.1,
+     "tail": true
+    }
+   ],
+   "total_points": 64250,
+   "total_diff": 4225,
+   "rate_pct": 6.5759,
+   "step0_pct": 3.0
+  },
+  {
+   "corpus": "honest_h03",
+   "partition": 200,
+   "parts": [
+    {
+     "points": 51400,
+     "diff": 2993,
+     "rate_pct": 5.823,
+     "step0_pct": 0.0,
+     "nonces": 200,
+     "part": 0,
+     "size": 200,
+     "sec": 13.2,
+     "tail": false
+    },
+    {
+     "points": 12850,
+     "diff": 928,
+     "rate_pct": 7.2218,
+     "step0_pct": 4.0,
+     "nonces": 50,
+     "part": 1,
+     "size": 50,
+     "sec": 7.7,
+     "tail": true
+    }
+   ],
+   "total_points": 64250,
+   "total_diff": 3921,
+   "rate_pct": 6.1027,
+   "step0_pct": 2.0
+  }
+ ],
+ "kit_version": "g0912a"
+}

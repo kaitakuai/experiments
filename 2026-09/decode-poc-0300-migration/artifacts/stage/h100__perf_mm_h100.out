@@ -1,0 +1,4 @@
+[14:44:59] perf start tag=mm030 npoc=3000 warm=0 chat_conc=768
+[14:46:24] PoC: 3000 nonces in 84.9 s = 35.33 nonce/s; complete 3000/3000; nan steps 0
+[14:47:41] chat (conc, req/s, tpot_p50_ms): [(768, 36.75, 61.0)]
+[14:47:41] perf done

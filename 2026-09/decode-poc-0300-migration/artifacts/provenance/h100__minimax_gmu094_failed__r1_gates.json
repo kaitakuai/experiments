@@ -1,0 +1,37 @@
+{
+ "gate_artifacts": {
+  "n": 8,
+  "lens": [
+   257
+  ],
+  "k_min": 0,
+  "k_max": 15,
+  "n_nan": 0,
+  "unique_prologues": 8,
+  "sec": 3.2,
+  "pass": true
+ },
+ "gate_selfval": {
+  "points": 16448,
+  "diff": 954,
+  "rate_pct": 5.8001,
+  "step0_pct": 4.688,
+  "nonces": 64,
+  "tp": 1,
+  "pass": false,
+  "rule": "TP=1 -> строгий 0"
+ },
+ "verdict": "FAIL",
+ "gate_determinism": {
+  "points": 2056,
+  "diff": 0,
+  "rate_pct": 0.0,
+  "step0_pct": 0.0,
+  "nonces": 8,
+  "autotuner_lines_in_boot": 0,
+  "pass": true,
+  "free_gen_reproducible": true,
+  "rule": "TP=1, автотюн выкл -> повтор обязан быть бит-идентичен"
+ },
+ "boot": {}
+}

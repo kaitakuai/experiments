@@ -1,0 +1,32 @@
+{
+ "boot": {},
+ "waves": 3,
+ "ignore_eos_flag": true,
+ "max_num_seqs": 0,
+ "points": [
+  {
+   "concurrency": 256,
+   "num_prompts": 768,
+   "waves": 3,
+   "ignore_eos_flag": true,
+   "source": "vllm bench serve",
+   "output_tok_s": 5105.41,
+   "req_s": 19.94,
+   "ttft_p50_ms": 1079.24,
+   "ttft_p95_ms": 2968.34,
+   "tpot_p50_ms": 45.37,
+   "tpot_p95_ms": 48.63,
+   "duration_s": 38.51,
+   "tok_per_req": 256.04
+  }
+ ],
+ "peak_req_s": {
+  "concurrency": 256,
+  "req_s": 19.94,
+  "output_tok_s": 5105.41,
+  "ttft_p50_ms": 1079.24,
+  "tpot_p50_ms": 45.37
+ },
+ "peak_output_tok_s": 5105.41,
+ "kit_version": "g0912a"
+}

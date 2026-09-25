@@ -1,0 +1,127 @@
+{
+ "corpus_quant": "nvfp4",
+ "validator_quant": "nvfp4",
+ "corpus_boot": {
+  "cfg": "b300",
+  "quant": "nvfp4",
+  "tp": 1,
+  "model_dir": "/models/DeepSeek-V4-Flash-0731-NVFP4",
+  "model_repo": null,
+  "ckpt_revision": null,
+  "ckpt_sha": "ebc08e4a45baee83",
+  "ckpt_config_sha256": "bb0d2286d6761439",
+  "boot_utc": "2026-09-24T15:39:30.588458+00:00",
+  "kv_tokens": 1118619,
+  "max_num_seqs": 1024,
+  "speculation": "off",
+  "wall_from_kv": 291,
+  "kv_per_nonce": 3833,
+  "wall_nonces_predicted": 291,
+  "wall_nonces": null,
+  "wall_source": "predicted-only",
+  "gpu": "NVIDIA B300 SXM6 PC",
+  "attention_backend": null,
+  "moe_actual": "'FLASHINFER_TRTLLM' NvFp4",
+  "moe_actual_all": [
+   "Using 'FLASHINFER_TRTLLM' NvFp4 MoE backend"
+  ],
+  "dispatch": null,
+  "attach": "PoC native attach: 43 layers, embed=True, snap=True, 40 MoE routers seeded (n_exp=256 top_k=6)",
+  "cpu_model": "Intel(R) Xeon(R) 6776P",
+  "cpu_count": 24,
+  "loadavg": [
+   0.97,
+   0.96,
+   1.08
+  ],
+  "autotuner_lines": 25,
+  "autotune_mode": "on",
+  "linear_backend": "auto",
+  "max_num_batched_tokens": 32768,
+  "moe_backend_forced": "auto",
+  "kit_version": "f900535b5fc3"
+ },
+ "validator_boot": {
+  "cfg": "b300",
+  "quant": "nvfp4",
+  "tp": 1,
+  "model_dir": "/models/DeepSeek-V4-Flash-0731-NVFP4",
+  "model_repo": null,
+  "ckpt_revision": null,
+  "ckpt_sha": "ebc08e4a45baee83",
+  "ckpt_config_sha256": "bb0d2286d6761439",
+  "boot_utc": "2026-09-24T15:39:30.588458+00:00",
+  "kv_tokens": 1118619,
+  "max_num_seqs": 1024,
+  "speculation": "off",
+  "wall_from_kv": 291,
+  "kv_per_nonce": 3833,
+  "wall_nonces_predicted": 291,
+  "wall_nonces": null,
+  "wall_source": "predicted-only",
+  "gpu": "NVIDIA B300 SXM6 PC",
+  "attention_backend": null,
+  "moe_actual": "'FLASHINFER_TRTLLM' NvFp4",
+  "moe_actual_all": [
+   "Using 'FLASHINFER_TRTLLM' NvFp4 MoE backend"
+  ],
+  "dispatch": null,
+  "attach": "PoC native attach: 43 layers, embed=True, snap=True, 40 MoE routers seeded (n_exp=256 top_k=6)",
+  "cpu_model": "Intel(R) Xeon(R) 6776P",
+  "cpu_count": 24,
+  "loadavg": [
+   0.97,
+   0.96,
+   1.08
+  ],
+  "autotuner_lines": 25,
+  "autotune_mode": "on",
+  "linear_backend": "auto",
+  "max_num_batched_tokens": 32768,
+  "moe_backend_forced": "auto",
+  "kit_version": "f900535b5fc3"
+ },
+ "per_hash": [
+  {
+   "hash": "h01",
+   "points": 64250,
+   "diff": 808,
+   "rate_pct": 1.2576,
+   "step0_pct": 0.4,
+   "nonces": 250
+  },
+  {
+   "hash": "h02",
+   "points": 64250,
+   "diff": 245,
+   "rate_pct": 0.3813,
+   "step0_pct": 0.0,
+   "nonces": 250
+  },
+  {
+   "hash": "h03",
+   "points": 64250,
+   "diff": 412,
+   "rate_pct": 0.6412,
+   "step0_pct": 0.0,
+   "nonces": 250
+  }
+ ],
+ "total_points": 192750,
+ "total_diff": 1465,
+ "rate_pct": 0.7601,
+ "tau_grid_pct": {
+  "0.0": 0.759,
+  "0.01": 0.1152,
+  "0.02": 0.0192,
+  "0.05": 0.001,
+  "0.1": 0.0,
+  "0.2": 0.0
+ },
+ "margins": {
+  "n": 1465,
+  "max": 0.07627936399957314,
+  "median": 0.003794437422399266
+ },
+ "kit_version": "f900535b5fc3"
+}

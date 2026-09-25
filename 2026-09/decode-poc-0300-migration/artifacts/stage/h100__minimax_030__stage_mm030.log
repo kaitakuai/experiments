@@ -1,0 +1,48 @@
+[14:35:35] stage start tag=mm030 hashes=h01,h02,h03 ref=/root/ref/minimax/h100
+[14:35:35] --- 1. gates
+    {"points": 16448, "diff": 1012, "rate_pct": 6.1527, "step0_pct": 7.812, "nonces": 64, "tp": 4, "pass": true, "rule": "TP>1 -> ноль не гарантирован, записать долю"}
+--- прогрев: первый вызов после бута идёт другим численным путём
+--- ворота 3: детерминизм генерации (два ТЁПЛЫХ прогона)
+    {"points": 2056, "diff": 0, "rate_pct": 0.0, "step0_pct": 0.0, "nonces": 8, "autotuner_lines_in_boot": 0, "pass": true, "free_gen_reproducible": true, "rule": "автотюн вкл или TP>1 -> воспроизводимость свободной генерации ФИКСИРУЕТСЯ, не требуется"}
+=== ВОРОТА: PASS -> /root/rout/mm/r1_gates.json
+   выгрузка: None
+[14:36:02] --- 2. corpora (GEN_BATCH=250)
+    {"tag": "honest_h02", "n": 250, "lens": [257], "full_sph": 250, "sec": 10.7, "nonces_per_s": 23.3}
+   выгрузка: None | цепочки: None
+--- honest_h03
+    {"tag": "honest_h03", "n": 250, "lens": [257], "full_sph": 250, "sec": 10.6, "nonces_per_s": 23.55}
+   выгрузка: None | цепочки: None
+=== корпуса: 3 -> /root/rout/mm/r_corpora_honest.json | выгрузка: None
+    44465801 /root/rout/mm/corp_honest_h01_gen.json
+    44465995 /root/rout/mm/corp_honest_h02_gen.json
+    44465779 /root/rout/mm/corp_honest_h03_gen.json
+[14:36:38] --- 3. validate the OLD reference corpora with this server (partition 250)
+    {"rate_pct": 6.9089, "step0_pct": 8.0, "total_diff": 4439} | выгрузка: None
+--- honest_h08: 250 нонсов, хэш h08
+     {"points": 64250, "diff": 3740, "rate_pct": 5.821, "step0_pct": 4.8, "nonces": 250, "part": 0, "size": 250, "sec": 10.5, "tail": false}
+    npz -> /root/rout/mm/vs_old/npz_honest_h08_v250.npz | выгрузка: None
+    {"rate_pct": 5.821, "step0_pct": 4.8, "total_diff": 3740} | выгрузка: None
+--- honest_h09: 250 нонсов, хэш h09
+     {"points": 64250, "diff": 4149, "rate_pct": 6.4576, "step0_pct": 6.0, "nonces": 250, "part": 0, "size": 250, "sec": 10.7, "tail": false}
+    npz -> /root/rout/mm/vs_old/npz_honest_h09_v250.npz | выгрузка: None
+    {"rate_pct": 6.4576, "step0_pct": 6.0, "total_diff": 4149} | выгрузка: None
+--- honest_h10: 250 нонсов, хэш h10
+     {"points": 64250, "diff": 4035, "rate_pct": 6.2802, "step0_pct": 6.8, "nonces": 250, "part": 0, "size": 250, "sec": 10.6, "tail": false}
+    npz -> /root/rout/mm/vs_old/npz_honest_h10_v250.npz | выгрузка: None
+    {"rate_pct": 6.2802, "step0_pct": 6.8, "total_diff": 4035} | выгрузка: None
+=== итог -> /root/rout/mm/vs_old/r2_validate_summary_old_v250.json | выгрузка: None
+[14:38:36] --- 4. validate this server's own corpora (same boot)
+--- прогрев (первый вызов после бута численно иной)
+корпусов найдено: 0 | партиция 250 | стена валидатора 0
+=== итог -> /root/rout/mm/vs_self/r2_validate_summary_self_v250.json | выгрузка: None
+[14:38:43] --- 5. mining round through /init/generate + gate
+[14:39:43]    chat before round: HTTP 000
+[14:39:43]    init/generate: {"status":"OK","pow_status":{"status":"GENERATING"}}
+[14:40:03]    status: {"status":"GENERATING","config":{"block_hash":"deadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef","block_height":1,"public_key":"cafebabecafebabecafebabecafebabe","node_id":0,"node_coun
+[14:40:03]    chat during round: HTTP 503  (503 expected)
+[14:40:03]    stop: {"status":"OK","pow_status":{"status":"STOPPED"}}
+[14:40:06]    chat after stop: HTTP 200  (200 expected)
+[14:40:06] --- 6. replay equivalence (24 originals, replay on the same server)
+python3: can't open file '/root/run_replay.py': [Errno 2] No such file or directory
+python3: can't open file '/root/report.py': [Errno 2] No such file or directory
+[14:40:06] stage done

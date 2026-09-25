@@ -1,0 +1,1 @@
+{"cfg": "h100", "tag": "glmold", "wall_nonces": 256, "model_dir": "/root/models/GLM-5.3-Flash", "synth": "0.28.1 freeze stack as validator"}

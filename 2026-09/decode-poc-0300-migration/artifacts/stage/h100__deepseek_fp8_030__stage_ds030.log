@@ -1,0 +1,68 @@
+[15:34:02] stage start tag=ds030 quant=fp8 ref=/root/ref/deepseek/chains/xq_g10_fp8_h100.json
+[15:34:02] --- 1. gates
+    {"points": 16448, "diff": 1386, "rate_pct": 8.4266, "step0_pct": 4.688, "nonces": 64, "tp": 1, "pass": false, "rule": "TP=1 -> строгий 0"}
+--- прогрев: первый вызов после бута идёт другим численным путём
+--- ворота 3: детерминизм генерации (два ТЁПЛЫХ прогона)
+    {"points": 2056, "diff": 1324, "rate_pct": 64.3969, "step0_pct": 0.0, "nonces": 8, "autotuner_lines_in_boot": 0, "pass": false, "free_gen_reproducible": false, "rule": "TP=1, автотюн выкл -> повтор обязан быть бит-идентичен"}
+=== ВОРОТА: FAIL -> /root/rout/ds/r1_gates.json
+   выгрузка: None
+[15:34:56] --- 2. validate the OLD reference artifact set (teacher-forced, all hashes)
+  режим: КРОСС-КВАНТИЗАЦИЯ
+  h01: расхождений 5948 из 64250 = 9.2576%  (нулевой шаг 12.4%)
+  h02: расхождений 5729 из 64250 = 8.9167%  (нулевой шаг 10.0%)
+  h03: расхождений 5724 из 64250 = 8.9089%  (нулевой шаг 8.4%)
+  h04: расхождений 5776 из 64250 = 8.9899%  (нулевой шаг 5.6%)
+  h05: расхождений 5697 из 64250 = 8.8669%  (нулевой шаг 7.2%)
+  h06: расхождений 5933 из 64250 = 9.2342%  (нулевой шаг 5.6%)
+  h07: расхождений 5940 из 64250 = 9.2451%  (нулевой шаг 7.2%)
+  h08: расхождений 5772 из 64250 = 8.9837%  (нулевой шаг 6.8%)
+  h09: расхождений 5792 из 64250 = 9.0148%  (нулевой шаг 10.8%)
+  h10: расхождений 5746 из 64250 = 8.9432%  (нулевой шаг 6.8%)
+
+  ИТОГО: 58057 из 642500 = 9.0361%
+  маржи расхождений: медиана 0.004073  p90 0.012763  макс 0.114239
+  доля по сетке tau:
+    tau=0.0   : 57995 = 9.0265%
+    tau=0.01  :  9912 = 1.5427%
+    tau=0.02  :  1587 = 0.247%
+    tau=0.05  :    89 = 0.0139%
+    tau=0.1   :     1 = 0.0002%
+    tau=0.2   :     0 = 0.0%
+  -> /root/rout/ds/xq_val_fp8_to_?.json
+[15:37:23] --- 3. own artifact set, 3 hashes x 250, then self-validation (same boot)
+  сервер: quant=? ckpt=None moe=None pmb-режим см. провенанс
+  h01: 250 цепочек по 257 шагов за 13.0 с
+  h02: 250 цепочек по 257 шагов за 12.9 с
+  h03: 250 цепочек по 257 шагов за 12.9 с
+  корпус -> /root/rout/ds/xq_self.json
+  h01: расхождений 4888 из 64250 = 7.6078%  (нулевой шаг 9.6%)
+  h02: расхождений 4873 из 64250 = 7.5844%  (нулевой шаг 6.4%)
+  h03: расхождений 4821 из 64250 = 7.5035%  (нулевой шаг 9.6%)
+
+  ИТОГО: 14582 из 192750 = 7.5652%
+  маржи расхождений: медиана 0.003444  p90 0.010960  макс 0.094558
+  доля по сетке tau:
+    tau=0.0   : 14560 = 7.5538%
+    tau=0.01  :  1773 = 0.9198%
+    tau=0.02  :   319 = 0.1655%
+    tau=0.05  :    32 = 0.0166%
+    tau=0.1   :     0 = 0.0%
+    tau=0.2   :     0 = 0.0%
+  -> /root/rout/ds/xq_val_?_to_?.json
+[15:38:45] --- 4. mining round through /init/generate + gate
+[15:38:45]    chat before round: HTTP 200
+[15:38:45]    init/generate: {"status":"OK","pow_status":{"status":"GENERATING"}}
+[15:39:15]    status: {"status":"GENERATING","config":{"block_hash":"deadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef","block_height":1,"public_key":"cafebabecafebabecafebabecafebabe","node_id":0,"node_coun
+[15:39:15]    chat during round: HTTP 503  (503 expected)
+[15:39:15]    stop: {"status":"OK","pow_status":{"status":"STOPPED"}}
+[15:39:18]    chat after stop: HTTP 200  (200 expected)
+[15:39:18] --- 5. replay equivalence
+022 eos       finish=stop tokens=2 logprob_positions=2
+023 long-cap  finish=length tokens=200 logprob_positions=200
+replay_022.json http=200 finish=stop tokens=2 positions=2
+replay_023.json http=200 finish=length tokens=200 positions=200
+replay_022.json  eos       PASS                                     0.99928  2     2     stop    stop
+replay_023.json  long-cap  PASS                                     0.98223  200   200   length  length
+
+24 replays, PASS 24, similarity min 0.9685431501007915 median 0.990431301534189
+[15:40:26] stage done

@@ -1,0 +1,17 @@
+{
+ "role": "honest",
+ "batch": 256,
+ "tags": [
+  "honest_h04",
+  "honest_h08",
+  "honest_h09"
+ ],
+ "boot": {
+  "cfg": "h100",
+  "tag": "glmmarlin",
+  "wall_nonces": 256,
+  "model_dir": "/root/models/GLM-5.3-Flash",
+  "synth": "0.30 marlin MoE check"
+ },
+ "kit_version": "g0912a"
+}

@@ -1,0 +1,70 @@
+{
+ "partition": 250,
+ "validator_boot": {},
+ "cells": [
+  {
+   "corpus": "honest_h01",
+   "partition": 250,
+   "parts": [
+    {
+     "points": 64250,
+     "diff": 3875,
+     "rate_pct": 6.0311,
+     "step0_pct": 4.8,
+     "nonces": 250,
+     "part": 0,
+     "size": 250,
+     "sec": 10.8,
+     "tail": false
+    }
+   ],
+   "total_points": 64250,
+   "total_diff": 3875,
+   "rate_pct": 6.0311,
+   "step0_pct": 4.8
+  },
+  {
+   "corpus": "honest_h02",
+   "partition": 250,
+   "parts": [
+    {
+     "points": 64250,
+     "diff": 4505,
+     "rate_pct": 7.0117,
+     "step0_pct": 5.6,
+     "nonces": 250,
+     "part": 0,
+     "size": 250,
+     "sec": 10.7,
+     "tail": false
+    }
+   ],
+   "total_points": 64250,
+   "total_diff": 4505,
+   "rate_pct": 7.0117,
+   "step0_pct": 5.6
+  },
+  {
+   "corpus": "honest_h03",
+   "partition": 250,
+   "parts": [
+    {
+     "points": 64250,
+     "diff": 3961,
+     "rate_pct": 6.165,
+     "step0_pct": 6.0,
+     "nonces": 250,
+     "part": 0,
+     "size": 250,
+     "sec": 10.6,
+     "tail": false
+    }
+   ],
+   "total_points": 64250,
+   "total_diff": 3961,
+   "rate_pct": 6.165,
+   "step0_pct": 6.0
+  }
+ ],
+ "kit_version": "14fe97dec7e2"
+}

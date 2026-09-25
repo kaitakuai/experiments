@@ -1,0 +1,32 @@
+{
+ "cfg": "b300",
+ "model_dir": "/models/MiniMax-M2.7",
+ "model_repo": null,
+ "ckpt_sha": "0e360ceafdac502a",
+ "ckpt_config_sha256": "697c30492781d55a",
+ "boot_utc": "2026-09-24T16:30:26.462463",
+ "moe_requested": "flashinfer_trtllm",
+ "tp": 1,
+ "moe_actual": "Using FLASHINFER_TRTLLM Fp8 MoE backend",
+ "moe_actual_all": [
+  "Using FLASHINFER_TRTLLM Fp8 MoE backend"
+ ],
+ "dispatch": null,
+ "attach": "PoC native attach: 62 layers, embed=True, snap=True, 62 MoE routers seeded (n_exp=256 top_k=8)",
+ "kv_tokens": 274128,
+ "wall_nonces": 535,
+ "wall_from_kv": 535,
+ "max_num_seqs": 608,
+ "work_batch": 505,
+ "cpu_model": "Intel(R) Xeon(R) 6776P",
+ "cpu_count": 24,
+ "loadavg": [
+  0.85,
+  0.97,
+  0.99
+ ],
+ "autotuner_lines": 25,
+ "autotune_mode": "on",
+ "compile_cache_key": null,
+ "compile_cache_mode": "unknown"
+}

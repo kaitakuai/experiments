@@ -1,0 +1,11 @@
+[14:27:31] stage start tag=mm030 hashes=h01,h02,h03 ref=/root/ref/minimax/h100
+[14:27:31] --- 1. gates
+    {"points": 16448, "diff": 954, "rate_pct": 5.8001, "step0_pct": 4.688, "nonces": 64, "tp": 1, "pass": false, "rule": "TP=1 -> строгий 0"}
+--- прогрев: первый вызов после бута идёт другим численным путём
+--- ворота 3: детерминизм генерации (два ТЁПЛЫХ прогона)
+    {"points": 2056, "diff": 0, "rate_pct": 0.0, "step0_pct": 0.0, "nonces": 8, "autotuner_lines_in_boot": 0, "pass": true, "free_gen_reproducible": true, "rule": "TP=1, автотюн выкл -> повтор обязан быть бит-идентичен"}
+=== ВОРОТА: FAIL -> /root/rout/mm/r1_gates.json
+   выгрузка: None
+[14:27:58] --- 2. corpora (GEN_BATCH=250)
+нет стены в провенансе бута — сначала r_boot.sh
+[14:27:58] --- 3. validate the OLD reference corpora with this server (partition 250)

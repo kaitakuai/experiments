@@ -1,0 +1,134 @@
+[15:50:12] === B. DeepSeek NVFP4 tier A on the running reference boot
+[15:50:12] boot: KV cache size: 1,118,619 tokens PoC native attach: 43 layers, embed=True, snap=True, 40 MoE routers seeded (n_e Using 'FLASHINFER_TRTLLM' NvFp4 MoE backend 
+[15:56:11] DeepSeek stage done: 1
+[15:56:11] === C. DeepSeek perf at the frozen profile (N 2048, capture 2048, MNBT 32768, gmu 0.90), warm-up 1280
+[16:05:51] PoC: 3000 nonces in 63.7 s = 47.07 nonce/s; complete 3000/3000; nan steps 0
+[16:06:30] chat (conc, req/s, tpot_p50_ms): [(1024, 43.74, 66.74)]
+[16:06:30] === A. MiniMax perf at the frozen profile (N 608, MNBT 32768, capture 608, gmu 0.97)
+[16:22:19] server process gone
+[16:22:19] MiniMax perf boot FAILED: (APIServer pid=50421)     raise RuntimeError(
+(APIServer pid=50421) RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}
+[16:22:19] === chain2 done
+provenance: wall 675 nonces (kv 345808)
+[14:43:56] stage start tag=mm030 hashes=h01,h02,h03 ref=/root/ref/minimax/b300
+[14:43:56] --- 1. gates
+    {"points": 16448, "diff": 0, "rate_pct": 0.0, "step0_pct": 0.0, "nonces": 64, "tp": 1, "pass": true, "rule": "TP=1 -> строгий 0"}
+--- прогрев: первый вызов после бута идёт другим численным путём
+--- ворота 3: детерминизм генерации (два ТЁПЛЫХ прогона)
+    {"points": 2056, "diff": 0, "rate_pct": 0.0, "step0_pct": 0.0, "nonces": 8, "autotuner_lines_in_boot": 0, "pass": true, "free_gen_reproducible": true, "rule": "TP=1, автотюн выкл -> повтор обязан быть бит-идентичен"}
+=== ВОРОТА: PASS -> /root/rout/mm/r1_gates.json
+   выгрузка: None
+[14:44:43] --- 2. corpora (GEN_BATCH=250)
+    {"tag": "honest_h02", "n": 250, "lens": [257], "full_sph": 250, "sec": 14.4, "nonces_per_s": 17.36}
+   выгрузка: None | цепочки: None
+--- honest_h03
+    {"tag": "honest_h03", "n": 250, "lens": [257], "full_sph": 250, "sec": 14.3, "nonces_per_s": 17.45}
+   выгрузка: None | цепочки: None
+=== корпуса: 3 -> /root/rout/mm/r_corpora_honest.json | выгрузка: None
+    44464971 /root/rout/mm/corp_honest_h01_gen.json
+    44465090 /root/rout/mm/corp_honest_h02_gen.json
+    44465301 /root/rout/mm/corp_honest_h03_gen.json
+[14:45:30] --- 3. validate the OLD reference corpora with this server (partition 250)
+    {"rate_pct": 6.7984, "step0_pct": 6.8, "total_diff": 4368} | выгрузка: None
+--- honest_h08: 250 нонсов, хэш h08
+     {"points": 64250, "diff": 3684, "rate_pct": 5.7339, "step0_pct": 3.2, "nonces": 250, "part": 0, "size": 250, "sec": 14.6, "tail": false}
+    npz -> /root/rout/mm/vs_old/npz_honest_h08_v250.npz | выгрузка: None
+    {"rate_pct": 5.7339, "step0_pct": 3.2, "total_diff": 3684} | выгрузка: None
+--- honest_h09: 250 нонсов, хэш h09
+     {"points": 64250, "diff": 4000, "rate_pct": 6.2257, "step0_pct": 4.8, "nonces": 250, "part": 0, "size": 250, "sec": 14.6, "tail": false}
+    npz -> /root/rout/mm/vs_old/npz_honest_h09_v250.npz | выгрузка: None
+    {"rate_pct": 6.2257, "step0_pct": 4.8, "total_diff": 4000} | выгрузка: None
+--- honest_h10: 250 нонсов, хэш h10
+     {"points": 64250, "diff": 4033, "rate_pct": 6.277, "step0_pct": 4.0, "nonces": 250, "part": 0, "size": 250, "sec": 14.6, "tail": false}
+    npz -> /root/rout/mm/vs_old/npz_honest_h10_v250.npz | выгрузка: None
+    {"rate_pct": 6.277, "step0_pct": 4.0, "total_diff": 4033} | выгрузка: None
+=== итог -> /root/rout/mm/vs_old/r2_validate_summary_old_v250.json | выгрузка: None
+[14:48:09] --- 4. validate this server's own corpora (same boot)
+--- прогрев (первый вызов после бута численно иной)
+корпусов найдено: 0 | партиция 250 | стена валидатора 0
+=== итог -> /root/rout/mm/vs_self/r2_validate_summary_self_v250.json | выгрузка: None
+[14:48:16] --- 5. mining round through /init/generate + gate
+[14:49:16]    chat before round: HTTP 000
+[14:49:16]    init/generate: {"status":"OK","pow_status":{"status":"GENERATING"}}
+[14:49:36]    status: {"status":"GENERATING","config":{"block_hash":"deadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef","block_height":1,"public_key":"cafebabecafebabecafebabecafebabe","node_id":0,"node_coun
+[14:49:36]    chat during round: HTTP 503  (503 expected)
+[14:49:36]    stop: {"status":"OK","pow_status":{"status":"STOPPED"}}
+[14:49:42]    chat after stop: HTTP 200  (200 expected)
+[14:49:42] --- 6. replay equivalence (24 originals, replay on the same server)
+022 eos       finish=stop tokens=45 logprob_positions=45
+023 long-cap  finish=length tokens=200 logprob_positions=200
+replay_022.json http=200 finish=stop tokens=45 positions=45
+replay_023.json http=200 finish=length tokens=200 positions=200
+replay_022.json  eos       PASS                                     1.00000  45    45    stop    stop
+replay_023.json  long-cap  PASS                                     1.00000  200   200   length  length
+
+24 replays, PASS 24, similarity min 0.9815046884007639 median 1.0
+[14:50:50] stage done
+[15:50:12] stage start tag=ds030 quant=nvfp4 ref=/root/ref/deepseek/chains/xq_g10_nvfp4_b300.json
+[15:50:12] --- 1. gates
+    {"points": 16448, "diff": 281, "rate_pct": 1.7084, "step0_pct": 0.0, "nonces": 64, "tp": 1, "pass": false, "rule": "TP=1 -> строгий 0"}
+--- прогрев: первый вызов после бута идёт другим численным путём
+--- ворота 3: детерминизм генерации (два ТЁПЛЫХ прогона)
+    {"points": 2056, "diff": 1583, "rate_pct": 76.9942, "step0_pct": 12.5, "nonces": 8, "autotuner_lines_in_boot": 25, "pass": true, "free_gen_reproducible": false, "rule": "автотюн вкл или TP>1 -> воспроизводимость свободной генерации ФИКСИРУЕТСЯ, не требуется"}
+=== ВОРОТА: FAIL -> /root/rout/ds/r1_gates.json
+   выгрузка: None
+[15:50:58] --- 2. validate the OLD reference artifact set (teacher-forced, all hashes)
+  режим: САМОВАЛИДАЦИЯ (базовая линия)
+  h01: расхождений 6502 из 64250 = 10.1198%  (нулевой шаг 10.4%)
+  h02: расхождений 6486 из 64250 = 10.0949%  (нулевой шаг 11.6%)
+  h03: расхождений 6463 из 64250 = 10.0591%  (нулевой шаг 10.4%)
+  h04: расхождений 6629 из 64250 = 10.3175%  (нулевой шаг 10.4%)
+  h05: расхождений 6428 из 64250 = 10.0047%  (нулевой шаг 11.6%)
+  h06: расхождений 6432 из 64250 = 10.0109%  (нулевой шаг 8.8%)
+  h07: расхождений 6623 из 64250 = 10.3082%  (нулевой шаг 10.8%)
+  h08: расхождений 6430 из 64250 = 10.0078%  (нулевой шаг 6.0%)
+  h09: расхождений 6466 из 64250 = 10.0638%  (нулевой шаг 10.0%)
+  h10: расхождений 6497 из 64250 = 10.1121%  (нулевой шаг 10.4%)
+
+  ИТОГО: 64956 из 642500 = 10.1099%
+  маржи расхождений: медиана 0.004508  p90 0.013747  макс 0.066406
+  доля по сетке tau:
+    tau=0.0   : 64895 = 10.1004%
+    tau=0.01  : 12794 = 1.9913%
+    tau=0.02  :  1890 = 0.2942%
+    tau=0.05  :     3 = 0.0005%
+    tau=0.1   :     0 = 0.0%
+    tau=0.2   :     0 = 0.0%
+  -> /root/rout/ds/xq_val_nvfp4_to_nvfp4.json
+[15:53:19] --- 3. own artifact set, 3 hashes x 250, then self-validation (same boot)
+  сервер: quant=nvfp4 ckpt=ebc08e4a45ba moe='FLASHINFER_TRTLLM' NvFp4 pmb-режим см. провенанс
+  h01: 250 цепочек по 257 шагов за 11.9 с
+  h02: 250 цепочек по 257 шагов за 11.8 с
+  h03: 250 цепочек по 257 шагов за 11.8 с
+  корпус -> /root/rout/ds/xq_self.json
+  h01: расхождений 808 из 64250 = 1.2576%  (нулевой шаг 0.4%)
+  h02: расхождений 245 из 64250 = 0.3813%  (нулевой шаг 0.0%)
+  h03: расхождений 412 из 64250 = 0.6412%  (нулевой шаг 0.0%)
+
+  ИТОГО: 1465 из 192750 = 0.7601%
+  маржи расхождений: медиана 0.003794  p90 0.012428  макс 0.076279
+  доля по сетке tau:
+    tau=0.0   :  1463 = 0.759%
+    tau=0.01  :   222 = 0.1152%
+    tau=0.02  :    37 = 0.0192%
+    tau=0.05  :     2 = 0.001%
+    tau=0.1   :     0 = 0.0%
+    tau=0.2   :     0 = 0.0%
+  -> /root/rout/ds/xq_val_nvfp4_to_nvfp4.json
+[15:54:34] --- 4. mining round through /init/generate + gate
+[15:54:34]    chat before round: HTTP 200
+[15:54:34]    init/generate: {"status":"OK","pow_status":{"status":"GENERATING"}}
+[15:55:04]    status: {"status":"GENERATING","config":{"block_hash":"deadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef","block_height":1,"public_key":"cafebabecafebabecafebabecafebabe","node_id":0,"node_coun
+[15:55:04]    chat during round: HTTP 503  (503 expected)
+[15:55:04]    stop: {"status":"OK","pow_status":{"status":"STOPPED"}}
+[15:55:07]    chat after stop: HTTP 200  (200 expected)
+[15:55:07] --- 5. replay equivalence
+022 eos       finish=stop tokens=2 logprob_positions=2
+023 long-cap  finish=length tokens=200 logprob_positions=200
+replay_022.json http=200 finish=stop tokens=2 positions=2
+replay_023.json http=200 finish=length tokens=200 positions=200
+replay_022.json  eos       PASS                                     1.00000  2     2     stop    stop
+replay_023.json  long-cap  PASS                                     1.00000  200   200   length  length
+
+24 replays, PASS 24, similarity min 0.9751231725829971 median 1.0
+[15:56:11] stage done

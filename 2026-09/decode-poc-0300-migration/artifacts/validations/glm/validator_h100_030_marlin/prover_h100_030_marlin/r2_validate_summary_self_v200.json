@@ -1,0 +1,109 @@
+{
+ "partition": 200,
+ "validator_boot": {
+  "cfg": "h100",
+  "tag": "glmmarlin",
+  "wall_nonces": 256,
+  "model_dir": "/root/models/GLM-5.3-Flash",
+  "synth": "0.30 marlin MoE check"
+ },
+ "cells": [
+  {
+   "corpus": "honest_h04",
+   "partition": 200,
+   "parts": [
+    {
+     "points": 51400,
+     "diff": 3347,
+     "rate_pct": 6.5117,
+     "step0_pct": 3.5,
+     "nonces": 200,
+     "part": 0,
+     "size": 200,
+     "sec": 13.3,
+     "tail": false
+    },
+    {
+     "points": 12850,
+     "diff": 807,
+     "rate_pct": 6.2802,
+     "step0_pct": 8.0,
+     "nonces": 50,
+     "part": 1,
+     "size": 50,
+     "sec": 7.7,
+     "tail": true
+    }
+   ],
+   "total_points": 64250,
+   "total_diff": 4154,
+   "rate_pct": 6.4654,
+   "step0_pct": 5.75
+  },
+  {
+   "corpus": "honest_h08",
+   "partition": 200,
+   "parts": [
+    {
+     "points": 51400,
+     "diff": 3623,
+     "rate_pct": 7.0486,
+     "step0_pct": 2.0,
+     "nonces": 200,
+     "part": 0,
+     "size": 200,
+     "sec": 13.3,
+     "tail": false
+    },
+    {
+     "points": 12850,
+     "diff": 964,
+     "rate_pct": 7.5019,
+     "step0_pct": 8.0,
+     "nonces": 50,
+     "part": 1,
+     "size": 50,
+     "sec": 7.7,
+     "tail": true
+    }
+   ],
+   "total_points": 64250,
+   "total_diff": 4587,
+   "rate_pct": 7.1393,
+   "step0_pct": 5.0
+  },
+  {
+   "corpus": "honest_h09",
+   "partition": 200,
+   "parts": [
+    {
+     "points": 51400,
+     "diff": 3715,
+     "rate_pct": 7.2276,
+     "step0_pct": 2.5,
+     "nonces": 200,
+     "part": 0,
+     "size": 200,
+     "sec": 13.3,
+     "tail": false
+    },
+    {
+     "points": 12850,
+     "diff": 1112,
+     "rate_pct": 8.6537,
+     "step0_pct": 6.0,
+     "nonces": 50,
+     "part": 1,
+     "size": 50,
+     "sec": 7.7,
+     "tail": true
+    }
+   ],
+   "total_points": 64250,
+   "total_diff": 4827,
+   "rate_pct": 7.5128,
+   "step0_pct": 4.25
+  }
+ ],
+ "kit_version": "g0912a"
+}

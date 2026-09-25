@@ -1,0 +1,1 @@
+{"cfg": "b300", "tag": "glmboth", "wall_nonces": 256, "model_dir": "/root/models/GLM-5.3-Flash", "synth": "0.30 both prefill flags pinned"}

@@ -1,0 +1,5 @@
+[19:30:41] perf start tag=glmboth npoc=1000 warm=0 chat_conc=256
+[19:31:38] PoC: 1000 nonces in 57.3 s = 17.46 nonce/s; complete 1000/1000; nan steps 0
+[19:32:29] chat (conc, req/s, tpot_p50_ms): [(256, 18.74, 45.81)]
+[19:32:29] perf done
+PERF_DONE

@@ -1,0 +1,46 @@
+{
+ "gate_artifacts": {
+  "n": 8,
+  "lens": [
+   257
+  ],
+  "k_min": 0,
+  "k_max": 15,
+  "n_nan": 0,
+  "unique_prologues": 8,
+  "sec": 16.1,
+  "pass": true
+ },
+ "gate_selfval": {
+  "points": 16448,
+  "diff": 0,
+  "rate_pct": 0.0,
+  "step0_pct": 0.0,
+  "nonces": 64,
+  "tp": 1,
+  "pass": true,
+  "rule": "TP=1 -> строгий 0"
+ },
+ "verdict": "PASS",
+ "gate_determinism": {
+  "points": 2056,
+  "diff": 0,
+  "rate_pct": 0.0,
+  "step0_pct": 0.0,
+  "nonces": 8,
+  "autotuner_lines_in_boot": 0,
+  "pass": true,
+  "free_gen_reproducible": true,
+  "rule": "TP=1, автотюн выкл -> повтор обязан быть бит-идентичен"
+ },
+ "boot": {
+  "cfg": "b300",
+  "model_dir": "/models/MiniMax-M2.7",
+  "wall_nonces": 675,
+  "kv_tokens": 345808,
+  "tag": "mm030",
+  "synth": "0.30 tier A: wall derived from the server log",
+  "vllm": "0.30.0",
+  "plugin": "0.2.0"
+ }
+}

@@ -1,0 +1,1 @@
+{"cfg": "h100", "model_dir": "/root/models/MiniMax-M2.7", "wall_nonces": 752, "tag": "mm030", "synth": "0.30 tier A: GEN_BATCH=250, N 752 MNBT 32768 gmu 0.94 capture 768", "vllm": "0.30.0", "plugin": "0.2.0"}

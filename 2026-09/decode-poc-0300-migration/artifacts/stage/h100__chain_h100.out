@@ -1,0 +1,20 @@
+[14:56:39] === A. GLM tier A in the container
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+gonka-poc 0.2.0
+glm030 booting; log /root/rout/glm/server.log
+[15:08:01] GLM healthy: KV cache size: 4,387,642 tokens PoC native attach: 45 layers, embed=True, snap=True, 42 MoE routers seeded (n_e Using TRITON Fp8 MoE backend attention backend out of potential backends: ['FLASHINFER 
+[15:16:46] GLM stage done: 1
+[15:16:46] === GLM perf on the same boot (N 256, MNBT 8192): PoC 1000 at once, chat c=256
+[15:17:42] PoC: 1000 nonces in 55.8 s = 17.92 nonce/s; complete 1000/1000; nan steps 0
+[15:18:32] chat (conc, req/s, tpot_p50_ms): [(256, 20.45, 44.9)]
+[15:18:43] === B. DeepSeek FP8 tier A in the container (waits for the weights)
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+gonka-poc 0.2.0
+ds030 booting; log /root/rout/ds/server.log
+[15:34:02] DeepSeek healthy: KV cache size: 541,547 tokens PoC native attach: 43 layers, embed=True, snap=True, 40 MoE routers seeded (n_e Using 'MARLIN' Mxfp4 MoE backend 
+[15:40:26] DeepSeek stage done: 1
+[15:40:26] === DeepSeek perf: reboot at the frozen 4xH100 profile (gmu 0.90, N 640, MNBT 16384, capture 640), warm-up 1280
+dsperf booting; log /root/rout/ds_perf/server.log
+[15:59:13] PoC: 3000 nonces in 140.0 s = 21.42 nonce/s; complete 3000/3000; nan steps 0
+[16:01:04] chat (conc, req/s, tpot_p50_ms): [(768, 23.82, 87.53)]
+[16:01:04] === chain done

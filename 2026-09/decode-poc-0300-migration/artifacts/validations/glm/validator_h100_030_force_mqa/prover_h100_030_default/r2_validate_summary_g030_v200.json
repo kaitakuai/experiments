@@ -1,0 +1,103 @@
+{
+ "partition": 200,
+ "validator_boot": {},
+ "cells": [
+  {
+   "corpus": "honest_h01",
+   "partition": 200,
+   "parts": [
+    {
+     "points": 51400,
+     "diff": 5475,
+     "rate_pct": 10.6518,
+     "step0_pct": 12.0,
+     "nonces": 200,
+     "part": 0,
+     "size": 200,
+     "sec": 13.7,
+     "tail": false
+    },
+    {
+     "points": 12850,
+     "diff": 1431,
+     "rate_pct": 11.1362,
+     "step0_pct": 14.0,
+     "nonces": 50,
+     "part": 1,
+     "size": 50,
+     "sec": 7.7,
+     "tail": true
+    }
+   ],
+   "total_points": 64250,
+   "total_diff": 6906,
+   "rate_pct": 10.7486,
+   "step0_pct": 13.0
+  },
+  {
+   "corpus": "honest_h02",
+   "partition": 200,
+   "parts": [
+    {
+     "points": 51400,
+     "diff": 9749,
+     "rate_pct": 18.9669,
+     "step0_pct": 22.0,
+     "nonces": 200,
+     "part": 0,
+     "size": 200,
+     "sec": 13.6,
+     "tail": false
+    },
+    {
+     "points": 12850,
+     "diff": 2463,
+     "rate_pct": 19.1673,
+     "step0_pct": 28.0,
+     "nonces": 50,
+     "part": 1,
+     "size": 50,
+     "sec": 7.7,
+     "tail": true
+    }
+   ],
+   "total_points": 64250,
+   "total_diff": 12212,
+   "rate_pct": 19.007,
+   "step0_pct": 25.0
+  },
+  {
+   "corpus": "honest_h03",
+   "partition": 200,
+   "parts": [
+    {
+     "points": 51400,
+     "diff": 9334,
+     "rate_pct": 18.1595,
+     "step0_pct": 13.5,
+     "nonces": 200,
+     "part": 0,
+     "size": 200,
+     "sec": 13.7,
+     "tail": false
+    },
+    {
+     "points": 12850,
+     "diff": 1925,
+     "rate_pct": 14.9805,
+     "step0_pct": 12.0,
+     "nonces": 50,
+     "part": 1,
+     "size": 50,
+     "sec": 7.7,
+     "tail": true
+    }
+   ],
+   "total_points": 64250,
+   "total_diff": 11259,
+   "rate_pct": 17.5237,
+   "step0_pct": 12.75
+  }
+ ],
+ "kit_version": "g0912a"
+}

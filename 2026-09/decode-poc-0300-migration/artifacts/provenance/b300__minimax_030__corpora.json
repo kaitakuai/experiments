@@ -1,0 +1,20 @@
+{
+ "role": "honest",
+ "batch": 250,
+ "tags": [
+  "honest_h01",
+  "honest_h02",
+  "honest_h03"
+ ],
+ "boot": {
+  "cfg": "b300",
+  "model_dir": "/models/MiniMax-M2.7",
+  "wall_nonces": 675,
+  "kv_tokens": 345808,
+  "tag": "mm030",
+  "synth": "0.30 tier A: wall derived from the server log",
+  "vllm": "0.30.0",
+  "plugin": "0.2.0"
+ },
+ "kit_version": "14fe97dec7e2"
+}

@@ -1,0 +1,30 @@
+{
+ "cfg": "b300",
+ "model_dir": "/models/MiniMax-M2.7",
+ "model_repo": null,
+ "ckpt_sha": "0e360ceafdac502a",
+ "ckpt_config_sha256": "697c30492781d55a",
+ "boot_utc": "2026-09-24T15:39:32.454793",
+ "moe_requested": "flashinfer_trtllm",
+ "tp": 1,
+ "moe_actual": null,
+ "moe_actual_all": [],
+ "dispatch": null,
+ "attach": null,
+ "kv_tokens": 0,
+ "wall_nonces": 0,
+ "wall_from_kv": 0,
+ "max_num_seqs": 608,
+ "work_batch": -30,
+ "cpu_model": "Intel(R) Xeon(R) 6776P",
+ "cpu_count": 24,
+ "loadavg": [
+  0.89,
+  0.94,
+  1.07
+ ],
+ "autotuner_lines": 0,
+ "autotune_mode": "on",
+ "compile_cache_key": null,
+ "compile_cache_mode": "unknown"
+}
