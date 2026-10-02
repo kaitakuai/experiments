@@ -1,0 +1,18 @@
+{
+ "tag": "b300_v_b200",
+ "cfg": "b300",
+ "role": "honest",
+ "model_dir": "zai-org/GLM-5.3-Flash",
+ "hf_revision": "04c4e9e95c5da8862dced7e5056455116f83a7e0",
+ "image": "ghcr.io/gonka-ai/mlnode@sha256:dbf2a7075b30c8bcf2f227e4e4ded83d3244c17680017adaa990b4fdd24268e8",
+ "tp": 2,
+ "gpus": "0,1",
+ "gpu_info": "0, NVIDIA B300 SXM6 AC, 580.178.04;1, NVIDIA B300 SXM6 AC, 580.178.04;",
+ "gmu": "0.90",
+ "mnbt": 32768,
+ "max_num_seqs": 256,
+ "flag_language_model_only": true,
+ "nccl_nvls_disabled": false,
+ "kv_tokens": 12143478,
+ "boot_s": 102
+}
