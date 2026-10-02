@@ -1,0 +1,18 @@
+{
+ "tag": "h200_f_h07",
+ "cfg": "h200",
+ "role": "fraud",
+ "model_dir": "wtdcode/GLM-5.3-Flash-AWQ-W4A16",
+ "hf_revision": "abd7b07719111f137e1de8a0c1b7e01c11b74d1a",
+ "image": "ghcr.io/gonka-ai/mlnode@sha256:dbf2a7075b30c8bcf2f227e4e4ded83d3244c17680017adaa990b4fdd24268e8",
+ "tp": 4,
+ "gpus": "0,1,2,3",
+ "gpu_info": "0, NVIDIA H200, 580.178.04;1, NVIDIA H200, 580.178.04;2, NVIDIA H200, 580.178.04;3, NVIDIA H200, 580.178.04;",
+ "gmu": "0.90",
+ "mnbt": 16384,
+ "max_num_seqs": 256,
+ "flag_language_model_only": true,
+ "nccl_nvls_disabled": true,
+ "kv_tokens": 11597765,
+ "boot_s": 214
+}
