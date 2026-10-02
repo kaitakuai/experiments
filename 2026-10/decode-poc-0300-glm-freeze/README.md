@@ -19,7 +19,6 @@ statistic, and the room a single threshold has.
 - [Launch settings](#launch-settings) — the four measured configurations
 - [Throughput](#throughput) — PoC and chat per configuration, nonces/min per 8 GPUs, the ratio R
 - [Separability](#separability) — honest and fraud arms, every prover against every validator, the chain statistic on a τ grid, the room a single threshold has
-- [When these numbers apply](#when-these-numbers-apply) — the conditions under which every number above was measured
 - [Reproduce](#reproduce) — rebuilding the τ tables from the counters in this folder
 - [Data not in this repository](#data-not-in-this-repository) — corpora, validator vectors and raw runs on Drive
 
@@ -134,13 +133,6 @@ One (τ, `p_mismatch`) pair for the fleet, chosen so that the worst honest hash 
 ![Honest pairs and the W4A16 fraud arm across tau, by points](artifacts/figures/pts_glm.png)
 
 *Mismatch rate by points, snap margin, log scale; zero sits on the axis floor. The fraud curve is above every honest curve at every τ; the honest curves reach zero at τ 0.025 (Hopper ↔ Hopper), 0.030 (Blackwell ↔ Blackwell) and 0.035 (Hopper ↔ Blackwell).*
-
-## When these numbers apply
-
-- The same launch arguments ran on both sides of every validation, and the same image digest on B300, H200 and H100; B200 ran in a rented container started from the release image, and the digest in its boot records is the one set in the launch script, not read from the container (its logs show vLLM 0.30.0 and `gonka-poc` 0.2.0).
-- Corpora, validations and throughput were taken at N 256, the profile N; throughput comes from one instance per configuration.
-- Chat was measured at concurrency 256 only, in three runs. On B300, H200 and B200 the rate rose from run to run (B300 20.61 → 21.49, H200 18.03 → 20.79, B200 25.85 → 33.00 requests/s), so their chat values may be lower bounds.
-- One fraud arm was measured: W4A16 on the routed experts.
 
 ---
 
