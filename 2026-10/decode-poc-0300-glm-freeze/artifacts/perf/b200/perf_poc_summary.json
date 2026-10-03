@@ -1,0 +1,17 @@
+{
+ "tag": "b200_perf_n1024_poc",
+ "elapsed_s": 148.27817583084106,
+ "params": {
+  "model": "zai-org/GLM-5.3-Flash",
+  "seq_len": 256,
+  "k_dim": 12,
+  "scheme": "decode",
+  "max_tokens": 256
+ },
+ "n_artifacts": 5120,
+ "points_per_artifact": {
+  "257": 5120
+ },
+ "source": "data/perf/b200/sweep/b200_perf_n1024/perf_poc.json in the devkit poc-devkit-glm-2026-10-02",
+ "source_sha256": "56ade32450b1273df4d9a62af6c0b1b2c3ef755086f6766653fd54e916c9a880"
+}

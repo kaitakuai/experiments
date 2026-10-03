@@ -1,1 +1,1 @@
-decode gen b200_hg_poc: 2560 artifacts, steps min/max 257/257, 105.9s
+decode gen b200_perf_n1024_poc: 5120 artifacts, steps min/max 257/257, 148.3s

@@ -1,2 +1,5 @@
-tag	kvdt	moe	N	gmu	mnbt	poc_nonce_s	full	kv_tokens	moe_backend_log	cuda_errors
-b200_hg	fp8	-	256	0.90	32768	24.17	2560/2560	11588826	FLASHINFER_TRTLLM	0
+boot	source	N	capture	gmu	mnbt	moe	kv_tokens	graph_est_gib	graph_actual_gib	boot_s	warm_s	poc_nonces	poc_s	poc_nonce_s	full	chat_c256	chat_c512	chat_c768	chat_c1024	peak_c	peak_req_s	R	nonces_min_8gpu	max_running_kv_by_c	engine_errors	used	note
+b200_hg	campaign	256	512	0.90	32768	flashinfer_trtllm	11588826	5.30	4.54	580	69.7	2560	105.92	24.17	2560/2560	28.90	-	-	-	256	28.90	0.836	2900	c256:256/29.6%	0	yes	honest corpora generation boot: N 256, capture size not set (the engine captures up to 512), chat at concurrency 256 only; the corpora and validation boots share its settings
+b200_perf_n256	sweep	256	256	0.90	32768	flashinfer_trtllm	11579888	5.35	3.52	133	7.7	5120	199.12	25.71	5120/5120	32.87	-	-	-	256	32.87	0.782	3086	c256:256/29.6%	0	yes	
+b200_perf_n512	sweep	512	512	0.90	32768	flashinfer_trtllm	11521787	5.61	5.36	151	7.7	5120	158.31	32.34	5120/5120	33.04	40.39	-	-	512	40.39	0.801	3881	c256:256/29.8% c512:512/59.6%	0	yes	
+b200_perf_n1024	sweep	1024	1024	0.90	32768	flashinfer_trtllm	8451396	23.08	10.10	661	71.9	5120	148.28	34.53	5120/5120	30.58	39.22	-	45.27	1024	45.27	0.763	4144	c256:256/40.6% c512:512/81.2% c1024:630/100.0%	0	yes	first boot of the host, on empty compile caches (warm-up 71.9 s against 7.7 s on the later boots); its PoC and c1024 were not repeated; its c256 repetitions scatter (27.79-33.35), the c1024 repetitions agree (45.12-45.40)
