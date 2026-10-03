@@ -1,1 +1,1 @@
-decode gen h100_hg_poc: 2560 artifacts, steps min/max 257/257, 148.1s
+decode gen h100_perf_n512_g095r_poc: 1280 artifacts, steps min/max 257/257, 69.8s

@@ -1,2 +1,8 @@
-tag	kvdt	moe	N	gmu	mnbt	poc_nonce_s	full	kv_tokens	moe_backend_log	cuda_errors
-h200_hg	fp8	-	256	0.90	16384	14.94	2560/2560	5702793	TRITON	0
+boot	source	N	capture	gmu	mnbt	moe	kv_tokens	graph_est_gib	graph_actual_gib	boot_s	warm_s	poc_nonces	poc_s	poc_nonce_s	full	chat_c256	chat_c512	chat_c768	chat_c1024	peak_c	peak_req_s	R	nonces_min_8gpu	max_running_kv_by_c	engine_errors	used	note
+h200_hg	campaign	256	512	0.90	16384	triton	5702793	10.11	4.12	709	81.7	2560	171.36	14.94	2560/2560	19.43	-	-	-	256	19.43	0.769	1793	c256:256/60.2%	0	yes	honest corpora generation boot: N 256, capture size not set (the engine captures up to 512), chat at concurrency 256 only; the corpora and validation boots share its settings
+h200_perf_n256_m16k	sweep	256	256	0.90	16384	triton	6692737	4.42	3.16	166	12.6	1280	80.15	15.97	1280/1280	20.83	-	-	-	256	20.83	0.767	1916	c256:256/51.3%	0	yes	
+h200_perf_n256_mdef	sweep	256	256	0.90	8192	triton	7115083	4.42	3.16	484	12.9	1280	82.63	15.49	1280/1280	20.43	-	-	-	256	20.43	0.758	1859	c256:256/48.3%	0	yes	
+h200_perf_n512_mdef	sweep	512	512	0.90	8192	triton	6022346	10.63	5.30	190	12.5	1280	66.66	19.20	1280/1280	20.34	23.82	-	-	512	23.82	0.806	2304	c256:256/57.0% c512:449/100.0%	0	yes	
+h200_perf_n768_mdef	sweep	768	768	0.90	8192	triton	6978770	5.04	7.26	208	12.5	1280	67.03	19.09	1280/1280	20.68	26.76	25.53	-	512	26.76	0.713	2291	c256:256/49.2% c512:512/98.4% c768:520/99.9%	0	yes	
+h200_perf_n1024_mdef	sweep	1024	1024	0.90	8192	triton	6853631	5.28	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-	0	no	boot failed: CUDA out of memory in CUDA graph capture
+h200_perf_n1024_mdef_g085	sweep	1024	1024	0.85	8192	triton	5640223	5.28	9.63	220	12.7	1280	72.54	17.65	1280/1280	20.60	23.53	-	23.73	1024	23.73	0.744	2118	c256:256/60.9% c512:420/99.9% c1024:420/99.9%	0	yes	

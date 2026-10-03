@@ -1,6 +1,6 @@
 # decode-PoC on vLLM 0.30.0: measured state for GLM-5.3-Flash
 
-- **Date:** 2026-10-02
+- **Dates:** 2026-10-02 … 2026-10-03
 - **Model:** `zai-org/GLM-5.3-Flash` @ `04c4e9e9` (FP8 weights)
 - **Fraud arm:** `wtdcode/GLM-5.3-Flash-AWQ-W4A16` @ `abd7b077` (INT4 on the routed experts only)
 - **Hardware:** 2×B300 SXM6, 4×H200, 8×H100 80GB, 4×B200
@@ -38,37 +38,43 @@ statistic, and the room a single threshold has.
 
 ## Launch settings
 
-The four measured configurations. Full profiles: `PROFILES.md` in the devkit.
+The four measured configurations. Full profiles and the sweep behind every N: `PROFILES.md` in the devkit.
 
-| cards | TP | KV cache | MoE (engine choice) | gpu-memory-utilization | N = max-num-seqs | max-num-batched-tokens |
+| cards | TP | KV cache | MoE (engine choice) | gpu-memory-utilization | N = max-num-seqs = capture size | max-num-batched-tokens |
 | --- | ---: | --- | --- | ---: | ---: | ---: |
-| 2×B300 SXM6 | 2 | fp8 | `flashinfer_trtllm` | 0.90 | 256 | 32768 |
-| 4×H200 | 4 | fp8 | `triton` | 0.90 | 256 | 16384 |
-| 8×H100 80GB \* | 8 | fp8 | `triton` | 0.95 | 256 | 8192 |
-| 4×B200 \* | 4 | fp8 | `flashinfer_trtllm` | 0.90 | 256 | 32768 |
+| 2×B300 SXM6 | 2 | fp8 | `flashinfer_trtllm` | 0.90 | 512 | 32768 |
+| 4×H200 | 4 | fp8 | `triton` | 0.90 | 512 | 8192 \*\* |
+| 8×H100 80GB \* | 8 | fp8 | `triton` | 0.95 | 512 | 8192 |
+| 4×B200 \* | 4 | fp8 | `flashinfer_trtllm` | 0.90 | 1024 | 32768 |
 
-All four run one argument set: `--max-model-len 400000 --kv-cache-dtype fp8 --block-size 2304 --no-enable-prefix-caching --no-enable-flashinfer-autotune --kda-prefill-backend triton --attention-config '{"sparse_mla_force_mqa": true}' --language-model-only`, plus the tool and reasoning parsers (`PROFILES.md`). The MoE column is the backend the engine chose; no kernel was set. The CUDA graph capture size is the engine default, 512. Corpora and throughput are requested with `batch_size 0`, so the engine schedules the batch; a validation request carries one partition of 200 nonces, or the tail of 50. H200, H100 and B200 ran with `NCCL_NVLS_ENABLE=0 NCCL_CUMEM_ENABLE=0`.
+All four run one argument set: `--max-model-len 400000 --kv-cache-dtype fp8 --block-size 2304 --no-enable-prefix-caching --no-enable-flashinfer-autotune --kda-prefill-backend triton --attention-config '{"sparse_mla_force_mqa": true}' --language-model-only`, plus the tool and reasoning parsers (`PROFILES.md`). N is passed twice, as `--max-num-seqs N` and `--compilation-config '{"max_cudagraph_capture_size": N}'`. The MoE column is the backend the engine chose; no kernel was set. Corpora and throughput are requested with `batch_size 0`, so the engine schedules the batch; a validation request carries one partition of 200 nonces, or the tail of 50. H200, H100 and B200 ran with `NCCL_NVLS_ENABLE=0 NCCL_CUMEM_ENABLE=0`.
+
+N was chosen by PoC nonces/s in a sweep over N 256–1024 per configuration. PoC peaks at N 512 on B300 and rises to N 1024 on B200. On H200, N 512 and N 768 are within 0.6% (19.20 and 19.09 nonces/s), and N 512 is listed. On H100, PoC stays within 18.20–18.43 nonces/s from N 256 to 1024, and N 512 is listed: it booted at gpu-memory-utilization 0.95, the value of the corpora and validation boots.
+
+At the listed gpu-memory-utilization, N 1024 runs out of memory in CUDA graph capture on B300, H200 and H100, and so did the one boot of H100 N 256 at 0.95. N 1024 boots at 0.85 on B300 and H200, where it is slower than N 512 (20.07 and 17.65 nonces/s); on H100, N 256 and N 1024 boot at 0.90.
 
 \* with `--disable-custom-all-reduce`.
+
+\*\* not passed; 8192 is the engine default.
 
 ## Throughput
 
 | cards · GLM-5.3-Flash | PoC, nonces/s | nonces/min per 8 GPUs | at N | chat, requests/s | at concurrency | R |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| 2×B300 | 17.25 | 4,140 | 256 | 21.49 | 256 | 0.803 |
-| 4×H200 | 14.94 | 1,793 | 256 | 20.79 | 256 | 0.719 |
-| 8×H100 | 17.29 | 1,037 | 256 | 25.17 | 256 | 0.687 |
-| 4×B200 | 24.17 | 2,900 | 256 | 33.00 | 256 | 0.732 |
+| 2×B300 | 21.26 | 5,103 | 512 | 24.30 | 512 | 0.875 |
+| 4×H200 | 19.20 | 2,304 | 512 | 23.82 | 512 | 0.806 |
+| 8×H100 | 18.34 | 1,100 | 512 | 24.46 | 256 | 0.750 |
+| 4×B200 | 34.53 | 4,144 | 1024 | 45.27 | 1024 | 0.763 |
 
-**nonces/min per 8 GPUs = nonces/s × 60 × 8 ÷ GPUs in the configuration** (8 ÷ TP instances per node, as MLNode starts them). **R = nonces/s ÷ requests/s**; the units are comparable: a nonce is 256 prompt tokens plus 256 decode steps, a chat request 256 prompt plus 256 generated.
+**nonces/min per 8 GPUs = nonces/s × 60 × 8 ÷ GPUs in the configuration**, from the unrounded nonces/s (8 ÷ TP instances per node, as MLNode starts them). **R = nonces/s ÷ requests/s**; the units are comparable: a nonce is 256 prompt tokens plus 256 decode steps, a chat request 256 prompt plus 256 generated.
 
-Each row is one boot with no other engine of the campaign on its host: PoC first, 2,560 nonces after a 128-nonce warm-up, ramp-up and drain included; then chat, three runs of 768 requests at concurrency 256 (`vllm bench serve`, random 256/256, `--ignore-eos`). The row gives the highest run.
+Each row is one boot with no other engine on its host: a 128-nonce warm-up, then PoC timed with ramp-up and drain (2,560 nonces on B300, 5,120 on B200, 1,280 on H200 and H100), then chat (`vllm bench serve`, random 256/256, `--ignore-eos`): three repetitions of 3×C requests at each concurrency C ≤ N among 256, 512 and 1024. The row gives the concurrency with the highest mean of its three repetitions. The B200 row is the first boot of its host, on empty compile caches; its PoC and concurrency 1024 were not repeated.
 
-**Fairness is equal R across configurations**; the absolute value depends on the work unit. The spread is **×1.169** (8×H100 0.687 to 2×B300 0.803); the chain defines no tolerance for it.
+**Fairness is equal R across configurations**; the absolute value depends on the work unit. The spread is **×1.167** (8×H100 0.750 to 2×B300 0.875); the chain defines no tolerance for it. R depends on N: on H200, N 768 boots with more KV cache and runs all 512 requests at concurrency 512 (N 512: at most 449), reaching 26.76 requests/s and R 0.713, which makes the spread ×1.227; on H100, R is 0.720–0.750 over N 256–1024.
 
 ![Throughput and fairness by configuration, GLM-5.3-Flash](artifacts/figures/fleet_glm.png)
 
-*Left: PoC and chat on the measured settings (chat: the highest of three runs). Right: R as a deviation from the fleet mean; fair means every configuration at zero.*
+*Left: PoC and chat on the launch settings above (chat: the mean of three repetitions at the concurrency in the table). Right: R as a deviation from the fleet mean; fair means every configuration at zero.*
 
 ## Separability
 
@@ -115,7 +121,7 @@ Every honest row is at 100% at τ = 0, so τ = 0 carries no information for this
 
 ### Room for one threshold per model
 
-> **Estimate, needs confirmation.** `p_mismatch` is the smallest grid value at which the worst observed honest hash passes with probability 99%; no safety margin is added. At τ 0.025–0.033 the worst honest hash flags one nonce of 250, from τ 0.034 none.
+> **Estimate, needs confirmation.** Every corpus and validation was taken at N 256 with the engine-default capture size 512 (H200: max-num-batched-tokens 16384), while the profiles run N 512–1024 with capture size N; cells at the profile N were not measured. `p_mismatch` is the smallest grid value at which the worst observed honest hash passes with probability 99%; no safety margin is added. At τ 0.025–0.033 the worst honest hash flags one nonce of 250, from τ 0.034 none.
 
 The chain sets one threshold per model. By points at τ = 0 it has to pass between the highest honest hash mean and the lowest fraud hash mean on every validator, over every prover validated there (self-validation included):
 
@@ -158,10 +164,22 @@ same layout, 1 for each nonce the claimed-margin rule flags at τ and 0 for the 
 revision, image digest, TP, GPUs with name and driver, gpu-memory-utilization,
 max-num-batched-tokens, N, KV capacity in tokens, boot time in seconds), named
 `<validator>__<prover>__kv_<tag>.json`.
-`artifacts/perf/<card>/` holds the run behind the throughput table: `perf_points.tsv` (one line,
-the throughput boot; the PoC column is its `poc_nonce_s`), the PoC and warm-up summaries
-`perf_poc.out` and `perf_warm.out` (their elapsed time is rounded), and the three chat runs
-`chat_c256_w1.log` … `chat_c256_w3.log`.
+
+`artifacts/perf/<card>/` holds the boot behind each throughput row: its vLLM command line
+`cmdline.txt` and boot record `kv_<boot>.json`, the PoC run summary `perf_poc_summary.json`
+(nonces/s = `n_artifacts` ÷ `elapsed_s`; the full run with every nonce is in the devkit: path in
+`source`, sha256 in `source_sha256`), the PoC and warm-up logs `perf_poc.out` and `perf_warm.out` (their elapsed
+time is rounded), and the chat repetitions `chat_c<C>_r<k>.log`.
+
+`perf_points.tsv` lists every boot of the sweep over N for that configuration, one line each (N,
+capture size, gpu-memory-utilization, max-num-batched-tokens, MoE, KV tokens, PoC, chat mean per
+concurrency, peak, R), with `used` no and the reason in `note` for every boot not used; a chat mean
+in parentheses was not used, its reason also in `note`. The line `<card>_hg` (source `campaign`) is
+the honest corpora generation boot, at N 256 with capture size 512 and chat at concurrency 256 only.
+
+Boot names: `_n<N>` the N; `_g085`, `_g090`, `_g095` gpu-memory-utilization; `_mdef`
+max-num-batched-tokens not passed, `_m16k` 16384; `_marlin` `--moe-backend marlin`; a trailing `r`
+or `_retry` a repeat.
 
 ## Data not in this repository
 

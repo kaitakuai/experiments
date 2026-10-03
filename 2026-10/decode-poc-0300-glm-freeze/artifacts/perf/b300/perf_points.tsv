@@ -1,2 +1,7 @@
-tag	kvdt	moe	N	gmu	mnbt	poc_nonce_s	full	kv_tokens	moe_backend_log	cuda_errors
-b300_hg	fp8	-	256	0.90	32768	17.25	2560/2560	12143478	FLASHINFER_TRTLLM	0
+boot	source	N	capture	gmu	mnbt	moe	kv_tokens	graph_est_gib	graph_actual_gib	boot_s	warm_s	poc_nonces	poc_s	poc_nonce_s	full	chat_c256	chat_c512	chat_c768	chat_c1024	peak_c	peak_req_s	R	nonces_min_8gpu	max_running_kv_by_c	engine_errors	used	note
+b300_hg	campaign	256	512	0.90	32768	flashinfer_trtllm	12143478	5.90	4.70	99	14.5	2560	148.41	17.25	2560/2560	20.92	-	-	-	256	20.92	0.825	4140	c256:256/55.0%	0	yes	honest corpora generation boot: N 256, capture size not set (the engine captures up to 512), chat at concurrency 256 only; the corpora and validation boots share its settings
+b300_perf_n256	sweep	256	256	0.90	32768	flashinfer_trtllm	12091304	6.21	3.65	99	11.4	2560	146.81	17.44	2560/2560	21.44	-	-	-	256	21.44	0.813	4185	c256:256/55.3%	0	yes	
+b300_perf_n512	sweep	512	512	0.90	32768	flashinfer_trtllm	12117391	6.22	5.55	105	11.5	2560	120.40	21.26	2560/2560	21.45	24.30	-	-	512	24.30	0.875	5103	c256:256/55.1% c512:464/99.9%	0	yes	
+b300_perf_n1024	sweep	1024	1024	0.90	32768	flashinfer_trtllm	11904347	7.32	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-	4	no	boot failed: CUDA out of memory in CUDA graph capture
+b300_perf_n1024_g085	sweep	1024	1024	0.85	32768	flashinfer_trtllm	9643478	7.32	10.40	123	11.4	2560	127.55	20.07	2560/2560	21.47	22.50	-	23.20	1024	23.20	0.865	4817	c256:256/69.3% c512:369/99.9% c1024:369/99.9%	0	yes	
+b300_perf_n1024_retry	sweep	1024	1024	0.90	32768	flashinfer_trtllm	11904347	7.32	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-	4	no	boot failed: CUDA out of memory in CUDA graph capture; repeat of b300_perf_n1024 with the same arguments

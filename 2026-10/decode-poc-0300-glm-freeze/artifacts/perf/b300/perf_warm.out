@@ -1,1 +1,1 @@
-decode gen b300_hg_warm: 128 artifacts, steps min/max 257/257, 14.5s
+decode gen b300_perf_n512_warm: 128 artifacts, steps min/max 257/257, 11.5s

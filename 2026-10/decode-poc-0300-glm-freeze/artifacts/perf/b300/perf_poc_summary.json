@@ -1,0 +1,17 @@
+{
+ "tag": "b300_perf_n512_poc",
+ "elapsed_s": 120.39672422409058,
+ "params": {
+  "model": "zai-org/GLM-5.3-Flash",
+  "seq_len": 256,
+  "k_dim": 12,
+  "scheme": "decode",
+  "max_tokens": 256
+ },
+ "n_artifacts": 2560,
+ "points_per_artifact": {
+  "257": 2560
+ },
+ "source": "data/perf/b300/sweep/b300_perf_n512/perf_poc.json in the devkit poc-devkit-glm-2026-10-02",
+ "source_sha256": "532ab12c151000bf93ed00246f6e98560f27c0cb7a5eed580c91d0d60ef93165"
+}
