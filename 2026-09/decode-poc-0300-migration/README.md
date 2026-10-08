@@ -304,6 +304,16 @@ the PoC runs (`perf_poc_*.json`) and chat sweeps (`r_chat_sweep_*.json`, `vllm b
 `h100/stage_ds.sh`), the GLM bisect (`h100/glm_bisect.sh`, `h100/glm_cellC_then_old.sh`, `h100/glm_cellD.sh`) and
 the replay check.
 
+## Errata of 8 October 2026: DeepSeek summary names
+
+`artifacts/validations/deepseek/validator_b300_030_nvfp4/vs_0251_nvfp4_b300.json` held the same-boot self-validation,
+not the run on the 0.25.1 reference set: on the box both runs wrote the same summary name, and the second overwrote
+the first. It is renamed to `self_same_boot.json`. The reference-set result is only in
+`artifacts/stage/b300__deepseek_nvfp4_030__stage_ds030.log`. The tables above come from the logs and are not affected.
+On H100 the 0.30 server wrote no boot provenance, so the kit printed `quant=?`. Both H100 summaries now carry the
+checkpoint and the mode, and the mode lines of the DeepSeek stage logs are corrected and marked
+`[исправлено 08.10.2026 …]`.
+
 ## Data not in this repository
 
 Corpora with per-step vectors (`corp_honest_*_gen.json`, 44 MB each), the per-nonce validation records

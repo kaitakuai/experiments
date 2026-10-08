@@ -1,4 +1,10 @@
 {
+ "label_fix_2026_10_08": "Was in validator_nvfp4_b300/. The validator of this run is the FP8 checkpoint on H200 (validator_boot.gpu), not NVFP4 on B300.",
+ "mode": "КРОСС-КВАНТИЗАЦИЯ (другой чекпойнт)",
+ "corpus_ckpt": "ebc08e4a45baee83",
+ "validator_ckpt": "1c1320a8d3313e00",
+ "corpus_repo": "MJPansa/DeepSeek-V4-Flash-0731-NVFP4",
+ "validator_repo": "deepseek-ai/DeepSeek-V4-Flash-0731",
  "corpus_quant": "nvfp4",
  "validator_quant": "fp8",
  "corpus_boot": {

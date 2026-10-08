@@ -21,4 +21,4 @@
     tau=0.05  : 21684 = 3.3749%
     tau=0.1   :   956 = 0.1488%
     tau=0.2   :     1 = 0.0002%
-  -> /root/gold100/ds/xq_val_fp8_to_nvfp4.json
+  -> /root/gold100/ds/xq_val_fp8_to_nvfp4.json  [итога JSON этого прогона в ките нет; результат только в этом логе]

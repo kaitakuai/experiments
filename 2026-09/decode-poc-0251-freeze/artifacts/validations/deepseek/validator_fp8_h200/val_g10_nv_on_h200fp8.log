@@ -21,4 +21,4 @@
     tau=0.05  :     0 = 0.0%
     tau=0.1   :     0 = 0.0%
     tau=0.2   :     0 = 0.0%
-  -> /root/gold100/ds/xq_val_nvfp4_to_fp8.json
+  -> /root/gold100/ds/xq_val_nvfp4_to_fp8.json  [в ките: validator_fp8_h200/xq_val_nvfp4_to_fp8.json]

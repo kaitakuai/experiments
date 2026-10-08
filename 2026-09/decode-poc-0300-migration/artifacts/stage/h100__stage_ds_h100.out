@@ -7,7 +7,7 @@
 === ВОРОТА: FAIL -> /root/rout/ds/r1_gates.json
    выгрузка: None
 [15:34:56] --- 2. validate the OLD reference artifact set (teacher-forced, all hashes)
-  режим: КРОСС-КВАНТИЗАЦИЯ
+  режим: ТОТ ЖЕ ЧЕКПОЙНТ FP8, другой стек: корпус vLLM 0.25.1, валидатор vLLM 0.30  [исправлено 08.10.2026: скрипт ставил «КРОСС-КВАНТИЗАЦИЯ», потому что сервер 0.30 не записал провенанс]
   h01: расхождений 5948 из 64250 = 9.2576%  (нулевой шаг 12.4%)
   h02: расхождений 5729 из 64250 = 8.9167%  (нулевой шаг 10.0%)
   h03: расхождений 5724 из 64250 = 8.9089%  (нулевой шаг 8.4%)
@@ -28,7 +28,7 @@
     tau=0.05  :    89 = 0.0139%
     tau=0.1   :     1 = 0.0002%
     tau=0.2   :     0 = 0.0%
-  -> /root/rout/ds/xq_val_fp8_to_?.json
+  -> /root/rout/ds/xq_val_fp8_to_?.json  [здесь: artifacts/validations/deepseek/validator_h100_030_fp8/vs_0251_fp8_h100.json]
 [15:37:23] --- 3. own artifact set, 3 hashes x 250, then self-validation (same boot)
   сервер: quant=? ckpt=None moe=None pmb-режим см. провенанс
   h01: 250 цепочек по 257 шагов за 13.0 с
@@ -48,7 +48,7 @@
     tau=0.05  :    32 = 0.0166%
     tau=0.1   :     0 = 0.0%
     tau=0.2   :     0 = 0.0%
-  -> /root/rout/ds/xq_val_?_to_?.json
+  -> /root/rout/ds/xq_val_?_to_?.json  [здесь: artifacts/validations/deepseek/validator_h100_030_fp8/self_same_boot.json]
 [15:38:45] --- 4. mining round through /init/generate + gate
 [15:38:45]    chat before round: HTTP 200
 [15:38:45]    init/generate: {"status":"OK","pow_status":{"status":"GENERATING"}}
