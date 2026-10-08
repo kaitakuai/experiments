@@ -1,6 +1,12 @@
 {
+ "label_fix_2026_10_08": "The frozen 0.25.1 FP8 H100 reference set validated by the same FP8 checkpoint under vLLM 0.30: same checkpoint, different stack. validator_quant was '?' and the stage log called the run cross-quantisation. The 4xH100 vLLM 0.30 server wrote no boot provenance, so the kit printed quant=? for it; the validator identity is taken from the stage log (quant=fp8) and from this README (deepseek-ai/DeepSeek-V4-Flash-0731).",
+ "mode": "ТОТ ЖЕ ЧЕКПОЙНТ FP8, другой стек: корпус vLLM 0.25.1, валидатор vLLM 0.30",
+ "corpus_ckpt": "1c1320a8d3313e00",
+ "validator_ckpt": null,
+ "corpus_repo": "deepseek-ai/DeepSeek-V4-Flash-0731",
+ "validator_repo": "deepseek-ai/DeepSeek-V4-Flash-0731",
  "corpus_quant": "fp8",
- "validator_quant": "?",
+ "validator_quant": "fp8",
  "corpus_boot": {
   "cfg": "h100",
   "quant": "fp8",

@@ -1,4 +1,10 @@
 {
+ "label_fix_2026_10_08": "Was vs_0251_nvfp4_b300.json, which named it the run on the 0.25.1 reference set. It is the same-boot self-validation on B300 under vLLM 0.30 (own corpus, 3 hashes x 250 nonces). The reference-set run wrote the same summary name on the box and was overwritten; its result is only in artifacts/stage/b300__deepseek_nvfp4_030__stage_ds030.log.",
+ "mode": "САМОВАЛИДАЦИЯ (базовая линия, тот же чекпойнт)",
+ "corpus_ckpt": "ebc08e4a45baee83",
+ "validator_ckpt": "ebc08e4a45baee83",
+ "corpus_repo": "MJPansa/DeepSeek-V4-Flash-0731-NVFP4",
+ "validator_repo": "MJPansa/DeepSeek-V4-Flash-0731-NVFP4",
  "corpus_quant": "nvfp4",
  "validator_quant": "nvfp4",
  "corpus_boot": {

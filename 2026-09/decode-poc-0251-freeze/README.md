@@ -213,6 +213,31 @@ margins of the twelve DeepSeek cells. `artifacts/fig_data_matrix.json` and
 `artifacts/provenance/` holds the boot records (KV size, checkpoint revision, MoE backend, GPU,
 driver) of every generation and validation run.
 
+## Errata of 8 October 2026: DeepSeek summary labels
+
+The DeepSeek kit named each summary `xq_val_<corpus quant>_to_<validator quant>.json` and printed
+`САМОВАЛИДАЦИЯ (базовая линия)` (self-validation, baseline) whenever the two quantisations matched. The REAP-145B
+fraud arm is FP8 as well, so its runs were labelled self-validation, and runs that shared a file name overwrote each
+other's summary. The DeepSeek table above was built from the logs and is not affected. The kit in the bundle now
+decides the mode by checkpoint and never overwrites a summary.
+
+Relabelled files in `artifacts/validations/deepseek/` (measurements unchanged; each moved summary carries a
+`label_fix_2026_10_08` note):
+
+| was | now | what it is |
+| --- | --- | --- |
+| `validator_fp8_h100/xq_val_fp8_to_fp8.json` | `validator_fp8_h100/xq_val_reap_to_fp8.json` | REAP corpus, honest FP8 validator on H100 |
+| `validator_nvfp4_b300/xq_val_fp8_to_fp8.json` and `val_g10_reap_on_reap.log` | `validator_reap_b300/`, the summary as `xq_val_reap_to_reap.json` | REAP corpus validated by REAP on B300 |
+| `validator_nvfp4_b300/xq_val_nvfp4_to_fp8.json` and `val_g10_{fp8_h200,nv,reap}_on_h200fp8.log` | `validator_fp8_h200/` | these runs were validated by FP8 on H200 |
+
+The mode line is corrected in the two REAP-on-FP8 logs and marked `[исправлено 08.10.2026 …]`. Eight logs have no
+summary in this folder, because a later run printed the same output path. Their output line is marked
+`[итога JSON этого прогона в ките нет …]`, and the log is the only record.
+
+The DeepSeek cross-validations ran on the `xq_g10_*` chains of the bundle (`data/corpora/deepseek/chains/`). These
+are separate generations from its `golden_*` files of the same boots (on hash h01 the FP8 H100 chains differ in all
+250 nonces), so the summaries and logs do not pair with the prover vectors in the golden files.
+
 ## Data not in this repository
 
 Corpora with per-step vectors (4.2 GB) and the raw throughput runs (182 MB) are too large for

@@ -7,7 +7,7 @@
 === ВОРОТА: FAIL -> /root/rout/ds/r1_gates.json
    выгрузка: None
 [15:50:58] --- 2. validate the OLD reference artifact set (teacher-forced, all hashes)
-  режим: САМОВАЛИДАЦИЯ (базовая линия)
+  режим: ТОТ ЖЕ ЧЕКПОЙНТ NVFP4, другой стек: корпус vLLM 0.25.1, валидатор vLLM 0.30  [исправлено 08.10.2026: скрипт ставил «САМОВАЛИДАЦИЯ (базовая линия)», сравнивая только квант]
   h01: расхождений 6502 из 64250 = 10.1198%  (нулевой шаг 10.4%)
   h02: расхождений 6486 из 64250 = 10.0949%  (нулевой шаг 11.6%)
   h03: расхождений 6463 из 64250 = 10.0591%  (нулевой шаг 10.4%)
@@ -28,7 +28,7 @@
     tau=0.05  :     3 = 0.0005%
     tau=0.1   :     0 = 0.0%
     tau=0.2   :     0 = 0.0%
-  -> /root/rout/ds/xq_val_nvfp4_to_nvfp4.json
+  -> /root/rout/ds/xq_val_nvfp4_to_nvfp4.json  [итог перезаписан следующим прогоном с тем же именем; результат только в этом логе]
 [15:53:19] --- 3. own artifact set, 3 hashes x 250, then self-validation (same boot)
   сервер: quant=nvfp4 ckpt=ebc08e4a45ba moe='FLASHINFER_TRTLLM' NvFp4 pmb-режим см. провенанс
   h01: 250 цепочек по 257 шагов за 11.9 с
@@ -48,7 +48,7 @@
     tau=0.05  :     2 = 0.001%
     tau=0.1   :     0 = 0.0%
     tau=0.2   :     0 = 0.0%
-  -> /root/rout/ds/xq_val_nvfp4_to_nvfp4.json
+  -> /root/rout/ds/xq_val_nvfp4_to_nvfp4.json  [здесь: artifacts/validations/deepseek/validator_b300_030_nvfp4/self_same_boot.json]
 [15:54:34] --- 4. mining round through /init/generate + gate
 [15:54:34]    chat before round: HTTP 200
 [15:54:34]    init/generate: {"status":"OK","pow_status":{"status":"GENERATING"}}

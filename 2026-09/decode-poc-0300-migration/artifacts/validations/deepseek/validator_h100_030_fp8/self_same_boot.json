@@ -1,6 +1,12 @@
 {
- "corpus_quant": "?",
- "validator_quant": "?",
+ "label_fix_2026_10_08": "Same-boot self-validation of the FP8 checkpoint on 4xH100 under vLLM 0.30 (own corpus, 3 hashes x 250 nonces). corpus_quant and validator_quant were '?'. The 4xH100 vLLM 0.30 server wrote no boot provenance, so the kit printed quant=? for it; the validator identity is taken from the stage log (quant=fp8) and from this README (deepseek-ai/DeepSeek-V4-Flash-0731).",
+ "mode": "САМОВАЛИДАЦИЯ на том же буте (vLLM 0.30), чекпойнт FP8 по журналу прогона",
+ "corpus_ckpt": null,
+ "validator_ckpt": null,
+ "corpus_repo": "deepseek-ai/DeepSeek-V4-Flash-0731",
+ "validator_repo": "deepseek-ai/DeepSeek-V4-Flash-0731",
+ "corpus_quant": "fp8",
+ "validator_quant": "fp8",
  "corpus_boot": {},
  "validator_boot": {},
  "per_hash": [
